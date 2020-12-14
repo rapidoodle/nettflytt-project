@@ -1,0 +1,245 @@
+@extends('layouts.main')
+@section('content')
+<div class="mb-5 container steps-container">
+    <div class="nav-steps d-flex justify-content-center">
+            <div class="text-center">
+                <span class="steps-circle">1</span>
+                <sub>Start</sub>
+            </div>
+            <div><hr></div>
+            <div>
+                <span class="steps-circle">2</span>
+                <sub>Mottakere</sub>
+            </div>
+            <div><hr></div>
+            <div class="active">
+                <span class="steps-circle">3</span>
+                <sub>Boligsjekk</sub>
+            </div>
+            <div><hr></div>
+            <div>
+                <span class="steps-circle">4</span>
+                <sub>Oppsummering</sub>
+            </div>
+    </div>
+</div>
+
+<div class="row px-4 mb-5 mt-5 mt-md-0 d-none d-md-inline">
+    <div class="col-12 col-md-8 offset-md-2 text-center">
+        <h2>La leverandørene konkurere om deg!</h2>
+        <p class="mt-3">Motta helt uforpliktende tilbud til din nye bolig</p>
+    </div>
+</div>  
+
+<div class="row px-4 mb-4 mt-5 mt-md-0 d-md-none">
+    <div class="col-12 col-md-8 offset-md-2 text-center">
+        <h2>Gå gjennom boligsjekken</h2>
+        <p class="mt-3">Du må svare JA/NEI om du ønsker et helt uforpliktende tilbud på tjenester til din nye bolig</p>
+    </div>
+</div>  
+<div class="row px-4 mt-0 mb-4 mb-md-5 my-lg-5  mt-lg-0">
+    <div class="col-12 col-lg-8">
+        <div class="accordion" id="offersAcdn">
+          <div class="card">
+            <div class="card-header active" id="headingOne">
+              <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Strøm <i class="fas fa-power-off"></i>
+                </button>
+              </h2>
+            </div>
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#offersAcdn">
+              <div class="card-body">
+                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
+                        <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+
+                        <div class="row mt-4 mb-2 pl-md-4">
+                            <div class="col pl-md-4 order-2 order-md-1">
+                                <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
+                            </div>
+                            <div class="col pl-md-4 order-1 order-md-2">
+                                <a class="btn btn-info btn-block py-3" href="">Ja takk!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-md-4 d-none d-md-inline">
+                        <img src="{{ asset('images/windmill.png')}}" class="img-fluid">
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                  Tv/Internett <i class="fas fa-tv"></i>
+                </button>
+              </h2>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#offersAcdn">
+              <div class="card-body">
+                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
+                        <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+
+                        <div class="row mt-4 mb-2 pl-md-4">
+                            <div class="col pl-md-4 order-2 order-md-1">
+                                <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
+                            </div>
+                            <div class="col pl-md-4 order-1 order-md-2">
+                                <a class="btn btn-info btn-block py-3" href="">Ja takk!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-md-4 d-none d-md-inline">
+                        <img src="{{ asset('images/windmill.png')}}" class="img-fluid">
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingThree">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                  Forsikring <i class="fas fa-home"></i>
+                </button>
+              </h2>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#offersAcdn">
+               <div class="card-body">
+                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
+                        <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+
+                        <div class="row mt-4 mb-2 pl-md-4">
+                            <div class="col pl-md-4 order-2 order-md-1">
+                                <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
+                            </div>
+                            <div class="col pl-md-4 order-1 order-md-2">
+                                <a class="btn btn-info btn-block py-3" href="">Ja takk!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-md-4 d-none d-md-inline">
+                        <img src="{{ asset('images/windmill.png')}}" class="img-fluid">
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingFour">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                  Boligalarm <i class="fas fa-lock"></i>
+                </button>
+              </h2>
+            </div>
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#offersAcdn">
+               <div class="card-body">
+                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
+                        <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+
+                        <div class="row mt-4 mb-2 pl-md-4">
+                            <div class="col pl-md-4 order-2 order-md-1">
+                                <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
+                            </div>
+                            <div class="col pl-md-4 order-1 order-md-2">
+                                <a class="btn btn-info btn-block py-3" href="">Ja takk!</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-md-4 d-none d-md-inline">
+                        <img src="{{ asset('images/windmill.png')}}" class="img-fluid">
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-12 col-lg-3 offset-lg-1">
+        <div class="bg-info index-summary p-4 mt-4 mt-lg-0">
+            <p class="heading">Oppsummering</p>
+            <p class="sub-heading">Gammel adresse</p>
+            <div class="input-group mt-2 group-form">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="gamel-address-1-icon">
+                        <i class="fa fa-map-marker"></i>
+                    </span>
+                </div>
+                <input type="text" name="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10">
+            </div>
+            <div class="input-group mt-2 group-form">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="gamel-address-2-icon">
+                        <i class="fa fa-map-o"></i>
+                    </span>
+                </div>
+                <input type="text" name="gamel-address-2" class="form-control" placeholder="1234 Oslo">
+            </div>
+
+            <p class="sub-heading mt-3">Ny adressee</p>
+            <div class="input-group mt-2 group-form">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="ny-address-1-icon">
+                        <i class="fa fa-map-marker"></i>
+                    </span>
+                </div>
+                <input type="text" name="ny-address-1" class="form-control" placeholder="Eksempelgaten 10">
+            </div>
+            <div class="input-group mt-2 group-form">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="ny-address-2-icon">
+                        <i class="fa fa-map-o"></i>
+                    </span>
+                </div>
+                <input type="text" name="ny-address-2" class="form-control" placeholder="1234 Oslo">
+            </div>
+
+            <p class="sub-heading mt-3">Mottakere</p>
+            <div class="summary-choices px-2 py-3">
+                <table width="100%" id="selected-list">
+                    <tr>
+                        <td><i class="fas fa-check"></i></td>
+                        <td>Telenor</td>
+                        <td><i class="fas fa-times"></i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-check"></i></td>
+                        <td>Fjordkraft</td>
+                        <td><i class="fas fa-times"></i></td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-check"></i></td>
+                        <td>OBOS</td>
+                        <td><i class="fas fa-times"></i></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row px-4 mt-2 mb-4">
+    <div class="mt-2 mt-md-0 col-12 btn-sm-6 col-md-6 order-2 order-md-1">
+        <a href="/" class="btn btn-previous float-left"><i class="fas fa-arrow-left"></i> Gå tilbake</a>
+        
+    </div>
+    <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
+        <button id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></button>
+    </div>
+</div>
+@endsection
