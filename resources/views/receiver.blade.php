@@ -203,7 +203,7 @@
             </center>
         </div>
     </div>
-    <div class="col-12 col-lg-3 offset-lg-1">
+    <div class="col-12 col-lg-3 offset-lg-1" id="summary">
         <div class="d-none d-md-block bg-info index-summary p-4 mt-4 mt-lg-0">
             <p class="heading">Oppsummering</p>
             <p class="sub-heading">Gammel adresse</p>
@@ -213,7 +213,7 @@
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" name="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10">
+                <input type="text" name="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly>
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -221,7 +221,7 @@
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" name="gamel-address-2" class="form-control" placeholder="1234 Oslo">
+                <input type="text" name="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly>
             </div>
 
             <p class="sub-heading mt-3">Ny adressee</p>
@@ -231,7 +231,7 @@
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" name="ny-address-1" class="form-control" placeholder="Eksempelgaten 10">
+                <input type="text" name="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly>
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -239,7 +239,7 @@
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" name="ny-address-2" class="form-control" placeholder="1234 Oslo">
+                <input type="text" name="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly>
             </div>
 
             <p class="sub-heading mt-3">Mottakere</p>
@@ -299,7 +299,7 @@
 </div>
 
 <div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title mt-4">Flyttemelding for !reciever</h5>

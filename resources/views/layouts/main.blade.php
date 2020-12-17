@@ -107,6 +107,6 @@
     </body>
     <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
     <script src="https://kit.fontawesome.com/58a5e1829b.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
 </html>

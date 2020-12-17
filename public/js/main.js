@@ -69,16 +69,16 @@ $(document).ready(function() {
     		isNull = false;
     	});
 
-    	if(isNull){
-    		alert("Please select atleast 1 service");
-    	}else{
+    	// if(isNull){
+    		// alert("Please select atleast 1 service");
+    	// }else{
     		if(!isPowerSupplier){
     			$(".cat-n-search, .label-none, .title-receiver").hide();
     			$(".ps-cont").show();
     		}else{
     			window.location.href = "/offers/";
     		}
-    	}
+    	// }
     });
 
     $(".select-result").click(function(){
@@ -102,10 +102,19 @@ $(document).ready(function() {
     $('#offersAcdn').collapse({
 	  toggle: false
 	});
-    $(".card-header").click(function(){
-        $(".card-header").removeClass("active")
-        $(this).addClass("active")
-    });
+    // $(".card-header").click(function(){
+    //     $(".card-header").removeClass("active");
+    //     $(this).addClass("active");
+    // });
+
+    $('#offersAcdn').on('shown.bs.collapse', function () {
+      var header = $("div.collapse.show").attr("aria-labelledby");
+      $("#"+header).addClass("active");
+    })
+    
+    $('#offersAcdn').on('hidden.bs.collapse', function () {
+      var prev = $("div.card-header.active").removeClass("active");
+    })
 
     //POSTBOX
     $(".pb-field").keyup(function(e){
@@ -124,7 +133,8 @@ $(document).ready(function() {
     	if($("#rad4").val() != ""){
     		allNames.push($("#rad4").val());
     	}
-    	var finalText = allNames.toString().replace(",", ", ");
+        allNames = allNames.toString();
+        var finalText = allNames.replace(/,/g, ', <br>');
     	$(".postbox-summary").html(finalText);
     });
 });

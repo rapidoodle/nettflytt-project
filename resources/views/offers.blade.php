@@ -61,7 +61,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" href="">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" href="">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" href="">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -157,7 +157,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" href="">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
           </div>
         </div>
     </div>
-    <div class="col-12 col-lg-3 offset-lg-1">
+    <div class="col-12 col-lg-3 offset-lg-1 d-none d-md-inline">
         <div class="bg-info index-summary p-4 mt-4 mt-lg-0">
             <p class="heading">Oppsummering</p>
             <p class="sub-heading">Gammel adresse</p>
@@ -239,7 +239,7 @@
         
     </div>
     <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
-        <button id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></button>
+        <a href="/summary" id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
     </div>
 </div>
 @endsection

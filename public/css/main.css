@@ -163,8 +163,8 @@ div.active-option{
 }
 div.index-option:hover{
     background-color: #7EA8B4!important;
-    color:#000;
-    border: 1px solid #1D576F;
+    color:#000!important;
+    border: 1px solid #1D576F!important;
 }
 
 div.bg-light{
@@ -182,14 +182,14 @@ div.index-step-3 > img{
     width: 150px
 }
 div.index-step-3 > p{
-    font-size:9px;
+    font-size:10px;
 }
-div.index-extra-options{
-    color:#C6C8D0!important;
+div.index-extra-options .index-option{
+    color:#C6C8D0;
     font-size: 12px;
 }
 div.index-step-4 label{
-    font-size: 10px;
+    font-size: 12px;
 }
 div.index-summary{
     color:#fff!important;
@@ -560,6 +560,19 @@ div.accordion .card-header{
 div.accordion .card-header.active{
     background-color: #1D576F!important;
 }
+.form-control[readonly]{
+    background-color: #fff!important;
+}
+select option {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
 /*responsive*/
 @media (max-width: 992px) {
     .bg-xs-light{
@@ -606,6 +619,8 @@ div.accordion .card-header.active{
         font-size: 8px;
         margin: 2px;
         text-align: center;
+        height: 30px;
+        line-height: 1.6rem;
     }
     .steps{
         display:none!important;

@@ -60,7 +60,7 @@
             <h5>Tom Vatland</h5>
             <span class="text-sm-gray">Ekstraperson</span>
             <div class="text-right mt-5">
-                <button class="btn btn-endre btn-info btn-lg">Endre</button>
+                <a href="/thank-you/" class="btn btn-info btn-lg btn-endre">Endre</a>
             </div>
         </div>
     </div>
@@ -91,7 +91,7 @@
             </table>
 
             <div class="text-right mt-5">
-                <button class="btn btn-info btn-lg btn-endre">Endre</button>
+                <a href="/thank-you/" class="btn btn-info btn-lg btn-endre">Endre</a>
             </div>
         </div>
     </div>
@@ -110,7 +110,7 @@
             <span class="text-sm-gray">Postnummer: 3950</span>
             <span class="text-sm-gray">Poststed: Brevik</span>
             <div class="text-right mt-5">
-                <button class="btn btn-endre btn-info btn-lg">Endre</button>
+               <a href="/thank-you/" class="btn btn-info btn-lg btn-endre">Endre</a>
             </div>
         </div>
     </div>
@@ -119,7 +119,7 @@
             <h3 class="mb-5"><i class="fa fa-user"></i> Flyttedato</h3>
 
             <div class="text-right mt-5">
-                <button class="btn btn-info btn-lg btn-endre">Endre</button>
+                <a href="/thank-you/" class="btn btn-info btn-lg btn-endre">Endre</a>
             </div>
         </div>
     </div>
@@ -137,7 +137,7 @@
                 </label>
                 <p class="my-4 text-left text-md-center">Ved å legge inn koden og akseptere betingelsene sender vi flyttemeldingen for deg. Tjenesten koster 149,- kroner og kommer på telefonregningen din.</p>
                 <div class="px-5 px-md-0">
-                    <button class="btn btn-info btn-lg" id="btn-summary-send">Send flyttemeldingene</button>
+                    <a href="/thank-you/" class="btn btn-info btn-lg btn-endre">Endre</a>
                 </div>            
             </div>
         </div>

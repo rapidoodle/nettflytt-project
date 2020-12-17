@@ -35,7 +35,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                 <div class="bg-xs-light col-12 col-md-6 col-lg-5">
                     <div class="header-num">1</div> <h6>Personlig informasjon</h6>
                     <hr class="mb-2">
-                    <div class="card bg-md-light p-3 bg-xs-light">
+                    <div class="card bg-md-light p-0 p-md-3 bg-xs-light">
                         <form>
                             <div id="extra-names">
                                 
@@ -68,7 +68,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                             <i class="fa fa-arrow-down"></i>
                                             </span>
                                         </div>
-                                        <select type="text" required="true" class="form-control" placeholder="Dag" id="day">
+                                        <select type="text" required="true" class="form-control" placeholder="Dag" id="birth_day">
                                             <option value="" disabled selected>Dag</option>
                                         <?php 
                                         for ($i=1; $i <=31 ; $i++) {?>
@@ -85,7 +85,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                             <i class="fa fa-arrow-down"></i>
                                             </span>
                                         </div>
-                                        <select type="text" required="true" class="form-control"  id="month">
+                                        <select type="text" required="true" class="form-control"  id="birth_month">
                                             <option value="" disabled selected>Måned</option>
                                         <?php 
                                         foreach($months as $month) {?>
@@ -101,7 +101,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                             <span class="input-group-text" id="year-icon"><i class="fa fa-arrow-down"></i>
                                             </span>
                                         </div>
-                                        <select type="text" required="true" class="form-control"  id="year">
+                                        <select type="text" required="true" class="form-control"  id="birth_year">
                                             <option value="" disabled selected>Ar</option>
                                         <?php 
                                         for ($i = 1920; $i <= 2020 ; $i++) {?>
@@ -126,30 +126,30 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                     <hr class="mb-2">
                         <div class="form-group pt-md-3">
                             <label for="street-address">Jeg flytter fra (Gammel adresse)</label>
-                            <input type="text" required="true" class="form-control smy-fld" id="street-address" placeholder="Eksempelgaten 10" data-conn="gamel-address-1">
+                            <input type="text" required="true" class="form-control smy-fld" id="old_address" placeholder="Eksempelgaten 10" data-conn="gamel-address-1">
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <label for="post-number">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="123" id="post-number" max="4" data-conn="gamel-address-2">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="123" id="old_zipcode" max="4" data-conn="gamel-address-2">
                             </div>
                             <div class="col-6">
                                 <label for="poststed">Poststed</label>
-                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="poststed">
+                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="old_place">
                             </div>
                         </div>
                         <div class="form-group mt-3">
                             <label for="ny-address">Jeg flytter til (Ny adresse)</label>
-                            <input type="text" required="true" class="form-control smy-fld" id="ny-address" data-conn="ny-address-1">
+                            <input type="text" required="true" class="form-control smy-fld" id="new_address" data-conn="ny-address-1">
                         </div>
-                        <div class="row">
+                        <div class="form-group row">
                             <div class="col-6">
                                 <label for="post-number2">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="123" id="post-number2" data-conn="ny-address-2">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="123" id="new_zipcode" data-conn="ny-address-2">
                             </div>
                             <div class="col-6">
                                 <label for="poststed2">Poststed</label>
-                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="poststed2">
+                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="new_place">
                             </div>
                         </div>
                         <div class="row">
@@ -161,7 +161,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                             <i class="fa fa-arrow-down"></i>
                                             </span>
                                         </div>
-                                        <select type="text" required="true" class="form-control" id="day">
+                                        <select type="text" required="true" class="form-control" id="">
                                             <option value="" disabled selected>Dag</option>
                                         <?php 
                                         for ($i=1; $i <=31 ; $i++) {?>
@@ -205,6 +205,9 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                 </div>
                         </div>
                         <div class="row mt-3 px-3 index-extra-options">
+                            <div class="col-12 px-0">
+                                <label>Boligtype</label>
+                            </div>
                             <div class="col bg-light mr-2 py-3 text-center index-option pointer">
                                 <i class="fas fa-home"></i> Hus
                             </div>
@@ -241,7 +244,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
             </div>
         </form>
     </div>
-    <div class="col-12 col-lg-3 d-none d-lg-block">
+    <div class="col-12 col-lg-3 d-none d-lg-block" id="summary">
         <div class="bg-info index-summary p-4 mt-4">
             <p class="heading text-center">Oppsummering</p>
             <p class="sub-heading">Gammel adresse</p>
@@ -251,7 +254,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" name="gamel-address-1" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10">
+                <input type="text" name="gamel-address-1" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly>
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -259,7 +262,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" name="gamel-address-2" id="gamel-address-2" class="form-control" placeholder="1234 Oslo">
+                <input type="text" name="gamel-address-2" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly>
             </div>
 
             <p class="sub-heading mt-4">Ny adressee</p>
@@ -269,7 +272,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" name="ny-address-1" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10">
+                <input type="text" name="ny-address-1" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly>
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -277,7 +280,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" name="ny-address-2" id="ny-address-2" class="form-control" placeholder="1234 Oslo">
+                <input type="text" name="ny-address-2" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly>
             </div>
             <p class="sub-heading mt-4">Hovedkontakt</p>
             <div class="input-group mt-2 group-form">
@@ -286,7 +289,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-user-o"></i>
                     </span>
                 </div>
-                <input type="text" name="hk-name" id="hk-name" class="form-control" placeholder="Tomas Ivanov">
+                <input type="text" name="hk-name" id="hk-name" class="form-control" placeholder="Tomas Ivanov" readonly>
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -294,7 +297,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-phone"></i>
                     </span>
                 </div>
-                <input type="text" name="hk-phone" id="hk-phone" class="form-control" placeholder="+47 94059094">
+                <input type="text" name="hk-phone" id="hk-phone" class="form-control" placeholder="+47 94059094" readonly>
             </div>
         </div>
     </div>
