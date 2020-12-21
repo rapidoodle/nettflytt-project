@@ -28,31 +28,29 @@ $(document).ready(function() {
         }
         else{
          var newId = Date.now();
-         var html = '<div id="accordion">'+
-                        '<div class="card" id="card_'+newId+'">'+
-                            '<div class="pointer card-header d-flex align-items-center justify-content-between" id="'+newId+'" data-toggle="collapse" data-target="#col_'+newId+'" aria-expanded="true" aria-controls="collapseOne">'+
-                                '<span>'+fullName.val()+'</span>'+
-                                '<i class="fa fa-times float-right" data-id="card_'+newId+'" onclick="removePanel()"></i>'+
-                            '</div>'+
-                            '<div id="col_'+newId+'" class="collapse" aria-labelledby="'+newId+'" data-parent="#accordion">'+
-                                '<div class="bg-white card-body">'+
-                                    '<table class="w-100">'+
-                                        '<tr>'+
-                                            '<td>E-post</td>'+
-                                            '<td>'+email.val()+'</td>'+
-                                        '</tr>'+
-                                        '<tr>'+
-                                            '<td>Telefonnummer</td>'+
-                                            '<td>'+phone.val()+'</td>'+
-                                        '</tr>'+
-                                        '<tr>'+
-                                            '<td>Fødselsdato</td>'+
-                                            '<td>'+month.val()+' '+day.val()+', '+year.val()+'</td>'+
-                                        '</tr>'+
-                                    '</table>'+
-                                '</div>'+
+         var html = '<div class="card" id="card_'+newId+'">'+
+                        '<div class="pointer card-header d-flex align-items-center justify-content-between" id="'+newId+'" data-toggle="collapse" data-target="#col_'+newId+'" aria-expanded="true" aria-controls="collapseOne">'+
+                            '<span>'+fullName.val()+'</span>'+
+                            '<i class="fa fa-times float-right" data-id="card_'+newId+'" style="z-index:99999999999"></i>'+
                         '</div>'+
-                    '</div>';
+                        '<div id="col_'+newId+'" class="collapse" aria-labelledby="'+newId+'" data-parent="#extra-names">'+
+                            '<div class="bg-white card-body">'+
+                                '<table class="w-100">'+
+                                    '<tr>'+
+                                        '<td>E-post</td>'+
+                                        '<td>'+email.val()+'</td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td>Telefonnummer</td>'+
+                                        '<td>'+phone.val()+'</td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td>Fødselsdato</td>'+
+                                        '<td>'+month.val()+' '+day.val()+', '+year.val()+'</td>'+
+                                    '</tr>'+
+                                '</table>'+
+                            '</div>'+
+                        '</div>';
             $("#extra-names").append(html);
 
             fullName.val("");
@@ -61,9 +59,24 @@ $(document).ready(function() {
             day.val("");
             month.val("");
             year.val("");
+
             $('.collapse').collapse({
              toggle: false
             });
+        }
+    });
+
+    $(".card-header").on("click", function(){
+        var thisid = $(this).attr("data-id");
+        console.log(thisid);
+        $("#"+thisid).remove();
+
+    });
+    $(document).click(function(event) {
+        var thisid = $(event.target).attr("data-id");
+        if(thisid){
+            console.log(thisid);
+            $("#"+thisid).remove();
         }
     });
     //auto fill summary

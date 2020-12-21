@@ -66,7 +66,7 @@
                         </div>
                     </div>
                     <div class="col col-md-4 d-none d-md-inline">
-                        <img src="{{ asset('images/windmill.png')}}" class="img-fluid">
+                        <img src="{{ asset('images/windmill.png')}}" class="img-fluid" alt="windmill image">
                     </div>
                 </div>
               </div>
@@ -82,11 +82,11 @@
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#offersAcdn">
               <div class="card-body">
-                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
+                <h5>På tide med nye linjer?</h5>
                 <div class="row">
                     <div class="col-12 col-md-8">
-                        <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
-                        <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+                        <p>De siste og beste tilbudene får du her Vi finner den beste leverandøren basert på ditt nye område</p>
+                        <h6>Spar penger i dag!</h6>
 
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="col col-md-4 d-none d-md-inline">
-                        <img src="{{ asset('images/windmill.png')}}" class="img-fluid">
+                        <img src="{{ asset('images/hand-pressing-remote-smart-tv.png')}}" class="img-fluid" alt="hand pressing remote smart tv image">
                     </div>
                 </div>
               </div>
