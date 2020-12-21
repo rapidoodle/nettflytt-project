@@ -5,13 +5,13 @@
 $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
 
 ?>
-<div class="row px-4 mb-5">
-    <div class="col-12 col-md-6 d-flex align-content-end flex-wrap">
-        <img src="{{ asset('images/couple-mobile.png')}}" class="img-fluid d-md-none my-4 flex-item" alt="smiley couple taking selfie while packing move out">
+<div class="row px-2 px-lg-4 mb-5">
+    <div class="col-12 col-sm-6 d-flex align-content-end flex-wrap">
+        <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4 flex-item" alt="smiley couple taking selfie while packing move out">
 
         <h3 class="flex-item">Adresseendring for Norge</h3>
 
-        <p class="mt-0 mt-md-4">Her kan du fylle ut én enkelt flyttemelding til alle selskaper og organisasjoner du er medlem hos. Du får også ferdigutfylte dokumenter til posten og folkeregisteret</p>
+        <p class="mt-0 mt-sm-4">Her kan du fylle ut én enkelt flyttemelding til alle selskaper og organisasjoner du er medlem hos. Du får også ferdigutfylte dokumenter til posten og folkeregisteret</p>
 
         <a class="btn btn-info mt-2" href="#index-form-container">Meld flytting</a> 
         <div class="d-flex align-items-center flex-wrap steps mt-4">
@@ -23,21 +23,21 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
             <div class="header-mini ml-1">Send flyttemeldingene</div>
         </div> 
     </div>
-    <div class="col-12 col-md-6 py-4 pt-md-0 pb-md-3 d-none d-md-inline">
+    <div class="col-12 col-sm-6 py-4 pt-sm-0 pb-sm-3 d-none d-sm-inline">
         <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid" alt="smiley couple taking selfie while packing move out">
     </div>
 </div>  
 
 <div class="row px-4 my-5 form" id="index-form-container">
-    <div class="col-12 col-md-12 col-lg-9">
+    <div class="col-12 col-sm-12 col-lg-9">
         <form class="mt-2rem" id="index-form" action="/receiver" method="GET">
             <div class="row">
-                <div class="bg-xs-light col-12 col-md-6 col-lg-5">
+                <div class="bg-xs-light col-12 col-sm-12 col-lg-5">
                     <div class="header-num">1</div> <h6>Personlig informasjon</h6>
                     <hr class="mb-2">
-                    <div class="card bg-md-light p-0 p-md-3 bg-xs-light">
+                    <div class="card bg-sm-light p-0 p-sm-3 bg-xs-light">
                         <form>
-                            <div id="extra-names">
+                            <div class="accordion" id="extra-names">
                                 
                             </div>
                             <div class="form-group">
@@ -53,10 +53,10 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                 <div class="input-group group-form">
                                         <div class="input-group-prepend" id="phone-group">
                                             <span class="input-group-text" id="phone-icon">
-                                            <img src="{{ asset('images/norway-flag.png')}}" width="20px;">
+                                                <img src="{{ asset('images/norway-flag.png')}}" width="20px;"> +47 
                                             </span>
                                         </div>
-                                        <input type="text" class="form-control smy-fld" data-conn="hk-phone" id="phone" placeholder="+47 94059094">
+                                        <input type="text" class="form-control smy-fld" data-conn="hk-phone" id="phone" placeholder="12345678">
                                     </div>
                             </div>
                             <div class="row">
@@ -120,18 +120,18 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         </form>
                     </div>
                 </div>
-                <div class="bg-xs-light col-12 col-md-6 col-lg-7 pt-3 pt-md-0 mt-4 mt-md-0">
+                <div class="bg-xs-light col-12 col-sm-12 col-lg-7 pt-3 pt-lg-0 mt-4 mt-lg-0">
                     <div class="header-num">2</div> <h6>Adresse</h6>
                     
                     <hr class="mb-2">
-                        <div class="form-group pt-md-3">
+                        <div class="form-group pt-sm-3">
                             <label for="street-address">Jeg flytter fra (Gammel adresse)</label>
                             <input type="text" required="true" class="form-control smy-fld" id="old_address" placeholder="Eksempelgaten 10" data-conn="gamel-address-1">
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <label for="post-number">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="123" id="old_zipcode" max="4" data-conn="gamel-address-2">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="old_zipcode" max="4" data-conn="gamel-address-2">
                             </div>
                             <div class="col-6">
                                 <label for="poststed">Poststed</label>
@@ -140,12 +140,13 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         </div>
                         <div class="form-group mt-3">
                             <label for="ny-address">Jeg flytter til (Ny adresse)</label>
-                            <input type="text" required="true" class="form-control smy-fld" id="new_address" data-conn="ny-address-1">
+                            <input type="text" required="true" class="form-control smy-fld" id="new_address" data-conn="ny-address-1" placeholder="Eksemmpelgaten 10
+">
                         </div>
                         <div class="form-group row">
                             <div class="col-6">
                                 <label for="post-number2">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="123" id="new_zipcode" data-conn="ny-address-2">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="new_zipcode" data-conn="ny-address-2">
                             </div>
                             <div class="col-6">
                                 <label for="poststed2">Poststed</label>
@@ -153,8 +154,8 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                             </div>
                         </div>
                         <div class="row">
-                                <div class="col-4 col-md-3">
-                                    <label for="day">Fødselsdato</label>
+                                <div class="col-4 col-sm-3">
+                                    <label for="day">Flyttedato</label>
                                     <div class="input-group group-form">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="day-icon">
@@ -170,7 +171,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-4 col-md-3">
+                                <div class="col-4 col-sm-3">
                                     <label for="month">&nbsp;</label>
                                     <div class="input-group group-form">
                                         <div class="input-group-prepend">
@@ -187,7 +188,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-4 col-md-3">
+                                <div class="col-4 col-sm-3">
                                     <label for="year">&nbsp;</label>
                                    <div class="input-group group-form">
                                         <div class="input-group-prepend">
@@ -221,24 +222,26 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 col-md-5 pt-4 bg-xs-light mt-4 mt-md-0">
+                <div class="col-12 col-lg-5 pt-4 bg-xs-light mt-4 mt-lg-0">
                     <div class="header-num">3</div> <h6>Folkeregisteret</h6>
                     <hr>
-                    <div class="d-flex flex-row align-items-center index-step-3">
+                    <div class="d-flex flex-row align-items-center index-step-3 fle">
                         <img src="{{ asset('images/newspaper.png')}}" alt="newspaper image">
                         <p class="p-2">Ved fullføring tilbyr vi mulighet for å laste ned direkte utfylt skjema for flyttemelding til Folkeregisteret. Husk at du er pliktig til å melde flytting til Folkeregisteret.</p>
                     </div>
                 </div>
-                <div class="col-12 col-md-7 pt-4">
+                <div class="col-12 col-lg-7 pt-4">
                     <div class="header-num">4</div> <h6>Postkasseskilt</h6>
                     <hr>
-                    <div class="form-check index-step-4 ml-4 ml-md-0">
+                    <div class="form-check index-step-4 ml-4 ml-lg-0">
                         <input class="form-check-input" required="true" type="checkbox" value="" id="check">
                         <label class="form-check-label" for="check">
                         Jeg vil bestille nytt postkasseskilt til den nye boligen for kun kr 169,- inkl frakt
                         </label>
                     </div>
-                    <a href="/receiver" class="float-right btn btn-info mt-4 mb-auto" id="submit-form">Meld flytting</a> 
+                    <div class="text-center px-5 px-lg-0">
+                        <a href="/receiver" class="float-lg-right btn btn-info mt-4 mb-auto" id="submit-form">Meld flytting</a> 
+                    </div>
                     <!-- <button class="float-right btn btn-info mt-4 mb-auto" id="submit-form" type="submit">Meld flytting</button>  -->
                 </div>
             </div>
@@ -289,15 +292,15 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-user-o"></i>
                     </span>
                 </div>
-                <input type="text" name="hk-name" id="hk-name" class="form-control" placeholder="Tomas Ivanov" readonly>
+                <input type="text" name="hk-name" id="hk-name" class="form-control" placeholder="Fullt navn" readonly>
             </div>
             <div class="input-group mt-2 group-form">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="hk-phone-icon">
-                        <i class="fa fa-phone"></i>
+                <div class="input-group-prepend"id="hk-phone-icon">
+                    <span class="input-group-text">
+                        <i class="fa fa-phone"></i> +47
                     </span>
                 </div>
-                <input type="text" name="hk-phone" id="hk-phone" class="form-control" placeholder="+47 94059094" readonly>
+                <input type="text" name="hk-phone" id="hk-phone" class="form-control" placeholder="12345678" readonly>
             </div>
         </div>
     </div>

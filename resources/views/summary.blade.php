@@ -117,7 +117,7 @@
     <div class="col-12 col-sm-6 col-md-5 offset-md-2">
         <div class="smry-rcrd p-4 mt-5 mt-md-0">
             <h3 class="mb-5"><i class="fa fa-user"></i> Flyttedato</h3>
-
+            <div id="my-calendar"></div>
             <div class="text-right mt-5">
                 <a href="/thank-you/" class="btn btn-info btn-lg btn-endre">Endre</a>
             </div>

@@ -32,9 +32,9 @@
 </div>  
 <div class="row px-4 mb-5 mt-5 mt-md-0">
     <div class="col-12 col-md-10 offset-md-1 text-center text-md-left">
-        <h4 class="mb-5">Du vil nå få tilsendt en sms som starter prosessen med bestilling av strøm</h5>
-        <h4 class=" mb-5 text-red">VIKTIG: Du må bekrefte din bestilling ved å svare JA på SMSen du mottar.</h5>
-        <h4 class="mb-5 text-underline">Du kan nå fortsette tjenesten</h5>
+        <h5 class="mb-5">Du vil nå få tilsendt en sms som starter prosessen med bestilling av strøm</h5>
+        <h5 class=" mb-5 text-red">VIKTIG: Du må bekrefte din bestilling ved å svare JA på SMSen du mottar.</h5>
+        <h5 class="mb-5 text-underline">Du kan nå fortsette tjenesten</h5>
     </div>
     <div class="col-12 col-md-10 offset-md-1 text-center">
         <a href="/offers/" class="btn btn-info py-3 px-5">Fortsett flyttemeldingen <i class="fas fa-arrow-right" title="Offers page"></i></a>

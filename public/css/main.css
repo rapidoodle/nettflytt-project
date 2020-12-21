@@ -19,7 +19,7 @@ html, body{
     font-family: 'AcuminProNormal', sans-serif;
     height: 100vh;
     margin: 0;
-    letter-spacing: 0.6px;
+    scroll-behavior: smooth!important;
 }
 input{
     font-family: 'AcuminProNormal', sans-serif;
@@ -46,20 +46,27 @@ button.btn-info{
     border: 1px solid #495057;
     padding:.3rem 1.3rem;
     font-weight: bold;
-    letter-spacing: 0.46px;
     max-width: 130px;
 }
 div.steps{
     width: 500px;
 }
 div.steps div.header-num{
-    width: 30px;
+/*    width: 30px;
     height:30px;
     background-color: #1D576F;
     color:#fff;
     border-radius: 50%;
-    padding-left: 10px;
-    padding-top: 4px;
+    padding-left: 11px;
+    padding-top: 4px;*/
+    width: 30px;
+    height: 30px;
+    line-height: 32px;
+    border-radius: 50%;
+    color: #fff;
+    text-align: center;
+    background-color: #1D576F;
+    display: inline-block;
 }
 div.steps div.header-mini{
     font-size: 9px;
@@ -71,7 +78,6 @@ div.steps div.header-mini{
 h6{
     font-weight: bold;
     font-size: 12px;
-    letter-spacing: 0.4px;
 }
 
 div.form div.header-num{
@@ -158,12 +164,12 @@ div.input-group-focus{
 
 div.active-option{
     background-color: #7EA8B4!important;
-    color:#000;
-    border: 1px solid #1D576F;
+    color:#1D576F!important;
+    border: 1px solid #1D576F!important;
 }
 div.index-option:hover{
     background-color: #7EA8B4!important;
-    color:#000!important;
+    color:#1D576F!important;
     border: 1px solid #1D576F!important;
 }
 
@@ -171,13 +177,19 @@ div.bg-light{
     background-color: #F0F0F0;
 }
 
-form div.input-group div#phone-group{
-    width: 30px!important;
+form div.input-group div#phone-group, div#hk-phone-icon{
 }
 form div.input-group div#phone-group span.input-group-text{
-    width: 30px!important;
+    width: 55px!important;
+    font-size: 12px!important;
 }
-
+div#hk-phone-icon span.input-group-text{
+    width: 51px!important;
+    font-size: 12px!important;
+}
+form div.input-group div#phone-group span.input-group-text img, span.input-group-text i.fa-phone {
+    margin-right:3px!important;
+}
 div.index-step-3 > img{
     width: 150px
 }
@@ -227,7 +239,14 @@ div.input-group-prepend .input-group-text, div.input-group-append .input-group-t
     border-radius: .25rem;
 }
 div.input-group-append span.input-group-text{
-    width: 40px!important;
+    width: 30px!important;
+}
+
+/*div#phone-group span#phone-icon{ 
+    width : 60px!important;
+}*/
+div.input-group-append span.input-group-text i{
+    font-size:15px!important;
 }
 div.input-group-append i.fa-bars{
     margin-left:0px;
@@ -256,6 +275,9 @@ div.category-item{
 }
 .pointer{
     cursor: pointer!important;
+}
+card-header:first-child {
+    border-radius: none!important;
 }
 div.category-item:hover{
     background-color: #7EA8B4!important;
@@ -314,7 +336,6 @@ div.summary-choices table tr td > i.fa-bars{
     border: 1px solid #495057;
     border-radius: 4px;
     color: #00000053;
-    letter-spacing: 0.75px;
     font-weight: bold;
     width: 300px;
     padding-top:.8rem;
@@ -325,7 +346,6 @@ div.summary-choices table tr td > i.fa-bars{
     border: 1px solid #CCC;
     border-radius: 4px;
     color: #fff;
-    letter-spacing: 0.75px;
     font-weight: bold;
     width: 300px;
     padding-top:.8rem;
@@ -490,7 +510,6 @@ div.postbox-summary{
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 7px 7px 6px #00000029;
     border: 1px solid #CCCCCC;
-    letter-spacing: 0.9px;
     color: #000000;
     font-size: 18px;
     font-weight: bold
@@ -573,8 +592,46 @@ select option {
   border: 6px solid transparent;
   border-color: #fff transparent transparent transparent;
 }
+div#extra-names table tr td{
+    font-size: 12px;
+    padding:0;
+    font-weight: bold;
+}
+div#extra-names .card-header{
+    font-size: 12px;
+    color: #1D576F;
+    padding:5px!important;
+    border-radius: 2px!important;
+    border: 0px!important;
+}
+button#btn-ty-send{
+    font-size: 1.5rem;
+    font-weight: bold!important;
+}
+div#extra-names .card{
+    margin-bottom: 2px!important;
+}
+div.content{
+    min-height: 600px;
+}
 /*responsive*/
 @media (max-width: 992px) {
+     div.index-extra-options .index-option i{
+        margin-right: 5px;
+        margin-top: -5px;
+     }
+    div.index-extra-options .index-option{
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    a#submit-form{
+        width: 100%;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        font-size: 18px!important;
+    }
     .bg-xs-light{
         background-color: #EAEAEA;
         padding-top:1rem;
@@ -666,10 +723,17 @@ select option {
         margin-bottom: 3.5rem;
     }
 }
+@media (min-width: 1200px){
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1240px!important;
+}
 
 /*utilities*/
 .text-bold{
     font-weight: bold;
+}
+.text-blue{
+    color:#1D576F!important;
 }
 .py-6 {
     padding-top: 4rem!important;

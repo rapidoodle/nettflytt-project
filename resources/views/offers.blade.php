@@ -58,7 +58,7 @@
 
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
                                 <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Ja takk!</a>
@@ -90,7 +90,7 @@
 
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
                                 <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Ja takk!</a>
@@ -122,10 +122,10 @@
 
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
           <div class="card">
             <div class="card-header" id="headingFour">
               <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                   Boligalarm <i class="fas fa-lock"></i>
                 </button>
               </h2>
@@ -154,10 +154,10 @@
 
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" href="">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Ja takk!</a>
                             </div>
                         </div>
                     </div>

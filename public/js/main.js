@@ -1,10 +1,16 @@
 $(document).ready(function() {
+
+
+    function removePanel(){
+        console.log($(this));
+    }
+
 	var fullName = $("#full-name");
 	var email 	 = $("#email");
 	var phone    = $("#phone");
-	var day      = $("#day");
-	var month    = $("#month");
-	var year     = $("#year");
+	var day      = $("#birth_day");
+	var month    = $("#birth_month");
+	var year     = $("#birth_year");
 
 	var rcvrSlct = "";
 
@@ -15,24 +21,51 @@ $(document).ready(function() {
         $(this).parent().removeClass("input-group-focus");
     });
 
+
     $("#add-name").click(function(){
-		var html 	 = '<div class="mb-2 input-group group-form add-form">'+
-                        '<input type="text" disabled class="form-control" value="'+fullName.val()+'">'+
-                        '<div class="input-group-append">'+
-                            '<span class="input-group-text edit-name">'+
-                                '<i class="fa fa-bars"></i></span>'+
+        if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
+            alert("Please complete the form before adding a new name");
+        }
+        else{
+         var newId = Date.now();
+         var html = '<div id="accordion">'+
+                        '<div class="card" id="card_'+newId+'">'+
+                            '<div class="pointer card-header d-flex align-items-center justify-content-between" id="'+newId+'" data-toggle="collapse" data-target="#col_'+newId+'" aria-expanded="true" aria-controls="collapseOne">'+
+                                '<span>'+fullName.val()+'</span>'+
+                                '<i class="fa fa-times float-right" data-id="card_'+newId+'" onclick="removePanel()"></i>'+
+                            '</div>'+
+                            '<div id="col_'+newId+'" class="collapse" aria-labelledby="'+newId+'" data-parent="#accordion">'+
+                                '<div class="bg-white card-body">'+
+                                    '<table class="w-100">'+
+                                        '<tr>'+
+                                            '<td>E-post</td>'+
+                                            '<td>'+email.val()+'</td>'+
+                                        '</tr>'+
+                                        '<tr>'+
+                                            '<td>Telefonnummer</td>'+
+                                            '<td>'+phone.val()+'</td>'+
+                                        '</tr>'+
+                                        '<tr>'+
+                                            '<td>Fødselsdato</td>'+
+                                            '<td>'+month.val()+' '+day.val()+', '+year.val()+'</td>'+
+                                        '</tr>'+
+                                    '</table>'+
+                                '</div>'+
                         '</div>'+
                     '</div>';
-        $("#extra-names").append(html);
+            $("#extra-names").append(html);
 
-        fullName.val("");
-        email.val("");
-        phone.val("");
-        day.val("");
-        month.val("");
-        year.val("");
+            fullName.val("");
+            email.val("");
+            phone.val("");
+            day.val("");
+            month.val("");
+            year.val("");
+            $('.collapse').collapse({
+             toggle: false
+            });
+        }
     });
-
     //auto fill summary
     $(".smy-fld").keyup(function(e){
     	var val = $(this).val();
@@ -102,10 +135,6 @@ $(document).ready(function() {
     $('#offersAcdn').collapse({
 	  toggle: false
 	});
-    // $(".card-header").click(function(){
-    //     $(".card-header").removeClass("active");
-    //     $(this).addClass("active");
-    // });
 
     $('#offersAcdn').on('shown.bs.collapse', function () {
       var header = $("div.collapse.show").attr("aria-labelledby");
@@ -114,6 +143,10 @@ $(document).ready(function() {
     
     $('#offersAcdn').on('hidden.bs.collapse', function () {
       var prev = $("div.card-header.active").removeClass("active");
+    })
+
+    const myCalendar = new TavoCalendar('#my-calendar', {
+      // settings here
     })
 
     //POSTBOX
@@ -136,5 +169,12 @@ $(document).ready(function() {
         allNames = allNames.toString();
         var finalText = allNames.replace(/,/g, ', <br>');
     	$(".postbox-summary").html(finalText);
+    });
+
+    //THANK YOU
+    $(".btn-ty-ja").click(function(){
+        var html = '<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" class="p-5" autoplay></lottie-player>';
+        $(this).hide();
+        $(this).parent().append(html);
     });
 });
