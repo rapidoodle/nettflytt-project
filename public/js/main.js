@@ -22,16 +22,17 @@ $(document).ready(function() {
     });
 
 
+
     $("#add-name").click(function(){
-        if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
-            alert("Please complete the form before adding a new name");
-        }
-        else{
+        // if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
+        //     alert("Please complete the form before adding a new name");
+        // }
+        // else{
          var newId = Date.now();
          var html = '<div class="card" id="card_'+newId+'">'+
-                        '<div class="pointer card-header d-flex align-items-center justify-content-between" id="'+newId+'" data-toggle="collapse" data-target="#col_'+newId+'" aria-expanded="true" aria-controls="collapseOne">'+
+                        '<div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="'+newId+'" data-toggle="collapse" data-target="#col_'+newId+'" aria-expanded="true" aria-controls="collapseOne">'+
                             '<span>'+fullName.val()+'</span>'+
-                            '<i class="fa fa-times float-right" data-id="card_'+newId+'" style="z-index:99999999999"></i>'+
+                            '<i class="fa fa-times float-right" data-id="card_'+newId+'" style="margin-top:-3px;z-index:99999999999"></i>'+
                         '</div>'+
                         '<div id="col_'+newId+'" class="collapse" aria-labelledby="'+newId+'" data-parent="#extra-names">'+
                             '<div class="bg-white card-body">'+
@@ -53,17 +54,30 @@ $(document).ready(function() {
                         '</div>';
             $("#extra-names").append(html);
 
+            $('.collapse').collapse({
+             toggle: false
+            });
+
+            $(".multi-collapse").collapse("hide")
+            $(".multi-collapse").clone(true).insertAfter("div#customer-form:last");
+            
+
+            setTimeout(function(){
+                $(".multi-collapse").collapse("show");
+            }, 500);
+
+            $(".multi-collapse")[1].remove();        
             fullName.val("");
             email.val("");
             phone.val("");
             day.val("");
             month.val("");
-            year.val("");
-
-            $('.collapse').collapse({
-             toggle: false
-            });
-        }
+            year.val("");    
+        // }
+    });
+    $(document).on('show.bs.collapse hide.bs.collapse', '.multi-collapse', function(e) {
+        e.stopPropagation();
+        console.log('event triggered');
     });
 
     $(".card-header").on("click", function(){
