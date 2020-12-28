@@ -1,3 +1,6 @@
+<?php 
+$summary = session('request');
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -65,16 +68,16 @@
         <h5>Informasjon</h5>
         <ul class="list-unstyled">
           <li>
-            <a href="/">Om oss</a>
+            <a href="/about-us/">Om oss</a>
           </li>
           <li>
-            <a href="/">Personvern</a>
+            <a href="/privacy-policy">Personvern</a>
           </li>
           <li>
-            <a href="/">Kjøpsvilkår</a>
+            <a href="/terms-of-use/">Kjøpsvilkår</a>
           </li>
           <li>
-            <a href="/">Kontakt oss</a>
+            <a href="/contact-us/">Kontakt oss</a>
           </li>
         </ul>
       </div>
@@ -109,8 +112,8 @@
     <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="https://kit.fontawesome.com/58a5e1829b.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js" ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" ></script>
+    <script src="{{ asset('js/moment.min.js') }}" ></script>
+    <script src="{{ asset('js/moment-with-locales.js') }}" ></script>
     <script type="text/javascript" src="{{ asset('js/tavo-calendar.js') }}"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>

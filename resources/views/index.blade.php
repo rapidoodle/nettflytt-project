@@ -1,8 +1,9 @@
 @extends('layouts.main')
 @section('content')
 <?php
+$months  = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
 
-$months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
+$monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December']; 
 
 ?>
 <div class="row px-2 px-lg-4 mb-5">
@@ -28,9 +29,10 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
         <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid" alt="smiley couple taking selfie while packing move out" height="100%">
     </div>
 </div>  
-
+<form action="/getToken" method="POST" id="index-form">
+@csrf <!-- {{ csrf_field() }} -->
 <div class="row px-4 my-5 form" id="index-form-container">
-    <div class="col-12 col-sm-12 col-lg-9">
+    <div class="col-12 col-sm-12 col-lg-9 form-">
             <div class="row">
                 <div class="accordion bg-xs-light col-12 col-sm-12 col-lg-5">
                     <div class="header-num">1</div> <h6>Personlig informasjon</h6>
@@ -40,14 +42,13 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                             
                         </div>
                         <div data-parent="#customer-form" class="multi-collapse">
-                            <form>
                                 <div class="form-group">
                                     <label for="full-name">Fullt navn</label>
-                                    <input type="text" class="form-control smy-fld" id="full-name" data-conn="hk-name" placeholder="Fullt navn">
+                                    <input type="text" class="form-control smy-fld req-fld" id="full-name" data-conn="hk-full-name" placeholder="Fullt navn" required="true">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-post</label>
-                                    <input type="email" class="form-control" id="email" placeholder="eksempel@nettflytt.no">
+                                    <input type="email" class="form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Telefonnummer</label>
@@ -57,7 +58,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                                     <img src="{{ asset('images/norway-flag.png')}}" width="20px;"> +47 
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control smy-fld" data-conn="hk-phone" id="phone" placeholder="12345678">
+                                            <input type="text" class="form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true">
                                         </div>
                                 </div>
                                 <div class="row">
@@ -69,7 +70,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                                 <i class="fa fa-arrow-down"></i>
                                                 </span>
                                             </div>
-                                            <select type="text" required="true" class="form-control" placeholder="Dag" id="birth_day">
+                                            <select type="text" required="true" class="form-control req-fld" placeholder="Dag" id="birth_day" name="birth_day">
                                                 <option value="" disabled selected>Dag</option>
                                             <?php 
                                             for ($i=1; $i <=31 ; $i++) {?>
@@ -86,7 +87,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                                 <i class="fa fa-arrow-down"></i>
                                                 </span>
                                             </div>
-                                            <select type="text" required="true" class="form-control"  id="birth_month">
+                                            <select type="text" required="true" class="form-control req-fld"  id="birth_month" name="birth_month">
                                                 <option value="" disabled selected>Måned</option>
                                             <?php 
                                             foreach($months as $month) {?>
@@ -102,17 +103,16 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                                 <span class="input-group-text" id="year-icon"><i class="fa fa-arrow-down"></i>
                                                 </span>
                                             </div>
-                                            <select type="text" required="true" class="form-control"  id="birth_year">
+                                            <select type="text" required="true" class="form-control req-fld"  id="birth_year" name="birth_year">
                                                 <option value="" disabled selected>År</option>
                                             <?php 
-                                            for ($i = 1920; $i <= 2020 ; $i++) {?>
+                                            for ($i = 2020; $i >= 1920 ; $i--) {?>
                                                 <option value="<?=$i?>"><?=$i?></option>
                                             <?php } ?>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                             <div class="form-group mt-3 mb-3half">
                                 <label for="add-name">Melder du flytting for fler personer?</label><br>
@@ -124,35 +124,33 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                 </div>
                 <div class="bg-xs-light col-12 col-sm-12 col-lg-7 pt-3 pt-lg-0 mt-4 mt-lg-0">
                     <div class="header-num">2</div> <h6>Adresse</h6>
-                    
                     <hr class="mb-2">
                         <div class="form-group pt-sm-3">
-                            <label for="street-address">Jeg flytter fra (Gammel adresse)</label>
-                            <input type="text" required="true" class="form-control smy-fld" id="old_address" placeholder="Eksempelgaten 10" data-conn="gamel-address-1">
+                            <label for="old_address">Jeg flytter fra (Gammel adresse)</label>
+                            <input type="text" required="true" class="form-control smy-fld" id="old_address" placeholder="Eksempelgaten 10" data-conn="gamel-address-1" name="old_address">
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <label for="post-number">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="old_zipcode" max="4" data-conn="gamel-address-2">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="old_zipcode" max="4" data-conn="gamel-address-2" name="old_zipcode">
                             </div>
                             <div class="col-6">
                                 <label for="poststed">Poststed</label>
-                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="old_place">
+                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="old_place" name="old_place">
                             </div>
                         </div>
                         <div class="form-group mt-3">
-                            <label for="ny-address">Jeg flytter til (Ny adresse)</label>
-                            <input type="text" required="true" class="form-control smy-fld" id="new_address" data-conn="ny-address-1" placeholder="Eksemmpelgaten 10
-">
+                            <label for="new_address">Jeg flytter til (Ny adresse)</label>
+                            <input type="text" required="true" class="form-control smy-fld" id="new_address" data-conn="ny-address-1" placeholder="Eksemmpelgaten 10" name="new_address">
                         </div>
                         <div class="form-group row">
                             <div class="col-6">
                                 <label for="post-number2">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="new_zipcode" data-conn="ny-address-2">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="new_zipcode" data-conn="ny-address-2" name="new_zipcode">
                             </div>
                             <div class="col-6">
                                 <label for="poststed2">Poststed</label>
-                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="new_place">
+                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="new_place" name="new_place">
                             </div>
                         </div>
                         <div class="row">
@@ -164,7 +162,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                             <i class="fa fa-arrow-down"></i>
                                             </span>
                                         </div>
-                                        <select type="text" required="true" class="form-control" id="">
+                                        <select type="text" required="true" class="form-control" id="moving_date_day" name="moving_date_day">
                                             <option value="" disabled selected>Dag</option>
                                         <?php 
                                         for ($i=1; $i <=31 ; $i++) {?>
@@ -181,7 +179,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                             <i class="fa fa-arrow-down"></i>
                                             </span>
                                         </div>
-                                        <select type="text" required="true" class="form-control"  id="month">
+                                        <select type="text" required="true" class="form-control"  id="moving_date_month" name="moving_date_month">
                                             <option value="" disabled selected>Måned</option>
                                         <?php 
                                         foreach($months as $month) {?>
@@ -197,10 +195,10 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                                             <span class="input-group-text" id="year-icon"><i class="fa fa-arrow-down"></i>
                                             </span>
                                         </div>
-                                        <select type="text" required="true" class="form-control"  id="year2">
+                                        <select type="text" required="true" class="form-control"  id="moving_date_year" name="moving_date_year">
                                             <option value="" disabled selected>År</option>
                                         <?php 
-                                        for ($i = 1920; $i <= 2020 ; $i++) {?>
+                                        for ($i = 2020; $i >= 1920 ; $i--) {?>
                                             <option value="<?=$i?>"><?=$i?></option>
                                         <?php } ?>
                                         </select>
@@ -211,15 +209,16 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                             <div class="col-12 px-0">
                                 <label>Boligtype</label>
                             </div>
-                            <div class="col bg-light mr-2 py-3 text-center index-option pointer">
+                            <div class="col bg-light mr-2 py-3 text-center index-option pointer" data-value="hus">
                                 <i class="fas fa-home"></i> Hus
                             </div>
-                            <div class="col bg-light mx-2 py-3 text-center index-option pointer">
+                            <div class="col bg-light mx-2 py-3 text-center index-option pointer" data-value="leilighet">
                                 <i class="far fa-building"></i> Leilighet
                             </div>
-                            <div class="col bg-light ml-2 py-3 text-center index-option pointer">
+                            <div class="col bg-light ml-2 py-3 text-center index-option pointer" data-value="annet" >
                                 Annet
                             </div>
+                            <input type="hidden" name="new_house_type" id="new_house_type" required="true">
                         </div>
                 </div>
             </div>
@@ -236,13 +235,13 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                     <div class="header-num">4</div> <h6>Postkasseskilt</h6>
                     <hr>
                     <div class="form-check index-step-4 ml-4 ml-lg-0">
-                        <input class="form-check-input" required="true" type="checkbox" value="" id="check">
+                        <input class="form-check-input" type="checkbox" value="" id="check">
                         <label class="form-check-label" for="check">
                         Jeg vil bestille nytt postkasseskilt til den nye boligen for kun kr 169,- inkl frakt
                         </label>
                     </div>
                     <div class="text-center px-5 px-lg-0">
-                        <a href="/receiver" class="float-lg-right btn btn-info mt-4 mb-auto" id="submit-form">Meld flytting</a> 
+                        <button class="float-lg-right btn btn-info mt-4 mb-auto" id="submit-form">Meld flytting</button> 
                     </div>
                     <!-- <button class="float-right btn btn-info mt-4 mb-auto" id="submit-form" type="submit">Meld flytting</button>  -->
                 </div>
@@ -258,7 +257,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" name="gamel-address-1" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly>
+                <input type="text" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{$summary['full-name']}}">
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -266,7 +265,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" name="gamel-address-2" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly>
+                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly>
             </div>
 
             <p class="sub-heading mt-4">Ny adressee</p>
@@ -276,7 +275,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" name="ny-address-1" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly>
+                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly>
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -284,7 +283,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" name="ny-address-2" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly>
+                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly>
             </div>
             <p class="sub-heading mt-4">Hovedkontakt</p>
             <div class="input-group mt-2 group-form">
@@ -293,7 +292,7 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-user-o"></i>
                     </span>
                 </div>
-                <input type="text" name="hk-name" id="hk-name" class="form-control" placeholder="Fullt navn" readonly>
+                <input type="text" id="hk-full-name" name="full-name" class="form-control" placeholder="Fullt navn" readonly>
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend"id="hk-phone-icon">
@@ -301,9 +300,11 @@ $months = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Septe
                         <i class="fa fa-phone"></i> +47
                     </span>
                 </div>
-                <input type="text" name="hk-phone" id="hk-phone" class="form-control" placeholder="12345678" readonly>
+                <input type="text" id="hk-phone" name="phone" class="form-control" placeholder="12345678" readonly>
             </div>
         </div>
     </div>
 </div>
+<input type="hidden" id="hk-email" name="email" class="form-control" placeholder="12345678" readonly>
+</form>
 @endsection

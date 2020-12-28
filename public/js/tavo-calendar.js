@@ -79,7 +79,7 @@
 
     var options_default = {
         format: MOMENT_F,
-        locale: 'en',
+        locale: 'da',
         date: null,
         date_start: null,
         date_end: null,

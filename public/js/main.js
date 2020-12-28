@@ -1,6 +1,4 @@
 $(document).ready(function() {
-
-
     function removePanel(){
         console.log($(this));
     }
@@ -11,15 +9,19 @@ $(document).ready(function() {
 	var day      = $("#birth_day");
 	var month    = $("#birth_month");
 	var year     = $("#birth_year");
-
 	var rcvrSlct = "";
+    var months   = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
 
 	//INDEX PAGE
-	$(".group-form input, .add-form input, .group-form select").on("focus", function(e){
-        $(this).parent().addClass("input-group-focus");
-	}).blur(function(e){
-        $(this).parent().removeClass("input-group-focus");
-    });
+	// $(".group-form input, .add-form input, .group-form select").on("focus", function(e){
+ //        $(this).parent().addClass("input-group-focus");
+ //        $(this).parent().find("span.input-group-text").css("height:", "30px");
+ //        $(this).css("height:", "30px");
+	// }).blur(function(e){
+ //        $(this).parent().removeClass("input-group-focus");
+ //        $(this).parent().find("span.input-group-text").css("height:", "32px");
+ //        $(this).parent().find("input.form-control").css("height:", "32px");
+ //    });
 
 
 
@@ -28,8 +30,9 @@ $(document).ready(function() {
             alert("Please complete the form before adding a new name");
         }
         else{
-         var newId = Date.now();
-         var html = '<div class="card" id="card_'+newId+'">'+
+         var pCtr   = $(".person").length;
+         var newId  = Date.now();
+         var html   = '<div class="card person" id="card_'+newId+'">'+
                         '<div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="'+newId+'" data-toggle="collapse" data-target="#col_'+newId+'" aria-expanded="true" aria-controls="collapseOne">'+
                             '<span>'+fullName.val()+'</span>'+
                             '<i class="fa fa-times float-right" data-id="card_'+newId+'" style="margin-top:-3px;z-index:99999999999"></i>'+
@@ -38,16 +41,20 @@ $(document).ready(function() {
                             '<div class="bg-white card-body">'+
                                 '<table class="w-100">'+
                                     '<tr>'+
+                                        '<td>Full name</td>'+
+                                        '<td><input type="text" class="person-input" value="'+fullName.val()+'" id="name_'+pCtr+'"></td>'+
+                                    '</tr>'+
+                                    '<tr>'+
                                         '<td>E-post</td>'+
-                                        '<td>'+email.val()+'</td>'+
+                                        '<td><input type="text" class="person-input" value="'+email.val()+'" id="email_'+pCtr+'"></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>Telefonnummer</td>'+
-                                        '<td>'+phone.val()+'</td>'+
+                                        '<td><input type="text" class="person-input" value="'+phone.val()+'" id="phone_'+pCtr+'"></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>Fødselsdato</td>'+
-                                        '<td>'+month.val()+' '+day.val()+', '+year.val()+'</td>'+
+                                        '<td><input type="date" class="person-input" value="'+year.val()+'-'+month.val()+'-'+day.val()+'" id="bday_'+pCtr+'"></td>'+
                                     '</tr>'+
                                 '</table>'+
                             '</div>'+
@@ -66,13 +73,17 @@ $(document).ready(function() {
                 $(".multi-collapse").collapse("show");
             }, 500);
 
-            $(".multi-collapse")[1].remove();        
+            $(".multi-collapse")[1].remove();       
+
             fullName.val("");
             email.val("");
             phone.val("");
             day.val("");
             month.val("");
             year.val("");    
+
+            //REMOVE REQUIRED FIELD TO PERSONAL INFORMATION IF FIRST PERSON IS ADDED
+            $(".req-fld").removeAttr("required");
         }
     });
     $(document).on('show.bs.collapse hide.bs.collapse', '.multi-collapse', function(e) {
@@ -91,6 +102,10 @@ $(document).ready(function() {
         if(thisid){
             console.log(thisid);
             $("#"+thisid).remove();
+            if($(".person").length == 0){
+                $(".req-fld").attr("required", true);
+            }
+
         }
     });
     //auto fill summary
@@ -98,16 +113,29 @@ $(document).ready(function() {
     	var val = $(this).val();
     	var eqFld = $(this).attr("data-conn");
 
-    	$("#"+eqFld).val(val);
+        if($(".person").length == 0){
+            $("#"+eqFld).val(val);
+        }
     });
     //select option
     $(".index-option").click(function(){
     	$(".index-option").removeClass("active-option");
-    	$(this).addClass("active-option");
+        $(this).addClass("active-option");
+    	var val = $(this).attr("data-value");
+        
+        $("#new_house_type").val(val);
     });
     //submit index form 
-    $("#submit-form").click(function(){
-    	// $("#index-form").submit();
+    $("#index-form").submit(function(){
+        for(var q = 0; q <= $(".person").length; q++ ){
+            var name  = $("#name_"+q).val();
+            var phone = $("#phone_"+q).val();
+            var email = $("#email_"+q).val();
+            var person = {phone: phone, name: name, email: email};
+            var inp   = '<input type="hidden" name="person'+q+'" value="'+JSON.stringify(person)+'">'; 
+            $(this).append(inp);
+            alert(JSON.stringify(person));
+        }
     });
 
 
@@ -173,6 +201,7 @@ $(document).ready(function() {
     })
 
     const myCalendar = new TavoCalendar('#my-calendar', {
+         locale: "da"
       // settings here
     })
 
@@ -200,7 +229,7 @@ $(document).ready(function() {
 
     //THANK YOU
     $(".btn-ty-ja").click(function(){
-        var html = '<lottie-player src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" class="p-5" autoplay></lottie-player>';
+        var html = '<lottie-player style="height:56px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <br> <b>Takk! Vi kontakter deg snart</b>';
         $(this).hide();
         $(this).parent().append(html);
     });

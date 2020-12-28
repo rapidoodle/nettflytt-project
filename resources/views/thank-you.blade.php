@@ -42,7 +42,7 @@
             </div>
             <div class="card-body">
                 <p class="my-4">Ønsker du et uforpliktende tilbud på strøm til din nye bolig?</p>
-                <div class="px-5 px-md-0 text-center">
+                <div class="text-center">
                     <button class="btn btn-info mb-4 btn-ty-ja">Ja takk!</button>
                 </div>
             </div>
@@ -55,7 +55,7 @@
             </div>
             <div class="card-body">
                 <p class="my-4">Ønsker du et uforpliktende tilbud på alarm til din nye bolig?</p>
-                <div class="px-5 px-md-0">
+                <div class="text-center">
                     <button class="btn btn-info mb-4 btn-ty-ja">Ja takk!</button>
                 </div>
             </div>
@@ -69,7 +69,7 @@
             <div class="card-body">
                 <p class="my-4">Ønsker du et tilbud på forsikring til din nye bolig?</p>
 
-                <div class="px-5 px-md-0"> 
+                <div class="text-center"> 
                 <button class="btn btn-info mb-4 btn-ty-ja">Ja takk!</button>
                 </div> 
             </div>
