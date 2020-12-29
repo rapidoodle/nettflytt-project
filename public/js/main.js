@@ -54,7 +54,8 @@ $(document).ready(function() {
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>Fødselsdato</td>'+
-                                        '<td><input type="date" class="person-input" value="'+year.val()+'-'+month.val()+'-'+day.val()+'" id="bday_'+pCtr+'"></td>'+
+                                         '<td><input type="date" class="person-input" value="'+year.val()+'-'+month.val()+'-'+day.val()+'" id="bday_'+pCtr+'"></td>'+
+                                        // '<td><input type="date" class="person-input" value="2020-10-10" id="bday_'+pCtr+'"></td>'+
                                     '</tr>'+
                                 '</table>'+
                             '</div>'+
@@ -100,7 +101,6 @@ $(document).ready(function() {
     $(document).click(function(event) {
         var thisid = $(event.target).attr("data-id");
         if(thisid){
-            console.log(thisid);
             $("#"+thisid).remove();
             if($(".person").length == 0){
                 $(".req-fld").attr("required", true);
@@ -124,18 +124,33 @@ $(document).ready(function() {
     	var val = $(this).attr("data-value");
         
         $("#new_house_type").val(val);
+
+        var people = "";
+        for(var q = 0; q < $(".person").length; q++ ){
+            var name   = $("#name_"+q).val();
+            var phone  = $("#phone_"+q).val();
+            var email  = $("#email_"+q).val();
+            var bday   = $("#bday_"+q).val();
+            var person = name+"|"+phone+"|"+email+"|"+bday;
+            people += person+"---";
+        }
+        console.log(people);
+
+
     });
     //submit index form 
     $("#index-form").submit(function(){
-        for(var q = 0; q <= $(".person").length; q++ ){
-            var name  = $("#name_"+q).val();
-            var phone = $("#phone_"+q).val();
-            var email = $("#email_"+q).val();
-            var person = {phone: phone, name: name, email: email};
-            var inp   = '<input type="hidden" name="person'+q+'" value="'+JSON.stringify(person)+'">'; 
-            $(this).append(inp);
-            alert(JSON.stringify(person));
+        var people = "";
+        for(var q = 0; q < $(".person").length; q++ ){
+            var name   = $("#name_"+q).val();
+            var phone  = $("#phone_"+q).val();
+            var email  = $("#email_"+q).val();
+            var bday   = $("#bday_"+q).val();
+            var person = name+"|"+phone+"|"+email+"|"+bday;
+            people += person+"---";
         }
+        var inp   = '<input type="hidden" name="people" value="'+people+'">'; 
+        $(this).append(inp);
     });
 
 

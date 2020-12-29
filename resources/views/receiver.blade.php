@@ -207,40 +207,39 @@
             <div class="d-none d-md-block bg-info index-summary p-4 mt-4 mt-lg-0">
                 <p class="heading">Oppsummering</p>
                 <p class="sub-heading">Gammel adresse</p>
-                <div class="input-group mt-2 group-form">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="gamel-address-1-icon">
-                            <i class="fa fa-map-marker"></i>
-                        </span>
+                    <div class="input-group mt-2 group-form">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="gamel-address-1-icon">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                        </div>
+                        <input type="text" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['old_address']}}">
                     </div>
-                    <input type="text" name="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly>
+            <div class="input-group mt-2 group-form">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="gamel-address-2-icon">
+                        <i class="fa fa-map-o"></i>
+                    </span>
                 </div>
-                <div class="input-group mt-2 group-form">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="gamel-address-2-icon">
-                            <i class="fa fa-map-o"></i>
-                        </span>
-                    </div>
-                    <input type="text" name="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly>
+                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_zipcode']}} {{session('customer')['old_place']}}">
+            </div>
+            <p class="sub-heading mt-4">Ny adressee</p>
+            <div class="input-group mt-2 group-form">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="ny-address-1-icon">
+                        <i class="fa fa-map-marker"></i>
+                    </span>
                 </div>
-
-                <p class="sub-heading mt-3">Ny adressee</p>
-                <div class="input-group mt-2 group-form">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="ny-address-1-icon">
-                            <i class="fa fa-map-marker"></i>
-                        </span>
-                    </div>
-                    <input type="text" name="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly>
+                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address']}}">
+            </div>
+            <div class="input-group mt-2 group-form">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="ny-address-2-icon">
+                        <i class="fa fa-map-o"></i>
+                    </span>
                 </div>
-                <div class="input-group mt-2 group-form">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="ny-address-2-icon">
-                            <i class="fa fa-map-o"></i>
-                        </span>
-                    </div>
-                    <input type="text" name="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly>
-                </div>
+                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_zipcode']}} {{session('customer')['new_place']}}">
+            </div>
 
                 <p class="sub-heading mt-3">Mottakere</p>
                 <div class="summary-choices px-2 py-3">
@@ -320,9 +319,9 @@
             </table>
             <div class="modal-person">
                 <h6>Flyttemeldingen gjelder for</h6>
-                <input type="checkbox" name="" id="person1"> <label for="person1">!person1</label>
-                <input type="checkbox" name="" id="person2" class="ml-2">
-                <label for="person2">!person2</label>
+                <?php for($x = 0; $x < session("customer")["totalPerson"]; $x++){ ?>
+                <input type="checkbox" name="" id="person{{$x}}"> <label for="person{{$x}}">{{session('customer')['person'.$x]['name']}}</label>
+                <?php } ?>
             </div>
 
           </div>

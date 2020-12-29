@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<?php echo json_encode(session('customer')); ?>
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
             <div class="text-center">
@@ -170,25 +171,25 @@
           </div>
         </div>
     </div>
-    <div class="col-12 col-lg-3 offset-lg-1 d-none d-md-inline">
+    <div class="col-12 col-lg-3 offset-lg-1 d-none d-md-inline" id="summary">
         <div class="bg-info index-summary p-4 mt-4 mt-lg-0">
             <p class="heading">Oppsummering</p>
             <p class="sub-heading">Gammel adresse</p>
-            <div class="input-group mt-2 group-form">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="gamel-address-1-icon">
-                        <i class="fa fa-map-marker"></i>
-                    </span>
-                </div>
-                <input type="text" name="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10">
-            </div>
+                    <div class="input-group mt-2 group-form">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="gamel-address-1-icon">
+                                <i class="fa fa-map-marker"></i>
+                            </span>
+                        </div>
+                        <input type="text" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['old_address']}}">
+                    </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="gamel-address-2-icon">
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" name="gamel-address-2" class="form-control" placeholder="1234 Oslo">
+                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_zipcode']}} {{session('customer')['old_place']}}">
             </div>
 
             <p class="sub-heading mt-3">Ny adressee</p>
@@ -198,7 +199,7 @@
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" name="ny-address-1" class="form-control" placeholder="Eksempelgaten 10">
+                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address']}}">
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -206,7 +207,7 @@
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" name="ny-address-2" class="form-control" placeholder="1234 Oslo">
+                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_zipcode']}} {{session('customer')['new_place']}}">
             </div>
 
             <p class="sub-heading mt-3">Mottakere</p>
