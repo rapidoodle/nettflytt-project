@@ -758,7 +758,7 @@ input.person-input:focus{
     font-weight: bold;
 }
 .text-blue{
-    color:#1D576F!important;
+    /*color:#1D576F!important;*/
 }
 .py-6 {
     padding-top: 4rem!important;
