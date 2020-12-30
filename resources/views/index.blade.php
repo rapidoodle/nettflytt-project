@@ -107,7 +107,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                                 <option value="" disabled selected>Dag</option>
                                             <?php 
                                             for ($i=1; $i <=31 ; $i++) {?>
-                                                <option value="<?=$i?>" {{isset(session('customer')['birth_day']) && session('customer')['birth_day'] == $i ? 'selected' : ''}}><?=$i?></option>
+                                                <option value="{{Helper::digits2($i)}}" {{isset(session('customer')['birth_day']) && session('customer')['birth_day'] == Helper::digits2($i) ? 'selected' : ''}}>{{Helper::digits2($i)}}</option>
                                             <?php } ?>
                                             </select>
                                         </div>
@@ -169,7 +169,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                             </div>
                             <div class="col-6">
                                 <label for="poststed">Poststed</label>
-                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="old_place" name="old_place" value="{{session('customer')['old_place'] ?? ''}}">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="Poststed" id="old_place" name="old_place" value="{{session('customer')['old_place'] ?? ''}}">
                             </div>
                         </div>
                         <div class="form-group mt-3">
@@ -183,7 +183,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                             </div>
                             <div class="col-6">
                                 <label for="poststed2">Poststed</label>
-                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="new_place" name="new_place" value="{{session('customer')['new_zipcode'] ?? ''}}">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="Poststed" id="new_place" name="new_place" value="{{session('customer')['new_zipcode'] ?? ''}}">
                             </div>
                         </div>
                         <div class="row">
@@ -199,7 +199,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                             <option value="" disabled selected>Dag</option>
                                         <?php 
                                         for ($i=1; $i <=31 ; $i++) {?>
-                                            <option value="<?=$i?>" {{isset(session('customer')['moving_date_day']) && session('customer')['moving_date_day'] == $i ? 'selected' : ''}} ><?=$i?></option>
+                                            <option value="{{Helper::digits2($i)}}" {{isset(session('customer')['moving_date_day']) && session('customer')['moving_date_day'] == Helper::digits2($i) ? 'selected' : ''}} >{{Helper::digits2($i)}}</option>
                                         <?php } ?>
                                         </select>
                                     </div>

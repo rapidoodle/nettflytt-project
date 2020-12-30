@@ -84,7 +84,7 @@ $(document).ready(function() {
             year.val("");    
 
             //REMOVE REQUIRED FIELD TO PERSONAL INFORMATION IF FIRST PERSON IS ADDED
-            $(".req-fld").removeAttr("required");
+            // $(".req-fld").removeAttr("required");
         }
     });
     $(document).on('show.bs.collapse hide.bs.collapse', '.multi-collapse', function(e) {
@@ -102,20 +102,29 @@ $(document).ready(function() {
         var thisid = $(event.target).attr("data-id");
         if(thisid){
             $("#"+thisid).remove();
-            if($(".person").length == 0){
-                $(".req-fld").attr("required", true);
-            }
+            // if($(".person").length == 0){
+            //     $(".req-fld").attr("required", true);
+            // }
 
         }
     });
     //auto fill summary
     $(".smy-fld").keyup(function(e){
     	var val = $(this).val();
-    	var eqFld = $(this).attr("data-conn");
-
-        if($(".person").length == 0){
+        
+        if($(this).attr("id") == "old_zipcode"){
+            $("#gamel-address-2").val($(this).val()+" "+$("#old_place").val());
+        }else if($(this).attr("id") == "old_place"){
+            $("#gamel-address-2").val($("#old_zipcode").val()+" "+$(this).val());
+        }else if($(this).attr("id") == "new_zipcode"){
+            $("#ny-address-2").val($("#new_zipcode").val()+" "+$(this).val());
+        }else if($(this).attr("id") == "new_place"){
+            $("#ny-address-2").val($("#new_zipcode").val()+" "+$(this).val());
+        }else{
+            var eqFld = $(this).attr("data-conn");
             $("#"+eqFld).val(val);
         }
+
     });
     //select option
     $(".index-option").click(function(){
@@ -125,31 +134,29 @@ $(document).ready(function() {
         
         $("#new_house_type").val(val);
 
-        var people = "";
-        for(var q = 0; q < $(".person").length; q++ ){
-            var name   = $("#name_"+q).val();
-            var phone  = $("#phone_"+q).val();
-            var email  = $("#email_"+q).val();
-            var bday   = $("#bday_"+q).val();
-            var person = name+"|"+phone+"|"+email+"|"+bday;
-            people += person+"---";
-        }
-        console.log(people);
-
-
+            console.log($("#email_0").val());
     });
     //submit index form 
     $("#index-form").submit(function(){
         var people = "";
         for(var q = 0; q < $(".person").length; q++ ){
-            var name   = $("#name_"+q).val();
-            var phone  = $("#phone_"+q).val();
-            var email  = $("#email_"+q).val();
-            var bday   = $("#bday_"+q).val();
-            var person = name+"|"+phone+"|"+email+"|"+bday;
+            var nameA   = $("#name_"+q).val();
+            var phoneA  = $("#phone_"+q).val();
+            var emailA  = $("#email_"+q).val();
+            var bdayA   = $("#bday_"+q).val();
+            var person  = nameA+"|"+phoneA+"|"+emailA+"|"+bdayA;
             people += person+"---";
         }
-        var inp   = '<input type="hidden" name="people" value="'+people+'">'; 
+
+        if($("#name_0").length != 0){
+            var bday_arr = $("#bday_0").val().split("-");
+            var newAdd = $(".person").length + 1;      
+            var extraPerson = fullName.val()+"|"+phone.val()+"|"+email.val()+"|"+year.val()+'-'+month.val()+'-'+day.val();
+            people += extraPerson+"---";
+        }
+
+
+        var inp     = '<input type="hidden" name="people" value="'+people+'">'; 
         $(this).append(inp);
     });
 
@@ -192,12 +199,13 @@ $(document).ready(function() {
 
     $("#confirm-notif").click(function(){
     	var html = '<tr>'+
-                    	'<td><i class="fas fa-check"></i></td>'+
+                    	'<td width="10%"><i class="fas fa-check"></i></td>'+
                         '<td>'+rcvrSlct+'</td>'+
                         '<td><i class="fas fa-times"></i></td>'+
                     '</tr>';
 
-    	$("#selected-list").append(html);
+        $(".default-selected").hide();
+    	$(".selected-list").append(html);
     });
 
 

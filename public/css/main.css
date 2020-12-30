@@ -87,11 +87,12 @@ div.form div.header-num{
     border: 1px solid #B7B7B7;
     color:#fff;
     border-radius: 50%;
-    padding-left: 6px;
-    padding-top: 1.5px;
     color: #2D3855;
     position: absolute;
     font-size: 12px;
+    display: inline-block;
+    line-height: 19px;
+    text-align: center;
 }
 div.form h6{
     font-size: 14px;

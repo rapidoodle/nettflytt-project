@@ -221,7 +221,7 @@
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_zipcode']}} {{session('customer')['old_place']}}">
+                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_post'] ?? ''}}">
             </div>
             <p class="sub-heading mt-4">Ny adressee</p>
             <div class="input-group mt-2 group-form">
@@ -230,7 +230,7 @@
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address']}}">
+                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address'] ?? ''}}">
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -238,26 +238,14 @@
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_zipcode']}} {{session('customer')['new_place']}}">
+                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_post'] ?? ''}}">
             </div>
 
                 <p class="sub-heading mt-3">Mottakere</p>
                 <div class="summary-choices px-2 py-3">
-                    <table width="100%" id="selected-list">
-                        <tr>
-                            <td><i class="fas fa-check"></i></td>
-                            <td>Telenor</td>
-                            <td><i class="fas fa-times"></i></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-check"></i></td>
-                            <td>Fjordkraft</td>
-                            <td><i class="fas fa-times"></i></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-check"></i></td>
-                            <td>OBOS</td>
-                            <td><i class="fas fa-times"></i></td>
+                    <table width="100%" class="selected-list">
+                        <tr class="default-selected">
+                            <td align="center">Selected Company</td>
                         </tr>
                     </table>
                 </div>
@@ -265,21 +253,9 @@
             <div class="d-md-none bg-info index-summary p-4 mt-4 mt-lg-0">
                 <p class="sub-heading">Mottakere</p>
                 <div class="summary-choices p-4">
-                    <table width="100%" id="selected-list">
-                        <tr>
-                            <td><i class="fas fa-check"></i></td>
-                            <td>Telenor</td>
-                            <td><i class="fas fa-times"></i></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-check"></i></td>
-                            <td>Fjordkraft</td>
-                            <td><i class="fas fa-times"></i></td>
-                        </tr>
-                        <tr>
-                            <td><i class="fas fa-check"></i></td>
-                            <td>OBOS</td>
-                            <td><i class="fas fa-times"></i></td>
+                    <table width="100%" class="selected-list">
+                        <tr class="default-selected">
+                            <td align="center">Selected Company</td>
                         </tr>
                     </table>
                 </div>
@@ -301,7 +277,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title mt-4">Flyttemelding for !reciever</h5>
+            <h5 class="modal-title mt-4">Flyttemelding for {{session('customer')['full-name']}}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -313,15 +289,18 @@
                     <td>Flytter til</td>
                 </tr>
                 <tr>
-                    <td>!old adress</td>
-                    <td>!new adress</td>
+                    <td>{{session('customer')['old_address'] ?? ''}}</td>
+                    <td>{{session('customer')['new_address'] ?? ''}}</td>
                 </tr>
             </table>
             <div class="modal-person">
                 <h6>Flyttemeldingen gjelder for</h6>
-                <?php for($x = 0; $x < session("customer")["totalPerson"]; $x++){ ?>
-                <input type="checkbox" name="" id="person{{$x}}"> <label for="person{{$x}}">{{session('customer')['person'.$x]['name']}}</label>
-                <?php } ?>
+                <?php 
+                if(isset(session("customer")["totalPerson"])){ 
+                    for($x = 0; $x < session("customer")["totalPerson"]; $x++){ ?>
+                <input type="checkbox" name="" id="person{{$x}}">
+                <label for="person{{$x}}">{{session('customer')['person'.$x]['name'] ?? ''}}</label><br>
+                <?php } } ?>
             </div>
 
           </div>

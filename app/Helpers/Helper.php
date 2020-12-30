@@ -47,7 +47,23 @@ class Helper
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+		$output = curl_exec($ch);
+		curl_close($ch);
+		$response = json_decode($output);
+
+		return $response;
+    }
+
+
+    public static function getData($token){
+		$endpoint = "https://api.nettflytt.no/api/nettflytt/2020-04/storage/".$token."/details";
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $endpoint);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 		$output = curl_exec($ch);
 		curl_close($ch);
 		$response = json_decode($output);

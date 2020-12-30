@@ -180,7 +180,7 @@
                                 <i class="fa fa-map-marker"></i>
                             </span>
                         </div>
-                        <input type="text" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['old_address']}}">
+                        <input type="text" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['old_address'] ?? ''}}">
                     </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -188,7 +188,7 @@
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_zipcode']}} {{session('customer')['old_place']}}">
+                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_post']  ?? ''}}">
             </div>
 
             <p class="sub-heading mt-3">Ny adressee</p>
@@ -198,7 +198,7 @@
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address']}}">
+                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address'] ?? ''}}">
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -206,7 +206,7 @@
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_zipcode']}} {{session('customer')['new_place']}}">
+                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_post'] ?? ''}}">
             </div>
 
             <p class="sub-heading mt-3">Mottakere</p>
