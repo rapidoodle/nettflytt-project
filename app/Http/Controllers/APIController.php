@@ -43,6 +43,8 @@ class APIController extends Controller
     	// echo json_encode($update);
 
     	session(['_token' 	=> $token, 
+    			 'old_post' => $request['old_zipcode'].' '.$request['old_place'],
+    			 'new_post' => $request['new_zipcode'].' '.$request['new_place'],
     			 'customer' => $request->all()]);
     	// echo json_encode(session('customer'));
 

@@ -81,7 +81,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-post</label>
-                                    <input type="email" name="email" class="form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email" value="{{session('customer')['email']}}">
+                                    <input type="email" name="email" class="form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email" value="{{session('customer')['email'] ?? ''}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Telefonnummer</label>
@@ -91,7 +91,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                                     <img src="{{ asset('images/norway-flag.png')}}" width="20px;"> +47 
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true" value="{{session('customer')['phone']}}">
+                                            <input type="text" class="form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true" value="{{session('customer')['phone'] ?? ''}}">
                                         </div>
                                 </div>
                                 <div class="row">
@@ -160,30 +160,30 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                     <hr class="mb-2">
                         <div class="form-group pt-sm-3">
                             <label for="old_address">Jeg flytter fra (Gammel adresse)</label>
-                            <input type="text" required="true" class="form-control smy-fld" id="old_address" placeholder="Eksempelgaten 10" data-conn="gamel-address-1" name="old_address" value="{{session('customer')['old_address']}}">
+                            <input type="text" required="true" class="form-control smy-fld" id="old_address" placeholder="Eksempelgaten 10" data-conn="gamel-address-1" name="old_address" value="{{session('customer')['old_address'] ?? ''}}">
                         </div>
                         <div class="row">
                             <div class="col-6">
                                 <label for="post-number">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="old_zipcode" max="4" data-conn="gamel-address-2" name="old_zipcode" value="{{session('customer')['old_zipcode']}}">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="old_zipcode" max="4" data-conn="gamel-address-2" name="old_zipcode" value="{{session('customer')['old_zipcode'] ?? ''}}">
                             </div>
                             <div class="col-6">
                                 <label for="poststed">Poststed</label>
-                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="old_place" name="old_place" value="{{session('customer')['old_place']}}">
+                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="old_place" name="old_place" value="{{session('customer')['old_place'] ?? ''}}">
                             </div>
                         </div>
                         <div class="form-group mt-3">
                             <label for="new_address">Jeg flytter til (Ny adresse)</label>
-                            <input type="text" required="true" class="form-control smy-fld" id="new_address" data-conn="ny-address-1" placeholder="Eksemmpelgaten 10" name="new_address" value="{{session('customer')['new_address']}}">
+                            <input type="text" required="true" class="form-control smy-fld" id="new_address" data-conn="ny-address-1" placeholder="Eksemmpelgaten 10" name="new_address" value="{{session('customer')['new_address'] ?? ''}}">
                         </div>
                         <div class="form-group row">
                             <div class="col-6">
                                 <label for="post-number2">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="new_zipcode" data-conn="ny-address-2" name="new_zipcode" value="{{session('customer')['new_zipcode']}}">
+                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="new_zipcode" data-conn="ny-address-2" name="new_zipcode" value="{{session('customer')['new_zipcode'] ?? ''}}">
                             </div>
                             <div class="col-6">
                                 <label for="poststed2">Poststed</label>
-                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="new_place" name="new_place" value="{{session('customer')['new_zipcode']}}">
+                                <input type="text" required="true" class="form-control" placeholder="Poststed" id="new_place" name="new_place" value="{{session('customer')['new_zipcode'] ?? ''}}">
                             </div>
                         </div>
                         <div class="row">
@@ -290,7 +290,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['old_address']}}">
+                <input type="text" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['old_address'] ?? ''}}">
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -298,7 +298,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_zipcode']}} {{session('customer')['old_place']}}">
+                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_post'] ?? ''}}">
             </div>
 
             <p class="sub-heading mt-4">Ny adressee</p>
@@ -308,7 +308,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         <i class="fa fa-map-marker"></i>
                     </span>
                 </div>
-                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address']}}">
+                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address'] ?? ''}}">
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend">
@@ -316,7 +316,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         <i class="fa fa-map-o"></i>
                     </span>
                 </div>
-                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_zipcode']}} {{session('customer')['new_place']}}">
+                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_post'] ?? ''}}">
             </div>
             <p class="sub-heading mt-4">Hovedkontakt</p>
             <div class="input-group mt-2 group-form">
@@ -325,7 +325,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         <i class="fa fa-user-o"></i>
                     </span>
                 </div>
-                <input type="text" id="hk-full-name" name="full-name" class="form-control" placeholder="Fullt navn" readonly value="{{session('customer')['full-name']}}">
+                <input type="text" id="hk-full-name" name="full-name" class="form-control" placeholder="Fullt navn" readonly value="{{session('customer')['full-name'] ?? ''}}">
             </div>
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend"id="hk-phone-icon">
@@ -333,7 +333,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         <i class="fa fa-phone"></i> +47
                     </span>
                 </div>
-                <input type="text" id="hk-phone" name="phone" class="form-control" placeholder="12345678" readonly value="{{session('customer')['phone']}}">
+                <input type="text" id="hk-phone" name="phone" class="form-control" placeholder="12345678" readonly value="{{session('customer')['phone'] ?? ''}}">
             </div>
         </div>
     </div>
