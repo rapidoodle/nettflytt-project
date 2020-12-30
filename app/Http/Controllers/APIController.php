@@ -35,7 +35,7 @@ class APIController extends Controller
 
 
     	//customer unique token -- store in session
-    	echo $token = Helper::getToken();
+    	$token = Helper::getToken();
 
     	//update customer record
     	$update = Helper::updateData($token, $request->all());

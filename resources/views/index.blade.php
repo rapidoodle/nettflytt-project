@@ -77,7 +77,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         <div data-parent="#customer-form" class="multi-collapse">
                                 <div class="form-group">
                                     <label for="full-name">Fullt navn</label>
-                                    <input type="text" class="form-control smy-fld req-fld" id="full-name" data-conn="hk-full-name" placeholder="Fullt navn" required="true" value="{{session('customer')['full-name']}}">
+                                    <input type="text" class="form-control smy-fld req-fld" id="full-name" data-conn="hk-full-name" placeholder="Fullt navn" required="true" value="{{session('customer')['full-name'] ?? ''}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-post</label>
