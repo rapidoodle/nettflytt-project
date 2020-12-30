@@ -107,7 +107,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                                 <option value="" disabled selected>Dag</option>
                                             <?php 
                                             for ($i=1; $i <=31 ; $i++) {?>
-                                                <option value="<?=$i?>" {{session('customer')['birth_day'] == $i ? 'selected' : ''}}><?=$i?></option>
+                                                <option value="<?=$i?>" {{isset(session('customer')['birth_day']) && session('customer')['birth_day'] == $i ? 'selected' : ''}}><?=$i?></option>
                                             <?php } ?>
                                             </select>
                                         </div>
@@ -124,7 +124,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                                 <option value="" disabled selected>Måned</option>
                                             <?php 
                                             foreach($months as $i => $month) {?>
-                                                <option value="{{Helper::digits2($i+1)}}" {{session('customer')['birth_month'] == Helper::digits2($i+1) ? 'selected' : ''}}><?=$month?></option>
+                                                <option value="{{Helper::digits2($i+1)}}" {{isset(session('customer')['birth_month']) && session('customer')['birth_month'] == Helper::digits2($i+1) ? 'selected' : ''}}><?=$month?></option>
                                             <?php } ?>
                                             </select>
                                         </div>
@@ -140,7 +140,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                                 <option value="" disabled selected>År</option>
                                             <?php 
                                             for ($i = 2020; $i >= 1920 ; $i--) {?>
-                                                <option value="<?=$i?>"{{session('customer')['birth_year'] == $i ? 'selected' : ''}}><?=$i?></option>
+                                                <option value="<?=$i?>"{{isset(session('customer')['birth_year']) && session('customer')['birth_year'] == $i ? 'selected' : ''}}><?=$i?></option>
                                             <?php } ?>
                                             </select>
                                         </div>
@@ -199,7 +199,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                             <option value="" disabled selected>Dag</option>
                                         <?php 
                                         for ($i=1; $i <=31 ; $i++) {?>
-                                            <option value="<?=$i?>" {{session('customer')['moving_date_day'] == $i ? 'selected' : ''}} ><?=$i?></option>
+                                            <option value="<?=$i?>" {{isset(session('customer')['moving_date_day']) && session('customer')['moving_date_day'] == $i ? 'selected' : ''}} ><?=$i?></option>
                                         <?php } ?>
                                         </select>
                                     </div>
@@ -216,7 +216,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                             <option value="" disabled selected>Måned</option>
                                         <?php 
                                         foreach($months as $i => $month) { ?>
-                                            <option value="{{Helper::digits2($i+1)}}"{{session('customer')['moving_date_month'] == Helper::digits2($i+1) ? 'selected' : ''}}><?=$month?></option>
+                                            <option value="{{Helper::digits2($i+1)}}"{{isset(session('customer')['moving_date_month']) && session('customer')['moving_date_month'] == Helper::digits2($i+1) ? 'selected' : ''}}><?=$month?></option>
                                         <?php } ?>
                                         </select>
                                     </div>
@@ -232,7 +232,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                             <option value="" disabled selected>År</option>
                                         <?php 
                                         for ($i = 2020; $i >= 1920 ; $i--) {?>
-                                            <option value="<?=$i?>"{{session('customer')['moving_date_year'] == $i ? 'selected' : ''}}><?=$i?></option>
+                                            <option value="<?=$i?>"{{isset(session('customer')['moving_date_year']) && session('customer')['moving_date_year'] == $i ? 'selected' : ''}}><?=$i?></option>
                                         <?php } ?>
                                         </select>
                                     </div>
