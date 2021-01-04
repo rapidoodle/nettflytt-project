@@ -11,7 +11,7 @@ class APIController extends Controller
     public function getToken(Request $request){
     	$people = $request->people;
     	$person = explode("---", $people);
-    	$pctr    = 0;
+    	$pctr   = 0;
     	$request['first_name'] = Helper::firstName($request['full-name']);
     	$request['last_name']  = Helper::lastName($request['full-name']);
     	foreach ($person as $key => $value) {
@@ -20,8 +20,10 @@ class APIController extends Controller
 	    		$record    = explode("|", $value);
 	    		$firstName = Helper::firstName($record['0']);
 	    		$lastName  = Helper::lastName($record['0']);
-	  			$request['person'.$pos] = array("name" => $record[0], "under18" => false, "bday" => $record[3], "last_name" => $lastName, "first_name" => $firstName, "phone" => $record[1], "email" => $record[2]);
-	  			$pctr++;
+                if($firstName != "" && $lastName != "" && $record[1] != "" && $record[2] != ""){
+                    $request['person'.$pos] = array("name" => $record[0], "under18" => false, "bday" => $record[3], "last_name" => $lastName, "first_name" => $firstName, "phone" => $record[1], "email" => $record[2]);
+                    $pctr++;
+                }
     		}
     	}
 
@@ -37,7 +39,8 @@ class APIController extends Controller
     		$request['birth_year'] 	= $bdayArr[0];
     	}
 
-    	$request['totalPerson'] = $pctr;
+        $request['totalPerson'] = $pctr;
+    	$request['services']    = array();
     	$request['old_post'] 	= $request['old_zipcode'].' '.$request['old_place'];
     	$request['new_post'] 	= $request['new_zipcode'].' '.$request['new_place'];
 		// or when your server returns json
@@ -63,9 +66,24 @@ class APIController extends Controller
     	// 		 'customer' => $request->all()]);
 
     	// echo json_encode(session('customer'));
-    	// echo json_encode(session('customer'));
 
     	 return redirect('/receiver/');
 
+    }
+    public function updateCompanyList(Request $request){
+        if(isset($request->companies)){
+            $companies = $request->companies;
+            
+            //empty company list;
+            session()->put('customer.services', array());
+
+            foreach ($companies as $company) {
+                session()->push('customer.services', array($company, "0912345678", "person0"));
+            }        
+
+            echo json_encode(session('customer')['services']);
+        }else{
+            echo "No company selected";
+        }
     }
 }

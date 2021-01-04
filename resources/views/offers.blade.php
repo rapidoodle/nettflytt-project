@@ -139,7 +139,7 @@
           <div class="card">
             <div class="card-header" id="headingFour">
               <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                   Boligalarm <i class="fas fa-lock"></i>
                 </button>
               </h2>
@@ -154,10 +154,10 @@
 
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -211,23 +211,26 @@
 
             <p class="sub-heading mt-3">Mottakere</p>
             <div class="summary-choices px-2 py-3">
-                <table width="100%" id="selected-list">
-                    <tr>
-                        <td><i class="fas fa-check"></i></td>
-                        <td>Telenor</td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-check"></i></td>
-                        <td>Fjordkraft</td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                    <tr>
-                        <td><i class="fas fa-check"></i></td>
-                        <td>OBOS</td>
-                        <td><i class="fas fa-times"></i></td>
-                    </tr>
-                </table>
+                    <table width="100%" class="selected-list">
+                        <?php 
+                        if(!isset(session('customer')['services'])){?>
+                        <tr class="default-selected">
+                            <td align="center">Selected Company</td>
+                        </tr>
+                        <?php } else{
+                            if(isset(session('customer')['services'])){
+                            foreach (session('customer')['services'] as $key => $value) {
+                            $newId = time(); 
+                            if($value){?>
+                        <tr id="comp_{{$key}}{{$newId}}">
+                            <td width="10%"><i class="fas fa-check"></i></td>
+                            <td class="company-list">{{$value[0]}}</td>
+                            <td>
+                                <i class="fas fa-times pointer select-delete" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$value[0]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i>
+                            </td>
+                        </tr>
+                        <?php } } } }?>
+                    </table>
             </div>
         </div>
     </div>
@@ -235,11 +238,32 @@
 
 <div class="row px-4 mt-2 mb-4">
     <div class="mt-2 mt-md-0 col-12 btn-sm-6 col-md-6 order-2 order-md-1">
-        <a href="/" class="btn btn-previous float-left"><i class="fas fa-arrow-left"></i> Gå tilbake</a>
+        <a href="/receiver/" class="btn btn-previous float-left"><i class="fas fa-arrow-left"></i> Gå tilbake</a>
         
     </div>
     <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
         <a href="/summary" id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
     </div>
 </div>
+
+    <!--CONFIRMATION MODAL-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="text-center modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body mt-4">
+            <div class="text-center mb-4">
+                <h5 class="modal-title">Er du sikker på at du vil fjerne <span id="company-name"></span> fra listen?</h5>            
+            </div>
+            <p>
+                
+            </p>
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="confirm-delete">Ja</button>
+            <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Nei</button>
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection

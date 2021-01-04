@@ -1,5 +1,7 @@
 @extends('layouts.main')
 @section('content')
+
+<input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
             <div class="text-center">
@@ -204,7 +206,9 @@
             </div>
         </div>
         <div class="col-12 col-lg-3 offset-lg-1" id="summary">
-            <div class="d-none d-md-block bg-info index-summary p-4 mt-4 mt-lg-0">
+
+            <div class="bg-info index-summary p-4 mt-4 mt-lg-0">
+            <div class="d-none d-md-block ">
                 <p class="heading">Oppsummering</p>
                 <p class="sub-heading">Gammel adresse</p>
                     <div class="input-group mt-2 group-form">
@@ -215,48 +219,54 @@
                         </div>
                         <input type="text" id="gamel-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['old_address']}}">
                     </div>
-            <div class="input-group mt-2 group-form">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="gamel-address-2-icon">
-                        <i class="fa fa-map-o"></i>
-                    </span>
+                <div class="input-group mt-2 group-form">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="gamel-address-2-icon">
+                            <i class="fa fa-map-o"></i>
+                        </span>
+                    </div>
+                    <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_post'] ?? ''}}">
                 </div>
-                <input type="text" id="gamel-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['old_post'] ?? ''}}">
-            </div>
-            <p class="sub-heading mt-4">Ny adressee</p>
-            <div class="input-group mt-2 group-form">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="ny-address-1-icon">
-                        <i class="fa fa-map-marker"></i>
-                    </span>
+                <p class="sub-heading mt-4">Ny adressee</p>
+                <div class="input-group mt-2 group-form">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="ny-address-1-icon">
+                            <i class="fa fa-map-marker"></i>
+                        </span>
+                    </div>
+                    <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address'] ?? ''}}">
                 </div>
-                <input type="text" id="ny-address-1" class="form-control" placeholder="Eksempelgaten 10" readonly value="{{session('customer')['new_address'] ?? ''}}">
-            </div>
-            <div class="input-group mt-2 group-form">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="ny-address-2-icon">
-                        <i class="fa fa-map-o"></i>
-                    </span>
-                </div>
-                <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_post'] ?? ''}}">
+                <div class="input-group mt-2 group-form">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="ny-address-2-icon">
+                            <i class="fa fa-map-o"></i>
+                        </span>
+                    </div>
+                    <input type="text" id="ny-address-2" class="form-control" placeholder="1234 Oslo" readonly value="{{session('customer')['new_post'] ?? ''}}">
+                </div>  
             </div>
 
-                <p class="sub-heading mt-3">Mottakere</p>
+                <p class="sub-heading mt-md-3">Mottakere</p>
                 <div class="summary-choices px-2 py-3">
                     <table width="100%" class="selected-list">
+                        <?php 
+                        if(!isset(session('customer')['services'])){?>
                         <tr class="default-selected">
                             <td align="center">Selected Company</td>
                         </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="d-md-none bg-info index-summary p-4 mt-4 mt-lg-0">
-                <p class="sub-heading">Mottakere</p>
-                <div class="summary-choices p-4">
-                    <table width="100%" class="selected-list">
-                        <tr class="default-selected">
-                            <td align="center">Selected Company</td>
+                        <?php } else{
+                            if(isset(session('customer')['services'])){
+                            foreach (session('customer')['services'] as $key => $value) {
+                            $newId = time(); 
+                            if($value){?>
+                        <tr id="comp_{{$key}}{{$newId}}">
+                            <td width="10%"><i class="fas fa-check"></i></td>
+                            <td class="company-list">{{$value[0]}}</td>
+                            <td>
+                                <i class="fas fa-times pointer select-delete" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$value[0]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i>
+                            </td>
                         </tr>
+                        <?php } } } }?>
                     </table>
                 </div>
             </div>
@@ -272,7 +282,7 @@
             <button id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></button>
         </div>
     </div>
-
+    <!-- OPTIONS MODAL -->
     <div class="modal fade" id="optionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -293,6 +303,7 @@
                     <td>{{session('customer')['new_address'] ?? ''}}</td>
                 </tr>
             </table>
+            <?php if(isset(session("customer")["totalPerson"]) && session("customer")["totalPerson"] > 1){ ?>
             <div class="modal-person">
                 <h6>Flyttemeldingen gjelder for</h6>
                 <?php 
@@ -300,9 +311,10 @@
                     for($x = 0; $x < session("customer")["totalPerson"]; $x++){ ?>
                 <input type="checkbox" name="" id="person{{$x}}">
                 <label for="person{{$x}}">{{session('customer')['person'.$x]['name'] ?? ''}}</label><br>
-                <?php } } ?>
+                <?php } 
+                } ?>
             </div>
-
+        <?php } ?>
           </div>
           <div class="modal-footer text-center">
             <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="confirm-notif">Bekreft flyttemelding</button>
@@ -311,7 +323,7 @@
       </div>
     </div>
 
-
+    <!-- BANK MODAL -->
     <div class="modal fade" id="bankModal" tabindex="-1" role="dialog" aria-labelledby="bankModalLabel" aria-hidden="true">
       <div class="text-center modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -326,6 +338,27 @@
           </div>
           <div class="modal-footer text-center">
             <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="confirm-notif">Ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--CONFIRMATION MODAL-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="text-center modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body mt-4">
+            <div class="text-center mb-4">
+                <h5 class="modal-title">Er du sikker på at du vil fjerne <span id="company-name"></span> fra listen?</h5>            
+            </div>
+            <p>
+                
+            </p>
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="confirm-delete">Ja</button>
+            <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Nei</button>
           </div>
         </div>
       </div>

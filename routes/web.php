@@ -54,3 +54,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 //API
 Route::post('/getToken', 'APIController@getToken');
+Route::post('/updateCompanyList', 'APIController@updateCompanyList');

@@ -62,6 +62,12 @@
                             <input type="text" class="form-control pb-field" id="rad4">
                         </div>
                     </div>  
+                    <div class="form-group row">
+                        <label for="rad4" class="col-3 col-form-label">Rad 5:</label>
+                        <div class="col-8">
+                            <input type="text" class="form-control pb-field" id="rad5">
+                        </div>
+                    </div>  
                 </div>
                 <div class="col-12 col-md-6
                 ">  <div class=" d-none d-md-block">
@@ -69,7 +75,7 @@
                     </div>
                     <div class="d-flex mt-4 justify-content-md-between">
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
-                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2">Legg til</button>
+                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till">Legg til</button>
                     </div>
                 </div>
             </div>
@@ -85,7 +91,8 @@
                 <div class="col-12 col-md-6 align-items-end height-120 d-flex">
                     <div class="w-100 d-flex mt-4 justify-content-md-between">
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
-                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2">Legg til</button>
+                        
+                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till">Legg til</button>
                     </div>
                 </div>
             </div>
@@ -98,14 +105,14 @@
             <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
             <h5 class="my-4">KAMPANJE!</h5>
             <div class="mb-4">GRATIS POSTKASSESKILT VED BESTILLING AV STRØM</div>
-            <a class="btn btn-violet" href="/power-supplier/">Bestill strøm fra Norges energi</a>
+            <a class="btn btn-violet" href="#">Bestill strøm fra Norges energi</a>
         </div>
     </div>
 </div>
 
 <div class="row px-4 mt-2 mb-4 d-flex">
     <div class="mt-2 mt-md-0 col-12 btn-sm-6 col-md-6 order-2 order-md-1">
-        <a href="/" class="btn btn-previous float-left"><i class="fas fa-arrow-left"></i> Gå tilbake</a>
+        <a href="/offers/" class="btn btn-previous float-left"><i class="fas fa-arrow-left"></i> Gå tilbake</a>
         
     </div>
     <div class="col-12 btn-sm-6 col-md-6  order-1 order-md-2">

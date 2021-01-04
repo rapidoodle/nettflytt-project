@@ -3,27 +3,41 @@ $(document).ready(function() {
         console.log($(this));
     }
 
-	var fullName = $("#full-name");
-	var email 	 = $("#email");
-	var phone    = $("#phone");
-	var day      = $("#birth_day");
-	var month    = $("#birth_month");
-	var year     = $("#birth_year");
-	var rcvrSlct = "";
-    var months   = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
-
+	var fullName  = $("#full-name");
+	var email 	  = $("#email");
+	var phone     = $("#phone");
+	var day       = $("#birth_day");
+	var month     = $("#birth_month");
+    var year      = $("#birth_year");
+	var csrf      = $("#csrf");
+	var rcvrSlct  = "";
+    var rcvrDlt   = "";
+    var months    = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
+    var companies = [];
 	//INDEX PAGE
-	// $(".group-form input, .add-form input, .group-form select").on("focus", function(e){
- //        $(this).parent().addClass("input-group-focus");
- //        $(this).parent().find("span.input-group-text").css("height:", "30px");
- //        $(this).css("height:", "30px");
-	// }).blur(function(e){
- //        $(this).parent().removeClass("input-group-focus");
- //        $(this).parent().find("span.input-group-text").css("height:", "32px");
- //        $(this).parent().find("input.form-control").css("height:", "32px");
- //    });
+    $(".req-fld").keyup(function(){
+        if($("#name_0").length != 0){
+            if(fullName.length != 0 && email.length != 0 && phone.length != 0 && day.length != 0 && month.length != 0 && year.length != 0){
+                $(".req-fld").attr("required", true);
+            }else{
+                $(".req-fld").removeAttr("required");
+            }
+        }
+    });
 
+    if($("#customer-form").length != 0){
+        $(".multi-collapse").collapse();
+    }
 
+    if($(".company-list").length != 0){
+        $(".company-list").each(function(ind, elem){
+            companies.push($(elem).text());
+        })
+    }
+
+    if($("#name_0").length != 0){
+        $(".req-fld").removeAttr("required");
+    }
 
     $("#add-name").click(function(){
         if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
@@ -84,30 +98,52 @@ $(document).ready(function() {
             year.val("");    
 
             //REMOVE REQUIRED FIELD TO PERSONAL INFORMATION IF FIRST PERSON IS ADDED
-            // $(".req-fld").removeAttr("required");
+            $(".req-fld").removeAttr("required");
         }
     });
     $(document).on('show.bs.collapse hide.bs.collapse', '.multi-collapse', function(e) {
         e.stopPropagation();
-        console.log('event triggered');
     });
 
     $(".card-header").on("click", function(){
         var thisid = $(this).attr("data-id");
-        console.log(thisid);
         $("#"+thisid).remove();
 
     });
     $(document).click(function(event) {
-        var thisid = $(event.target).attr("data-id");
+        //removing person
+        var thisid  = $(event.target).attr("data-id");
         if(thisid){
             $("#"+thisid).remove();
-            // if($(".person").length == 0){
-            //     $(".req-fld").attr("required", true);
-            // }
+            if($(".person").length == 0){
+                $(".req-fld").attr("required", true);
+            }
+        }
 
+        //removing company
+        var company = $(event.target).attr("data-parent");
+        if(company){
+        var val     = $(event.target).attr("data-value");
+
+            $("#confirm-delete").attr("data-parent", company);
+            $("#confirm-delete").attr("data-value", val);
         }
     });
+
+    //confirm delete
+    $("#confirm-delete").click(function(){
+        var company = $(this).attr("data-parent");
+        if(company){
+            var val     = $(this).attr("data-value");
+            $("#"+company).remove();
+            companies = companies.filter(function(item) {
+                return item !== val;
+            })
+            console.log(companies);
+            updateCompanyList();
+        }
+    });
+
     //auto fill summary
     $(".smy-fld").keyup(function(e){
     	var val = $(this).val();
@@ -194,18 +230,35 @@ $(document).ready(function() {
     $(".select-result").click(function(){
     	rcvrSlct = "";
     	rcvrSlct = $(this).attr("data-val");
-    	console.log(rcvrSlct);
+    });
+
+    $(".select-delete").click(function(){
+        rcvrDlt = "";
+        rcvrDlt = $(this).attr("data-value");
+        $("#company-name").html(rcvrDlt);
     });
 
     $("#confirm-notif").click(function(){
-    	var html = '<tr>'+
-                    	'<td width="10%"><i class="fas fa-check"></i></td>'+
+        if(jQuery.inArray(rcvrSlct, companies) !== -1){
+            alert("Company is already in the list");
+        }else{
+
+        var newId  = Date.now();
+        var html = '<tr id="comp_'+newId+'">'+
+                        '<td width="10%"><i class="fas fa-check"></i></td>'+
                         '<td>'+rcvrSlct+'</td>'+
-                        '<td><i class="fas fa-times"></i></td>'+
+                        '<td><i class="fas fa-times pointer" data-parent="comp_'+newId+'" data-value="'+rcvrSlct+'" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i></td>'+
                     '</tr>';
 
         $(".default-selected").hide();
-    	$(".selected-list").append(html);
+        $(".selected-list").append(html);
+
+        //add selected company to the list
+        companies.push(rcvrSlct);
+
+
+        updateCompanyList();
+        }
     });
 
 
@@ -245,9 +298,18 @@ $(document).ready(function() {
     	if($("#rad4").val() != ""){
     		allNames.push($("#rad4").val());
     	}
+        if($("#rad5").val() != ""){
+            allNames.push($("#rad5").val());
+        }
         allNames = allNames.toString();
         var finalText = allNames.replace(/,/g, ', <br>');
     	$(".postbox-summary").html(finalText);
+    });
+
+    $(".btn-legg-till").click(function(){
+        var html = '<div class="text-center d-block  order-1 order-md-2"><lottie-player style="height:56px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-4">Postkasseskiltet er lagt i ordren</h6></div>';
+        $(this).hide();
+        $(this).parent().append(html);
     });
 
     //THANK YOU
@@ -256,4 +318,17 @@ $(document).ready(function() {
         $(this).hide();
         $(this).parent().append(html);
     });
+
+
+    //IN FUNCTIONS
+    function updateCompanyList(){
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val(), companies : companies },
+            url: "/updateCompanyList",
+            success: function(response){
+                console.log(response)
+            }
+        });
+    }
 });

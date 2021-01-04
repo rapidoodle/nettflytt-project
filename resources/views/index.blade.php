@@ -40,9 +40,10 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         <div class="accordion" id="extra-names">
                             <?php 
                             if(session('customer')){ 
+                                $newId = time();
+                                if(session('customer')['totalPerson'] != 0){
                                 for ($i=0; $i < session('customer')['totalPerson']; $i++){
                                     if(isset(session('customer')['person'.$i])){
-                                    $newId = $i.time();
                             ?>
                             <div class="card person" id="card_{{$newId}}">
                             <div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="{{$newId}}" data-toggle="collapse" data-target="#col_{{$newId}}" aria-expanded="true" aria-controls="collapseOne">
@@ -72,16 +73,45 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                 </div>
                             </div> 
                         </div>
-                        <?php } } } ?>
+                        <?php } } }else { ?>
+                            <div class="card person" id="card_{{$newId}}">
+                            <div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="{{$newId}}" data-toggle="collapse" data-target="#col_{{$newId}}" aria-expanded="true" aria-controls="collapseOne">
+                                <span>{{session('customer')['first_name']}} {{session('customer')['last_name']}}</span>
+                                <i class="fa fa-times float-right" data-id="card_{{$newId}}" style="margin-top:-3px;z-index:99999999999"></i>
+                            </div>
+                            <div id="col_{{$newId}}" class="collapse" aria-labelledby="{{$newId}}" data-parent="#extra-names">
+                                <div class="bg-white card-body">
+                                    <table class="w-100">
+                                        <tr>
+                                            <td>Full name</td>
+                                            <td><input type="text" class="person-input" value="{{session('customer')['first_name']}} {{session('customer')['last_name']}}" id="name_0"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>E-post</td>
+                                            <td><input type="text" class="person-input" value="{{session('customer')['email']}}" id="email_0"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Telefonnummer</td>
+                                            <td><input type="text" class="person-input" value="{{session('customer')['phone']}}" id="phone_0"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Fødselsdato</td>
+                                            <td><input type="date" class="person-input" value="{{session('customer')['birth_year']}}-{{session('customer')['birth_month']}}-{{session('customer')['birth_day']}}" id="bday_0"></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div> 
+                        </div>
+                        <?php } } ?>
                     </div>
                         <div data-parent="#customer-form" class="multi-collapse">
                                 <div class="form-group">
                                     <label for="full-name">Fullt navn</label>
-                                    <input type="text" class="form-control smy-fld req-fld" id="full-name" data-conn="hk-full-name" placeholder="Fullt navn" required="true" value="{{session('customer')['full-name'] ?? ''}}">
+                                    <input type="text" class="form-control smy-fld req-fld" id="full-name" data-conn="hk-full-name" placeholder="Fullt navn" required="true">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-post</label>
-                                    <input type="email" name="email" class="form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email" value="{{session('customer')['email'] ?? ''}}">
+                                    <input type="email" name="email" class="form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Telefonnummer</label>
@@ -91,7 +121,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                                     <img src="{{ asset('images/norway-flag.png')}}" width="20px;"> +47 
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true" value="{{session('customer')['phone'] ?? ''}}">
+                                            <input type="text" class="form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true">
                                         </div>
                                 </div>
                                 <div class="row">
@@ -107,7 +137,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                                 <option value="" disabled selected>Dag</option>
                                             <?php 
                                             for ($i=1; $i <=31 ; $i++) {?>
-                                                <option value="{{Helper::digits2($i)}}" {{isset(session('customer')['birth_day']) && session('customer')['birth_day'] == Helper::digits2($i) ? 'selected' : ''}}>{{Helper::digits2($i)}}</option>
+                                                <option value="{{Helper::digits2($i)}}">{{Helper::digits2($i)}}</option>
                                             <?php } ?>
                                             </select>
                                         </div>
@@ -124,7 +154,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                                 <option value="" disabled selected>Måned</option>
                                             <?php 
                                             foreach($months as $i => $month) {?>
-                                                <option value="{{Helper::digits2($i+1)}}" {{isset(session('customer')['birth_month']) && session('customer')['birth_month'] == Helper::digits2($i+1) ? 'selected' : ''}}><?=$month?></option>
+                                                <option value="{{Helper::digits2($i+1)}}"><?=$month?></option>
                                             <?php } ?>
                                             </select>
                                         </div>
@@ -140,7 +170,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                                 <option value="" disabled selected>År</option>
                                             <?php 
                                             for ($i = 2020; $i >= 1920 ; $i--) {?>
-                                                <option value="<?=$i?>"{{isset(session('customer')['birth_year']) && session('customer')['birth_year'] == $i ? 'selected' : ''}}><?=$i?></option>
+                                                <option value="<?=$i?>"><?=$i?></option>
                                             <?php } ?>
                                             </select>
                                         </div>
