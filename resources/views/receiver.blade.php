@@ -54,7 +54,7 @@
                         <a href="javascript:void();">Les avtaleviklårene</a>
                     </div>
 
-                    <a class="btn btn-violet" href="/power-supplier/" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">
+                    <a class="btn btn-violet" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">
                     Bestill Strøm til Lavpris
                     </a>
                 </div>
@@ -70,7 +70,7 @@
                         <a href="javascript:void();">Les avtaleviklårene</a>
                     </div>
 
-                    <a class="btn btn-violet" href="/power-supplier/">Bestill Strøm til Lavpris</a>
+                    <a class="btn btn-violet" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill Strøm til Lavpris</a>
                 </div>
             </div>
         </div>  
