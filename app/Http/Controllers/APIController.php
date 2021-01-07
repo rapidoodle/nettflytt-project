@@ -9,12 +9,16 @@ class APIController extends Controller
 {
     //
     public function getToken(Request $request){
+        // echo json_encode($request->all());
+
     	$people = $request->people;
     	$person = explode("---", $people);
     	$pctr   = 0;
     	$request['first_name'] = Helper::firstName($request['full-name']);
     	$request['last_name']  = Helper::lastName($request['full-name']);
+
     	foreach ($person as $key => $value) {
+
     		if($value){
     			$pos 	   = $key;
 	    		$record    = explode("|", $value);
@@ -71,15 +75,34 @@ class APIController extends Controller
 
     }
     public function updateCompanyList(Request $request){
-        if(isset($request->companies)){
+        //empty company list;
+        // session()->put('customer.services', array());
+
+        if($request->companies){
             $companies = $request->companies;
-            
-            //empty company list;
-            session()->put('customer.services', array());
+            $people    = $request->people;
+
 
             foreach ($companies as $company) {
-                session()->push('customer.services', array($company, "0912345678", "person0"));
-            }        
+                $pip        = explode("|", $people);
+                $personList = "person0";
+
+                //get the existing list
+                foreach (session('customer')['services'] as $key => $cmp) {
+                    if($cmp[0] == $company){
+                        $personList = $cmp[2];
+                    }        
+                }   
+
+                if($pip[0] != 0 || $pip[0] == $company){
+                    $personList = $pip[1];
+                }
+
+                $newCompanies[] = array($company, "0912345678", $personList);
+            }
+
+            session()->put('customer.services', $newCompanies);
+
 
             echo json_encode(session('customer')['services']);
         }else{

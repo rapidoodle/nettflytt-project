@@ -92,20 +92,27 @@
                     <div class="w-100 d-flex mt-4 justify-content-md-between">
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
                         
-                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till">Legg til</button>
+                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till-2">Legg til</button>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="col-12 col-lg-3 text-center">
+    <div class="col-12 col-lg-3 text-center collapse multi-collapse show">
         <h5 class="d-lg-none mt-4">Kampane! Gratis postkasseskilt ved bestilling av strøm</h5>
         <div class="ps-option p-4 mt-2 mt-md-0">
             <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
             <h5 class="my-4">KAMPANJE!</h5>
             <div class="mb-4">GRATIS POSTKASSESKILT VED BESTILLING AV STRØM</div>
-            <a class="btn btn-violet" href="#">Bestill strøm fra Norges energi</a>
+            <a class="btn btn-violet" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill Strøm til Lavpris</a>
+        </div>
+    </div>
+    <div class="col-12 col-lg-3 text-left collapse multi-collapse">
+        <div class="bg-light p-4">
+            <h5 class="mb-4">Du vil nå få tilsendt en sms som starter prosessen med bestilling av strøm</h5>
+            <h5 class="mb-4 text-red">VIKTIG: Du må bekrefte din bestilling ved å svare JA på SMSen du mottar.</h5>
+            <h5 class="text-underline">Vi starter utsendelse av postkasseskiltet når du har bekreftet “JA” på SMS</h5>
         </div>
     </div>
 </div>
@@ -116,7 +123,7 @@
         
     </div>
     <div class="col-12 btn-sm-6 col-md-6  order-1 order-md-2">
-        <button id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></button>
+        <a href="/summary/" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
     </div>
 </div>
 @endsection

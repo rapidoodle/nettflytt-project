@@ -1,5 +1,7 @@
 @extends('layouts.main')
 @section('content')
+
+<input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
             <div class="text-center">
@@ -242,7 +244,7 @@
         
     </div>
     <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
-        <a href="/summary" id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
+        <a href="/postbox-sign/" id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
     </div>
 </div>
 

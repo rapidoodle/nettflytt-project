@@ -766,7 +766,7 @@ input.person-input:focus{
     padding-bottom: 4rem!important;
 }
 .text-red{
-    color: #760000;
+    color: #760000!important;
 }
 .bold-red{
     font-size: 20px;

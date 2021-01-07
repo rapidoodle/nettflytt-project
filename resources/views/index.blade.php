@@ -40,15 +40,18 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         <div class="accordion" id="extra-names">
                             <?php 
                             if(session('customer')){ 
-                                $newId = time();
                                 if(session('customer')['totalPerson'] != 0){
                                 for ($i=0; $i < session('customer')['totalPerson']; $i++){
                                     if(isset(session('customer')['person'.$i])){
+
+                                $newId = $i.time();
                             ?>
                             <div class="card person" id="card_{{$newId}}">
                             <div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="{{$newId}}" data-toggle="collapse" data-target="#col_{{$newId}}" aria-expanded="true" aria-controls="collapseOne">
                                 <span>{{session('customer')['person'.$i]['first_name']}} {{session('customer')['person'.$i]['last_name']}}</span>
-                                <i class="fa fa-times float-right" data-id="card_{{$newId}}" style="margin-top:-3px;z-index:99999999999"></i>
+                                <?php if($i != 0){ ?>
+                                <i class="fa fa-times float-right" data-id="card_{{$newId}}"    style="margin-top:-3px;z-index:99999999999"></i>
+                                <?php } ?>
                             </div>
                             <div id="col_{{$newId}}" class="collapse" aria-labelledby="{{$newId}}" data-parent="#extra-names">
                                 <div class="bg-white card-body">
@@ -73,7 +76,10 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                 </div>
                             </div> 
                         </div>
-                        <?php } } }else { ?>
+                        <?php } } }else {
+
+                            $bday = ""
+                        ?>
                             <div class="card person" id="card_{{$newId}}">
                             <div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="{{$newId}}" data-toggle="collapse" data-target="#col_{{$newId}}" aria-expanded="true" aria-controls="collapseOne">
                                 <span>{{session('customer')['first_name']}} {{session('customer')['last_name']}}</span>

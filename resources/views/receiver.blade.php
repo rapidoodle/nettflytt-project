@@ -250,9 +250,9 @@
                 <div class="summary-choices px-2 py-3">
                     <table width="100%" class="selected-list">
                         <?php 
-                        if(!isset(session('customer')['services'])){?>
+                        if(isset(session('customer')['services']) && count(session('customer')['services']) == 0){?>
                         <tr class="default-selected">
-                            <td align="center">Selected Company</td>
+                            <td align="center">Please select a company</td>
                         </tr>
                         <?php } else{
                             if(isset(session('customer')['services'])){
@@ -309,7 +309,7 @@
                 <?php 
                 if(isset(session("customer")["totalPerson"])){ 
                     for($x = 0; $x < session("customer")["totalPerson"]; $x++){ ?>
-                <input type="checkbox" name="" id="person{{$x}}">
+                <input type="checkbox" class="person-list" id="person{{$x}}" value="person{{$x}}">
                 <label for="person{{$x}}">{{session('customer')['person'.$x]['name'] ?? ''}}</label><br>
                 <?php } 
                 } ?>

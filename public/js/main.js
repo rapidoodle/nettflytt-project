@@ -1,7 +1,5 @@
 $(document).ready(function() {
-    function removePanel(){
-        console.log($(this));
-    }
+
 
 	var fullName  = $("#full-name");
 	var email 	  = $("#email");
@@ -14,10 +12,12 @@ $(document).ready(function() {
     var rcvrDlt   = "";
     var months    = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
     var companies = [];
+
+    var personForCompany = [];
 	//INDEX PAGE
     $(".req-fld").keyup(function(){
         if($("#name_0").length != 0){
-            if(fullName.length != 0 && email.length != 0 && phone.length != 0 && day.length != 0 && month.length != 0 && year.length != 0){
+            if(fullName.val() != "" || email.val() != "" || phone.val() != "" || day.val() != null || month.val() != null || year.val() != null){
                 $(".req-fld").attr("required", true);
             }else{
                 $(".req-fld").removeAttr("required");
@@ -48,9 +48,11 @@ $(document).ready(function() {
          var newId  = Date.now();
          var html   = '<div class="card person" id="card_'+newId+'">'+
                         '<div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="'+newId+'" data-toggle="collapse" data-target="#col_'+newId+'" aria-expanded="true" aria-controls="collapseOne">'+
-                            '<span>'+fullName.val()+'</span>'+
-                            '<i class="fa fa-times float-right" data-id="card_'+newId+'" style="margin-top:-3px;z-index:99999999999"></i>'+
-                        '</div>'+
+                            '<span>'+fullName.val()+'</span>';
+                            if(pCtr != 0){
+                                html += '<i class="fa fa-times float-right" data-id="card_'+newId+'" style="margin-top:-3px;z-index:99999999999"></i>';
+                            }
+                    html += '</div>'+
                         '<div id="col_'+newId+'" class="collapse" aria-labelledby="'+newId+'" data-parent="#extra-names">'+
                             '<div class="bg-white card-body">'+
                                 '<table class="w-100">'+
@@ -110,6 +112,7 @@ $(document).ready(function() {
         $("#"+thisid).remove();
 
     });
+
     $(document).click(function(event) {
         //removing person
         var thisid  = $(event.target).attr("data-id");
@@ -123,10 +126,13 @@ $(document).ready(function() {
         //removing company
         var company = $(event.target).attr("data-parent");
         if(company){
-        var val     = $(event.target).attr("data-value");
+            var val     = $(event.target).attr("data-value");
 
             $("#confirm-delete").attr("data-parent", company);
             $("#confirm-delete").attr("data-value", val);
+
+            $("#company-name").html(val);
+            rcvrSlct = 0;
         }
     });
 
@@ -136,10 +142,11 @@ $(document).ready(function() {
         if(company){
             var val     = $(this).attr("data-value");
             $("#"+company).remove();
+
             companies = companies.filter(function(item) {
                 return item !== val;
             })
-            console.log(companies);
+            
             updateCompanyList();
         }
     });
@@ -169,8 +176,6 @@ $(document).ready(function() {
     	var val = $(this).attr("data-value");
         
         $("#new_house_type").val(val);
-
-            console.log($("#email_0").val());
     });
     //submit index form 
     $("#index-form").submit(function(){
@@ -239,8 +244,17 @@ $(document).ready(function() {
     });
 
     $("#confirm-notif").click(function(){
+
+        $("input:checked").each(function (i, ob) {
+            if(!jQuery.inArray($(ob).val(), personForCompany) !== -1){
+                personForCompany.push($(ob).val());
+            }
+        });
+
         if(jQuery.inArray(rcvrSlct, companies) !== -1){
             alert("Company is already in the list");
+        }else if($("input.person-list").length != 0 && $("input.person-list:checked").length == 0){
+            alert("Please select atleast 1 person");
         }else{
 
         var newId  = Date.now();
@@ -255,8 +269,6 @@ $(document).ready(function() {
 
         //add selected company to the list
         companies.push(rcvrSlct);
-
-
         updateCompanyList();
         }
     });
@@ -307,7 +319,15 @@ $(document).ready(function() {
     });
 
     $(".btn-legg-till").click(function(){
-        var html = '<div class="text-center d-block  order-1 order-md-2"><lottie-player style="height:56px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-4">Postkasseskiltet er lagt i ordren</h6></div>';
+        var html = '<div class="text-center d-block  order-1 order-md-2"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2">Postkasseskiltet er lagt i ordren</h6></div>';
+        $(this).hide();
+        $(this).parent().append(html);
+    });
+
+
+
+    $(".btn-legg-till-2").click(function(){
+        var html = '<div class="text-center d-block  order-1 order-md-2"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2">Skiltet er lagt til i ordren</h6></div>';
         $(this).hide();
         $(this).parent().append(html);
     });
@@ -322,12 +342,18 @@ $(document).ready(function() {
 
     //IN FUNCTIONS
     function updateCompanyList(){
+        console.log(personForCompany);
+        var ppl = rcvrSlct+"|"+personForCompany;
         $.ajax({
             type: "POST",
-            data: { _token : csrf.val(), companies : companies },
+            data: { _token : csrf.val(), companies : companies, people : ppl},
             url: "/updateCompanyList",
             success: function(response){
-                console.log(response)
+                if(companies.length == 0){
+                    var nolist = '<tr class="default-selected"><td align="center">Please select a company</td></tr>';
+                    $(".selected-list").append(nolist);
+                }
+                personForCompany.length = 0;
             }
         });
     }

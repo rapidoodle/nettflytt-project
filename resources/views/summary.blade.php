@@ -50,17 +50,41 @@
 </div>
 <div class="row px-4 mb-5">
     <div class="col-12 col-md-5">
-        <div class="smry-rcrd p-4">
+        <div class="smry-rcrd p-4 collapse multi-collapse show">
             <h3 class="mb-5"><i class="fa fa-user"></i> Personalia</h3>
-            <h5>Tomas Ivanov</h5>
+            <h5 class="disp-field">Tomas Ivanov</h5>
             <span class="text-sm-gray">Hovedperson</span>
-            <span class="mt-4 text-sm-gray">E-post: tomas.k.ivanov@gmail.com</span>
-            <span class="text-sm-gray">Født: 6. Oktober 1992</span>
+            <span class="mt-4 text-sm-gray disp-field">E-post: tomas.k.ivanov@gmail.com</span>
+            <span class="text-sm-gray disp-field">Født: 6. Oktober 1992</span>
             <hr>
-            <h5>Tom Vatland</h5>
+            <h5 class="disp-field">Tom Vatland</h5>
             <span class="text-sm-gray">Ekstraperson</span>
             <div class="text-right mt-5">
-                <a href="/thank-you/" class="btn btn-info btn-lg btn-endre">Endre</a>
+                <button id="edit-people" class="btn btn-info btn-lg btn-endre" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Endre</button>
+            </div>
+        </div>
+        <div class="smry-rcrd p-4 collapse multi-collapse">
+            <h3 class="mb-5"><i class="fa fa-user"></i> Personalia</h3>
+            <table class="w-100">
+                <tr>
+                    <td>Full name</td>
+                    <td><input type="text" class="person-input" value="{{session('customer')['first_name']}} {{session('customer')['last_name']}}" id="name_0"></td>
+                </tr>
+                <tr>
+                    <td>E-post</td>
+                    <td><input type="text" class="person-input" value="{{session('customer')['email']}}" id="email_0"></td>
+                </tr>
+                <tr>
+                    <td>Telefonnummer</td>
+                    <td><input type="text" class="person-input" value="{{session('customer')['phone']}}" id="phone_0"></td>
+                </tr>
+                <tr>
+                    <td>Fødselsdato</td>
+                    <td><input type="date" class="person-input" value="{{session('customer')['birth_year']}}-{{session('customer')['birth_month']}}-{{session('customer')['birth_day']}}" id="bday_0"></td>
+                </tr>
+            </table>
+            <div class="text-right mt-5">
+                <button id="edit-people" class="btn btn-info btn-lg btn-endre" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Lagre</button>
             </div>
         </div>
     </div>
@@ -91,7 +115,7 @@
             </table>
 
             <div class="text-right mt-5">
-                <a href="/thank-you/" class="btn btn-info btn-lg btn-endre">Endre</a>
+                <button id="edit-services" class="btn btn-info btn-lg btn-endre">Endre</button>
             </div>
         </div>
     </div>
