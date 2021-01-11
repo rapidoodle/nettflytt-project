@@ -78,7 +78,6 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                         </div>
                         <?php } } }else {
 
-                            $bday = ""
                         ?>
                             <div class="card person" id="card_{{$newId}}">
                             <div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="{{$newId}}" data-toggle="collapse" data-target="#col_{{$newId}}" aria-expanded="true" aria-controls="collapseOne">
