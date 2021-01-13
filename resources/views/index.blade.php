@@ -77,7 +77,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                             </div> 
                         </div>
                         <?php } } }else {
-
+                            $newId = time();
                         ?>
                             <div class="card person" id="card_{{$newId}}">
                             <div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="{{$newId}}" data-toggle="collapse" data-target="#col_{{$newId}}" aria-expanded="true" aria-controls="collapseOne">
@@ -266,7 +266,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                         <select type="text" required="true" class="form-control"  id="moving_date_year" name="moving_date_year">
                                             <option value="" disabled selected>År</option>
                                         <?php 
-                                        for ($i = 2020; $i >= 1920 ; $i--) {?>
+                                        for ($i = 2023; $i >= 2020; $i--) {?>
                                             <option value="<?=$i?>"{{isset(session('customer')['moving_date_year']) && session('customer')['moving_date_year'] == $i ? 'selected' : ''}}><?=$i?></option>
                                         <?php } ?>
                                         </select>

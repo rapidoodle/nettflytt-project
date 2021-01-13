@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<!-- <?=json_encode(session('customer'));?> -->
 
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
@@ -134,74 +135,27 @@
                     <div class="input-group mb-3 receiver-search-group">
                         <input type="text" class="form-control" placeholder="Søk etter selskap eller organisasjon" aria-label="Søk etter selskap eller organisasjon" aria-describedby="basic-addon2" id="receiver-search-input">
                         <div class="input-group-append">
-                            <button class="btn btn-info" type="button" id="search">Søk</button>
+                            <button class="btn btn-info" type="button" id="company-search">Søk</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mb-4">
+            <div class="mb-4 result-cont">
                 <p class="ps-cont text-left">
                     <b class="text-bold">Eller, </b> viderefør din eksisterende avtale
                 </p>
+                <div class="bg-light w-100 p-4 search-no-result">
+                    <h5>Ingen treff i vårt register</h5>
+                    <p> <b>Fant du ikke det du lette etter?</b></p>
+                    <button class="btn btn-info btn-other-search">Søk videre i brønnøysundregstrene</button>
+                </div>
                 <table class="table table-striped receiver-search-result">
-                    <tr>
-                        <td>Aftenposten
-                            <button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal"data-val="Aftenposten">Legg til</button>
-                    </tr>
-                    <tr>
-                        <td>Dagbladet
-                            <button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal"data-val="Dagbladet">Legg til</button>
-                    </tr>
-                    <tr>
-                        <td>VG
-                            <button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal"data-val="VG">Legg til</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Klassekampen
-                            <button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal" data-val="Klassekampen">Legg til</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Porsgrunn dagblad
-                            <button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal" data-val="Porsgrunn dagblad">Legg til</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Varden
-                            <button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal" data-val="Varden">Legg til</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>TA
-                            <button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal" data-val="TA">Legg til</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Budstikka
-                            <button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal" data-toggle="modal" data-target="#optionModal" data-val="Budstikka">Legg til</button>
-                        </td>
-                    </tr>
+
                 </table>
-                <center><nav aria-label="Page navigation example" class="text-center">
-                    <ul class="mt-2 justify-content-center justify-content-md-start pagination nav-receiver">
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Previous">
-                            <i class="fa fa-chevron-left"></i>
-                          </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item">
-                          <a class="page-link" href="#" aria-label="Next">
-                            <i class="fa fa-chevron-right"></i>
-                          </a>
-                        </li>
-                    </ul>
-                </nav>
+                <center>
+                    <nav aria-label="Page navigation example" class="text-center">
+                        <ul class="mt-2 justify-content-center justify-content-md-start pagination"></ul>
+                        </nav>
                 </center>
             </div>
         </div>
@@ -352,11 +306,6 @@
             <div class="text-center mb-4">
                 <h5 class="modal-title">Er du sikker på at du vil fjerne <span id="company-name"></span> fra listen?</h5>            
             </div>
-            <p>
-                
-            </p>
-          </div>
-          <div class="modal-footer text-center">
             <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="confirm-delete">Ja</button>
             <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Nei</button>
           </div>

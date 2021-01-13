@@ -1,19 +1,21 @@
 $(document).ready(function() {
 
 
-	var fullName  = $("#full-name");
-	var email 	  = $("#email");
-	var phone     = $("#phone");
-	var day       = $("#birth_day");
-	var month     = $("#birth_month");
-    var year      = $("#birth_year");
-	var csrf      = $("#csrf");
-	var rcvrSlct  = "";
-    var rcvrDlt   = "";
-    var months    = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
-    var companies = [];
-
+	var fullName   = $("#full-name");
+	var email 	   = $("#email");
+	var phone      = $("#phone");
+	var day        = $("#birth_day");
+	var month      = $("#birth_month");
+    var year       = $("#birth_year");
+	var csrf       = $("#csrf");
+	var rcvrSlct   = "";
+    var rcvrDlt    = "";
+    var months     = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
+    var companies  = [];
+    var searchComp = $("#receiver-search-input");
+    var globalAllNames   = [];
     var personForCompany = [];
+    var movingDate = $("#moving-date");
 	//INDEX PAGE
     $(".req-fld").keyup(function(){
         if($("#name_0").length != 0){
@@ -134,14 +136,25 @@ $(document).ready(function() {
             $("#company-name").html(val);
             rcvrSlct = 0;
         }
+
+        var searchBtn = $(event.target).attr("data-val");
+        if(searchBtn){
+            rcvrSlct = "";
+            rcvrSlct = searchBtn;
+            console.log("Result:"+rcvrSlct);
+        }
+
+        var company = $(event.target).attr("data-company");
+        //delete company in summary
     });
 
     //confirm delete
     $("#confirm-delete").click(function(){
         var company = $(this).attr("data-parent");
+            $("#"+company).remove();
+
         if(company){
             var val     = $(this).attr("data-value");
-            $("#"+company).remove();
 
             companies = companies.filter(function(item) {
                 return item !== val;
@@ -203,6 +216,20 @@ $(document).ready(function() {
 
 
     //RECEIVER'S PAGE
+    $("#company-search").click(function(){
+        var val = searchComp.val();
+        $(".search-no-result").hide();
+        if(val.length > 1){
+            var html = '<tr class="item"><td align="center">Searching..</td></tr>';
+            $(".receiver-search-result").html(html);
+            $(".receiver-search-result").show();
+
+            searchCompany(val);
+
+        }
+
+    })
+
     $(".category-item").click(function(){
     	$(".category-item").removeClass("active-option");
     	$(this).addClass("active-option");
@@ -232,18 +259,20 @@ $(document).ready(function() {
     	// }
     });
 
-    $(".select-result").click(function(){
-    	rcvrSlct = "";
-    	rcvrSlct = $(this).attr("data-val");
-    });
+    // $("button").on('click', (function(){
+    // 	rcvrSlct = "";
+    // 	rcvrSlct = $(this).attr("data-val");
+    //     console.log("Result:"+rcvrSlct);
+    // }));
 
-    $(".select-delete").click(function(){
-        rcvrDlt = "";
-        rcvrDlt = $(this).attr("data-value");
-        $("#company-name").html(rcvrDlt);
-    });
+    // $(".select-delete").click(function(){
+    //     rcvrDlt = "";
+    //     rcvrDlt = $(this).attr("data-value");
+    //     $("#company-name").html(rcvrDlt);
+    // });
 
     $("#confirm-notif").click(function(){
+        console.log("confirm confirm-notif: "+rcvrSlct);
 
         $("input:checked").each(function (i, ob) {
             if(!jQuery.inArray($(ob).val(), personForCompany) !== -1){
@@ -254,7 +283,7 @@ $(document).ready(function() {
         if(jQuery.inArray(rcvrSlct, companies) !== -1){
             alert("Company is already in the list");
         }else if($("input.person-list").length != 0 && $("input.person-list:checked").length == 0){
-            alert("Please select atleast 1 person");
+            alert("Vennligst velg en mottaker");
         }else{
 
         var newId  = Date.now();
@@ -288,16 +317,10 @@ $(document).ready(function() {
       var prev = $("div.card-header.active").removeClass("active");
     })
 
-    const myCalendar = new TavoCalendar('#my-calendar', {
-         locale: "da"
-      // settings here
-    })
-
     //POSTBOX
     $(".pb-field").keyup(function(e){
     	var val = $(this).val();
-    	var allNames = [];
-
+        var allNames = [];
     	if($("#rad1").val() != ""){
     		allNames.push($("#rad1").val());
     	}
@@ -316,18 +339,49 @@ $(document).ready(function() {
         allNames = allNames.toString();
         var finalText = allNames.replace(/,/g, ', <br>');
     	$(".postbox-summary").html(finalText);
+
+        globalAllNames = allNames;
     });
 
     $(".btn-legg-till").click(function(){
-        var html = '<div class="text-center d-block  order-1 order-md-2"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2">Postkasseskiltet er lagt i ordren</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2 lottie-1" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Postkasseskiltet er lagt i ordren</h6></div>';
         $(this).hide();
         $(this).parent().append(html);
     });
 
+    $(".btn-show-lott").click(function(){
+        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Postkasseskiltet er lagt i ordren</h6></div>';
+        var html2 = 'Tusen takk. Når du svarer “JA” på SMSen sender vi deg et gratis postkasseskilt.'+
+                    '<div style="color: red;">NB! Du må fylle inn navnene på postkasseskiltet før du klikker videre på denne siden!</div>';
+        $(".btn-legg-till").hide();
+        $(".lottie-1").remove();
+        $(".btn-legg-till").parent().append(html);
+        $("h6.sub-1").remove();
+        $(".post-warn").show();
 
+        $(".btn-next-summary").attr("data-power", true);
+    });
+
+    $(".btn-next-summary").click(function(){
+        console.log($(this).attr("data-power"));
+
+        if(!$(this).attr("data-power")){
+                window.location.href = "/summary/";
+        }else{
+            if(globalAllNames.length == 0){
+                $('#confirmModal').modal('toggle')
+            }else{
+                window.location.href = "/summary/";
+            }
+        }
+    })
+
+    $(".continue-summary").click(function(){
+        window.location.href = "/summary/";
+    });
 
     $(".btn-legg-till-2").click(function(){
-        var html = '<div class="text-center d-block  order-1 order-md-2"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2">Skiltet er lagt til i ordren</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:135px;"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Skiltet er lagt til i ordren</h6></div>';
         $(this).hide();
         $(this).parent().append(html);
     });
@@ -339,11 +393,48 @@ $(document).ready(function() {
         $(this).parent().append(html);
     });
 
+    //SUMMARY
+    const myCalendar = new TavoCalendar('#my-calendar', {
+        locale: "da",
+        date: movingDate.val(),
+        selected: [movingDate.val()],
+        past_select: true,
+    })
+
+    const calendar2 = document.querySelector('#my-calendar');
+    if(calendar2){
+        calendar2.addEventListener('calendar-select', (ev) => {
+
+            $("#date-from").html(movingDate.val());
+            $("#date-to").html(myCalendar.getSelected());
+            $('#confirmMove').modal('toggle')
+
+        });
+    }
+
+    $("#confirm-move").click(function(){
+        var date = myCalendar.getSelected();
+        var dates = date.split("-");
+        var fields = {moving_date_year : dates[0], moving_date_month : dates[1], moving_date_day : dates[2]};
+        updateCustomerData(fields);
+    })
+
+    $("#save-address").click(function(){
+        var fields = {}
+        $(".address-field").each(function(i, obj){
+            console.log($(obj).attr("id"));
+            fields[$(obj).attr("id")] = $(obj).val();
+
+            $("span[data-parent='"+$(obj).attr("id")+"']").html($(obj).val());
+        });
+        updateCustomerData(fields);
+    });
 
     //IN FUNCTIONS
     function updateCompanyList(){
-        console.log(personForCompany);
-        var ppl = rcvrSlct+"|"+personForCompany;
+
+        var ppl = personForCompany.length != 0 ? rcvrSlct+"|"+personForCompany : rcvrSlct+"|person0";
+        
         $.ajax({
             type: "POST",
             data: { _token : csrf.val(), companies : companies, people : ppl},
@@ -354,6 +445,56 @@ $(document).ready(function() {
                     $(".selected-list").append(nolist);
                 }
                 personForCompany.length = 0;
+            }
+        });
+    }
+
+    function updateCustomerData(data){
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val(), fields : data},
+            url: "/updateCustomerData",
+            success: function(response){
+                console.log(response);
+            }
+        });
+        console.log("Hey");
+    }
+
+    function searchCompany(query){
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val(), query : query},
+            url: "/searchCompany",
+            success: function(response){
+                var obj = JSON.parse(response);
+                var html = "";
+                if(obj.length > 0){
+                    for(var q = 0; q < obj.length; q++){
+                        var org = obj[q];
+                        html += '<tr class="item">'+
+                        '<td>'+org.name+
+                            '<button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal" data-val="'+org.name+'" data-val="'+org.number+'">Legg til</button>'+
+
+                        '</td>'+
+                    '</tr>';
+                    }
+                    $(".receiver-search-result").show();
+                    $(".search-no-result").hide();
+                }else{
+                    $(".receiver-search-result").hide();
+                    $(".search-no-result").show();
+                }
+
+                $(".receiver-search-result").html(html);
+                if(obj.length > 10){
+                    $('.pagination').rpmPagination({
+                      domElement:'.item',
+                      total: obj.length
+                    });
+                }else{
+                    $(".pagination").html("");
+                }
             }
         });
     }

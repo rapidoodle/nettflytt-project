@@ -114,4 +114,6 @@
     <script type="text/javascript" src="{{ asset('js/tavo-calendar.js') }}"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/pagination.js') }}"></script>
+
 </html>

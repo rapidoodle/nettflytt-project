@@ -44,7 +44,7 @@ class APIController extends Controller
     	}
 
         $request['totalPerson'] = $pctr;
-    	$request['services']    = array();
+    	$request['services']    = $request['services'] ? $request['services'] : array();
     	$request['old_post'] 	= $request['old_zipcode'].' '.$request['old_place'];
     	$request['new_post'] 	= $request['new_zipcode'].' '.$request['new_place'];
 		// or when your server returns json
@@ -54,7 +54,7 @@ class APIController extends Controller
     	unset($request['_token']);
 
     	//customer unique token -- store in session
-    	// echo $token = Helper::getToken();
+    	$token = Helper::getToken();
 
     	//update customer record
     	// $update = Helper::updateData($token, $request->all());
@@ -64,10 +64,10 @@ class APIController extends Controller
     	session(['customer' => $request->all()]);
     	// echo json_encode($update);
 
-    	// session(['_token' 	=> $token, 
-    	// 		 'old_post' => $request['old_zipcode'].' '.$request['old_place'],
-    	// 		 'new_post' => $request['new_zipcode'].' '.$request['new_place'],
-    	// 		 'customer' => $request->all()]);
+    	session(['_token' 	=> $token, 
+    			 'old_post' => $request['old_zipcode'].' '.$request['old_place'],
+    			 'new_post' => $request['new_zipcode'].' '.$request['new_place'],
+    			 'customer' => $request->all()]);
 
     	// echo json_encode(session('customer'));
 
@@ -108,5 +108,20 @@ class APIController extends Controller
         }else{
             echo "No company selected";
         }
+    }
+
+    public function searchCompany(Request $request){
+        echo Helper::searchCompanies($request['query']);
+    }
+
+    public function updateCustomerData(Request $request){
+
+        foreach ($request->fields as $key => $value) {
+            $sessionKey = 'customer.'.$key;
+            session()->put($sessionKey, $value);
+        }
+
+        echo json_encode(session('customer'));
+
     }
 }
