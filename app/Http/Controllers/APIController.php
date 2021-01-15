@@ -44,7 +44,7 @@ class APIController extends Controller
     	}
 
         $request['totalPerson'] = $pctr;
-    	$request['services']    = session('customer.services') != "" ? session('customer.services') : "";
+    	$request['services']    = session('customer.services') != "" ? session('customer.services') : array();
     	$request['old_post'] 	= $request['old_zipcode'].' '.$request['old_place'];
     	$request['new_post'] 	= $request['new_zipcode'].' '.$request['new_place'];
 		// or when your server returns json

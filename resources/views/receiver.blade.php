@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<?=json_encode(session('customer')); ?>
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
@@ -208,7 +209,6 @@
                             <td align="center">Vennligst velg et selskap</td>
                         </tr>
                         <?php } else{
-                            if(session('customer')['services'] !== null){
                             foreach (session('customer')['services'] as $key => $value) {
                             $newId = time(); 
                             if($value){?>
@@ -219,7 +219,7 @@
                                 <i class="fas fa-times pointer company-list" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$value[0]}}" data-company-number="{{$value[1]}}" data-company-people="{{$value[2]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i>
                             </td>
                         </tr>
-                        <?php } } } }?>
+                        <?php } } }?>
                     </table>
                 </div>
             </div>
