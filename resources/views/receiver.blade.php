@@ -204,7 +204,7 @@
                 <div class="summary-choices px-2 py-3">
                     <table width="100%" class="selected-list">
                         <?php 
-                        if(!isset(session('customer')['services'])){?>
+                        if(count(session('customer')['services']) == 0){?>
                         <tr class="default-selected">
                             <td align="center">Vennligst velg et selskap</td>
                         </tr>
