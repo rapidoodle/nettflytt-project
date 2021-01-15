@@ -208,7 +208,7 @@
                             <td align="center">Vennligst velg et selskap</td>
                         </tr>
                         <?php } else{
-                            if(Session::has('customer.services'))){
+                            if(Session::has('customer.services')){
                             foreach (session('customer')['services'] as $key => $value) {
                             $newId = time(); 
                             if($value){?>
