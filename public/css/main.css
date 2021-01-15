@@ -646,7 +646,13 @@ input.person-input:focus{
     border-bottom: 1px solid #777777!important;
 }
 .btn-other-search{
-    width:300px!important;
+    font-size: 12px;
+    border-radius: 0!important;
+    border: 1px solid #495057;
+    padding:.3rem 1.3rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #1D576F;
 }
 /*responsive*/
 @media (max-width: 992px) {
@@ -792,4 +798,8 @@ input.person-input:focus{
 }
 hr{
     border-top: 2px solid #DDD!important;
+}
+a.black-link{
+    color:#000;
+    text-decoration: underline;
 }

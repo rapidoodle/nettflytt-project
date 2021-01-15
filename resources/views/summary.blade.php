@@ -39,7 +39,7 @@
                 <input class="form-check-input" required="true" type="checkbox" value="" id="check">
 
                 <label class="form-check-label" for="check">
-                Jeg aksepterer betingelsene
+                    <a href="/terms-of-use/" target="_blank" class="black-link">Jeg aksepterer betingelsene</a>
                 </label>
                 <p class="my-4 text-left text-md-center">Ved å legge inn koden og akseptere betingelsene sender vi flyttemeldingen for deg. Tjenesten koster 149,- kroner og kommer på telefonregningen din.</p>
                 <div class="px-5 px-md-0">
@@ -53,7 +53,7 @@
     <div class="col-12 col-md-5">
         <div class="smry-rcrd p-4">
             <h3 class="mb-5"><i class="fa fa-user"></i> Personalia</h3>
-            <h5 class="disp-field"><?=session('customer')['person0']['name']?></h5>
+            <h5 class="disp-field" data-parent="old_address"><?=session('customer')['person0']['name']?></h5>
             <span class="text-sm-gray">Hovedperson</span>
             <span class="mt-4 text-sm-gray disp-field">E-post: <?=session('customer')['person0']['email']?></span>
             <span class="text-sm-gray disp-field">Født: <?=session('customer')['person0']['bday']?></span>
@@ -62,7 +62,7 @@
             <hr>
             <h5>Extraperson</h5>
             <?php for($i=1; $i < session('customer')['totalPerson']; $i++){ ?>
-            <h5 class="disp-field">Tom Vatland</h5>
+            <h5 class="disp-field"><?=session('customer')['person'.$i]['name'];?></h5>
             <span class="text-sm-gray">Ekstraperson</span>
             <?php } } ?>
             <div class="text-right mt-5">
@@ -97,7 +97,7 @@
                         echo session('customer')['person0']['name'];
                     }
                     ?></td>
-                    <td><i class="fas fa-times pointer" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$service[0]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i></td>
+                    <td> <i class="fas fa-times pointer company-list" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$service[0]}}" data-company-number="{{$service[1]}}" data-company-people="{{$service[2]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i></td>
                 </tr>
             <?php } }else{ ?> 
                 <tr>

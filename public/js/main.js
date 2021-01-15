@@ -1,22 +1,23 @@
 $(document).ready(function() {
 
 
-	var fullName   = $("#full-name");
-	var email 	   = $("#email");
-	var phone      = $("#phone");
-	var day        = $("#birth_day");
-	var month      = $("#birth_month");
+    var fullName   = $("#full-name");
+    var email      = $("#email");
+    var phone      = $("#phone");
+    var day        = $("#birth_day");
+    var month      = $("#birth_month");
     var year       = $("#birth_year");
-	var csrf       = $("#csrf");
-	var rcvrSlct   = "";
+    var csrf       = $("#csrf");
+    var rcvrSlct   = "";
+    var rcvrNum    = "";
     var rcvrDlt    = "";
     var months     = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
     var companies  = [];
     var searchComp = $("#receiver-search-input");
     var globalAllNames   = [];
-    var personForCompany = [];
     var movingDate = $("#moving-date");
-	//INDEX PAGE
+    var isPowerSupplier = false;
+    //INDEX PAGE
     $(".req-fld").keyup(function(){
         if($("#name_0").length != 0){
             if(fullName.val() != "" || email.val() != "" || phone.val() != "" || day.val() != null || month.val() != null || year.val() != null){
@@ -43,7 +44,7 @@ $(document).ready(function() {
 
     $("#add-name").click(function(){
         if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
-            alert("Please complete the form before adding a new name");
+            alert("Fyll ut skjemaet før du legger til et nytt navn.");
         }
         else{
          var pCtr   = $(".person").length;
@@ -137,11 +138,26 @@ $(document).ready(function() {
             rcvrSlct = 0;
         }
 
-        var searchBtn = $(event.target).attr("data-val");
+        var searchBtn = $(event.target).attr("data-company-name");
         if(searchBtn){
+
+            //unselect the checkbox in modal
+            $('.person-list').prop('checked', false);
+            var companyName   = $(event.target).attr("data-company-name");
+            var companyNumber = $(event.target).attr("data-company-number");
+
             rcvrSlct = "";
-            rcvrSlct = searchBtn;
-            console.log("Result:"+rcvrSlct);
+            rcvrSlct = companyName+"|"+companyNumber;
+
+            //check the selected person
+            if($("i[data-value='"+companyName+"']").length > 0){
+                var people = $("i[data-value='"+companyName+"']").attr("data-company-people");
+                people = people.split(",");
+
+                people.forEach(function(data){
+                    $("#"+data).prop("checked", "true");
+                })
+            }
         }
 
         var company = $(event.target).attr("data-company");
@@ -151,22 +167,13 @@ $(document).ready(function() {
     //confirm delete
     $("#confirm-delete").click(function(){
         var company = $(this).attr("data-parent");
-            $("#"+company).remove();
-
-        if(company){
-            var val     = $(this).attr("data-value");
-
-            companies = companies.filter(function(item) {
-                return item !== val;
-            })
-            
-            updateCompanyList();
-        }
+        $("#"+company).remove();
+        updateCompanyList();
     });
 
     //auto fill summary
     $(".smy-fld").keyup(function(e){
-    	var val = $(this).val();
+        var val = $(this).val();
         
         if($(this).attr("id") == "old_zipcode"){
             $("#gamel-address-2").val($(this).val()+" "+$("#old_place").val());
@@ -177,16 +184,18 @@ $(document).ready(function() {
         }else if($(this).attr("id") == "new_place"){
             $("#ny-address-2").val($("#new_zipcode").val()+" "+$(this).val());
         }else{
-            var eqFld = $(this).attr("data-conn");
-            $("#"+eqFld).val(val);
+            if($(".person").length == 0){
+                var eqFld = $(this).attr("data-conn");
+                $("#"+eqFld).val(val);            
+            }
         }
 
     });
     //select option
     $(".index-option").click(function(){
-    	$(".index-option").removeClass("active-option");
+        $(".index-option").removeClass("active-option");
         $(this).addClass("active-option");
-    	var val = $(this).attr("data-value");
+        var val = $(this).attr("data-value");
         
         $("#new_house_type").val(val);
     });
@@ -220,93 +229,90 @@ $(document).ready(function() {
         var val = searchComp.val();
         $(".search-no-result").hide();
         if(val.length > 1){
-            var html = '<tr class="item"><td align="center">Searching..</td></tr>';
+            var html = '<tr class="item"><td align="center">Loading Companies..</td></tr>';
             $(".receiver-search-result").html(html);
             $(".receiver-search-result").show();
-
-            searchCompany(val);
-
+            searchCompany(val, "orgnr");
         }
-
     })
 
+    if($("#company-search").length > 0){
+        loadingCompanies();
+        searchCompany("Ofte brukte", "categories");
+    }
+
     $(".category-item").click(function(){
-    	$(".category-item").removeClass("active-option");
-    	$(this).addClass("active-option");
+        $(".category-item").removeClass("active-option");
+        $(this).addClass("active-option");
+        
+        if($("#company-search").length > 0){
+            loadingCompanies();
+            var catSearch = $(this).attr("data-cat");
+            searchCompany(catSearch, "categories");
+        }
     });
 
     $("#btn-go-offer").click(function(){
-    	var isPowerSupplier = false;
-    	var isNull 			= true;
 
-    	$(".active-option").each(function(obj){
-    		var opt = $(this).attr("data-val");
-    		if(opt == "Strøm"){
-    			isPowerSupplier = true;
-    		}
-    		isNull = false;
-    	});
+        // $(".category-item").each(function(obj){
+        //     var opt = $(this).attr("data-val");
+        //     if(opt == "Strøm"){
+        //         isPowerSupplier = true;
+        //     }
+        //     isNull = false;
+        // });
+        if($(".company-list").length == 0){
+            $(".category-item").removeClass("active-option");
+            $(".category-item[data-cat='strÃ¸m']").addClass("active-option");
+            searchCompany("strÃ¸m", "categories");
+        }
 
-    	// if(isNull){
-    		// alert("Please select atleast 1 service");
-    	// }else{
-    		if(!isPowerSupplier){
-    			$(".cat-n-search, .label-none, .title-receiver").hide();
-    			$(".ps-cont").show();
-    		}else{
-    			window.location.href = "/offers/";
-    		}
-    	// }
+        if(!isPowerSupplier){
+            $(".cat-n-search, .label-none, .title-receiver").hide();
+            $(".ps-cont").show();
+            isPowerSupplier = true;
+        }else{
+            window.location.href = "/offers/";
+        }
     });
 
-    // $("button").on('click', (function(){
-    // 	rcvrSlct = "";
-    // 	rcvrSlct = $(this).attr("data-val");
-    //     console.log("Result:"+rcvrSlct);
-    // }));
-
-    // $(".select-delete").click(function(){
-    //     rcvrDlt = "";
-    //     rcvrDlt = $(this).attr("data-value");
-    //     $("#company-name").html(rcvrDlt);
-    // });
-
     $("#confirm-notif").click(function(){
-        console.log("confirm confirm-notif: "+rcvrSlct);
-
+        var personForCompany = [];
         $("input:checked").each(function (i, ob) {
             if(!jQuery.inArray($(ob).val(), personForCompany) !== -1){
                 personForCompany.push($(ob).val());
             }
         });
-
-        if(jQuery.inArray(rcvrSlct, companies) !== -1){
-            alert("Company is already in the list");
-        }else if($("input.person-list").length != 0 && $("input.person-list:checked").length == 0){
-            alert("Vennligst velg en mottaker");
-        }else{
-
-        var newId  = Date.now();
-        var html = '<tr id="comp_'+newId+'">'+
-                        '<td width="10%"><i class="fas fa-check"></i></td>'+
-                        '<td>'+rcvrSlct+'</td>'+
-                        '<td><i class="fas fa-times pointer" data-parent="comp_'+newId+'" data-value="'+rcvrSlct+'" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i></td>'+
-                    '</tr>';
+        var rcvrData        = rcvrSlct.split("|");
+        var companyName     = rcvrData[0];
+        var companyNumber   = rcvrData[1];
+        var companyPeople   = personForCompany.length == 0 ? "person0" : personForCompany;
+        var newId           = Date.now();
+        var html            = '<tr id="comp_'+newId+'">'+
+                                '<td width="10%"><i class="fas fa-check"></i></td>'+
+                                '<td>'+companyName+'</td>'+
+                                '<td><i class="fas fa-times pointer company-list" data-company-people="'+companyPeople+'" data-parent="comp_'+newId+'" data-value="'+companyName+'" data-company-number="'+companyNumber+'" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i></td>'+
+                              '</tr>';
 
         $(".default-selected").hide();
-        $(".selected-list").append(html);
 
-        //add selected company to the list
-        companies.push(rcvrSlct);
-        updateCompanyList();
+
+        if($("i[data-value='"+companyName+"']").length > 0){
+            //if company is already in the list, update the selected person;
+            $("i[data-value='"+companyName+"']").attr("data-company-people", companyPeople);
+        }else{
+            $(".selected-list").append(html);
+
+            //update the services in backend
+            updateCompanyList();
         }
     });
 
 
     //OFFERS PAGE
     $('#offersAcdn').collapse({
-	  toggle: false
-	});
+      toggle: false
+    });
 
     $('#offersAcdn').on('shown.bs.collapse', function () {
       var header = $("div.collapse.show").attr("aria-labelledby");
@@ -319,26 +325,26 @@ $(document).ready(function() {
 
     //POSTBOX
     $(".pb-field").keyup(function(e){
-    	var val = $(this).val();
+        var val = $(this).val();
         var allNames = [];
-    	if($("#rad1").val() != ""){
-    		allNames.push($("#rad1").val());
-    	}
-    	if($("#rad2").val() != ""){
-    		allNames.push($("#rad2").val());
-    	}
-    	if($("#rad3").val() != ""){
-    		allNames.push($("#rad3").val());
-    	}
-    	if($("#rad4").val() != ""){
-    		allNames.push($("#rad4").val());
-    	}
+        if($("#rad1").val() != ""){
+            allNames.push($("#rad1").val());
+        }
+        if($("#rad2").val() != ""){
+            allNames.push($("#rad2").val());
+        }
+        if($("#rad3").val() != ""){
+            allNames.push($("#rad3").val());
+        }
+        if($("#rad4").val() != ""){
+            allNames.push($("#rad4").val());
+        }
         if($("#rad5").val() != ""){
             allNames.push($("#rad5").val());
         }
         allNames = allNames.toString();
-        var finalText = allNames.replace(/,/g, ', <br>');
-    	$(".postbox-summary").html(finalText);
+        var finalText = allNames.replace(/,/g, '<br>');
+        $(".postbox-summary").html(finalText);
 
         globalAllNames = allNames;
     });
@@ -417,12 +423,11 @@ $(document).ready(function() {
         var dates = date.split("-");
         var fields = {moving_date_year : dates[0], moving_date_month : dates[1], moving_date_day : dates[2]};
         updateCustomerData(fields);
-    })
+    });
 
     $("#save-address").click(function(){
         var fields = {}
         $(".address-field").each(function(i, obj){
-            console.log($(obj).attr("id"));
             fields[$(obj).attr("id")] = $(obj).val();
 
             $("span[data-parent='"+$(obj).attr("id")+"']").html($(obj).val());
@@ -430,21 +435,42 @@ $(document).ready(function() {
         updateCustomerData(fields);
     });
 
+
+    $("#save-customers").click(function(){
+        var fields = {}
+        $(".address-field").each(function(i, obj){
+            fields[$(obj).attr("id")] = $(obj).val();
+
+            $("span[data-parent='"+$(obj).attr("id")+"']").html($(obj).val());
+        });
+        // updateCustomerData(fields);
+    });
+
     //IN FUNCTIONS
     function updateCompanyList(){
-
-        var ppl = personForCompany.length != 0 ? rcvrSlct+"|"+personForCompany : rcvrSlct+"|person0";
+        var services = [];
         
+        //get the updated company list to update services
+        $(".company-list").each(function(i, obj){
+            var companyName   = $(obj).attr("data-value");
+            var companyNumber = $(obj).attr("data-company-number");
+            var companyPeople = $(obj).attr("data-company-people");
+            var compObj       = [companyName, companyNumber, companyPeople];
+
+            services.push(compObj);
+        });
+        console.log(services);
+
         $.ajax({
             type: "POST",
-            data: { _token : csrf.val(), companies : companies, people : ppl},
+            data: { _token : csrf.val(), services : services},
             url: "/updateCompanyList",
             success: function(response){
-                if(companies.length == 0){
-                    var nolist = '<tr class="default-selected"><td align="center">Please select a company</td></tr>';
+                console.log(response);
+                if($(".company-list").length == 0){
+                    var nolist = '<tr class="default-selected"><td align="center">Vennligst velg et selskap</td></tr>';
                     $(".selected-list").append(nolist);
                 }
-                personForCompany.length = 0;
             }
         });
     }
@@ -458,13 +484,12 @@ $(document).ready(function() {
                 console.log(response);
             }
         });
-        console.log("Hey");
     }
 
-    function searchCompany(query){
+    function searchCompany(query, cat){
         $.ajax({
             type: "POST",
-            data: { _token : csrf.val(), query : query},
+            data: { _token : csrf.val(), query : query, cat : cat},
             url: "/searchCompany",
             success: function(response){
                 var obj = JSON.parse(response);
@@ -474,8 +499,7 @@ $(document).ready(function() {
                         var org = obj[q];
                         html += '<tr class="item">'+
                         '<td>'+org.name+
-                            '<button class="float-right btn btn-info select-result" data-toggle="modal" data-target="#optionModal" data-val="'+org.name+'" data-val="'+org.number+'">Legg til</button>'+
-
+                            '<button class="float-right btn btn-info" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'">Legg til</button>'+
                         '</td>'+
                     '</tr>';
                     }
@@ -497,5 +521,10 @@ $(document).ready(function() {
                 }
             }
         });
+    }
+
+    function loadingCompanies(){
+        var html = '<tr class="item"><td align="center">Loading Companies..</td></tr>';
+        $(".receiver-search-result").html(html);
     }
 });

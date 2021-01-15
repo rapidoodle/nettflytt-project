@@ -1,7 +1,5 @@
 @extends('layouts.main')
 @section('content')
-<!-- <?=json_encode(session('customer'));?> -->
-
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
@@ -41,7 +39,7 @@
         </div>
     </div>  
 
-    <div class="ps-cont text-center mt-5 mt-md-0">
+    <div class="ps-cont text-center mt-5 mt-md-0" id="power-supply">
         <h5 class="mini-header">
         Velg ny strømavtale for !adress</h5>
         <div class="row px-4 mb-5">
@@ -76,57 +74,58 @@
             </div>
         </div>  
     </div>
-        <h3 class="mini-header d-md-none mb-4 label-none">
-        Velg ny strømavtale for !adress</h3>
+    <h3 class="mini-header d-md-none mb-4 label-none">
+        Velg ny strømavtale for <?=session('customer')['new_address'];?>        
+    </h3>
     <div class="row px-4 mt-0 mb-5 my-lg-5  mt-lg-0 form">
         <div class="col-12 col-lg-8">
             <div class="cat-n-search">
                 <div class="d-flex flex-wrap category-container align-content-center justify-content-center mb-4">
-                    <div class="category-item" data-val="Ofte brukte">
+                    <div class="category-item active-option" data-cat="Ofte brukte">
                         <i class="far fa-star"></i>
                         Ofte brukte
                     </div>
-                    <div class="category-item" data-val="TV/Internett">
+                    <div class="category-item" data-cat="TV/Internett">
                         <i class="fas fa-tv"></i>
                         TV/Internett
                     </div>
-                    <div class="category-item" data-val="Aviser">
+                    <div class="category-item" data-cat="Aviser">
                         <i class="fa fa-newspaper-o"></i>
                         Aviser
                     </div>
-                    <div class="category-item" data-val="Boligalarm">
+                    <div class="category-item" data-cat="Boligalarm">
                         <i class="fas fa-lock"></i>
                         Boligalarm
                     </div>
-                    <div class="category-item" data-val="Medlemskap">
+                    <div class="category-item" data-cat="Medlemskap">
                         <i class="fas fa-paperclip"></i>
                         Medlemskap
                     </div>
-                    <div class="category-item" data-val="Utdanning">
+                    <div class="category-item" data-cat="Utdanning">
                         <i class="fas fa-graduation-cap"></i>
                         Utdanning
                     </div>
-                    <div class="category-item" data-val="Boligbyggelag">
+                    <div class="category-item" data-cat="Boligbyggelag">
                         <i class="fas fa-handshake"></i>
                         Boligbyggelag
                     </div>
-                    <div class="category-item" data-val="Telefon">
+                    <div class="category-item" data-cat="Telefon">
                         <i class="fas fa-phone"></i>
                         Telefon
                     </div>
-                    <div class="category-item" data-val="Forsikring">
+                    <div class="category-item" data-cat="Forsikring">
                         <i class="fas fa-home"></i>
                         Forsikring
                     </div>
-                    <div class="category-item" data-val="Strøm">
+                    <div class="category-item" data-cat="strÃ¸m">
                         <i class="fas fa-power-off"></i>
                         Strøm
                     </div>
-                    <div class="category-item" data-val="Magasiner">
+                    <div class="category-item" data-cat="Magasiner">
                         <i class="fa fa-file-image-o"></i>
                         Magasiner
                     </div>
-                    <div class="category-item" data-val="Bank" id="category-bank" data-toggle="modal" data-target="#bankModal" data-toggle="modal" data-target="#bankModal">
+                    <div class="category-item" data-cat="Bank" id="category-bank" data-toggle="modal" data-target="#bankModal" data-toggle="modal" data-target="#bankModal">
                         <i class="fas fa-university"></i>
                         Bank
                     </div>
@@ -147,7 +146,7 @@
                 <div class="bg-light w-100 p-4 search-no-result">
                     <h5>Ingen treff i vårt register</h5>
                     <p> <b>Fant du ikke det du lette etter?</b></p>
-                    <button class="btn btn-info btn-other-search">Søk videre i brønnøysundregstrene</button>
+                    <button class="btn btn-other-search">Søk videre i brønnøysundregstrene</button>
                 </div>
                 <table class="table table-striped receiver-search-result">
 
@@ -204,9 +203,9 @@
                 <div class="summary-choices px-2 py-3">
                     <table width="100%" class="selected-list">
                         <?php 
-                        if(isset(session('customer')['services']) && count(session('customer')['services']) == 0){?>
+                        if(!isset(session('customer')['services'])){?>
                         <tr class="default-selected">
-                            <td align="center">Please select a company</td>
+                            <td align="center">Vennligst velg et selskap</td>
                         </tr>
                         <?php } else{
                             if(isset(session('customer')['services'])){
@@ -217,7 +216,7 @@
                             <td width="10%"><i class="fas fa-check"></i></td>
                             <td class="company-list">{{$value[0]}}</td>
                             <td>
-                                <i class="fas fa-times pointer select-delete" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$value[0]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i>
+                                <i class="fas fa-times pointer company-list" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$value[0]}}" data-company-number="{{$value[1]}}" data-company-people="{{$value[2]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i>
                             </td>
                         </tr>
                         <?php } } } }?>
@@ -233,7 +232,7 @@
             
         </div>
         <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
-            <button id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></button>
+            <a href="#power-supply" id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <!-- OPTIONS MODAL -->

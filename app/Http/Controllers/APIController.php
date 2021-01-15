@@ -44,7 +44,7 @@ class APIController extends Controller
     	}
 
         $request['totalPerson'] = $pctr;
-    	$request['services']    = $request['services'] ? $request['services'] : array();
+    	$request['services']    = session('customer.services') != "" ? session('customer.services') : "";
     	$request['old_post'] 	= $request['old_zipcode'].' '.$request['old_place'];
     	$request['new_post'] 	= $request['new_zipcode'].' '.$request['new_place'];
 		// or when your server returns json
@@ -74,54 +74,34 @@ class APIController extends Controller
     	 return redirect('/receiver/');
 
     }
+
     public function updateCompanyList(Request $request){
         //empty company list;
-        // session()->put('customer.services', array());
+        session()->put('customer.services', $request->services);
 
-        if($request->companies){
-            $companies = $request->companies;
-            $people    = $request->people;
-
-
-            foreach ($companies as $company) {
-                $pip        = explode("|", $people);
-                $personList = "person0";
-
-                //get the existing list
-                foreach (session('customer')['services'] as $key => $cmp) {
-                    if($cmp[0] == $company){
-                        $personList = $cmp[2];
-                    }        
-                }   
-
-                if($pip[0] != 0 || $pip[0] == $company){
-                    $personList = $pip[1];
-                }
-
-                $newCompanies[] = array($company, "0912345678", $personList);
-            }
-
-            session()->put('customer.services', $newCompanies);
-
-
-            echo json_encode(session('customer')['services']);
-        }else{
-            echo "No company selected";
-        }
+        echo json_encode(session('customer.services'));
     }
 
     public function searchCompany(Request $request){
-        echo Helper::searchCompanies($request['query']);
+        if($request->cat == "categories" && session('allcompanies')){
+        $query = $request['query'];
+
+        $filteredItems = array_values(array_filter(json_decode(session('allcompanies')), function($elem) use($query){
+            return strtolower($elem->category) == strtolower($query);
+        }));
+
+        echo json_encode($filteredItems);
+
+        }else{
+            echo Helper::searchCompanies($request['query'], $request->cat);
+        }
     }
 
     public function updateCustomerData(Request $request){
-
         foreach ($request->fields as $key => $value) {
             $sessionKey = 'customer.'.$key;
             session()->put($sessionKey, $value);
         }
-
         echo json_encode(session('customer'));
-
     }
 }

@@ -277,13 +277,13 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                             <div class="col-12 px-0">
                                 <label>Boligtype</label>
                             </div>
-                            <div class="col bg-light mr-2 py-3 text-center index-option pointer" data-value="hus">
+                            <div class="col bg-light mr-2 py-3 text-center index-option pointer <?=session('customer')['new_house_type'] == "hus" ? "active-option" : ""?>" data-value="hus">
                                 <i class="fas fa-home"></i> Hus
                             </div>
-                            <div class="col bg-light mx-2 py-3 text-center index-option pointer" data-value="leilighet">
+                            <div class="col bg-light mx-2 py-3 text-center index-option pointer <?=session('customer')['new_house_type'] == "leilighet" ? "active-option" : ""?>" data-value="leilighet">
                                 <i class="far fa-building"></i> Leilighet
                             </div>
-                            <div class="col bg-light ml-2 py-3 text-center index-option pointer" data-value="annet" >
+                            <div class="col bg-light ml-2 py-3 text-center index-option pointer <?=session('customer')['new_house_type'] == "annet" ? "active-option" : ""?>" data-value="annet" >
                                 Annet
                             </div>
                             <input type="hidden" name="new_house_type" id="new_house_type" required="true">
@@ -303,8 +303,8 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                     <div class="header-num">4</div> <h6>Postkasseskilt</h6>
                     <hr>
                     <div class="form-check index-step-4 ml-4 ml-lg-0">
-                        <input class="form-check-input" type="checkbox" value="" id="check">
-                        <label class="form-check-label" for="check">
+                        <input class="form-check-input" type="checkbox" value="1" id="check" name="mailbox-sign" <?=isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 1 ? 'checked="check"' : ""?>">
+                        <label class="form-check-label" for="check" >
                         Jeg vil bestille nytt postkasseskilt til den nye boligen for kun kr 169,- inkl frakt
                         </label>
                     </div>
