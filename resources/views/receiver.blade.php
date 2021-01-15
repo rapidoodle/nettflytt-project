@@ -208,7 +208,7 @@
                             <td align="center">Vennligst velg et selskap</td>
                         </tr>
                         <?php } else{
-                            if(isset(session('customer')['services'])){
+                            if(isset(session('customer')['services']) && count(session('customer')['services']) != 0){
                             foreach (session('customer')['services'] as $key => $value) {
                             $newId = time(); 
                             if($value){?>
