@@ -277,13 +277,13 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                             <div class="col-12 px-0">
                                 <label>Boligtype</label>
                             </div>
-                            <div class="col bg-light mr-2 py-3 text-center index-option pointer <?=session('customer')['new_house_type'] == "hus" ? "active-option" : ""?>" data-value="hus">
+                            <div class="col bg-light mr-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "hus" ? "active-option" : ""?>" data-value="hus">
                                 <i class="fas fa-home"></i> Hus
                             </div>
-                            <div class="col bg-light mx-2 py-3 text-center index-option pointer <?=session('customer')['new_house_type'] == "leilighet" ? "active-option" : ""?>" data-value="leilighet">
+                            <div class="col bg-light mx-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "leilighet" ? "active-option" : ""?>" data-value="leilighet">
                                 <i class="far fa-building"></i> Leilighet
                             </div>
-                            <div class="col bg-light ml-2 py-3 text-center index-option pointer <?=session('customer')['new_house_type'] == "annet" ? "active-option" : ""?>" data-value="annet" >
+                            <div class="col bg-light ml-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "annet" ? "active-option" : ""?>" data-value="annet" >
                                 Annet
                             </div>
                             <input type="hidden" name="new_house_type" id="new_house_type" required="true">
