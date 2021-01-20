@@ -1,6 +1,5 @@
 @extends('layouts.main')
 @section('content')
-<?php echo json_encode(session('customer'));?>
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
             <div class="text-center">
