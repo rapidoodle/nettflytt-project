@@ -294,7 +294,7 @@ echo json_encode(session('customer'));
                             <div class="col bg-light mx-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "leilighet" ? "active-option" : ""?>" data-value="leilighet">
                                 <i class="far fa-building"></i> Leilighet
                             </div>
-                            <?php $annet_option = issset(session('customer')['new_house_type']) ? session('customer')['new_house_type'] : ""; ?>                            
+                            <?php $annet_option = isset(session('customer')['new_house_type']) ? session('customer')['new_house_type'] : ""; ?>                            
                             <div class="annet-options col bg-light ml-2 py-3 text-center index-option pointer <?=array_key_exists($annet_option, $others) ? "active-option" : ""?> dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-value="{{isset($others) ? $annet_option : 'annet'}}">
                                 {{isset($others[$annet_option]) ? $others[$annet_option]  : 'Annet'}}
                             </div>
