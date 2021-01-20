@@ -173,7 +173,6 @@ $(document).ready(function() {
 
         var inp     = '<input type="hidden" name="people" value="'+people+'">'; 
         $(this).append(inp);
-        addName(false);
     });
 
 
