@@ -1,6 +1,5 @@
 @extends('layouts.main')
 @section('content')
-<?=json_encode(session('customer')); ?>
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
@@ -44,33 +43,26 @@
         <h5 class="mini-header">
         Velg ny strømavtale for !adress</h5>
         <div class="row px-4 mb-5">
-            <div class="col-12 col-md-6 text-center p-4">
+            <div class="col-12 offset-md-1 col-md-5 text-center p-4">
                 <div class="ps-option p-4 mx-0 mx-lg-5">
                     <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
-                    <h5 class="my-4">STRØM TIL LAVPRIS</h5>
+                    <h5 class="my-4">Nesten ferdig…</h5>
 
                     <p>Med Strøm til lavpris får du en spotprisavtale, som ifølge Statistisk sentralbyrå har vært den billigste avtaleformen i over 10 år. Det betyr at du kan slappe av og fokusere på det som gir deg god energi!</p>
-                    <div class="text-left my-4">
-                        <a href="javascript:void();">Les avtaleviklårene</a>
-                    </div>
 
-                    <a class="btn btn-violet" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">
+                    <a class="btn btn-violet px-4 py-2" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">
                     Bestill Strøm til Lavpris
                     </a>
                 </div>
             </div>
-            <div class="col-12 col-md-6 text-center p-4">
+            <div class="col-12 col-md-5 text-center p-4">
                 <div class="ps-option p-4 mx-0 mx-lg-5">
                     <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
                     <h5 class="my-4">TOPP 5 VARIABEL</h5>
 
                     <p>Strømavtalen Topp 5-garanti sikrer deg en variabel strømpris som på årlig basis alltid er blant de 10 beste, målt mot en representativ liste over konkurrentene våre.</p>
 
-                    <div class="text-left my-4">
-                        <a href="javascript:void();">Les avtaleviklårene</a>
-                    </div>
-
-                    <a class="btn btn-violet" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill Strøm til Lavpris</a>
+                    <a class="btn btn-violet px-4 py-2" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill TOPP 5 VARIABEL</a>
                 </div>
             </div>
         </div>  
@@ -316,7 +308,6 @@
     <div class="row px-4 mb-5 mt-5 mt-md-0">
         <div class="col-12 col-md-8 offset-md-2 text-center">
             <h2>Strøm i ny bolig</h2>
-            <p class="mt-3">Dersom du ikke bestiller strøm fra en strømleverandør på ditt nye bosted vil du få leveringspliktig strøm fra din nettleverandør. Dette kan bli dyrt. Vi anbefaler deg derfor at du bestiller strøm på ditt nye bosted hvis ikke dette allerede er gjort eller er inkludert i eventuell husleie.</p>
         </div>
     </div>  
     <div class="row px-4 mb-5 mt-5 mt-md-0">

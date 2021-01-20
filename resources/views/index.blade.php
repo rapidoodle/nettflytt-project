@@ -4,18 +4,22 @@
 $months  = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
 
 $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December']; 
+
+$others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbolig', 'tomannsbolig2' => 'Tommansbolig m/utleiedel', 'rekkehus' => 'Rekkehus', 'hybel' => 'Hybel'];
+
+echo json_encode(session('customer'));
 ?>
 <div class="row px-2 px-lg-4 mb-5">
     <div class="col-12 col-sm-6 d-flex align-content-center flex-wrap">
-        <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out">
+        <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out" style="height: auto!important;">
 
         <h3 class="flex-item">Adresseendring for Norge</h3>
 
         <p class="mt-0 mt-sm-4">Her kan du fylle ut én enkelt flyttemelding til alle selskaper og organisasjoner du er medlem hos. Du får også ferdigutfylte dokumenter til posten og folkeregisteret</p>
 
-        <a class="btn btn-info mt-2 px-4 py-2" href="#index-form-container">Meld flytting</a> 
+        <a class="btn btn-info mt-2 px-4 py-2" href="#index-form-container">Start flytting</a> 
 
-        <div class="d-flex align-items-center flex-wrap steps mt-4">
+        <div class="d-flex align-items-center flex-wrap steps mt-5">
             <div class="header-num">1</div>
             <div class="header-mini ml-1">Fyll ut flyttemelding</div>
             <div class="header-num ml-3">2</div>
@@ -36,7 +40,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                 <div class="accordion bg-xs-light col-12 col-sm-12 col-lg-5">
                     <div class="header-num">1</div> <h6>Personlig informasjon</h6>
                     <hr class="mb-2">
-                    <div class="card bg-sm-light p-0 p-sm-3 bg-xs-light" id="customer-form">
+                    <div class="card bg-sm-light p-0 bg-xs-light" id="customer-form">
                         <div class="accordion" id="extra-names">
                             <?php 
                             if(session('customer')){ 
@@ -45,10 +49,11 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                     if(isset(session('customer')['person'.$i])){
 
                                 $newId = $i.time();
+                                $type  = $i == 0 ? "(hoverperson)" : "(ekstraperson)";
                             ?>
                             <div class="card person" id="card_{{$newId}}">
                             <div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="{{$newId}}" data-toggle="collapse" data-target="#col_{{$newId}}" aria-expanded="true" aria-controls="collapseOne">
-                                <span>{{session('customer')['person'.$i]['first_name']}} {{session('customer')['person'.$i]['last_name']}}</span>
+                                <span>{{session('customer')['person'.$i]['first_name']}} {{session('customer')['person'.$i]['last_name']}} {{$type}}</span>
                                 <?php if($i != 0){ ?>
                                 <i class="fa fa-times float-right" data-id="card_{{$newId}}"    style="margin-top:-3px;z-index:99999999999"></i>
                                 <?php } ?>
@@ -181,6 +186,12 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="row mt-2 save-person-collapse-cont">
+                                    <div class="col-12">
+                                        <a class="save-person-collapse text-bold pointer">Lagre</a>
+                                    </div>
+                                </div>
                         </div>
                             <div class="form-group mt-3 mb-3half">
                                 <label for="add-name">Melder du flytting for fler personer?</label><br>
@@ -277,14 +288,19 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                             <div class="col-12 px-0">
                                 <label>Boligtype</label>
                             </div>
-                            <div class="col bg-light mr-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "hus" ? "active-option" : ""?>" data-value="hus">
-                                <i class="fas fa-home"></i> Hus
+                            <div class="col bg-light mr-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "enebolig" ? "active-option" : ""?>" data-value="enebolig">
+                                <i class="fas fa-home"></i> Enebolig
                             </div>
                             <div class="col bg-light mx-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "leilighet" ? "active-option" : ""?>" data-value="leilighet">
                                 <i class="far fa-building"></i> Leilighet
                             </div>
-                            <div class="col bg-light ml-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "annet" ? "active-option" : ""?>" data-value="annet" >
-                                Annet
+                            <div class="annet-options col bg-light ml-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && array_key_exists(session('customer')['new_house_type'], $others) ? "active-option" : ""?> dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-value="{{isset($others) ? session('customer')['new_house_type'] : 'annet'}}">
+                                {{isset($others[session('customer')['new_house_type']]) ? $others[session('customer')['new_house_type']]  : 'Annet'}}
+                            </div>
+                            <div class="dropdown-menu bolig-menu">
+                                <?php foreach($others as $key => $value){ ?>
+                                <a class="dropdown-item pointer {{isset($others[session('customer')['new_house_type']]) && session('customer')['new_house_type'] == $key ? 'active'  : ''}}" data-val="{{$key}}">{{$value}}</a>
+                                <?php } ?>
                             </div>
                             <input type="hidden" name="new_house_type" id="new_house_type" required="true">
                         </div>
@@ -305,11 +321,11 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
                     <div class="form-check index-step-4 ml-4 ml-lg-0">
                         <input class="form-check-input" type="checkbox" value="1" id="check" name="mailbox-sign" <?=isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 1 ? 'checked="check"' : ""?>">
                         <label class="form-check-label" for="check" >
-                        Jeg vil bestille nytt postkasseskilt til den nye boligen for kun kr 169,- inkl frakt
+                        Jeg vil bestille nytt postkasseskilt til den nye adressen for kun kr 169,- inkl frakt
                         </label>
                     </div>
                     <div class="text-center px-5 px-lg-0">
-                        <button class="float-lg-right btn btn-info mt-4 mb-auto" id="submit-form">Meld flytting</button> 
+                        <button class="float-lg-right btn btn-info mt-4 mb-auto px-4 py-2" id="submit-form">Meld flytting</button> 
                     </div>
                     <!-- <button class="float-right btn btn-info mt-4 mb-auto" id="submit-form" type="submit">Meld flytting</button>  -->
                 </div>

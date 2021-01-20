@@ -18,12 +18,16 @@ $(document).ready(function() {
     var movingDate = $("#moving-date");
     var isPowerSupplier = false;
     //INDEX PAGE
+
+    $(".save-person-collapse-cont").hide();
     $(".req-fld").keyup(function(){
         if($("#name_0").length != 0){
             if(fullName.val() != "" || email.val() != "" || phone.val() != "" || day.val() != null || month.val() != null || year.val() != null){
                 $(".req-fld").attr("required", true);
+                $(".save-person-collapse-cont").show();
             }else{
                 $(".req-fld").removeAttr("required");
+                $(".save-person-collapse-cont").hide();
             }
         }
     });
@@ -43,69 +47,17 @@ $(document).ready(function() {
     }
 
     $("#add-name").click(function(){
-        if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
-            alert("Fyll ut skjemaet før du legger til et nytt navn.");
-        }
-        else{
-         var pCtr   = $(".person").length;
-         var newId  = Date.now();
-         var html   = '<div class="card person" id="card_'+newId+'">'+
-                        '<div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="'+newId+'" data-toggle="collapse" data-target="#col_'+newId+'" aria-expanded="true" aria-controls="collapseOne">'+
-                            '<span>'+fullName.val()+'</span>';
-                            if(pCtr != 0){
-                                html += '<i class="fa fa-times float-right" data-id="card_'+newId+'" style="margin-top:-3px;z-index:99999999999"></i>';
-                            }
-                    html += '</div>'+
-                        '<div id="col_'+newId+'" class="collapse" aria-labelledby="'+newId+'" data-parent="#extra-names">'+
-                            '<div class="bg-white card-body">'+
-                                '<table class="w-100">'+
-                                    '<tr>'+
-                                        '<td>Full name</td>'+
-                                        '<td><input type="text" class="person-input" value="'+fullName.val()+'" id="name_'+pCtr+'"></td>'+
-                                    '</tr>'+
-                                    '<tr>'+
-                                        '<td>E-post</td>'+
-                                        '<td><input type="text" class="person-input" value="'+email.val()+'" id="email_'+pCtr+'"></td>'+
-                                    '</tr>'+
-                                    '<tr>'+
-                                        '<td>Telefonnummer</td>'+
-                                        '<td><input type="text" class="person-input" value="'+phone.val()+'" id="phone_'+pCtr+'"></td>'+
-                                    '</tr>'+
-                                    '<tr>'+
-                                        '<td>Fødselsdato</td>'+
-                                         '<td><input type="date" class="person-input" value="'+year.val()+'-'+month.val()+'-'+day.val()+'" id="bday_'+pCtr+'"></td>'+
-                                        // '<td><input type="date" class="person-input" value="2020-10-10" id="bday_'+pCtr+'"></td>'+
-                                    '</tr>'+
-                                '</table>'+
-                            '</div>'+
-                        '</div>';
-            $("#extra-names").append(html);
-
-            $('.collapse').collapse({
-             toggle: false
-            });
-
-            $(".multi-collapse").collapse("hide")
-            $(".multi-collapse").clone(true).insertAfter("div#customer-form:last");
-            
-
-            setTimeout(function(){
-                $(".multi-collapse").collapse("show");
-            }, 500);
-
-            $(".multi-collapse")[1].remove();       
-
-            fullName.val("");
-            email.val("");
-            phone.val("");
-            day.val("");
-            month.val("");
-            year.val("");    
-
-            //REMOVE REQUIRED FIELD TO PERSONAL INFORMATION IF FIRST PERSON IS ADDED
-            $(".req-fld").removeAttr("required");
+        if($(".multi-collapse.collapse.show").length != 0){
+            addName(true);
+        }else{
+            $(".multi-collapse").collapse("show");
         }
     });
+
+    $(".save-person-collapse").click(function(){
+        addName(false);
+    });
+
     $(document).on('show.bs.collapse hide.bs.collapse', '.multi-collapse', function(e) {
         e.stopPropagation();
     });
@@ -225,6 +177,13 @@ $(document).ready(function() {
 
 
     //RECEIVER'S PAGE
+    $(".bolig-menu a").click(function(){
+        var val = $(this).attr("data-val");
+        $(".annet-options").attr("data-value", val);
+        $(".annet-options").text($(this).text());
+        $("#new_house_type").val(val);
+    });
+
     $("#company-search").click(function(){
         var val = searchComp.val();
         $(".search-no-result").hide();
@@ -324,39 +283,21 @@ $(document).ready(function() {
     })
 
     //POSTBOX
+    if($(".pb-field").length > 0){
+        postboxNames();
+    }
     $(".pb-field").keyup(function(e){
-        var val = $(this).val();
-        var allNames = [];
-        if($("#rad1").val() != ""){
-            allNames.push($("#rad1").val());
-        }
-        if($("#rad2").val() != ""){
-            allNames.push($("#rad2").val());
-        }
-        if($("#rad3").val() != ""){
-            allNames.push($("#rad3").val());
-        }
-        if($("#rad4").val() != ""){
-            allNames.push($("#rad4").val());
-        }
-        if($("#rad5").val() != ""){
-            allNames.push($("#rad5").val());
-        }
-        allNames = allNames.toString();
-        var finalText = allNames.replace(/,/g, '<br>');
-        $(".postbox-summary").html(finalText);
-
-        globalAllNames = allNames;
+        postboxNames();
     });
 
     $(".btn-legg-till").click(function(){
-        var html = '<div class="text-right d-block  order-1 order-md-2 lottie-1" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Postkasseskiltet er lagt i ordren</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2 lottie-1" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Postkasseskiltet er lagt til</h6></div>';
         $(this).hide();
         $(this).parent().append(html);
     });
 
     $(".btn-show-lott").click(function(){
-        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Postkasseskiltet er lagt i ordren</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Postkasseskiltet er lagt til</h6></div>';
         var html2 = 'Tusen takk. Når du svarer “JA” på SMSen sender vi deg et gratis postkasseskilt.'+
                     '<div style="color: red;">NB! Du må fylle inn navnene på postkasseskiltet før du klikker videre på denne siden!</div>';
         $(".btn-legg-till").hide();
@@ -387,7 +328,7 @@ $(document).ready(function() {
     });
 
     $(".btn-legg-till-2").click(function(){
-        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:135px;"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Skiltet er lagt til i ordren</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:135px;"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Skiltet er lagt til</h6></div>';
         $(this).hide();
         $(this).parent().append(html);
     });
@@ -526,5 +467,96 @@ $(document).ready(function() {
     function loadingCompanies(){
         var html = '<tr class="item"><td align="center">Loading Companies..</td></tr>';
         $(".receiver-search-result").html(html);
+    }
+
+    function postboxNames(){
+        var allNames = [];
+        if($("#rad1").val() != ""){
+            allNames.push($("#rad1").val());
+        }
+        if($("#rad2").val() != ""){
+            allNames.push($("#rad2").val());
+        }
+        if($("#rad3").val() != ""){
+            allNames.push($("#rad3").val());
+        }
+        if($("#rad4").val() != ""){
+            allNames.push($("#rad4").val());
+        }
+        if($("#rad5").val() != ""){
+            allNames.push($("#rad5").val());
+        }
+        allNames = allNames.toString();
+        var finalText = allNames.replace(/,/g, '<br>');
+        $(".postbox-summary").html(finalText);
+
+        globalAllNames = allNames;
+    }
+
+    function addName(collapse = true){
+        if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
+            alert("Fyll ut skjemaet før du legger til et nytt navn.");
+        }
+        else{
+         var pCtr   = $(".person").length;
+         var newId  = Date.now();
+         var type   = pCtr == 0 ? "(hovedperson)" : "(ekstraperson)";
+         var html   = '<div class="card person" id="card_'+newId+'">'+
+                        '<div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="'+newId+'" data-toggle="collapse" data-target="#col_'+newId+'" aria-expanded="true" aria-controls="collapseOne">'+
+                            '<span>'+fullName.val()+' '+type+'</span>';
+                            if(pCtr != 0){
+                                html += '<i class="fa fa-times float-right" data-id="card_'+newId+'" style="margin-top:-3px;z-index:99999999999"></i>';
+                            }
+                    html += '</div>'+
+                        '<div id="col_'+newId+'" class="collapse" aria-labelledby="'+newId+'" data-parent="#extra-names">'+
+                            '<div class="bg-white card-body">'+
+                                '<table class="w-100">'+
+                                    '<tr>'+
+                                        '<td>Full name</td>'+
+                                        '<td><input type="text" class="person-input" value="'+fullName.val()+'" id="name_'+pCtr+'"></td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td>E-post</td>'+
+                                        '<td><input type="text" class="person-input" value="'+email.val()+'" id="email_'+pCtr+'"></td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td>Telefonnummer</td>'+
+                                        '<td><input type="text" class="person-input" value="'+phone.val()+'" id="phone_'+pCtr+'"></td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td>Fødselsdato</td>'+
+                                         '<td><input type="date" class="person-input" value="'+year.val()+'-'+month.val()+'-'+day.val()+'" id="bday_'+pCtr+'"></td>'+
+                                        // '<td><input type="date" class="person-input" value="2020-10-10" id="bday_'+pCtr+'"></td>'+
+                                    '</tr>'+
+                                '</table>'+
+                            '</div>'+
+                        '</div>';
+            $("#extra-names").append(html);
+
+            $('.collapse').collapse({
+             toggle: false
+            });
+
+            $(".multi-collapse").collapse("hide")
+            $(".multi-collapse").clone(true).insertAfter("div#customer-form:last");
+            
+            if(collapse){
+                setTimeout(function(){
+                    $(".multi-collapse").collapse("show");
+                }, 500);
+            }
+
+            $(".multi-collapse")[1].remove();       
+
+            fullName.val("");
+            email.val("");
+            phone.val("");
+            day.val("");
+            month.val("");
+            year.val("");    
+
+            //REMOVE REQUIRED FIELD TO PERSONAL INFORMATION IF FIRST PERSON IS ADDED
+            $(".req-fld").removeAttr("required");
+        }
     }
 });

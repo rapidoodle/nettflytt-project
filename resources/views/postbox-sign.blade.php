@@ -41,31 +41,31 @@
                     <div class="form-group row">
                         <label for="rad1" class="col-3 col-form-label">Rad 1:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad1">
+                            <input type="text" class="form-control pb-field" id="rad1" value="{{isset(session('customer')['person0']) ? session('customer')['person0']['name'] : ''}}">
                         </div>
                     </div> 
                     <div class="form-group row">
                         <label for="rad2" class="col-3 col-form-label">Rad 2:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad2">
+                            <input type="text" class="form-control pb-field" id="rad2" value="{{isset(session('customer')['person1']) ? session('customer')['person1']['name'] : ''}}">
                         </div>
                     </div> 
                     <div class="form-group row">
                         <label for="rad3" class="col-3 col-form-label">Rad 3:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad3">
+                            <input type="text" class="form-control pb-field" id="rad3" value="{{isset(session('customer')['person2']) ? session('customer')['person2']['name'] : ''}}">
                         </div>
                     </div> 
                     <div class="form-group row">
                         <label for="rad4" class="col-3 col-form-label">Rad 4:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad4">
+                            <input type="text" class="form-control pb-field" id="rad4" value="{{isset(session('customer')['person3']) ? session('customer')['person3']['name'] : ''}}">
                         </div>
                     </div>  
                     <div class="form-group row">
                         <label for="rad4" class="col-3 col-form-label">Rad 5:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad5">
+                            <input type="text" class="form-control pb-field" id="rad5" value="{{isset(session('customer')['person4']) ? session('customer')['person4']['name'] : ''}}">
                         </div>
                     </div>  
                 </div>

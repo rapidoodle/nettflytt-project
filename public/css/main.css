@@ -24,7 +24,7 @@ html, body{
 input{
     font-family: 'AcuminProNormal', sans-serif;
 }
-.bold, b, h1, h2, h3, h4, h5, h6, div.header-mini, label, .text-sm-gray{
+.bold, b, h1, h2, h3, h4, h5, h6, div.header-mini, label, .text-sm-gray, .text-bold{
     font-family: 'AcuminProBold', sans-serif;
 }
 footer a, footer h5, .footer-copyright{
@@ -42,7 +42,7 @@ i.fa-bars{
 }
 button.btn-info{
     font-size: 12px;
-    border-radius: 0!important;
+    border-radius: 4px!important;
     border: 1px solid #495057;
     padding:.3rem 1.3rem;
     font-weight: bold;
@@ -59,9 +59,10 @@ div.steps div.header-num{
     border-radius: 50%;
     padding-left: 11px;
     padding-top: 4px;*/
-    width: 30px;
-    height: 30px;
-    line-height: 32px;
+    font-size: 18px;
+    width: 35px;
+    height: 35px;
+    line-height: 36px;
     border-radius: 50%;
     color: #fff;
     text-align: center;
@@ -104,7 +105,7 @@ div.form hr{
     color: #495057;
 }
 div > label{
-    font-size: 12px;
+    font-size: 13px;
     margin-bottom: 0px;
 }
 div.form div.card{
@@ -300,7 +301,7 @@ div.category-item > i{
 div.receiver-search-group input{
     height: 35px;
     padding-left:20px;
-    border-radius: 0!important;
+    border-radius: 4px!important;
     border: 1px solid #495057;
 }
 table.receiver-search-result{
@@ -312,6 +313,9 @@ table.receiver-search-result tr td{
 table.receiver-search-result tr td:first-child{
     /*padding-left: 40px;*/
 }
+table.table-striped > tr:nth-child(odd) > td {
+   background-color: #EAEAEA ; 
+ }
 ul.nav-receiver{
     margin-left: -.75rem;
 }
@@ -378,7 +382,7 @@ font-size: 12px!important;
 span.steps-circle{
     width: 60px;
     height: 60px;
-    line-height: 60px;
+    line-height: 64px;
     border-radius: 50%;
     font-size: 30px;
     color: #fff;
@@ -438,7 +442,7 @@ div.ps-option h5{
 
 }
 div.ps-option p{
-    min-height:120px;
+    min-height:150px;
 }
 div.ps-option a{
     text-decoration: underline;
@@ -528,6 +532,9 @@ div.postbox-summary{
     font-weight: bold
 }
 
+div.index-extra-options .active-option{
+    border: 1px solid #1D576F!important;
+}
 div.bold-message{
     border: 5px solid red;
     padding: 1rem;
@@ -623,7 +630,7 @@ div#extra-names table tr td{
 div#extra-names .card-header{
     font-size: 12px;
     color: #1D576F;
-    padding:5px!important;
+    padding: .375rem .75rem;
     border-radius: 2px!important;
     border: 0px!important;
 }
@@ -639,21 +646,26 @@ div.content{
 }
 input.person-input{
     width: 100%;
-    border:none;
-}
-
-input.person-input:focus{
-    border-bottom: 1px solid #777777!important;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    margin-bottom: 3px;
 }
 .btn-other-search{
     font-size: 12px;
-    border-radius: 0!important;
+    border-radius: 4px!important;
     border: 1px solid #495057;
     padding:.3rem 1.3rem;
     font-weight: bold;
     color: #fff;
     background-color: #1D576F;
 }
+.save-person-collapse{
+    color:#138496;
+    text-decoration: underline;
+    font-size: 13px;
+    font-weight: bold!important;
+}
+
 /*responsive*/
 @media (max-width: 992px) {
      div.index-extra-options .index-option i{
@@ -802,4 +814,11 @@ hr{
 a.black-link{
     color:#000;
     text-decoration: underline;
+}
+.btn-info{
+    border-radius: 4px!important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background-color: #1D576F!important;
 }

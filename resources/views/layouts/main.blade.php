@@ -79,18 +79,6 @@
         </ul>
       </div>
       <div class="col-md-3 mb-md-0 mb-3">
-        <h5>Informasjon</h5>
-
-        <ul class="list-unstyled">
-          <li>
-            <a href="/">Bryggegata 3, 0250 Oslo</a>
-          </li>
-          <li>
-            <a href="/">kundesenter@nettflytt.no</a>
-          </li>
-        </ul>
-      </div>
-      <div class="col-md-3 mb-md-0 mb-3">
         <h5>Selskap</h5>
 
         <ul class="list-unstyled">
@@ -107,6 +95,7 @@
 </footer>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="https://kit.fontawesome.com/58a5e1829b.js" crossorigin="anonymous"></script>
     <script src="{{ asset('js/moment.min.js') }}" ></script>

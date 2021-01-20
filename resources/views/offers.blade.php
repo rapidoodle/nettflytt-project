@@ -60,38 +60,6 @@
 
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nei takk</a>
-                            </div>
-                            <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Ja takk!</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col col-md-4 d-none d-md-inline">
-                        <img src="{{ asset('images/windmill.png')}}" class="img-fluid" alt="windmill image">
-                    </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-header" id="headingTwo">
-              <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                  Tv/Internett <i class="fas fa-tv"></i>
-                </button>
-              </h2>
-            </div>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#offersAcdn">
-              <div class="card-body">
-                <h5>På tide med nye linjer?</h5>
-                <div class="row">
-                    <div class="col-12 col-md-8">
-                        <p>De siste og beste tilbudene får du her Vi finner den beste leverandøren basert på ditt nye område</p>
-                        <h6>Spar penger i dag!</h6>
-
-                        <div class="row mt-4 mb-2 pl-md-4">
-                            <div class="col pl-md-4 order-2 order-md-1">
                                 <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
@@ -100,7 +68,7 @@
                         </div>
                     </div>
                     <div class="col col-md-4 d-none d-md-inline">
-                        <img src="{{ asset('images/hand-pressing-remote-smart-tv.png')}}" class="img-fluid" alt="hand pressing remote smart tv image">
+                        <img src="{{ asset('images/windmill.png')}}" class="img-fluid" alt="windmill image">
                     </div>
                 </div>
               </div>
@@ -156,10 +124,10 @@
 
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3" href="/postbox-sign">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3" href="/postbox-sign">Ja takk!</a>
                             </div>
                         </div>
                     </div>

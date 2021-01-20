@@ -42,8 +42,8 @@
                     <a href="/terms-of-use/" target="_blank" class="black-link">Jeg aksepterer betingelsene</a>
                 </label>
                 <p class="my-4 text-left text-md-center">Ved å legge inn koden og akseptere betingelsene sender vi flyttemeldingen for deg. Tjenesten koster 149,- kroner og kommer på telefonregningen din.</p>
-                <div class="px-5 px-md-0">
-                    <button class="btn btn-info btn-lg" id="btn-summary-send">Send flyttemeldingene</button>
+                <div class="px-md-5  px-md-0">
+                    <button class="btn btn-info btn-lg btn-block" id="btn-summary-send">Send flyttemeldingene</button>
                 </div>  
             </div>
         </div>
@@ -135,26 +135,6 @@
         </div>
     </div>
 </div>
-<div class="row px-4 mt-0 mb-5 my-lg-5  mt-lg-0 d-md-none">
-    <div class="col-12">
-        <div class="bg-light p-4 text-center">
-            <h4>Legg inn koden du fikk på SMS for å fullføre</h4>
-            <input type="text" class="my-4 form-control" id="otp" placeholder="4-siffret kode">
-            <div class="form-check mb-5">
-                <input class="form-check-input" required="true" type="checkbox" value="" id="check">
-
-                <label class="form-check-label" for="check">
-                Jeg aksepterer betingelsene
-                </label>
-                <p class="my-4 text-left text-md-center">Ved å legge inn koden og akseptere betingelsene sender vi flyttemeldingen for deg. Tjenesten koster 149,- kroner og kommer på telefonregningen din.</p>
-                <div class="px-5 px-md-0">
-                    <a href="/thank-you/" class="btn btn-info btn-lg btn-endre">Endre</a>
-                </div>            
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--CONFIRMATION MODAL-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="text-center modal-dialog modal-dialog-centered" role="document">
