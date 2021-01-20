@@ -12,8 +12,6 @@ echo json_encode(session('customer'));
 <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out">
 <div class="row px-2 px-lg-4 mb-5">
     <div class="col-12 col-sm-6 d-flex align-content-center flex-wrap">
-        <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out" style="height: auto!important;">
-
         <h3 class="flex-item">Adresseendring for Norge</h3>
 
         <p class="mt-0 mt-sm-4">Her kan du fylle ut én enkelt flyttemelding til alle selskaper og organisasjoner du er medlem hos. Du får også ferdigutfylte dokumenter til posten og folkeregisteret</p>
