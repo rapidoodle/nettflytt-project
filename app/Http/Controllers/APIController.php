@@ -99,9 +99,11 @@ class APIController extends Controller
 
     public function updateCustomerData(Request $request){
         foreach ($request->fields as $key => $value) {
-            $sessionKey = 'customer.'.$key;
+            $newKey = substr($key, 0, 6) == "person" ? str_replace("-", ".", $key) : $key;
+            $sessionKey = 'customer.'.$newKey;
             session()->put($sessionKey, $value);
         }
+
         echo json_encode(session('customer'));
     }
 }

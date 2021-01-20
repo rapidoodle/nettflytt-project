@@ -6,8 +6,6 @@ $months  = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Sept
 $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December']; 
 
 $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbolig', 'tomannsbolig2' => 'Tommansbolig m/utleiedel', 'rekkehus' => 'Rekkehus', 'hybel' => 'Hybel'];
-
-echo json_encode(session('customer'));
 ?>
 <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out">
 <div class="row px-2 px-lg-4 mb-5">

@@ -665,6 +665,14 @@ input.person-input{
     font-size: 13px;
     font-weight: bold!important;
 }
+#receiver-search-input{
+    border-top-right-radius: 0px!important;
+    border-bottom-right-radius: 0px!important;
+}
+#company-search{
+    border-top-left-radius: 0px!important;
+    border-bottom-left-radius: 0px!important;
+}
 
 /*responsive*/
 @media (max-width: 992px) {

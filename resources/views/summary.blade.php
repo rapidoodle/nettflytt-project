@@ -24,45 +24,40 @@
             </div>
     </div>
 </div>
-
-<div class="row px-4 mb-5 mt-5 mt-md-0">
+<div class="container">
+<div class="row mb-5 mt-5 mt-md-0">
     <div class="col-12 col-md-8 offset-md-2 text-center">
         <h2>Oppsummering</h2>
     </div>
 </div>  
-<div class="row px-4 mt-0 mb-5 my-lg-5  mt-lg-0">
+<div class="row mt-0 mb-5 my-lg-5  mt-lg-0">
     <div class="col-12">
         <div class="bg-light p-4 text-center">
             <h4>Legg inn koden du fikk på SMS for å fullføre</h4>
             <input type="text" class="my-4 form-control" id="otp" placeholder="4-siffret kode">
             <div class="mb-5">
-                <input class="form-check-input" required="true" type="checkbox" value="" id="check">
-
-                <label class="form-check-label" for="check">
-                    <a href="/terms-of-use/" target="_blank" class="black-link">Jeg aksepterer betingelsene</a>
-                </label>
-                <p class="my-4 text-left text-md-center">Ved å legge inn koden og akseptere betingelsene sender vi flyttemeldingen for deg. Tjenesten koster 149,- kroner og kommer på telefonregningen din.</p>
-                <div class="px-md-5  px-md-0">
-                    <button class="btn btn-info btn-lg btn-block" id="btn-summary-send">Send flyttemeldingene</button>
+                <p class="mb-4 text-left text-md-center">Ved å legge inn koden og akseptere <a href="/terms-of-use/" class="text-underline">betingelsene</a> sender vi flyttemeldingen for deg. Tjenesten koster 149,- kroner og kommer på telefonregningen din.</p>
+                <div class="px-md-5  px-md-0 text-center">
+                    <button class="btn btn-info btn-lg" id="btn-summary-send">Send flyttemeldingene</button>
                 </div>  
             </div>
         </div>
     </div>
 </div>
-<div class="row px-4 mb-5">
+<div class="row mb-5">
     <div class="col-12 col-md-5">
         <div class="smry-rcrd p-4">
             <h3 class="mb-5"><i class="fa fa-user"></i> Personalia</h3>
-            <h5 class="disp-field" data-parent="old_address"><?=session('customer')['person0']['name']?></h5>
+            <h5 class="disp-field"><span data-parent="person0-name"><?=session('customer')['person0']['name']?></span></h5>
             <span class="text-sm-gray">Hovedperson</span>
-            <span class="mt-4 text-sm-gray disp-field">E-post: <?=session('customer')['person0']['email']?></span>
-            <span class="text-sm-gray disp-field">Født: <?=session('customer')['person0']['bday']?></span>
+            <span class="mt-4 text-sm-gray disp-field">E-post: <span data-parent="person0-email"><?=session('customer')['person0']['email']?></span></span>
+            <span class="text-sm-gray disp-field">Født: <span data-parent="person0-bday"><?=session('customer')['person0']['bday']?></span></span>
 
             <?php if(session('customer')['totalPerson'] > 1){ ?>
             <hr>
             <h5>Extraperson</h5>
             <?php for($i=1; $i < session('customer')['totalPerson']; $i++){ ?>
-            <h5 class="disp-field"><?=session('customer')['person'.$i]['name'];?></h5>
+            <h5 class="disp-field"><span data-parent="person{{$i}}-name"><?=session('customer')['person'.$i]['name'];?></span></h5>
             <span class="text-sm-gray">Ekstraperson</span>
             <?php } } ?>
             <div class="text-right mt-5">
@@ -109,7 +104,7 @@
         </div>
     </div>
 </div>
-<div class="row px-4 mb-5">
+<div class="row mb-5">
     <div class="col-12 col-sm-6 col-md-5">
         <div class="smry-rcrd p-4">
             <h3 class="mb-5"><i class="fa fa-user"></i> Adresser</h3>
@@ -134,6 +129,7 @@
             <div id="my-calendar"></div>
         </div>
     </div>
+</div>
 </div>
 <!--CONFIRMATION MODAL-->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">

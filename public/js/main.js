@@ -291,13 +291,13 @@ $(document).ready(function() {
     });
 
     $(".btn-legg-till").click(function(){
-        var html = '<div class="text-right d-block  order-1 order-md-2 lottie-1" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Postkasseskiltet er lagt til</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2 lottie-1" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0 text-center">Postkasseskiltet er lagt til</h6></div>';
         $(this).hide();
         $(this).parent().append(html);
     });
 
     $(".btn-show-lott").click(function(){
-        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Postkasseskiltet er lagt til</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0 text-center">Postkasseskiltet er lagt til</h6></div>';
         var html2 = 'Tusen takk. Når du svarer “JA” på SMSen sender vi deg et gratis postkasseskilt.'+
                     '<div style="color: red;">NB! Du må fylle inn navnene på postkasseskiltet før du klikker videre på denne siden!</div>';
         $(".btn-legg-till").hide();
@@ -328,7 +328,7 @@ $(document).ready(function() {
     });
 
     $(".btn-legg-till-2").click(function(){
-        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:135px;"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0">Skiltet er lagt til</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:135px;"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="text-center mt-2 mb-0">Skiltet er lagt til</h6></div>';
         $(this).hide();
         $(this).parent().append(html);
     });
@@ -377,14 +377,14 @@ $(document).ready(function() {
     });
 
 
-    $("#save-customers").click(function(){
+    $("#save-people").click(function(){
         var fields = {}
-        $(".address-field").each(function(i, obj){
+        $(".cust-field").each(function(i, obj){
             fields[$(obj).attr("id")] = $(obj).val();
-
             $("span[data-parent='"+$(obj).attr("id")+"']").html($(obj).val());
         });
-        // updateCustomerData(fields);
+        updateCustomerData(fields);
+        console.log(fields);
     });
 
     //IN FUNCTIONS
