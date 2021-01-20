@@ -294,8 +294,9 @@ echo json_encode(session('customer'));
                             <div class="col bg-light mx-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "leilighet" ? "active-option" : ""?>" data-value="leilighet">
                                 <i class="far fa-building"></i> Leilighet
                             </div>
-                            <div class="annet-options col bg-light ml-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && array_key_exists(session('customer')['new_house_type'], $others) ? "active-option" : ""?> dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-value="{{isset($others) ? session('customer')['new_house_type'] : 'annet'}}">
-                                {{isset($others[session('customer')['new_house_type']]) ? $others[session('customer')['new_house_type']]  : 'Annet'}}
+                            <?php $annet_option = issset(session('customer')['new_house_type']) ? session('customer')['new_house_type'] : ""; ?>                            
+                            <div class="annet-options col bg-light ml-2 py-3 text-center index-option pointer <?=array_key_exists($annet_option, $others) ? "active-option" : ""?> dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-value="{{isset($others) ? $annet_option : 'annet'}}">
+                                {{isset($others[$annet_option]) ? $others[$annet_option]  : 'Annet'}}
                             </div>
                             <div class="dropdown-menu bolig-menu">
                                 <?php foreach($others as $key => $value){ ?>
