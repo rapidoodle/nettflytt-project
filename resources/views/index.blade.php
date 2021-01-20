@@ -300,7 +300,7 @@ echo json_encode(session('customer'));
                             </div>
                             <div class="dropdown-menu bolig-menu">
                                 <?php foreach($others as $key => $value){ ?>
-                                <a class="dropdown-item pointer {{isset($others[session('customer')['new_house_type']]) && session('customer')['new_house_type'] == $key ? 'active'  : ''}}" data-val="{{$key}}">{{$value}}</a>
+                                <a class="dropdown-item pointer {{isset($others[$annet_option]) && $annet_option == $key ? 'active'  : ''}}" data-val="{{$key}}">{{$value}}</a>
                                 <?php } ?>
                             </div>
                             <input type="hidden" name="new_house_type" id="new_house_type" required="true">
