@@ -21,9 +21,9 @@
 
         <p> Vi leverer alle flyttemeldinger til registerter kontaktpunkt fra Brønnøysundregisteret eller annen gyldig kontaktinformasjon gitt eller publisert fra selskap, organisasjoner eller leverandører.</p>
 
-        <p> Flytteportalen kan ikke holdes ansvarlig for postadresser eller elektroniske adresser som eventuelt er feilregistrert hos Brønnøysundregisteret eller gitt/ publisert fra selskap, organisasjoner eller leverandører. </p>
+        <p> Nettflytt kan ikke holdes ansvarlig for postadresser eller elektroniske adresser som eventuelt er feilregistrert hos Brønnøysundregisteret eller gitt/ publisert fra selskap, organisasjoner eller leverandører. </p>
         
-        <p>Nettflytt sitt ansvar for adresseendringstjenestene er begrenset opp til gjeldende pris for den betalte tjenesten. Flytteportalen er ikke ansvarlig for eventuelle følgeskader.</p>
+        <p>Nettflytt sitt ansvar for adresseendringstjenestene er begrenset opp til gjeldende pris for den betalte tjenesten. Nettflytt er ikke ansvarlig for eventuelle følgeskader.</p>
         
         <p class="bold text-left pt-4">Personvern</p>
 

@@ -201,7 +201,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                 <div class="bg-xs-light col-12 col-sm-12 col-lg-7 pt-3 pt-lg-0 mt-4 mt-lg-0">
                     <div class="header-num">2</div> <h6>Adresse</h6>
                     <hr class="mb-2">
-                        <div class="form-group pt-sm-3">
+                        <div class="form-group">
                             <label for="old_address">Jeg flytter fra (Gammel adresse)</label>
                             <input type="text" required="true" class="form-control smy-fld" id="old_address" placeholder="Eksempelgaten 10" data-conn="gamel-address-1" name="old_address" value="{{session('customer')['old_address'] ?? ''}}">
                         </div>

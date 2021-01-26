@@ -188,7 +188,7 @@ $(document).ready(function() {
         var val = searchComp.val();
         $(".search-no-result").hide();
         if(val.length > 1){
-            var html = '<tr class="item"><td align="center">Loading Companies..</td></tr>';
+            var html = '<tr class="item"><td align="center">Laster selskaper..</td></tr>';
             $(".receiver-search-result").html(html);
             $(".receiver-search-result").show();
             searchCompany(val, "orgnr");
@@ -465,7 +465,7 @@ $(document).ready(function() {
     }
 
     function loadingCompanies(){
-        var html = '<tr class="item"><td align="center">Loading Companies..</td></tr>';
+        var html = '<tr class="item"><td align="center">Laster selskaper..</td></tr>';
         $(".receiver-search-result").html(html);
     }
 

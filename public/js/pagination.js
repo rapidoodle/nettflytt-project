@@ -221,7 +221,7 @@
             pageArray = [1, '...', current_page - 1, current_page, current_page + 1, '...', lp];
         }
 
-        menuHtml = '<li class="' + rpmListClass + ' prev ' + (current_page === fp ? 'disabled' : '') + '"><a class="' + rpmAnchorClass + '" href="#">prev</a></li>';
+        menuHtml = '<li class="' + rpmListClass + ' prev ' + (current_page === fp ? 'disabled' : '') + '"><a class="' + rpmAnchorClass + '" href="#"><i class="fa fa-arrow-left"></i></a></li>';
         for (let i = 0; i < pageArray.length; i++) {
             if (lp <= i) {
                 break;
@@ -234,7 +234,7 @@
                 }
             }
         }
-        menuHtml += '<li class="' + rpmListClass + ' next ' + (current_page === lp ? 'disabled' : '') + '"><a class="' + rpmAnchorClass + '" href="#">next</a></li>';
+        menuHtml += '<li class="' + rpmListClass + ' next ' + (current_page === lp ? 'disabled' : '') + '"><a class="' + rpmAnchorClass + '" href="#"><i class="fa fa-arrow-right"></i></a></li>';
         $(element).append(menuHtml);
 
         return true;

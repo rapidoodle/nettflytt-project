@@ -69,6 +69,17 @@ class APIController extends Controller
     			 'new_post' => $request['new_zipcode'].' '.$request['new_place'],
     			 'customer' => $request->all()]);
 
+        if(!isset($request['person0'])){
+
+            session()->put("customer.person0.name", $request['full-name']);
+            session()->put("customer.person0.under18", true);
+            session()->put("customer.person0.bday", $request['birth_year'].'-'.$request['birth_month'].'-'.$request['birth_day']);
+
+            session()->put("customer.person0.last_name", $request['last_name']);
+            session()->put("customer.person0.first_name", $request['first_name']);
+            session()->put("customer.person0.phone", $request['phone']);
+            session()->put("customer.person0.email", $request['email']);
+        }
     	// echo json_encode(session('customer'));
 
     	 return redirect('/receiver/');

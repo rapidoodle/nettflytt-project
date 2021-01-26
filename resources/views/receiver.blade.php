@@ -41,7 +41,7 @@
 
     <div class="ps-cont text-center mt-5 mt-md-0" id="power-supply">
         <h5 class="mini-header">
-        Velg ny strømavtale for !adress</h5>
+        Velg ny strømavtale for <?=session('customer')['new_address']?></h5>
         <div class="row px-4 mb-5">
             <div class="col-12 offset-md-1 col-md-5 text-center p-4">
                 <div class="ps-option p-4 mx-0 mx-lg-5">
@@ -305,16 +305,15 @@
     </div>
 </section>
 <section id="power-supplier-section" class="collapse multi-collapse">
-    <div class="row px-4 mb-5 mt-5 mt-md-0">
+    <div class="row px-4 mt-5 mt-md-0">
         <div class="col-12 col-md-8 offset-md-2 text-center">
             <h2>Strøm i ny bolig</h2>
         </div>
     </div>  
-    <div class="row px-4 mb-5 mt-5 mt-md-0">
+    <div class="row px-4 mt-5 mt-md-0 text-center">
         <div class="col-12 col-md-10 offset-md-1 text-center text-md-left">
-            <h5 class="mb-5">Du vil nå få tilsendt en sms som starter prosessen med bestilling av strøm</h5>
-            <h5 class=" mb-5 text-red">VIKTIG: Du må bekrefte din bestilling ved å svare JA på SMSen du mottar.</h5>
-            <h5 class="mb-5 text-underline">Du kan nå fortsette tjenesten</h5>
+            <h5 class="text-center">Du vil nå få tilsendt en sms som starter prosessen med bestilling av strøm</h5>
+            <h5 class=" mb-5 text-red text-center">VIKTIG: Du må bekrefte din bestilling ved å svare JA på SMSen du mottar.</h5>
         </div>
         <div class="col-12 col-md-10 offset-md-1 text-center">
             <a href="/offers/" class="btn btn-info py-3 px-5">Fortsett flyttemeldingen <i class="fas fa-arrow-right" title="Offers page"></i></a>
