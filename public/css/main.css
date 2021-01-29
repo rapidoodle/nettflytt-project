@@ -503,14 +503,14 @@ select:focus{
     border-color: #1D576F!important;
     /*border-width: 2px;*/
 }
-select {
+/*select {
   -moz-appearance: none;
   -webkit-appearance: none;
 }
 
 select::-ms-expand {
   display: none;
-}
+}*/
 .btn-info{
     font-size: .8rem;
 }
