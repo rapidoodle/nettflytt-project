@@ -92,7 +92,6 @@ $(document).ready(function() {
 
         var searchBtn = $(event.target).attr("data-company-name");
         if(searchBtn){
-
             //unselect the checkbox in modal
             $('.person-list').prop('checked', false);
             var companyName   = $(event.target).attr("data-company-name");
@@ -114,6 +113,13 @@ $(document).ready(function() {
 
         var company = $(event.target).attr("data-company");
         //delete company in summary
+
+        var isCompany = $(event.target).attr("data-type");
+        
+        if(isCompany && isCompany == "companyList"){
+            var companyName = $(event.target).attr("data-company-name");
+            $(".option-modal-title").html(companyName);
+        }
     });
 
     //confirm delete
@@ -212,18 +218,11 @@ $(document).ready(function() {
     });
 
     $("#btn-go-offer").click(function(){
-
-        // $(".category-item").each(function(obj){
-        //     var opt = $(this).attr("data-val");
-        //     if(opt == "Strøm"){
-        //         isPowerSupplier = true;
-        //     }
-        //     isNull = false;
-        // });
+        loadingCompanies();
+        searchCompany("strÃ¸m", "categories");
         if($(".company-list").length == 0){
             $(".category-item").removeClass("active-option");
             $(".category-item[data-cat='strÃ¸m']").addClass("active-option");
-            searchCompany("strÃ¸m", "categories");
         }
 
         if(!isPowerSupplier){
@@ -291,13 +290,13 @@ $(document).ready(function() {
     });
 
     $(".btn-legg-till").click(function(){
-        var html = '<div class="text-right d-block  order-1 order-md-2 lottie-1" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0 text-center">Postkasseskiltet er lagt til</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2 lottie-1" style="width:177px"><lottie-player style="height:30px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0 text-center">Postkasseskiltet er lagt til</h6></div>';
         $(this).hide();
         $(this).parent().append(html);
     });
 
     $(".btn-show-lott").click(function(){
-        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:177px"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0 text-center">Postkasseskiltet er lagt til</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:177px"><lottie-player style="height:30px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0 text-center">Postkasseskiltet er lagt til</h6></div>';
         var html2 = 'Tusen takk. Når du svarer “JA” på SMSen sender vi deg et gratis postkasseskilt.'+
                     '<div style="color: red;">NB! Du må fylle inn navnene på postkasseskiltet før du klikker videre på denne siden!</div>';
         $(".btn-legg-till").hide();
@@ -328,7 +327,7 @@ $(document).ready(function() {
     });
 
     $(".btn-legg-till-2").click(function(){
-        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:135px;"><lottie-player style="height:40px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="text-center mt-2 mb-0">Skiltet er lagt til</h6></div>';
+        var html = '<div class="text-right d-block  order-1 order-md-2" style="width:135px;"><lottie-player style="height:30px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="text-center mt-2 mb-0">Skiltet er lagt til</h6></div>';
         $(this).hide();
         $(this).parent().append(html);
     });
@@ -440,7 +439,7 @@ $(document).ready(function() {
                         var org = obj[q];
                         html += '<tr class="item">'+
                         '<td>'+org.name+
-                            '<button class="float-right btn btn-info" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'">Legg til</button>'+
+                            '<button class="float-right btn btn-info btn-company-option" data-type="companyList" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'">Legg til</button>'+
                         '</td>'+
                     '</tr>';
                     }

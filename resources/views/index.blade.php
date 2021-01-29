@@ -38,7 +38,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                     <div class="header-num">1</div> <h6>Personlig informasjon</h6>
                     <hr class="mb-2">
                     <div class="card bg-sm-light p-0 bg-xs-light" id="customer-form">
-                        <div class="accordion" id="extra-names">
+                        <div class="accordion mb-4 mb-md-0" id="extra-names">
                             <?php 
                             if(session('customer')){ 
                                 if(session('customer')['totalPerson'] != 0){
@@ -125,7 +125,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                     <div class="input-group group-form">
                                             <div class="input-group-prepend" id="phone-group">
                                                 <span class="input-group-text" id="phone-icon">
-                                                    <img src="{{ asset('images/norway-flag.png')}}" width="20px;"> +47 
+                                                    <img src="{{ asset('images/norway-flag.png')}}" width="20px;">
                                                 </span>
                                             </div>
                                             <input type="text" class="form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true">
@@ -230,77 +230,86 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                             </div>
                         </div>
                         <div class="row">
-                                <div class="col-4 col-sm-3">
-                                    <label for="day">Flyttedato</label>
-                                    <div class="input-group group-form">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="day-icon">
-                                            <i class="fa fa-arrow-down"></i>
-                                            </span>
-                                        </div>
-                                        <select type="text" required="true" class="form-control" id="moving_date_day" name="moving_date_day">
-                                            <option value="" disabled selected>Dag</option>
-                                        <?php 
-                                        for ($i=1; $i <=31 ; $i++) {?>
-                                            <option value="{{Helper::digits2($i)}}" {{isset(session('customer')['moving_date_day']) && session('customer')['moving_date_day'] == Helper::digits2($i) ? 'selected' : ''}} >{{Helper::digits2($i)}}</option>
-                                        <?php } ?>
-                                        </select>
+                            <div class="col-4 col-sm-3">
+                                <label for="day">Flyttedato</label>
+                                <div class="input-group group-form">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="day-icon">
+                                        <i class="fa fa-arrow-down"></i>
+                                        </span>
                                     </div>
+                                    <select type="text" required="true" class="form-control" id="moving_date_day" name="moving_date_day">
+                                        <option value="" disabled selected>Dag</option>
+                                    <?php 
+                                    for ($i=1; $i <=31 ; $i++) {?>
+                                        <option value="{{Helper::digits2($i)}}" {{isset(session('customer')['moving_date_day']) && session('customer')['moving_date_day'] == Helper::digits2($i) ? 'selected' : ''}} >{{Helper::digits2($i)}}</option>
+                                    <?php } ?>
+                                    </select>
                                 </div>
-                                <div class="col-4 col-sm-3">
-                                    <label for="month">&nbsp;</label>
-                                    <div class="input-group group-form">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="day-icon">
-                                            <i class="fa fa-arrow-down"></i>
-                                            </span>
-                                        </div>
-                                        <select type="text" required="true" class="form-control"  id="moving_date_month" name="moving_date_month">
-                                            <option value="" disabled selected>Måned</option>
-                                        <?php 
-                                        foreach($months as $i => $month) { ?>
-                                            <option value="{{Helper::digits2($i+1)}}"{{isset(session('customer')['moving_date_month']) && session('customer')['moving_date_month'] == Helper::digits2($i+1) ? 'selected' : ''}}><?=$month?></option>
-                                        <?php } ?>
-                                        </select>
+                            </div>
+                            <div class="col-4 col-sm-3 px-0">
+                                <label for="month">&nbsp;</label>
+                                <div class="input-group group-form">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="day-icon">
+                                        <i class="fa fa-arrow-down"></i>
+                                        </span>
                                     </div>
+                                    <select type="text" required="true" class="form-control"  id="moving_date_month" name="moving_date_month">
+                                        <option value="" disabled selected>Måned</option>
+                                    <?php 
+                                    foreach($months as $i => $month) { ?>
+                                        <option value="{{Helper::digits2($i+1)}}"{{isset(session('customer')['moving_date_month']) && session('customer')['moving_date_month'] == Helper::digits2($i+1) ? 'selected' : ''}}><?=$month?></option>
+                                    <?php } ?>
+                                    </select>
                                 </div>
-                                <div class="col-4 col-sm-3">
-                                    <label for="year">&nbsp;</label>
-                                   <div class="input-group group-form">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="year-icon"><i class="fa fa-arrow-down"></i>
-                                            </span>
-                                        </div>
-                                        <select type="text" required="true" class="form-control"  id="moving_date_year" name="moving_date_year">
-                                            <option value="" disabled selected>År</option>
-                                        <?php 
-                                        for ($i = 2023; $i >= 2020; $i--) {?>
-                                            <option value="<?=$i?>"{{isset(session('customer')['moving_date_year']) && session('customer')['moving_date_year'] == $i ? 'selected' : ''}}><?=$i?></option>
-                                        <?php } ?>
-                                        </select>
+                            </div>
+                            <div class="col-4 col-sm-3">
+                                <label for="year">&nbsp;</label>
+                               <div class="input-group group-form">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="year-icon"><i class="fa fa-arrow-down"></i>
+                                        </span>
                                     </div>
+                                    <select type="text" required="true" class="form-control"  id="moving_date_year" name="moving_date_year">
+                                        <option value="" disabled selected>År</option>
+                                    <?php 
+                                    for ($i = 2023; $i >= 2020; $i--) {?>
+                                        <option value="<?=$i?>"{{isset(session('customer')['moving_date_year']) && session('customer')['moving_date_year'] == $i ? 'selected' : ''}}><?=$i?></option>
+                                    <?php } ?>
+                                    </select>
                                 </div>
+                            </div>
                         </div>
-                        <div class="row mt-3 px-3 index-extra-options">
+
+                        <div class="row mt-3 px-3">
                             <div class="col-12 px-0">
                                 <label>Boligtype</label>
                             </div>
-                            <div class="col bg-light mr-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "enebolig" ? "active-option" : ""?>" data-value="enebolig">
+                        </div>
+                        <div class="row index-extra-options">
+                            <div class="mt-2 mt-md-0 mb-2 mb-md-0 col-12 col-md-4 pr-md-0">
+                                <div class="bg-light py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "enebolig" ? "active-option" : ""?>" data-value="enebolig">
                                 <i class="fas fa-home"></i> Enebolig
+                                </div>
                             </div>
-                            <div class="col bg-light mx-2 py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "leilighet" ? "active-option" : ""?>" data-value="leilighet">
-                                <i class="far fa-building"></i> Leilighet
+                            <div class="mb-2 mb-md-0 col-12 col-md-4">
+                                <div class="bg-light py-3 text-center index-option pointer <?=isset(session('customer')['new_house_type']) && session('customer')['new_house_type'] == "leilighet" ? "active-option" : ""?>" data-value="leilighet">
+                                    <i class="far fa-building"></i> Leilighet
+                                </div>
                             </div>
-                            <?php $annet_option = isset(session('customer')['new_house_type']) ? session('customer')['new_house_type'] : ""; ?>                            
-                            <div class="annet-options col bg-light ml-2 py-3 text-center index-option pointer <?=array_key_exists($annet_option, $others) ? "active-option" : ""?> dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-value="{{isset($others) ? $annet_option : 'annet'}}">
-                                {{isset($others[$annet_option]) ? $others[$annet_option]  : 'Annet'}}
+                            <?php $annet_option = isset(session('customer')['new_house_type']) ? session('customer')['new_house_type'] : ""; ?>  
+                            <div class="col-12 col-md-4 pl-md-0">
+                                <div class="annet-options bg-light py-3 text-center index-option pointer <?=array_key_exists($annet_option, $others) ? "active-option" : ""?> dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-value="{{isset($others) ? $annet_option : 'annet'}}">
+                                    {{isset($others[$annet_option]) ? $others[$annet_option]  : 'Annet'}}
+                                </div>
+                                <div class="dropdown-menu bolig-menu">
+                                    <?php foreach($others as $key => $value){ ?>
+                                    <a class="dropdown-item pointer {{isset($others[$annet_option]) && $annet_option == $key ? 'active'  : ''}}" data-val="{{$key}}">{{$value}}</a>
+                                    <?php } ?>
+                                </div>
+                                <input type="hidden" name="new_house_type" id="new_house_type" required="true">
                             </div>
-                            <div class="dropdown-menu bolig-menu">
-                                <?php foreach($others as $key => $value){ ?>
-                                <a class="dropdown-item pointer {{isset($others[$annet_option]) && $annet_option == $key ? 'active'  : ''}}" data-val="{{$key}}">{{$value}}</a>
-                                <?php } ?>
-                            </div>
-                            <input type="hidden" name="new_house_type" id="new_house_type" required="true">
                         </div>
                 </div>
             </div>
@@ -379,7 +388,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
             <div class="input-group mt-2 group-form">
                 <div class="input-group-prepend"id="hk-phone-icon">
                     <span class="input-group-text">
-                        <i class="fa fa-phone"></i> +47
+                        <i class="fa fa-phone"></i>
                     </span>
                 </div>
                 <input type="text" id="hk-phone" name="phone" class="form-control" placeholder="12345678" readonly value="{{session('customer')['phone'] ?? ''}}">

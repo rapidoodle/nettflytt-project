@@ -40,8 +40,8 @@ i.fa-bars{
     transform: scale(1.5,1.5);
     margin-left: 10px;
 }
-button.btn-info{
-    font-size: 12px;
+button.btn-info, a.btn-info{
+    font-size: 14px;
     border-radius: 4px!important;
     border: 1px solid #495057;
     padding:.3rem 1.3rem;
@@ -70,7 +70,7 @@ div.steps div.header-num{
     display: inline-block;
 }
 div.steps div.header-mini{
-    font-size: 10px;
+    font-size: 12px;
     height:40px;
     color: #1D576F;
     font-weight:bold;
@@ -105,14 +105,14 @@ div.form hr{
     color: #495057;
 }
 div > label{
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 0px;
 }
 div.form div.card{
     border:0px;
 }
 input, select{
-    font-size: 16px!important;
+    font-size: 12px!important;
 }
 input.form-control:focus{
     border-color:#1D576F!important;
@@ -184,11 +184,11 @@ div.bg-light{
 div.form- div.input-group div#phone-group, div#hk-phone-icon{
 }
 div.form- div.input-group div#phone-group span.input-group-text{
-    width: 55px!important;
+    width: 35px!important;
     font-size: 12px!important;
 }
 div#hk-phone-icon span.input-group-text{
-    width: 51px!important;
+    width: 35px!important;
     font-size: 12px!important;
 }
 div.form- div.input-group div#phone-group span.input-group-text img, span.input-group-text i.fa-phone {
@@ -198,7 +198,7 @@ div.index-step-3 > img{
     width: 150px
 }
 div.index-step-3 > p{
-    font-size:10px;
+    font-size:12px;
 }
 div.index-extra-options .index-option{
     color:#C6C8D0;
@@ -573,8 +573,6 @@ table.tbl-summary tr td{
 }
 .btn-endre{
     font-size: 1rem!important;
-    padding-top: 1rem!important;
-    padding-bottom: 1rem!important;
     min-width: 180px!important;
     border: 1px solid #CCCCCC;
     border-radius: 4px!important;
@@ -673,9 +671,18 @@ input.person-input{
     border-top-left-radius: 0px!important;
     border-bottom-left-radius: 0px!important;
 }
+a.page-link{
+    color:#495057!important;
+}
 
-/*responsive*/
+/*responsive mobile*/
 @media (max-width: 992px) {
+    sub.sub-3{
+        margin-left:-2px;
+    }
+    sub.sub-4{
+        margin-left:-14px;
+    }
      div.index-extra-options .index-option i{
         margin-right: 5px;
         margin-top: -5px;
@@ -721,7 +728,7 @@ input.person-input{
         padding-left:0px!important;
     }
     div.nav-steps sub{
-        font-size: 8px;
+        font-size: 11px;
     }
     div.nav-steps hr{
         margin-top:15px!important;
@@ -733,7 +740,7 @@ input.person-input{
         display:none;
     }
     div.category-item{
-        font-size: 8px;
+        font-size: 11px;
         margin: 2px;
         text-align: center;
         height: 30px;
@@ -747,6 +754,13 @@ input.person-input{
     }
     .steps{
         display:none!important;
+    }
+
+    div.index-extra-options .index-option, div#extra-names .card-header, input, select, div.form-group > label, div.form h6, div > label, .btn-white{
+        font-size: 16px!important;
+    }
+    div.category-item{
+        flex: 1 0 25%;
     }
 }
 @media (min-width: 992px) {
@@ -781,6 +795,14 @@ input.person-input{
     }
     .mb-3half{
         margin-bottom: 3.5rem;
+    }
+
+    .h-50px{
+        height: 50px;
+    }
+    .h-50px button{
+        height: 38.8px;
+        margin-top:23px;
     }
 }
 @media (min-width: 1200px){

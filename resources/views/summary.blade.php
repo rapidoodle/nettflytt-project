@@ -15,12 +15,12 @@
             <div><hr></div>
             <div>
                 <span class="steps-circle">3</span>
-                <sub>Boligsjekk</sub>
+                <sub class="sub-3">Boligsjekk</sub>
             </div>
             <div><hr></div>
             <div class="active">
                 <span class="steps-circle">4</span>
-                <sub>Oppsummering</sub>
+                <sub class="sub-4">Oppsummering</sub>
             </div>
     </div>
 </div>
@@ -55,10 +55,9 @@
 
             <?php if(session('customer')['totalPerson'] > 1){ ?>
             <hr>
-            <h5>Extraperson</h5>
+            <h5>Andre personer i hustanden</h5>
             <?php for($i=1; $i < session('customer')['totalPerson']; $i++){ ?>
             <h5 class="disp-field"><span data-parent="person{{$i}}-name"><?=session('customer')['person'.$i]['name'];?></span></h5>
-            <span class="text-sm-gray">Ekstraperson</span>
             <?php } } ?>
             <div class="text-right mt-5">
                <button class="btn btn-info btn-lg btn-endre" data-toggle="modal" data-target="#personEditModal" data-toggle="modal">Endre</button>

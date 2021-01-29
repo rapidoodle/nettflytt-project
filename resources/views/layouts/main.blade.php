@@ -27,9 +27,9 @@
                     Meny <i class="fas fa-bars"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                        <a class="dropdown-item" type="button">Hjem</a>
-                        <a class="dropdown-item" type="button">Om oss</a>
-                        <a class="dropdown-item" type="button">Kontakt oss</a>
+                        <a href="/" class="dropdown-item" type="button">Hjem</a>
+                        <a href="/about-us" class="dropdown-item" type="button">Om oss</a>
+                        <a href="/contact-us" class="dropdown-item" type="button">Kontakt oss</a>
                     </div>
                 </div>               
             </li>

@@ -15,12 +15,12 @@
             <div><hr></div>
             <div>
                 <span class="steps-circle">3</span>
-                <sub>Boligsjekk</sub>
+                <sub class="sub-3">Boligsjekk</sub>
             </div>
             <div><hr></div>
             <div>
                 <span class="steps-circle">4</span>
-                <sub>Oppsummering</sub>
+                <sub class="sub-4">Oppsummering</sub>
             </div>
     </div>
 </div>
@@ -28,7 +28,7 @@
     <div class="row px-4 mb-4 mb-md-5 mt-5 mt-md-0 title-receiver">
         <div class="col-12 col-md-8 offset-md-2 text-center">
             <h2>Velg mottakere av din flyttemelding</h2>
-            <p class="mt-3 d-none d-md-inline">Under er det kategorier som hjelper deg å finne dine leverandører. Du kan også bruke søkefeltet til å finne dine bedrifter.</p>
+            <p class="mt-3">Under er det kategorier som hjelper deg å finne dine leverandører. Du kan også bruke søkefeltet til å finne dine bedrifter.</p>
         </div>
     </div>  
 
@@ -46,7 +46,7 @@
             <div class="col-12 offset-md-1 col-md-5 text-center p-4">
                 <div class="ps-option p-4 mx-0 mx-lg-5">
                     <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
-                    <h5 class="my-4">Nesten ferdig…</h5>
+                    <h5 class="my-4">STRØM TIL LAVPRIS</h5>
 
                     <p>Med Strøm til lavpris får du en spotprisavtale, som ifølge Statistisk sentralbyrå har vært den billigste avtaleformen i over 10 år. Det betyr at du kan slappe av og fokusere på det som gir deg god energi!</p>
 
@@ -67,9 +67,9 @@
             </div>
         </div>  
     </div>
-    <h3 class="mini-header d-md-none mb-4 label-none">
+<!--     <h3 class="mini-header d-md-none mb-4 label-none">
         Velg ny strømavtale for <?=session('customer')['new_address'];?>        
-    </h3>
+    </h3> -->
     <div class="row px-4 mt-0 mb-5 my-lg-5  mt-lg-0 form">
         <div class="col-12 col-lg-8">
             <div class="cat-n-search">
@@ -224,7 +224,7 @@
             
         </div>
         <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
-            <a href="#power-supply" id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
+            <a href="#receiver-section" id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <!-- OPTIONS MODAL -->
@@ -232,7 +232,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title mt-4">Flyttemelding for {{session('customer')['full-name']}}</h5>
+            <h5 class="modal-title mt-4 option-modal-title"></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
