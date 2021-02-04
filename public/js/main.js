@@ -216,21 +216,44 @@ $(document).ready(function() {
             searchCompany(catSearch, "categories");
         }
     });
+    $("#btn-add-postbox").click(function(){
+        updateCustomerData({"mailbox-sign" : 1, "price": 149});
+    });
+
+    $(".btn-offer").click(function(){
+        console.log($(this).attr("data-offer"));
+        var fields = {};
+        fields[$(this).attr("data-offer")] = 1;
+        if($(this).attr("data-offer") == "mailbox-sign"){
+            fields['price'] = 169;
+        }
+        updateCustomerData(fields);
+    });
+
+    $("#btn-go-power").click(function(){
+        updateCustomerData({"mailbox-sign" : 1});
+        window.location.href = "/offers/";
+    });
 
     $("#btn-go-offer").click(function(){
-        loadingCompanies();
-        searchCompany("strÃ¸m", "categories");
-        if($(".company-list").length == 0){
-            $(".category-item").removeClass("active-option");
-            $(".category-item[data-cat='strÃ¸m']").addClass("active-option");
-        }
-
-        if(!isPowerSupplier){
-            $(".cat-n-search, .label-none, .title-receiver").hide();
-            $(".ps-cont").show();
-            isPowerSupplier = true;
-        }else{
+        console.log($(this).attr("data-isNorges"));
+        if($(this).attr("data-isNorges") == 1){
             window.location.href = "/offers/";
+        }else{
+            loadingCompanies();
+            searchCompany("strÃ¸m", "categories");
+            if($(".company-list").length == 0){
+                $(".category-item").removeClass("active-option");
+                $(".category-item[data-cat='strÃ¸m']").addClass("active-option");
+            }
+
+            if(!isPowerSupplier){
+                $(".cat-n-search, .label-none, .title-receiver").hide();
+                $(".ps-cont").show();
+                isPowerSupplier = true;
+            }else{
+                window.location.href = "/offers/";
+            }
         }
     });
 
@@ -383,7 +406,6 @@ $(document).ready(function() {
             $("span[data-parent='"+$(obj).attr("id")+"']").html($(obj).val());
         });
         updateCustomerData(fields);
-        console.log(fields);
     });
 
     //IN FUNCTIONS

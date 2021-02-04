@@ -46,6 +46,58 @@
 </div>
 <div class="row mb-5">
     <div class="col-12 col-md-5">
+        <div class="smry-rcrd p-4 h-auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><b>Produkt</b></th>
+                        <th><b>Pris</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Behandling av flyttemeldinger</td>
+                        <td>kr <?=session('customer')['price'];?>,-</td>
+                    </tr>
+                    <tr>
+                        <td>Totalt:</td>
+                        <td>kr <?=session('customer')['price'];?>,-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-12 col-md-5 offset-md-2">
+        <?php
+        $check = '<i class="fa fa-check"></i>';
+        $times = '<i class="fa fa-times"></i>';
+        ?>
+        <div class="smry-rcrd p-4 mt-5 mt-md-0 h-auto">
+            <h5>Gjennomgang av avtaler hos</h5>
+            <table class="table">
+                <tr>
+                    <td width="30px"><?=isset(session('customer')['mailbox-sign']) ? $check : $times; ?></td>
+                    <td>Strøm</td>
+                </tr>
+                <tr>
+                    <td><?=isset(session('customer')['isFlyttevask']) ? $check : $times; ?></td>
+                    <td>Flyttevask</td>
+                </tr>
+                <tr>
+                    <td><?=isset(session('customer')['isForsikring']) ? $check : $times; ?></td>
+                    <td>Forsikring</td>
+                </tr>
+                <tr>
+                    <td><?=isset(session('customer')['isBoligalarm']) ? $check : $times; ?></td>
+                    <td>Boligalarm</td>
+                </tr>
+            </table>
+        </div> 
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-12 col-md-5">
         <div class="smry-rcrd p-4">
             <h3 class="mb-5"><i class="fa fa-user"></i> Personalia</h3>
             <h5 class="disp-field"><span data-parent="person0-name"><?=session('customer')['person0']['name']?></span></h5>

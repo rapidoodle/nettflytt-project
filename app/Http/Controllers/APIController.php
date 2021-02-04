@@ -9,8 +9,6 @@ class APIController extends Controller
 {
     //
     public function getToken(Request $request){
-        // echo json_encode($request->all());
-
     	$people = $request->people;
     	$person = explode("---", $people);
     	$pctr   = 0;
@@ -43,6 +41,12 @@ class APIController extends Controller
     		$request['birth_year'] 	= $bdayArr[0];
     	}
 
+        if(isset($request['mailbox-sign']) && $request['mailbox-sign'] == 1){
+            $request['price'] = 169;
+        }else{
+            $request['price'] = 149;
+        }
+
         $request['totalPerson'] = $pctr;
     	$request['services']    = session('customer.services') != "" ? session('customer.services') : array();
     	$request['old_post'] 	= $request['old_zipcode'].' '.$request['old_place'];
@@ -54,12 +58,17 @@ class APIController extends Controller
     	unset($request['_token']);
 
     	//customer unique token -- store in session
-    	$token = Helper::getToken();
+        // if(!session("_token")){
+        //     $token = Helper::getToken();
+        // }else{
+        //     $token = session("_token");
+        // }
 
+        echo    $token = Helper::getToken();
     	//update customer record
     	// $update = Helper::updateData($token, $request->all());
 
-    	// echo json_encode($update);
+        echo $sendOTP = Helper::sendOTP($token, "+639178713844", "Nettflytt");
 
     	session(['customer' => $request->all()]);
     	// echo json_encode($update);
@@ -80,7 +89,7 @@ class APIController extends Controller
             session()->put("customer.person0.phone", $request['phone']);
             session()->put("customer.person0.email", $request['email']);
         }
-    	// echo json_encode(session('customer'));
+    	echo json_encode(session('customer'));
 
     	 return redirect('/receiver/');
 

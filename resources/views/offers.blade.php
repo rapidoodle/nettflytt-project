@@ -63,7 +63,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" data-offer="mailbox-sign">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" data-offer="isFlyttevask">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -111,8 +111,7 @@
           <div class="card">
             <div class="card-header" id="headingThree">
               <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                  Forsikring <i class="fas fa-home"></i>
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Forsikring <i class="fas fa-home"></i>
                 </button>
               </h2>
             </div>
@@ -129,7 +128,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" data-offer="isForsikring">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -161,7 +160,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" href="/postbox-sign">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3" href="/postbox-sign">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer" href="/postbox-sign" data-offer="isBoligalarm">Ja takk!</a>
                             </div>
                         </div>
                     </div>

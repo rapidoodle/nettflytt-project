@@ -553,9 +553,12 @@ div.smry-rcrd{
     box-shadow: 5px 5px 6px #00000029;
     border: 1px solid #CCCCCC;
     opacity: 1;
-    min-height: 450px!important;
+    min-height: 450px;
     position: relative;
     height: auto;
+}
+.h-auto{
+    min-height: 300px!important;
 }
 .text-sm-gray{
     color: #00000080!important;
@@ -673,6 +676,9 @@ input.person-input{
 }
 a.page-link{
     color:#495057!important;
+}
+.w-200{
+    max-width: 250px!important;
 }
 
 /*responsive mobile*/

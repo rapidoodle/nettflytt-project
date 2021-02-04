@@ -224,7 +224,7 @@
             
         </div>
         <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
-            <a href="#receiver-section" id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
+            <a href="#receiver-section" id="btn-go-offer" class="btn btn-next float-right" data-isNorges="<?=isset(session('customer')['mailbox-sign']) ? session('customer')['mailbox-sign'] : 0?>">Videre <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <!-- OPTIONS MODAL -->
@@ -316,7 +316,7 @@
             <h5 class=" mb-5 text-red text-center">VIKTIG: Du må bekrefte din bestilling ved å svare JA på SMSen du mottar.</h5>
         </div>
         <div class="col-12 col-md-10 offset-md-1 text-center">
-            <a href="/offers/" class="btn btn-info py-3 px-5">Fortsett flyttemeldingen <i class="fas fa-arrow-right" title="Offers page"></i></a>
+            <a id="btn-go-power" class="btn btn-info py-3 w-200">Fortsett flyttemeldingen <i class="fas fa-arrow-right" title="Offers page"></i></a>
         </div>
     </div>  
 </section>

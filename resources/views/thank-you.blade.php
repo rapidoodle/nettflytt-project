@@ -35,6 +35,7 @@
 <hr>
             <center class="my-5"><h3 class="text-blue">Det er fortsatt ikke for sent…</h3></center>
 <div class="row px-4 mb-5">
+    <?php if(!isset(session('customer')['mailbox-sign'])){ ?>
     <div class="col-12 col-md-4">
         <div class="card ty-card text-center mb-5 mb-md-0">
             <div class="card-header">
@@ -48,7 +49,8 @@
             </div>
         </div>
     </div>
-    <div class="col-12 col-md-4">
+    <?php } ?>
+    <div class="col-12 col-md-4 <?=isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 1 ? 'offset-md-2' : ''?>">
         <div class="card ty-card text-center mb-5 mb-md-0">
             <div class="card-header">
                 <h3 class="mb-0">Boligalarm</h3>

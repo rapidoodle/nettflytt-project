@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
             <div class="text-center">
@@ -32,38 +33,38 @@
         Husk å merke postkassen din med en midlertidig lapp inntil du har fått skiltet.</p>
     </div>
 </div>  
-<div class="row px-4 mt-0 mb-4 my-lg-5  mt-lg-0">
-    <div class="col-12 col-lg-9">
+<div class="row px-4 mt-0 mb-4 my-lg-5 mt-lg-0">
+    <div class="col-12 col-lg-9 <?=isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 1 ? 'offset-md-2' : ''?>">
         <div class="bg-light p-4">
             <h4>Navn på skiltet</h4>
             <div class="row align-items-center">
                 <div class="col-12 col-md-6">
                     <div class="form-group row">
-                        <label for="rad1" class="col-3 col-form-label">Rad 1:</label>
+                        <label for="rad1" class="col-4 col-md-3 col-form-label">Rad 1:</label>
                         <div class="col-8">
                             <input type="text" class="form-control pb-field" id="rad1" value="{{isset(session('customer')['person0']) ? session('customer')['person0']['name'] : ''}}">
                         </div>
                     </div> 
                     <div class="form-group row">
-                        <label for="rad2" class="col-3 col-form-label">Rad 2:</label>
+                        <label for="rad2" class="col-4 col-md-3 col-form-label">Rad 2:</label>
                         <div class="col-8">
                             <input type="text" class="form-control pb-field" id="rad2" value="{{isset(session('customer')['person1']) ? session('customer')['person1']['name'] : ''}}">
                         </div>
                     </div> 
                     <div class="form-group row">
-                        <label for="rad3" class="col-3 col-form-label">Rad 3:</label>
+                        <label for="rad3" class="col-4 col-md-3 col-form-label">Rad 3:</label>
                         <div class="col-8">
                             <input type="text" class="form-control pb-field" id="rad3" value="{{isset(session('customer')['person2']) ? session('customer')['person2']['name'] : ''}}">
                         </div>
                     </div> 
                     <div class="form-group row">
-                        <label for="rad4" class="col-3 col-form-label">Rad 4:</label>
+                        <label for="rad4" class="col-4 col-md-3 col-form-label">Rad 4:</label>
                         <div class="col-8">
                             <input type="text" class="form-control pb-field" id="rad4" value="{{isset(session('customer')['person3']) ? session('customer')['person3']['name'] : ''}}">
                         </div>
                     </div>  
                     <div class="form-group row">
-                        <label for="rad4" class="col-3 col-form-label">Rad 5:</label>
+                        <label for="rad4" class="col-4 col-md-3 col-form-label">Rad 5:</label>
                         <div class="col-8">
                             <input type="text" class="form-control pb-field" id="rad5" value="{{isset(session('customer')['person4']) ? session('customer')['person4']['name'] : ''}}">
                         </div>
@@ -72,11 +73,14 @@
                 <div class="col-12 col-md-6
                 ">
                     <div class="postbox-summary d-flex align-items-center justify-content-center text-center px-4"></div>
+
+                <?php if(!isset(session('customer')['mailbox-sign'])){ ?>
                     <div class="h-50px d-flex mt-4 justify-content-md-between">
                         <span class="disp-none post-warn"><b>Tusen takk. Når du svarer “JA” på SMSen sender vi deg et gratis postkasseskilt.</b><br><div class="text-red">NB! Du må fylle inn navnene på postkasseskiltet før du klikker videre på denne siden!</div></span>
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub sub-1 align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
                         <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till">Legg til</button>
                     </div>
+                <?php } ?>
                 </div>
             </div>
         </div>
@@ -88,6 +92,7 @@
                         UADRESSERT REKLAME NEI TAKK!
                     </div>
                 </div>
+
                 <div class="col-12 col-md-6 align-items-end height-120 d-flex">
                     <div class="w-100 d-flex mt-4 justify-content-md-between h-50px">
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
@@ -99,6 +104,7 @@
         </div>
 
     </div>
+    <?php if(!isset(session('customer')['mailbox-sign'])){ ?>
     <div class="col-12 col-lg-3 text-center">
         <div class="collapse multi-collapse show">
                 <h5 class="d-lg-none mt-4">Kampane! Gratis postkasseskilt ved bestilling av strøm</h5>
@@ -106,7 +112,7 @@
                 <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
                 <h5 class="my-4">KAMPANJE!</h5>
                 <div class="mb-4">GRATIS POSTKASSESKILT VED BESTILLING AV STRØM</div>
-                <a class="btn btn-violet btn-show-lott" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill Strøm til Lavpris</a>
+                <a id="btn-add-postbox" class="btn btn-violet btn-show-lott" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill Strøm til Lavpris</a>
             </div>
         </div>
         <div class="text-left bg-light p-4 collapse multi-collapse">
@@ -115,6 +121,7 @@
             <p>Vi starter utsendelse av postkasseskiltet når du har bekreftet “JA” på SMS</>
         </div>
     </div>
+    <?php } ?>
 </div>
 
 <div class="row px-4 mt-2 mb-4 d-flex">
