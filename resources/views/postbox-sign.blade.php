@@ -34,7 +34,7 @@
     </div>
 </div>  
 <div class="row px-4 mt-0 mb-4 my-lg-5 mt-lg-0">
-    <div class="col-12 col-lg-9 <?=isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 1 ? 'offset-md-2' : ''?>">
+    <div class="col-12 col-lg-9 <?=isset(session('customer')['isNorges']) && session('customer')['isNorges'] == 1 ? 'offset-md-2' : ''?>">
         <div class="bg-light p-4">
             <h4>Navn på skiltet</h4>
             <div class="row align-items-center">
@@ -78,7 +78,7 @@
                     <div class="h-50px d-flex mt-4 justify-content-md-between">
                         <span class="disp-none post-warn"><b>Tusen takk. Når du svarer “JA” på SMSen sender vi deg et gratis postkasseskilt.</b><br><div class="text-red">NB! Du må fylle inn navnene på postkasseskiltet før du klikker videre på denne siden!</div></span>
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub sub-1 align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
-                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till">Legg til</button>
+                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till btn-postbox">Legg til</button>
                     </div>
                 <?php } ?>
                 </div>
@@ -97,14 +97,14 @@
                     <div class="w-100 d-flex mt-4 justify-content-md-between h-50px">
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
                         
-                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till-2">Legg til</button>
+                        <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till-2 btn-adv">Legg til</button>
                     </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <?php if(!isset(session('customer')['mailbox-sign'])){ ?>
+    <?php if(!isset(session('customer')['isNorges'])){ ?>
     <div class="col-12 col-lg-3 text-center">
         <div class="collapse multi-collapse show">
                 <h5 class="d-lg-none mt-4">Kampane! Gratis postkasseskilt ved bestilling av strøm</h5>
@@ -127,7 +127,6 @@
 <div class="row px-4 mt-2 mb-4 d-flex">
     <div class="mt-2 mt-md-0 col-12 btn-sm-6 col-md-6 order-2 order-md-1">
         <a href="/offers/" class="btn btn-previous float-left"><i class="fas fa-arrow-left"></i> Gå tilbake</a>
-        
     </div>
     <div class="col-12 btn-sm-6 col-md-6  order-1 order-md-2">
         <button class="btn btn-next float-right btn-next-summary">Videre <i class="fas fa-arrow-right"></i></button>
@@ -136,7 +135,6 @@
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModallLabel" aria-hidden="true">
       <div class="text-center modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-
           <div class="modal-body mt-4">
             <div class="text-center mb-4">
                 <h5 class="modal-title">Oj!</h5>            
@@ -148,6 +146,34 @@
           <div class="modal-footer text-center">
             <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Fyll inn navn</button>
             <button type="button" class="btn btn-info mb-4 continue-summary" data-dismiss="modal">Fortsett tjenesten</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="addressModal" tabindex="-1" role="dialog" aria-labelledby="addressModalLabel" aria-hidden="true">
+      <div class="text-center modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body mt-4">
+            <div class="text-center mb-4">
+                <h5 class="modal-title">Hvilke adresse ønsker du at vi sender postkasseskiltet til?</h5>            
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="radios" id="radio1" value="{{session('customer')['new_address']}}" checked>
+              <label class="form-check-label" for="radio1">
+               {{session('customer')['new_address']}}
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="radios" id="radio2" value="{{session('customer')['old_address']}}">
+              <label class="form-check-label" for="radio2">
+               {{session('customer')['old_address']}}
+              </label>
+            </div>
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="btn btn-info mb-4 pb-address" data-dismiss="modal">Lagre</button>
           </div>
         </div>
       </div>

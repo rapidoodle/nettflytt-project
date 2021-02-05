@@ -46,7 +46,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                     if(isset(session('customer')['person'.$i])){
 
                                 $newId = $i.time();
-                                $type  = $i == 0 ? "(hoverperson)" : "(ekstraperson)";
+                                $type  = $i == 0 ? "(hovedperson)" : "(ekstraperson)";
                             ?>
                             <div class="card person" id="card_{{$newId}}">
                             <div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="{{$newId}}" data-toggle="collapse" data-target="#col_{{$newId}}" aria-expanded="true" aria-controls="collapseOne">

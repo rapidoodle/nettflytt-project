@@ -42,11 +42,13 @@ class APIController extends Controller
     	}
 
         if(isset($request['mailbox-sign']) && $request['mailbox-sign'] == 1){
-            $request['price'] = 169;
+            $request['pb-price'] = 169;
         }else{
-            $request['price'] = 149;
+            $request['pb-price'] = 149;
         }
 
+        $request['price']       = 149;
+        $request['adv-price']   = 0;
         $request['totalPerson'] = $pctr;
     	$request['services']    = session('customer.services') != "" ? session('customer.services') : array();
     	$request['old_post'] 	= $request['old_zipcode'].' '.$request['old_place'];

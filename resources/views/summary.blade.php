@@ -47,6 +47,13 @@
 <div class="row mb-5">
     <div class="col-12 col-md-5">
         <div class="smry-rcrd p-4 h-auto">
+            <?php
+            $pbPrice    = isset(session('customer')['isNorges']) ? 0 : session('customer')['pb-price'];
+            $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
+            $price      = session()
+            $totalPrice = session('customer')['price'] + $pbPrice + $advPrice;
+
+            ?>
             <table class="table">
                 <thead>
                     <tr>
@@ -57,11 +64,19 @@
                 <tbody>
                     <tr>
                         <td>Behandling av flyttemeldinger</td>
-                        <td>kr <?=session('customer')['price'];?>,-</td>
+                        <td>kr 149,-</td>
+                    </tr>
+                    <tr>
+                        <td>Behandling av flyttemeldinger</td>
+                        <td><?=isset(session('customer')['isNorges']) ? "GRATIS" : "kr ".session('customer')['price'].",-";?></td>
+                    </tr>
+                    <tr>
+                        <td>UADRESSERT REKLAME NEI TAKK</td>
+                        <td>kr 149,-</td>
                     </tr>
                     <tr>
                         <td>Totalt:</td>
-                        <td>kr <?=session('customer')['price'];?>,-</td>
+                        <td>kr <?=$totalPrice?>,-</td>
                     </tr>
                 </tbody>
             </table>
@@ -81,12 +96,16 @@
                     <td>Strøm</td>
                 </tr>
                 <tr>
-                    <td><?=isset(session('customer')['isFlyttevask']) ? $check : $times; ?></td>
-                    <td>Flyttevask</td>
+                    <td><?=isset(session('customer')['isTV']) ? $check : $times; ?></td>
+                    <td>TV/Internet</td>
                 </tr>
                 <tr>
                     <td><?=isset(session('customer')['isForsikring']) ? $check : $times; ?></td>
                     <td>Forsikring</td>
+                </tr>
+                <tr>
+                    <td><?=isset(session('customer')['isFlyttevask']) ? $check : $times; ?></td>
+                    <td>Flyttevask</td>
                 </tr>
                 <tr>
                     <td><?=isset(session('customer')['isBoligalarm']) ? $check : $times; ?></td>

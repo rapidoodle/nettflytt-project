@@ -17,6 +17,7 @@ $(document).ready(function() {
     var globalAllNames   = [];
     var movingDate = $("#moving-date");
     var isPowerSupplier = false;
+    var companyNumbers = [];
     //INDEX PAGE
 
     $(".save-person-collapse-cont").hide();
@@ -96,9 +97,10 @@ $(document).ready(function() {
             $('.person-list').prop('checked', false);
             var companyName   = $(event.target).attr("data-company-name");
             var companyNumber = $(event.target).attr("data-company-number");
-
+            var isPS          = $(event.target).attr("data-ispowersupplier") === "true" ? "|ps" : "";
+            console.log("isPS: "+isPS);
             rcvrSlct = "";
-            rcvrSlct = companyName+"|"+companyNumber;
+            rcvrSlct = companyName+"|"+companyNumber+isPS;
 
             //check the selected person
             if($("i[data-value='"+companyName+"']").length > 0){
@@ -217,27 +219,42 @@ $(document).ready(function() {
         }
     });
     $("#btn-add-postbox").click(function(){
-        updateCustomerData({"mailbox-sign" : 1, "price": 149});
+        updateCustomerData({"isNorges" : 1, "pb-price": 0});
     });
 
     $(".btn-offer").click(function(){
         console.log($(this).attr("data-offer"));
         var fields = {};
         fields[$(this).attr("data-offer")] = 1;
-        if($(this).attr("data-offer") == "mailbox-sign"){
-            fields['price'] = 169;
-        }
+
         updateCustomerData(fields);
     });
 
-    $("#btn-go-power").click(function(){
-        updateCustomerData({"mailbox-sign" : 1});
+    $(".btn-postbox").click(function(){
+        updateCustomerData({"mailbox-sign" : 1, "pb-price" : 149});
+    });
+
+    $(".btn-adv").click(function(){
+        updateCustomerData({"isAdv" : 1, "adv-price" : 149});
+    });
+
+    $(".btn-go-power").click(function(){
+        updateCustomerData({"isNorges" : 1});
         window.location.href = "/offers/";
     });
 
     $("#btn-go-offer").click(function(){
-        console.log($(this).attr("data-isNorges"));
-        if($(this).attr("data-isNorges") == 1){
+        var isNorges = false;
+        var isPowerSupplier
+        $(".company-list").each(function(ind, elem){
+            companies.push($(elem).text());
+            if($(elem).text() == "NorgesEnergi AS"){
+                isNorges = true;
+            }
+        });
+
+
+        if(isNorges == true || $("i[data-isps='true']").length > 0 || $(this).attr("data-isnorges") == 1){
             window.location.href = "/offers/";
         }else{
             loadingCompanies();
@@ -267,23 +284,22 @@ $(document).ready(function() {
         var rcvrData        = rcvrSlct.split("|");
         var companyName     = rcvrData[0];
         var companyNumber   = rcvrData[1];
+        var isPS            = rcvrData[2] == 'ps' ? "data-isPS='true'" : '';
         var companyPeople   = personForCompany.length == 0 ? "person0" : personForCompany;
         var newId           = Date.now();
         var html            = '<tr id="comp_'+newId+'">'+
                                 '<td width="10%"><i class="fas fa-check"></i></td>'+
-                                '<td>'+companyName+'</td>'+
-                                '<td><i class="fas fa-times pointer company-list" data-company-people="'+companyPeople+'" data-parent="comp_'+newId+'" data-value="'+companyName+'" data-company-number="'+companyNumber+'" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i></td>'+
+                                '<td '+isPS+'>'+companyName+'</td>'+
+                                '<td><i class="fas fa-times pointer company-list" data-company-people="'+companyPeople+'" data-parent="comp_'+newId+'" data-value="'+companyName+'" data-company-number="'+companyNumber+'" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal" '+isPS+'></i></td>'+
                               '</tr>';
 
         $(".default-selected").hide();
-
 
         if($("i[data-value='"+companyName+"']").length > 0){
             //if company is already in the list, update the selected person;
             $("i[data-value='"+companyName+"']").attr("data-company-people", companyPeople);
         }else{
             $(".selected-list").append(html);
-
             //update the services in backend
             updateCompanyList();
         }
@@ -312,6 +328,11 @@ $(document).ready(function() {
         postboxNames();
     });
 
+    $(".pb-address").click(function(){
+        updateCustomerData({"pb-address" : $('input[name="radios"]:checked').val()});
+        window.location.href = "/summary/";
+    });
+
     $(".btn-legg-till").click(function(){
         var html = '<div class="text-right d-block  order-1 order-md-2 lottie-1" style="width:177px"><lottie-player style="height:30px" src="https://assets10.lottiefiles.com/packages/lf20_bP7KzP.json" background="transparent"  speed="1" autoplay></lottie-player> <h6 class="mt-2 mb-0 text-center">Postkasseskiltet er lagt til</h6></div>';
         $(this).hide();
@@ -333,16 +354,18 @@ $(document).ready(function() {
 
     $(".btn-next-summary").click(function(){
         console.log($(this).attr("data-power"));
+        $('#addressModal').modal('toggle');
 
-        if(!$(this).attr("data-power")){
-                window.location.href = "/summary/";
-        }else{
-            if(globalAllNames.length == 0){
-                $('#confirmModal').modal('toggle')
-            }else{
-                window.location.href = "/summary/";
-            }
-        }
+
+        // if(!$(this).attr("data-power")){
+        //         window.location.href = "/summary/";
+        // }else{
+        //     if(globalAllNames.length == 0){
+        //         $('#confirmModal').modal('toggle')
+        //     }else{
+        //         window.location.href = "/summary/";
+        //     }
+        // }
     })
 
     $(".continue-summary").click(function(){
@@ -417,18 +440,21 @@ $(document).ready(function() {
             var companyName   = $(obj).attr("data-value");
             var companyNumber = $(obj).attr("data-company-number");
             var companyPeople = $(obj).attr("data-company-people");
+            var isPS          = $(obj).attr("data-isps");
+            console.log($(obj).attr("data-isps"));
             var compObj       = [companyName, companyNumber, companyPeople];
-
+            
+            if(isPS == "true"){
+                compObj.push("isps");
+            }
             services.push(compObj);
         });
-        console.log(services);
 
         $.ajax({
             type: "POST",
             data: { _token : csrf.val(), services : services},
             url: "/updateCompanyList",
             success: function(response){
-                console.log(response);
                 if($(".company-list").length == 0){
                     var nolist = '<tr class="default-selected"><td align="center">Vennligst velg et selskap</td></tr>';
                     $(".selected-list").append(nolist);
@@ -459,11 +485,16 @@ $(document).ready(function() {
                 if(obj.length > 0){
                     for(var q = 0; q < obj.length; q++){
                         var org = obj[q];
-                        html += '<tr class="item">'+
-                        '<td>'+org.name+
-                            '<button class="float-right btn btn-info btn-company-option" data-type="companyList" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'">Legg til</button>'+
-                        '</td>'+
-                    '</tr>';
+                        var isPowerSupplier = query == "strÃ¸m" ? " data-ispowersupplier='true'" : "";
+
+                        if(!companyNumbers.includes(org.orgnr)){
+                            html += '<tr class="item">'+
+                            '<td>'+org.name+
+                                '<button class="float-right btn btn-info btn-company-option" data-type="companyList" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'" '+isPowerSupplier+'>Legg til</button>'+
+                            '</td>'+
+                            '</tr>';
+                            companyNumbers.push(org.orgnr);
+                        }
                     }
                     $(".receiver-search-result").show();
                     $(".search-no-result").hide();
@@ -481,6 +512,8 @@ $(document).ready(function() {
                 }else{
                     $(".pagination").html("");
                 }
+
+                companyNumbers = [];
             }
         });
     }
