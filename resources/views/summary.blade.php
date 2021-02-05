@@ -50,7 +50,6 @@
             <?php
             $pbPrice    = isset(session('customer')['isNorges']) ? 0 : session('customer')['pb-price'];
             $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
-            $price      = session()
             $totalPrice = session('customer')['price'] + $pbPrice + $advPrice;
 
             ?>
