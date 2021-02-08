@@ -51,7 +51,7 @@
                     <p>Med Strøm til lavpris får du en spotprisavtale, som ifølge Statistisk sentralbyrå har vært den billigste avtaleformen i over 10 år. Det betyr at du kan slappe av og fokusere på det som gir deg god energi!</p>
 
                     <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">
-                    Bestill Strøm til Lavpris
+                    Bestill “Strøm til Lavpris”
                     </a>
                 </div>
             </div>
@@ -62,7 +62,7 @@
 
                     <p>Strømavtalen Topp 5-garanti sikrer deg en variabel strømpris som på årlig basis alltid er blant de 10 beste, målt mot en representativ liste over konkurrentene våre.</p>
 
-                    <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill TOPP 5 VARIABEL</a>
+                    <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill “Topp 5 Variabel”</a>
                 </div>
             </div>
         </div>  
@@ -70,7 +70,7 @@
 <!--     <h3 class="mini-header d-md-none mb-4 label-none">
         Velg ny strømavtale for <?=session('customer')['new_address'];?>        
     </h3> -->
-    <div class="row px-4 mt-0 mb-5 my-lg-5  mt-lg-0 form">
+    <div class="row px-4 mt-0 mb-5 my-lg-5  mt-lg-0 form" id="receiver-main-section">
         <div class="col-12 col-lg-8">
             <div class="cat-n-search">
                 <div class="d-flex flex-wrap category-container align-content-center justify-content-center mb-4">
@@ -207,7 +207,7 @@
                             if($value){?>
                         <tr id="comp_{{$key}}{{$newId}}">
                             <td width="10%"><i class="fas fa-check"></i></td>
-                            <td class="company-list">{{$value[0]}}</td>
+                            <td class="cl">{{$value[0]}}</td>
                             <td>
                                 <i class="fas fa-times pointer company-list" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$value[0]}}" data-company-number="{{$value[1]}}" data-company-people="{{$value[2]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal" {{$isps}}></i>
                             </td>
@@ -225,7 +225,7 @@
             
         </div>
         <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
-            <a href="#receiver-section" id="btn-go-offer" class="btn btn-next float-right" data-isnorges="{{isset(session('customer')['isNorges']) ?? '1'}}">Videre <i class="fas fa-arrow-right"></i></a>
+            <a href="#receiver-section" id="btn-go-offer" class="btn btn-next float-right" data-isnorges="<?=isset(session('customer')['isNorges']) ? session('customer')['isNorges'] : 0?>">Videre <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <!-- OPTIONS MODAL -->

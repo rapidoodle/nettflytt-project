@@ -37,8 +37,8 @@ $(document).ready(function() {
         $(".multi-collapse").collapse();
     }
 
-    if($(".company-list").length != 0){
-        $(".company-list").each(function(ind, elem){
+    if($(".cl").length != 0){
+        $(".cl").each(function(ind, elem){
             companies.push($(elem).text());
         })
     }
@@ -127,8 +127,12 @@ $(document).ready(function() {
     //confirm delete
     $("#confirm-delete").click(function(){
         var company = $(this).attr("data-parent");
+        if($("#"+company).children().eq(1).text() == "NorgesEnergi AS"){
+            updateCustomerData({"isNorges" : 0});
+        }
         $("#"+company).remove();
         updateCompanyList();
+
     });
 
     //auto fill summary
@@ -219,7 +223,7 @@ $(document).ready(function() {
         }
     });
     $("#btn-add-postbox").click(function(){
-        updateCustomerData({"isNorges" : 1, "pb-price": 0});
+        updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1});
     });
 
     $(".btn-offer").click(function(){
@@ -235,35 +239,38 @@ $(document).ready(function() {
     });
 
     $(".btn-adv").click(function(){
-        updateCustomerData({"isAdv" : 1, "adv-price" : 149});
+        updateCustomerData({"isAdv" : 1, "adv-price" : 89});
     });
 
     $(".btn-go-power").click(function(){
         updateCustomerData({"isNorges" : 1});
-        window.location.href = "/offers/";
+        // window.location.href = "/offers/";
     });
 
     $("#btn-go-offer").click(function(){
         var isNorges = false;
         var isPowerSupplier
-        $(".company-list").each(function(ind, elem){
+        $(".cl").each(function(ind, elem){
             companies.push($(elem).text());
             if($(elem).text() == "NorgesEnergi AS"){
                 isNorges = true;
             }
         });
 
+        //  || $("i[data-isps='true']").length > 0
 
-        if(isNorges == true || $("i[data-isps='true']").length > 0 || $(this).attr("data-isnorges") == 1){
+        if(isNorges == true || $(this).attr("data-isnorges") == 1 || $(this).attr("data-action") == "go"){
             window.location.href = "/offers/";
+        }else if( $("i[data-isps='true']").length > 0){
+            $("#receiver-main-section, .title-receiver").hide();
+                $(".ps-cont").show();
         }else{
             loadingCompanies();
             searchCompany("strÃ¸m", "categories");
-            if($(".company-list").length == 0){
+            if($(".cl").length == 0){
                 $(".category-item").removeClass("active-option");
                 $(".category-item[data-cat='strÃ¸m']").addClass("active-option");
             }
-
             if(!isPowerSupplier){
                 $(".cat-n-search, .label-none, .title-receiver").hide();
                 $(".ps-cont").show();
@@ -272,6 +279,9 @@ $(document).ready(function() {
                 window.location.href = "/offers/";
             }
         }
+
+        //if they click once, the next click should move to offers page
+        $(this).attr("data-action", "go");
     });
 
     $("#confirm-notif").click(function(){
@@ -289,7 +299,7 @@ $(document).ready(function() {
         var newId           = Date.now();
         var html            = '<tr id="comp_'+newId+'">'+
                                 '<td width="10%"><i class="fas fa-check"></i></td>'+
-                                '<td '+isPS+'>'+companyName+'</td>'+
+                                '<td '+isPS+' class="cl">'+companyName+'</td>'+
                                 '<td><i class="fas fa-times pointer company-list" data-company-people="'+companyPeople+'" data-parent="comp_'+newId+'" data-value="'+companyName+'" data-company-number="'+companyNumber+'" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal" '+isPS+'></i></td>'+
                               '</tr>';
 
@@ -386,6 +396,21 @@ $(document).ready(function() {
     });
 
     //SUMMARY
+    $("#remove-pb").click(function(){
+        $(".tr-pb").remove();
+        updateCustomerData({"mailbox-sign" : 0, "pb-price" : 0});
+        var newPrice = $("#total-price").val() - $("#pb-price").val();
+        $("#total-price").val(newPrice);
+    });
+    $("#remove-ad").click(function(){
+        $(".tr-ad").remove();
+        updateCustomerData({"isAdv" : 0, "adv-price" : 0});
+        var newPrice = $("#total-price").val() - 89;
+        $("#total-price").val(newPrice);
+
+        $("#total-price-cont").html(newPrice);
+    });
+
     const myCalendar = new TavoCalendar('#my-calendar', {
         locale: "da",
         date: movingDate.val(),

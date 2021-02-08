@@ -74,7 +74,7 @@
                 ">
                     <div class="postbox-summary d-flex align-items-center justify-content-center text-center px-4"></div>
 
-                <?php if(!isset(session('customer')['mailbox-sign'])){ ?>
+                <?php if(!isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 0){ ?>
                     <div class="h-50px d-flex mt-4 justify-content-md-between">
                         <span class="disp-none post-warn"><b>Tusen takk. Når du svarer “JA” på SMSen sender vi deg et gratis postkasseskilt.</b><br><div class="text-red">NB! Du må fylle inn navnene på postkasseskiltet før du klikker videre på denne siden!</div></span>
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub sub-1 align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
@@ -95,7 +95,7 @@
 
                 <div class="col-12 col-md-6 align-items-end height-120 d-flex">
                     <div class="w-100 d-flex mt-4 justify-content-md-between h-50px">
-                        <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
+                        <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub align-bottom order-2 order-md-1">Kr. 89 inkl. frakt</h6>
                         
                         <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till-2 btn-adv">Legg til</button>
                     </div>
@@ -104,14 +104,14 @@
         </div>
 
     </div>
-    <?php if(!isset(session('customer')['isNorges'])){ ?>
+    <?php if(!isset(session('customer')['isNorges']) || session('customer')['isNorges'] == 0){ ?>
     <div class="col-12 col-lg-3 text-center">
         <div class="collapse multi-collapse show">
                 <h5 class="d-lg-none mt-4">Kampane! Gratis postkasseskilt ved bestilling av strøm</h5>
             <div class="ps-option p-4 mt-2 mt-md-0">
                 <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
                 <h5 class="my-4">KAMPANJE!</h5>
-                <div class="mb-4">GRATIS POSTKASSESKILT VED BESTILLING AV STRØM</div>
+                <div class="mb-4">Gratis postkasseskilt ved bestilling av strøm</div>
                 <a id="btn-add-postbox" class="btn btn-violet btn-show-lott" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill Strøm til Lavpris</a>
             </div>
         </div>

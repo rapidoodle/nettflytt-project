@@ -41,7 +41,7 @@
 <div class="row px-4 mt-0 mb-4 mb-md-5 my-lg-5  mt-lg-0">
     <div class="col-12 col-lg-8">
         <div class="accordion" id="offersAcdn">
-            <?php if(!isset(session('customer')['isNorges'])){ ?>
+            <?php if(!isset(session('customer')['isNorges']) || session('customer')['isNorges'] == 0){ ?>
           <div class="card">
             <div class="card-header active" id="headingOne">
               <h2 class="mb-0">
@@ -62,7 +62,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" data-offer="isNorges">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" data-offer="isStrom">Ja takk!</a>
                             </div>
                         </div>
                     </div>
@@ -75,14 +75,14 @@
           </div>
       <?php } ?>
           <div class="card">
-            <div class="card-header  <?=isset(session('customer')['isNorges']) ? 'active' : ''?>" id="headingTwo">
+            <div class="card-header  <?=isset(session('customer')['isNorges']) && session('customer')['isNorges'] == 1 ? 'active' : ''?>" id="headingTwo">
               <h2 class="mb-0">
                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                   TV/Internet <i class="fas fa-lock"></i>
                 </button>
               </h2>
             </div>
-            <div id="collapseTwo" class="collapse <?=isset(session('customer')['isNorges']) ? 'show' : ''?>" aria-labelledby="headingTwo" data-parent="#offersAcdn">
+            <div id="collapseTwo" class="collapse <?=isset(session('customer')['isNorges']) && session('customer')['isNorges'] == 1  ? 'show' : ''?>" aria-labelledby="headingTwo" data-parent="#offersAcdn">
                <div class="card-body">
                 <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
                 <div class="row">
@@ -109,7 +109,7 @@
           <div class="card">
             <div class="card-header" id="headingThree">
               <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><?=isset(session('customer')['isNorges']) ? 'Flyttevask' : 'Forsikring'?> <i class="fas fa-home"></i>
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><?=isset(session('customer')['isNorges']) && session('customer')['isNorges'] == 1 ? 'Flyttevask' : 'Forsikring'?> <i class="fas fa-home"></i>
                 </button>
               </h2>
             </div>

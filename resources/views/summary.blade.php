@@ -48,11 +48,12 @@
     <div class="col-12 col-md-5">
         <div class="smry-rcrd p-4 h-auto">
             <?php
-            $pbPrice    = isset(session('customer')['isNorges']) ? 0 : session('customer')['pb-price'];
+            $pbPrice    = session('customer')['pb-price'];
             $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
             $totalPrice = session('customer')['price'] + $pbPrice + $advPrice;
-
             ?>
+            <input type="text" id="total-price" value="<?=$totalPrice?>">
+            <input type="text" id="pb-price" value="<?=$pbPrice?>">
             <table class="table">
                 <thead>
                     <tr>
@@ -65,17 +66,23 @@
                         <td>Behandling av flyttemeldinger</td>
                         <td>kr 149,-</td>
                     </tr>
-                    <tr>
-                        <td>Behandling av flyttemeldinger</td>
-                        <td><?=isset(session('customer')['isNorges']) ? "GRATIS" : "kr ".session('customer')['price'].",-";?></td>
+                    <?php if(isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 1) { ?>
+                    <tr class="tr-pb">
+                        <td>Postkasseskilt</td>
+                        <td><?=isset(session('customer')['pb-price']) && session('customer')['pb-price'] != 0 ? "kr ".session('customer')['price'].",-" : 'GRATIS'?></td>
+                        <td><i class="fa fa-trash-o pointer remove-pb" data-toggle="modal" data-target="#remove-pbModal" data-toggle="modal"></i></td>
                     </tr>
-                    <tr>
-                        <td>UADRESSERT REKLAME NEI TAKK</td>
-                        <td>kr 149,-</td>
+                    <?php } ?>
+                    <?php if(isset(session('customer')['isAdv']) && session('customer')['isAdv'] == 1) { ?>
+                    <tr class="tr-ad">
+                        <td>Uadressert reklame nei takk</td>
+                        <td>kr 89,-</td>
+                        <td><i class="fa fa-trash-o pointer remove-ad" data-toggle="modal" data-target="#remove-adModal" data-toggle="modal"></i></td>
                     </tr>
+                    <?php } ?>
                     <tr>
                         <td>Totalt:</td>
-                        <td>kr <?=$totalPrice?>,-</td>
+                        <td>kr <span id="total-price-cont"><?=$totalPrice?></span>,-</td>
                     </tr>
                 </tbody>
             </table>
@@ -91,16 +98,12 @@
             <h5>Gjennomgang av avtaler hos</h5>
             <table class="table">
                 <tr>
-                    <td width="30px"><?=isset(session('customer')['mailbox-sign']) ? $check : $times; ?></td>
+                    <td width="30px"><?=isset(session('customer')['isStrom']) ? $check : $times; ?></td>
                     <td>Strøm</td>
                 </tr>
                 <tr>
                     <td><?=isset(session('customer')['isTV']) ? $check : $times; ?></td>
                     <td>TV/Internet</td>
-                </tr>
-                <tr>
-                    <td><?=isset(session('customer')['isForsikring']) ? $check : $times; ?></td>
-                    <td>Forsikring</td>
                 </tr>
                 <tr>
                     <td><?=isset(session('customer')['isFlyttevask']) ? $check : $times; ?></td>
@@ -210,6 +213,36 @@
             <h5 class="modal-title">Er du sikker på at du vil fjerne <span id="company-name"></span> fra listen?</h5>            
         </div>
         <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="confirm-delete">Ja</button>
+        <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Nei</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--CONFIRMATION DELETE PB MODAL-->
+<div class="modal fade" id="remove-pbModal" tabindex="-1" role="dialog" aria-labelledby="remove-pbModal" aria-hidden="true">
+  <div class="text-center modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body mt-4">
+        <div class="text-center mb-4">
+            <h5 class="modal-title">Are you sure you want to delete Postbox subscription?</h5>            
+        </div>
+        <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="remove-pb">Ja</button>
+        <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Nei</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--CONFIRMATION DELETE AD MODAL-->
+<div class="modal fade" id="remove-adModal" tabindex="-1" role="dialog" aria-labelledby="remove-adModal" aria-hidden="true">
+  <div class="text-center modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-body mt-4">
+        <div class="text-center mb-4">
+            <h5 class="modal-title">Are you sure you want to delete *AD REMOVAL?</h5>            
+        </div>
+        <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="remove-ad">Ja</button>
         <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Nei</button>
       </div>
     </div>
