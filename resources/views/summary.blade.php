@@ -52,8 +52,8 @@
             $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
             $totalPrice = session('customer')['price'] + $pbPrice + $advPrice;
             ?>
-            <input type="text" id="total-price" value="<?=$totalPrice?>">
-            <input type="text" id="pb-price" value="<?=$pbPrice?>">
+            <input type="hidden" id="total-price" value="<?=$totalPrice?>">
+            <input type="hidden" id="pb-price" value="<?=$pbPrice?>">
             <table class="table">
                 <thead>
                     <tr>
@@ -69,7 +69,7 @@
                     <?php if(isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 1) { ?>
                     <tr class="tr-pb">
                         <td>Postkasseskilt</td>
-                        <td><?=isset(session('customer')['pb-price']) && session('customer')['pb-price'] != 0 ? "kr ".session('customer')['price'].",-" : 'GRATIS'?></td>
+                        <td><?=isset(session('customer')['pb-price']) && session('customer')['pb-price'] != 0 ? "kr ".session('customer')['pb-price'].",-" : 'GRATIS'?></td>
                         <td><i class="fa fa-trash-o pointer remove-pb" data-toggle="modal" data-target="#remove-pbModal" data-toggle="modal"></i></td>
                     </tr>
                     <?php } ?>
