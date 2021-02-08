@@ -44,7 +44,7 @@ class APIController extends Controller
         if(isset($request['mailbox-sign']) && $request['mailbox-sign'] == 1){
             $request['pb-price'] = 169;
         }else{
-            $request['pb-price'] = 149;
+            $request['pb-price'] = 0;
         }
 
         $request['price']       = 149;
