@@ -317,7 +317,7 @@
             <h5 class=" mb-5 text-red text-center">VIKTIG: Du må bekrefte din bestilling ved å svare JA på SMSen du mottar.</h5>
         </div>
         <div class="col-12 col-md-10 offset-md-1 text-center">
-            <a id="btn-go-power" class="btn btn-info py-3 w-200">Fortsett flyttemeldingen <i class="fas fa-arrow-right" title="Offers page"></i></a>
+            <a href="/offers/" class="btn btn-info py-3 w-200">Fortsett flyttemeldingen <i class="fas fa-arrow-right" title="Offers page"></i></a>
         </div>
     </div>  
 </section>

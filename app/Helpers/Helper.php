@@ -29,23 +29,30 @@ class Helper
     }
 
     public static function getToken(){
-  //       $user = "u46114";
-  //       $pass = "a6b15b2e218e3479ed99b7aaae3b5502";
-  //       $data = ["username" => $user, "password" => $pass];
-		// $endpoint = "https://api.nettflytt.no/api/nettflytt/2020-10/token/init";
-		// $ch   = curl_init();
-		// curl_setopt($ch, CURLOPT_URL, $endpoint);
-		// curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-		// curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		// curl_setopt($ch, CURLOPT_POST, true);
-		// curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		// $output = curl_exec($ch);
-		// curl_close($ch);
-		// $response = json_decode($output);
-		// return json_encode($response);
-		    $u = "u46114";
-		    $p = "a6b15b2e218e3479ed99b7aaae3b5502";
-		    $url = "https://api.nettflytt.no/api/nettflytt/2020-10/token/init";
+		    $u 	  = config('services.api.username');
+		    $p 	  = config('services.api.password');
+		    $url  = "https://api.nettflytt.no/api/nettflytt/2020-10/token/init";
+		    $vars = [
+		        "username" => $u,
+		        "password" => $p,
+		    ];
+		    $postdata = http_build_query( $vars );
+		    $options  = [ 'http' => [
+		        'method'  => "POST",
+		        'header'  => "Content-type: application/x-www-form-urlencoded",
+		        'content' => $postdata
+		    ]];
+		    $context = stream_context_create( $options );
+		    $json 	 = file_get_contents( $url, FALSE, $context );
+		    $res 	 = json_decode( $json, true );
+
+		    return $t = $res['token'];
+    }
+
+    public static function initStorage($token){
+		    $u 	  = config('services.api.username');
+		    $p 	  = config('services.api.password');
+		    $url = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/init";
 		    $vars = [
 		        "username" => $u,
 		        "password" => $p,
@@ -53,35 +60,36 @@ class Helper
 		    $postdata = http_build_query( $vars );
 		    $options = [ 'http' => [
 		        'method' => "POST",
-		       'header' => "Content-type: application/x-www-form-urlencoded",
+		        'header' => "Content-type: application/x-www-form-urlencoded",
 		        'content' => $postdata
 		    ]];
 		    $context = stream_context_create( $options );
 		    $json = file_get_contents( $url, FALSE, $context );
 		    $res = json_decode( $json, true );
-		    echo $t = $res['token'];
-		    // // Get storage
-		    // $url = "https://". $u .":". $t ."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$t."/details";
-		    // $c = file_get_contents( $url );
-		    // echo 'STORAGE DETAILS: '. $c . PHP_EOL;
-		    // $url = "https://". $u .":". $t ."@api.nettflytt.no/api/nettflytt/2020-10/token/". $t ."/details";
-		    // $c = file_get_contents( $url );
-		    // echo 'TOKEN DETAILS: '. $c . PHP_EOL;
+
+		    return $t = $res['_token'];
     }
 
-    public static function sendOTP($token,$phone, $sender = "Nettflytt"){
-		$endpoint = "https://u46114:".$token."@api/nettflytt/2020-10/billing-otp";
-		$ch = curl_init();
-		$data = array("msn" => $phone, "sender" => $sender); 
-		curl_setopt($ch, CURLOPT_URL, $endpoint);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		$output = curl_exec($ch);
-		curl_close($ch);
+    public static function updateStorage($json){
+		    echo $token;
+    }
 
-		return json_encode([$token, $phone, $sender]);
+    public static function sendOTP($token, $phone, $sender = "Nettflytt"){
+		$u 		  = config('services.api.username');
+		$p 	  	  = config('services.api.password');
+		$data 	  = array("msn" => $phone, "sender" => $sender); 
+		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
+	    $postdata = http_build_query( $data );
+	    $options  = [ 'http' => [
+					        'method' => "POST",
+					        'header' => "Content-type: application/x-www-form-urlencoded",
+					        'content' => $postdata]
+					  ];
+	    $context  = stream_context_create( $options );
+	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
+		$response = json_decode($json);
+
+	    return $response->transactionid;
     }
 
     public static function updateData($token, $data){

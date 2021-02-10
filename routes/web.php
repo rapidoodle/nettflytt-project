@@ -43,6 +43,7 @@ Route::get('/terms-of-use', function () {
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 });
+Route::get('/testapi', 'APIController@testapi')->name('testapi');
 
 Auth::routes();
 
