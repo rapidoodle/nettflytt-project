@@ -70,11 +70,12 @@ class APIController extends Controller
         unset($request['_initToken']);
 
         //customer unique token -- store in session
-        if(!session("_initToken")){
-            $token = Helper::getToken();
-        }else{
-            $token = session("_initToken");
-        }
+        // if(!session("_initToken")){
+        //     $token = Helper::getToken();
+        // }else{
+        //     $token = session("_initToken");
+        // }
+        $token = "TOKEN";
 
         //update customer record
         // $update = Helper::updateData($token, $request->all());
@@ -87,10 +88,10 @@ class APIController extends Controller
                  'new_post'     => $request['new_zipcode'].' '.$request['new_place'],
                  'customer'     => $request->all()]);
          //send otp
-        if(!$request->session()->has('customer._smsTransactionId')){
-            $tId = Helper::sendOTP($token, $request['phone'], "Nettflytt");
-            session()->put("customer._smsTransactionId", $tId);
-        }
+        // if(!$request->session()->has('customer._smsTransactionId')){
+        //     $tId = Helper::sendOTP($token, $request['phone'], "Nettflytt");
+        //     session()->put("customer._smsTransactionId", $tId);
+        // }
 
         if(!isset($request['person0'])){
             session()->put("customer.person0.name", $request['full-name']);
@@ -122,7 +123,7 @@ class APIController extends Controller
     }
 
     public function sendSMS(Request $request){
-       
+
      }
 
     public function updateCompanyList(Request $request){
