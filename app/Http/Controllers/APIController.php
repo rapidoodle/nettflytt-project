@@ -88,7 +88,7 @@ class APIController extends Controller
                  'customer'     => $request->all()]);
          //send otp
         if(!$request->session()->has('customer._smsTransactionId')){
-            $tId = Helper::sendOTP($token, "+4792445024", "Nettflytt");
+            $tId = Helper::sendOTP($token, $request['phone'], "Nettflytt");
             session()->put("customer._smsTransactionId", $tId);
         }
 
