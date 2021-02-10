@@ -74,7 +74,7 @@
                 ">
                     <div class="postbox-summary d-flex align-items-center justify-content-center text-center px-4"></div>
 
-                <?php if(!isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 0){ ?>
+                <?php if(!isset(session('customer')['mailbox-sign'])){ ?>
                     <div class="h-50px d-flex mt-4 justify-content-md-between">
                         <span class="disp-none post-warn"><b>Tusen takk. Når du svarer “JA” på SMSen sender vi deg et gratis postkasseskilt.</b><br><div class="text-red">NB! Du må fylle inn navnene på postkasseskiltet før du klikker videre på denne siden!</div></span>
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub sub-1 align-bottom order-2 order-md-1">Kr. 149 inkl. frakt</h6>
