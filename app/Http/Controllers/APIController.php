@@ -105,18 +105,18 @@ class APIController extends Controller
         }
 
         //save to storage
-        $storage = session('customer');
+        // $storage = session('customer');
          
-        if(isset(session('customer')['_storageToken'])){
-            //update storage
-            Helper::updateStorage($storage);
-        }else{
-            //new storage 
-            $storageToken  = Helper::initStorage($token);
-            if($storageToken){
-                session()->put("customer._storageToken", $storageToken);
-            }
-        }
+        // if(isset(session('customer')['_storageToken'])){
+        //     //update storage
+        //     Helper::updateStorage($storage);
+        // }else{
+        //     //new storage 
+        //     $storageToken  = Helper::initStorage($token);
+        //     if($storageToken){
+        //         session()->put("customer._storageToken", $storageToken);
+        //     }
+        // }
 
          return redirect('/receiver/');
 
