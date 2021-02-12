@@ -9,11 +9,14 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-        echo $token = Helper::getToken();
-        echo "<br>";
-        // echo $token = Helper::initStorage($token);
-        echo $sendOTP = Helper::sendOTP($token, "+4792445024", "Nettflytt");
-
+        // echo $token = Helper::getToken();
+        $token = session('_initToken');
+        // echo "<br>";
+        // echo $sendOTP = Helper::sendOTP($token, "+4792445024", "Nettflytt");
+        $storageToken = session('customer')['_storageToken'];
+        $token = session('_initToken');
+        // echo Helper::updateStorage($token, $storageToken, session('customer'));
+        echo Helper::getStorage($token, $storageToken);
     }
     //
     public function getToken(Request $request){
@@ -70,16 +73,13 @@ class APIController extends Controller
         unset($request['_initToken']);
 
         //customer unique token -- store in session
-        // if(!session("_initToken")){
-        //     $token = Helper::getToken();
-        // }else{
-        //     $token = session("_initToken");
-        // }
-        $token = "TOKEN";
+        if(!session("_initToken")){
+            $token = Helper::getToken();
+        }else{
+            echo $token = session("_initToken");
+        }
 
-        //update customer record
-        // $update = Helper::updateData($token, $request->all());
-        // echo $sendOTP = Helper::sendOTP($token, "+639178713844", "Nettflytt");
+        // $token = Helper::getToken();
 
         session(['customer' => $request->all()]);
 
@@ -87,11 +87,11 @@ class APIController extends Controller
                  'old_post'     => $request['old_zipcode'].' '.$request['old_place'],
                  'new_post'     => $request['new_zipcode'].' '.$request['new_place'],
                  'customer'     => $request->all()]);
-         //send otp
-        // if(!$request->session()->has('customer._smsTransactionId')){
-        //     $tId = Helper::sendOTP($token, $request['phone'], "Nettflytt");
-        //     session()->put("customer._smsTransactionId", $tId);
-        // }
+         // send otp
+        if(!$request->session()->has('customer._smsTransactionId')){
+            $tId = Helper::sendOTP($token, $request['phone'], "Nettflytt");
+            session()->put("customer._smsTransactionId", $tId);
+        }
 
         if(!isset($request['person0'])){
             session()->put("customer.person0.name", $request['full-name']);
@@ -105,18 +105,19 @@ class APIController extends Controller
         }
 
         //save to storage
-        // $storage = session('customer');
+        $storage = session('customer');
          
-        // if(isset(session('customer')['_storageToken'])){
-        //     //update storage
-        //     Helper::updateStorage($storage);
-        // }else{
-        //     //new storage 
-        //     $storageToken  = Helper::initStorage($token);
-        //     if($storageToken){
-        //         session()->put("customer._storageToken", $storageToken);
-        //     }
-        // }
+        if(isset(session('customer')['_storageToken'])){
+            //update storage
+            Helper::updateStorage($storage);
+        }else{
+            //new storage 
+            $storageToken  = Helper::initStorage($token);
+
+            if($storageToken){
+                session()->put("customer._storageToken", $storageToken);
+            }
+        }
 
          return redirect('/receiver/');
 
@@ -134,13 +135,13 @@ class APIController extends Controller
 
     public function searchCompany(Request $request){
         if($request->cat == "categories" && session('allcompanies')){
-        $query = $request['query'];
+            $query = $request['query'];
 
-        $filteredItems = array_values(array_filter(json_decode(session('allcompanies')), function($elem) use($query){
-            return strtolower($elem->category) == strtolower($query);
-        }));
+            $filteredItems = array_values(array_filter(json_decode(session('allcompanies')), function($elem) use($query){
+                return strtolower($elem->category) == strtolower($query);
+            }));
 
-        echo json_encode($filteredItems);
+            echo json_encode($filteredItems);
 
         }else{
             echo Helper::searchCompanies($request['query'], $request->cat);

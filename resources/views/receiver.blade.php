@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<?=json_encode(session('_token')); ?>
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">

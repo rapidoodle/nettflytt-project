@@ -46,7 +46,7 @@ class Helper
 		    $json 	 = file_get_contents( $url, FALSE, $context );
 		    $res 	 = json_decode( $json, true );
 
-		    return $t = $json;
+		    return $res['token'];
     }
 
     public static function initStorage($token){
@@ -70,8 +70,34 @@ class Helper
 		    return $t = $res['_token'];
     }
 
-    public static function updateStorage($json){
-		    echo $token;
+   	public static function getStorage($token, $storageToken){
+		$u 	  = config('services.api.username');
+	    // Get storage
+	    $url = "https://". $u .":". $token ."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$storageToken."/details";
+	    $c = file_get_contents( $url );
+	    echo 'STORAGE DETAILS: '. $c . PHP_EOL;
+   	}
+
+    public static function updateStorage($token, $storageToken, $data){
+		    $u 	  = config('services.api.username');
+		    $p 	  = config('services.api.password');
+		    $url = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$token."/update";
+		    $vars = [
+		        "storageid" => $storageToken,
+		        "storage" => json_encode($data),
+		    ];
+		    $postdata = http_build_query( $vars );
+		    $options = [ 'http' => [
+		        'method' => "POST",
+		        'header' => "Content-type: application/x-www-form-urlencoded",
+		        'content' => $postdata
+		    ]];
+
+		    $context = stream_context_create( $options );
+		    $json = file_get_contents( $url, FALSE, $context );
+		    $res = json_decode( $json, true );
+
+		    return $json;
     }
 
     public static function sendOTP($token, $phone, $sender = "Nettflytt"){
