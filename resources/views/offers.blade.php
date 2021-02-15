@@ -109,7 +109,7 @@
           <div class="card">
             <div class="card-header" id="headingThree">
               <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><?=isset(session('customer')['isNorges']) && session('customer')['isNorges'] == 1 ? 'Flyttevask' : 'Forsikring'?> <i class="fas fa-home"></i>
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Flyttevask<i class="fas fa-home"></i>
                 </button>
               </h2>
             </div>
@@ -126,7 +126,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" data-offer="<?=isset(session('customer')['isNorges']) ? 'isFlyttevask' : 'isForsikring'?>">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" data-offer="isFlyttevask">Ja takk!</a>
                             </div>
                         </div>
                     </div>

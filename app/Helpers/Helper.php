@@ -46,7 +46,7 @@ class Helper
 		    $json 	 = file_get_contents( $url, FALSE, $context );
 		    $res 	 = json_decode( $json, true );
 
-		    return $res['token'];
+		    return $json;
     }
 
     public static function initStorage($token){

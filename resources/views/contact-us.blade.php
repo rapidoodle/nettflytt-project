@@ -1,6 +1,65 @@
 @extends('layouts.main')
 @section('content')
-<div class="row px-4 mb-5 mt-5 mt-md-0">
+<div class="row px-4 mb-5 mt-5 mt-md-0" id="contact-page">
+    <div class="col-12 col-md-8 offset-md-2 text-center">
+        <h2 class="d-inline-block">Velkommen til vårt kundesenter</h2>
+        <p>Ved å besvare spørsmålene under får du kontaktinformasjon til den riktige instans.</p>
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3 class="text-center mb-0">Kundeservice</h3>
+            </div>
+            <div class="card-body p-md-5 m-md-0" id="contact-1">
+                <h5 class="mb-0">Gjelder din henvendelse spørsmål rettet til det norske folkeregisteret?</h5>
+                <p>Are you trying to contact the Norwegian national population register (Folkeregisteret)?</p>
+                <div class="row mt-4 ">
+                    <div class="col-12 col-md-6 text-md-right">
+                        <button data-next="contact-3" data-from="contact-1" class="btn btn-contact w-100 btn-info px-5 py-2">Nei</button>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-left p-2 p-md-0">
+                        <button data-next="contact-2" data-from="contact-1" class="btn btn-contact w-100 btn-info px-5 py-2">Ja</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-md-5 m-md-0 text-left d-hiddens" id="contact-2">
+                <h5>Kontaktinformasjon Folkeregisteret:</h5><br>
+                <i class="fa fa-phone"></i> Telefon: +47 800 80 000<br>
+                <span>Åpningstider på telefon: 09:00 - 15:30 alle hverdager</span><br><br>
+
+                <i class="far fa-comment-alt"></i> For chat besøk: <a href="https://www.skatteetaten.no/kontakt/chat-med-oss/"> https://www.skatteetaten.no/kontakt/chat-med-oss/</a><br><br>
+                
+                <i class="fa fa-desktop"></i> For alle andre henvendelser gjeldende folkeregisteret besøk:<br> <span><a href="https://www.skatteetaten.no/kontakt/">https://www.skatteetaten.no/kontakt/</a></span>
+            </div>
+
+            <div class="card-body p-md-5 m-md-0 d-hiddens" id="contact-3">
+                <h5 class="mb-0">Vi opplever for tiden mange som kontakter for adresseendring som ikke har noe med Nettflytt å gjøre.</h5>
+                <p>Er du helt sikker på at du har meldt adresseendring hos Nettflytt? (Vi ber om at du ser om Nettflytt er avsender av SMS og bekreftelses e-post)</p>
+                <div class="row mt-4 ">
+                    <div class="col-12 col-md-6 text-md-right">
+                        <button data-next="contact-4" data-from="contact-3" class="btn btn-contact w-100 btn-info px-5 py-2">Nei</button>
+                    </div>
+                    <div class="col-12 col-md-6 text-md-left p-2 p-md-0">
+                        <button data-next="contact-5" data-from="contact-3" class="btn btn-contact w-100 btn-info px-5 py-2">Ja</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-body p-md-5 m-md-0 d-hiddens" id="contact-4">
+                <h5 class="mb-0">Vi kan dessverre ikke hjelpe deg med flyttemeldinger som er sendt via andre portaler enn Nettflytt.no</h5>
+                <p>Vi anbefaler at du tar kontakt med selskapet som har håndtert din flyttemelding direkte.</p>
+            </div>
+
+            <div class="card-body p-md-5 m-md-0 text-center d-hiddens" id="contact-5">
+                <h5 class="mb-0">Send oss gjerne en e-post så svarer vi deg fortløpende</h5>
+                <div class="py-4"><i class="far fa-envelope"></i>  <a href="mailto:kundesenter@nettflytt.no">kundesenter@nettflytt.no</a></div>
+                </table>
+                <p>Husk å inkludere ditt telefonnummer i henvendelsen slik at vi kan finne din flyttemelding)</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row px-4 mb-5 mt-5 mt-md-0">
     <div class="col-12 col-md-8 offset-md-2 text-center">
         <h2 class="d-inline-block">Kundeservice</h2>
     </div>
@@ -32,5 +91,5 @@
 <center class="my-5"><h5>For alle andre henvendelser: Kontakt <span class="text-red">kundesenter@nettflytt.no</span></h5></center>
 <center class="mb-5">
     <button class="btn btn-extra-lg">Tilbake til forsiden</button>
-</center>
+</center> -->
 @endsection

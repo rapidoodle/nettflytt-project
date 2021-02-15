@@ -456,6 +456,15 @@ $(document).ready(function() {
         updateCustomerData(fields);
     });
 
+    //CONTACT US
+    $(".btn-contact").click(function(){
+        var from = $(this).attr("data-from");
+        var next = $(this).attr("data-next");
+
+        $("#"+from).hide();
+        $("#"+next).fadeIn();
+    });
+
     //IN FUNCTIONS
     function updateCompanyList(){
         var services = [];

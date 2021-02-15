@@ -680,7 +680,23 @@ a.page-link{
 .w-200{
     max-width: 250px!important;
 }
-
+#contact-page .card-header{
+    color:#fff;
+    background-color: #1D576F;
+}
+#contact-page .card-body{
+    background-color: #EAEAEA;
+}
+#contact-page .card-body a{
+    color:#1d576f;
+    text-decoration: underline;
+}
+#contact-page .card-body span{
+    margin-left:1.2rem;
+}
+#contact-page .card-body i{
+    font-size: 15px;
+}
 /*responsive mobile*/
 @media (max-width: 992px) {
     sub.sub-3{
@@ -812,11 +828,15 @@ a.page-link{
     }
 }
 @media (min-width: 1200px){
-.container, .container-lg, .container-md, .container-sm, .container-xl {
-    max-width: 1240px!important;
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1240px!important;
+    }
 }
 
 /*utilities*/
+.d-hiddens{
+    display:none;
+}
 .text-bold{
     font-weight: bold;
 }

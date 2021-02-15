@@ -74,9 +74,9 @@ class APIController extends Controller
 
         //customer unique token -- store in session
         if(!session("_initToken")){
-            $token = Helper::getToken();
+            echo $token = Helper::getToken();
         }else{
-            echo $token = session("_initToken");
+            $token = session("_initToken");
         }
 
         // $token = Helper::getToken();
@@ -119,7 +119,7 @@ class APIController extends Controller
             }
         }
 
-         return redirect('/receiver/');
+         // return redirect('/receiver/');
 
     }
 

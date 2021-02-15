@@ -28,7 +28,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                         <a href="/" class="dropdown-item" type="button">Hjem</a>
-                        <a href="/about-us" class="dropdown-item" type="button">Om oss</a>
+                        <a href="/about-us" class="dropdown-item" type="button">Personvern</a>
                         <a href="/contact-us" class="dropdown-item" type="button">Kontakt oss</a>
                     </div>
                 </div>               
@@ -64,9 +64,6 @@
       <div class="col-md-3 mb-md-0 mb-3">
         <h5>Informasjon</h5>
         <ul class="list-unstyled">
-          <li>
-            <a href="/about-us/">Om oss</a>
-          </li>
           <li>
             <a href="/privacy-policy">Personvern</a>
           </li>
