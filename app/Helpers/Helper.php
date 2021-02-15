@@ -29,8 +29,8 @@ class Helper
     }
 
     public static function getToken(){
-		    $u 	  = config('services.api.username');
-		    $p 	  = config('services.api.password');
+		    $u 	  = "u46114";
+		    $p 	  = "a6b15b2e218e3479ed99b7aaae3b5502";
 		    $url  = "https://api.nettflytt.no/api/nettflytt/2020-10/token/init";
 		    $vars = [
 		        "username" => $u,
@@ -46,12 +46,12 @@ class Helper
 		    $json 	 = file_get_contents( $url, FALSE, $context );
 		    $res 	 = json_decode( $json, true );
 
-		    return $json;
+		    return $res["token"];
     }
 
     public static function initStorage($token){
-		    $u 	  = config('services.api.username');
-		    $p 	  = config('services.api.password');
+		    $u 	  = "u46114";
+		    $p 	  = "a6b15b2e218e3479ed99b7aaae3b5502";
 		    $url = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/init";
 		    $vars = [
 		        "username" => $u,
@@ -71,7 +71,7 @@ class Helper
     }
 
    	public static function getStorage($token, $storageToken){
-		$u 	  = config('services.api.username');
+		$u 	  = "u46114";
 	    // Get storage
 	    $url = "https://". $u .":". $token ."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$storageToken."/details";
 	    $c = file_get_contents( $url );
@@ -79,9 +79,9 @@ class Helper
    	}
 
     public static function updateStorage($token, $storageToken, $data){
-		    $u 	  = config('services.api.username');
-		    $p 	  = config('services.api.password');
-		    $url = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$token."/update";
+		    $u 	  = "u46114";
+		    $p 	  = "a6b15b2e218e3479ed99b7aaae3b5502";
+		    $url  = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$token."/update";
 		    $vars = [
 		        "storageid" => $storageToken,
 		        "storage" => json_encode($data),
@@ -101,10 +101,26 @@ class Helper
     }
 
     public static function sendOTP($token, $phone, $sender = "Nettflytt"){
-		$u 		  = config('services.api.username');
-		$p 	  	  = config('services.api.password');
+		$u 	  	  = "u46114";
 		$data 	  = array("msn" => $phone, "sender" => $sender); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
+	    $postdata = http_build_query( $data );
+	    $options  = [ 'http' => [
+					        'method' => "POST",
+					        'header' => "Content-type: application/x-www-form-urlencoded",
+					        'content' => $postdata]
+					  ];
+	    $context  = stream_context_create( $options );
+	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
+		$response = json_decode($json);
+
+	    return $response->transactionid;
+    }
+
+    public static function sendSMS($token, $phone, $sender = "Nettflytt", $message){
+		$u 	  	  = "u46114";
+		$data 	  = array("msn" => $phone, "sender" => $sender, "message" => $message); 
+		$endpoint = "https://".$u.":".$token."@api.nettflytt.no//api/nettflytt/2020-10/sms-message";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
 					        'method' => "POST",

@@ -129,6 +129,7 @@ $(document).ready(function() {
         var company = $(this).attr("data-parent");
         if($("#"+company).children().eq(1).text() == "NorgesEnergi AS"){
             updateCustomerData({"isNorges" : 0});
+            sendSMS();
         }
         $("#"+company).remove();
         updateCompanyList();
@@ -224,6 +225,7 @@ $(document).ready(function() {
     });
     $("#btn-add-postbox").click(function(){
         updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1});
+        sendSMS();
     });
 
     $(".btn-offer").click(function(){
@@ -244,6 +246,7 @@ $(document).ready(function() {
 
     $(".btn-go-power").click(function(){
         updateCustomerData({"isNorges" : 1});
+            sendSMS();
         // window.location.href = "/offers/";
     });
 
@@ -502,6 +505,17 @@ $(document).ready(function() {
             type: "POST",
             data: { _token : csrf.val(), fields : data},
             url: "/updateCustomerData",
+            success: function(response){
+                console.log(response);
+            }
+        });
+    }
+
+    function sendSMS(){
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val()},
+            url: "/sendSMS",
             success: function(response){
                 console.log(response);
             }

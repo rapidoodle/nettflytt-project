@@ -9,14 +9,14 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-        // echo $token = Helper::getToken();
-        $token = session('_initToken');
+         echo $token = Helper::getToken();
+        //$token = session('_initToken');
         // echo "<br>";
-        // echo $sendOTP = Helper::sendOTP($token, "+4792445024", "Nettflytt");
-        $storageToken = session('customer')['_storageToken'];
-        $token = session('_initToken');
+         echo $sendOTP = Helper::sendOTP($token, "+4792445024", "Nettflytt");
+        //$storageToken = session('customer')['_storageToken'];
+        //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
-        echo Helper::getStorage($token, $storageToken);
+        //echo Helper::getStorage($token, $storageToken);
     }
     //
     public function getToken(Request $request){
@@ -27,7 +27,6 @@ class APIController extends Controller
         $request['last_name']  = Helper::lastName($request['full-name']);
 
         foreach ($person as $key => $value) {
-
             if($value){
                 $pos       = $key;
                 $record    = explode("|", $value);
@@ -74,12 +73,12 @@ class APIController extends Controller
 
         //customer unique token -- store in session
         if(!session("_initToken")){
-            echo $token = Helper::getToken();
+            $token = Helper::getToken();
         }else{
             $token = session("_initToken");
         }
 
-        // $token = Helper::getToken();
+        $token = Helper::getToken();
 
         session(['customer' => $request->all()]);
 
@@ -119,12 +118,16 @@ class APIController extends Controller
             }
         }
 
-         // return redirect('/receiver/');
+         return redirect('/receiver/');
 
     }
 
     public function sendSMS(Request $request){
-
+        $token   = session("_initToken");
+        $message = "This is a message to get when purchasing Norges";
+        
+        //send sms
+        sendSMS($token, session('customer')['phone'], "Nettflytt", $message);
      }
 
     public function updateCompanyList(Request $request){
