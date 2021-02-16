@@ -28,7 +28,7 @@
         <div class="p-4 text-center">
             <h1>Tusen takk {{session('customer')['first_name']}}</h1>
                 <p class="my-4">Vi sender deg en bekreftelse på SMS! Hvis det er noe vi kan hjelpe deg med i tiden som kommer er du hjertelig velkommen til å kontakte vårt dyktige supportteam.</p>
-                <button class="btn btn-info btn-lg" id="btn-ty-send">Tilbake til forsiden</button>
+                <a href="/" class="btn btn-info btn-lg" id="btn-ty-send">Tilbake til forsiden</a>
         </div>
     </div>
 </div>
