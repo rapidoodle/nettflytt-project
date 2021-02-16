@@ -246,7 +246,7 @@ $(document).ready(function() {
 
     $(".btn-go-power").click(function(){
         updateCustomerData({"isNorges" : 1});
-            sendSMS();
+        sendSMS();
         // window.location.href = "/offers/";
     });
 
@@ -315,6 +315,12 @@ $(document).ready(function() {
             $(".selected-list").append(html);
             //update the services in backend
             updateCompanyList();
+        }
+
+        //if norges is selected from the list
+        if(companyName == "NorgesEnergi AS"){
+            updateCustomerData({"isNorges" : 1});
+            sendSMS();
         }
     });
 
@@ -399,6 +405,27 @@ $(document).ready(function() {
     });
 
     //SUMMARY
+    $("#btn-summary-send").click(function(){
+        var otp = $("#otp").val();
+        console.log(otp);
+        if(otp.length > 0){
+            $.ajax({
+                type: "POST",
+                data: { _token : csrf.val(), otp : otp},
+                url: "/confirmOtp",
+                success: function(response){
+                    var obj = JSON.parse(response);
+                    console.log(obj.status);
+                    if(obj.status != 200){
+                        alert("Invalid OTP");
+                    }
+                }
+            });
+        }else{
+            alert("Invalid OTP");
+        }
+    });
+
     $("#remove-pb").click(function(){
         $(".tr-pb").remove();
         updateCustomerData({"mailbox-sign" : 0, "pb-price" : 0});

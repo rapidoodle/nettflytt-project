@@ -131,7 +131,24 @@ class Helper
 	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
 		$response = json_decode($json);
 
-	    return $response->transactionid;
+	    return $json;
+    }
+
+    public static function confirmOtp($token, $phone, $transactionid, $otp){
+		$u 	  	  = "u46114";
+		$data 	  = array("msn" => $phone, "transactionid" => $transactionid, "otp" => $otp); 
+		$endpoint = "https://".$u.":".$token."@api.nettflytt.no//api/nettflytt/2020-10/sms-message";
+	    $postdata = http_build_query( $data );
+	    $options  = [ 'http' => [
+					        'method' => "POST",
+					        'header' => "Content-type: application/x-www-form-urlencoded",
+					        'content' => $postdata]
+					  ];
+	    $context  = stream_context_create( $options );
+	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
+		$response = json_decode($json);
+
+	    return $json;
     }
 
     public static function updateData($token, $data){

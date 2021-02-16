@@ -12,11 +12,13 @@ class APIController extends Controller
          echo $token = Helper::getToken();
         //$token = session('_initToken');
         // echo "<br>";
-         echo $sendOTP = Helper::sendOTP($token, "+4792445024", "Nettflytt");
+        // echo $sendOTP = Helper::sendOTP($token, "+4792445024", "Nettflytt");
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
         //echo Helper::getStorage($token, $storageToken);
+        "This is a sample message for Norges AS";
+        echo Helper::sendSMS($token, session('customer')['phone'], "Nettflytt", $message);
     }
     //
     public function getToken(Request $request){
@@ -86,11 +88,15 @@ class APIController extends Controller
                  'old_post'     => $request['old_zipcode'].' '.$request['old_place'],
                  'new_post'     => $request['new_zipcode'].' '.$request['new_place'],
                  'customer'     => $request->all()]);
+
+
          // send otp
         if(!$request->session()->has('customer._smsTransactionId')){
             $tId = Helper::sendOTP($token, $request['phone'], "Nettflytt");
             session()->put("customer._smsTransactionId", $tId);
         }
+
+
 
         if(!isset($request['person0'])){
             session()->put("customer.person0.name", $request['full-name']);
@@ -127,8 +133,19 @@ class APIController extends Controller
         $message = "This is a message to get when purchasing Norges";
         
         //send sms
-        sendSMS($token, session('customer')['phone'], "Nettflytt", $message);
-     }
+        Helper::sendSMS($token, session('customer')['phone'], "Nettflytt", $message);
+    }
+
+    public function confirmOtp(Request $request){
+        $token          = session("_initToken");
+        $otp            = $request->otp;
+        $token          = session("_initToken");
+        $phone          = session('customer')['phone'];
+        $transactionId  = session('customer')['_smsTransactionId'];
+        
+        //check otp
+        echo Helper::confirmOtp($token, session('customer')['phone'], $transactionId, $otp);
+    }
 
     public function updateCompanyList(Request $request){
         //empty company list;

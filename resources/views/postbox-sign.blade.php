@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<!-- <?=json_encode(session('customer'));?> -->
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
@@ -92,7 +93,7 @@
                         UADRESSERT REKLAME NEI TAKK!
                     </div>
                 </div>
-
+                <?php if(!isset(session('customer')['isAdv']) || session('customer')['isAdv'] == 0){ ?>
                 <div class="col-12 col-md-6 align-items-end height-120 d-flex">
                     <div class="w-100 d-flex mt-4 justify-content-md-between h-50px">
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub align-bottom order-2 order-md-1">Kr. 89 inkl. frakt</h6>
@@ -100,6 +101,7 @@
                         <button class="py-2 btn btn-block btn-info btn-xl order-1 order-md-2 btn-legg-till-2 btn-adv">Legg til</button>
                     </div>
                 </div>
+            <?php } ?>
             </div>
         </div>
 
