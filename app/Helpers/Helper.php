@@ -73,9 +73,23 @@ class Helper
    	public static function getStorage($token, $storageToken){
 		$u 	  = "u46114";
 	    // Get storage
-	    $url = "https://". $u .":". $token ."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$storageToken."/details";
-	    $c = file_get_contents( $url );
-	    echo 'STORAGE DETAILS: '. $c . PHP_EOL;
+	    echo $url = "https://". $u .":". $token ."@api.nettflytt.no/api/nettflytt/2020-10/storage-status/".$storageToken."/details/info";
+		    $vars = [
+		        "storageid" => $storageToken,
+		        "type" 		=> "info"
+		    ];
+		    $postdata = http_build_query( $vars );
+		    $options = [ 'http' => [
+		        'method' => "POST",
+		        'header' => "Content-type: application/x-www-form-urlencoded",
+		        'content' => $postdata
+		    ]];
+
+		    $context = stream_context_create( $options );
+		    $json = file_get_contents( $url, FALSE, $context );
+		    $res = json_decode( $json, true );
+
+		    return $json;
    	}
 
     public static function updateStorage($token, $storageToken, $data){

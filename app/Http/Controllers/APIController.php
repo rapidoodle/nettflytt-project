@@ -9,16 +9,17 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-         echo $token = Helper::getToken();
+         $token = Helper::getToken();
+        $storageToken  = Helper::initStorage($token);
         //$token = session('_initToken');
         // echo "<br>";
         // echo $sendOTP = Helper::sendOTP($token, "+4792445024", "Nettflytt");
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
-        //echo Helper::getStorage($token, $storageToken);
-        "This is a sample message for Norges AS";
-        echo Helper::sendSMS($token, session('customer')['phone'], "Nettflytt", $message);
+        echo Helper::getStorage($token, "f8BK2KyB8m5aWPjSoF6JEFF0xIM1wTcEPIVTlE9sQucbtSH2FKk2B1qr2ZW5oWbs2");
+        // "This is a sample message for Norges AS";
+        // echo Helper::sendSMS($token, session('customer')['phone'], "Nettflytt", $message);
     }
     //
     public function getToken(Request $request){
@@ -173,6 +174,8 @@ class APIController extends Controller
             $newKey = substr($key, 0, 6) == "person" ? str_replace("-", ".", $key) : $key;
             $sessionKey = 'customer.'.$newKey;
             session()->put($sessionKey, $value);
+
+            Helper::updateStorage(session('customer'));
         }
 
         echo json_encode(session('customer'));
