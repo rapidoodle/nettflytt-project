@@ -44,6 +44,7 @@ Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 });
 Route::get('/testapi', 'APIController@testapi')->name('testapi');
+Route::get('/recover', 'APIController@recoverStorage')->name('recoverStorage');
 
 Auth::routes();
 
@@ -60,3 +61,4 @@ Route::post('/confirmOtp', 'APIController@confirmOtp');
 Route::post('/updateCompanyList', 'APIController@updateCompanyList');
 Route::post('/searchCompany', 'APIController@searchCompany');
 Route::post('/updateCustomerData', 'APIController@updateCustomerData');
+Route::post('/storageStatus', 'APIController@storageStatus');

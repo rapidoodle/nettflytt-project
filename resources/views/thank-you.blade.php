@@ -44,7 +44,7 @@
             <div class="card-body">
                 <p class="my-4">Ønsker du et uforpliktende tilbud på strøm til din nye bolig?</p>
                 <div class="text-center">
-                    <button class="btn btn-info mb-4 btn-ty-ja">Ja takk!</button>
+                    <button class="btn btn-info mb-4 btn-ty-ja btn-offer" data-offer="isStrom">Ja takk!</button>
                 </div>
             </div>
         </div>
@@ -58,7 +58,7 @@
             <div class="card-body">
                 <p class="my-4">Ønsker du et uforpliktende tilbud på alarm til din nye bolig?</p>
                 <div class="text-center">
-                    <button class="btn btn-info mb-4 btn-ty-ja">Ja takk!</button>
+                    <button class="btn btn-info mb-4 btn-ty-ja btn-offer" data-offer="isBoligalarm">Ja takk!</button>
                 </div>
             </div>
         </div>
@@ -66,13 +66,13 @@
     <div class="col-12 col-md-4">
         <div class="card ty-card text-center">
             <div class="card-header">
-                <h3 class="mb-0">Forsikring</h3>
+                <h3 class="mb-0">TV/Internett</h3>
             </div>
             <div class="card-body">
                 <p class="my-4">Ønsker du et tilbud på forsikring til din nye bolig?</p>
 
                 <div class="text-center"> 
-                <button class="btn btn-info mb-4 btn-ty-ja">Ja takk!</button>
+                <button class="btn btn-info mb-4 btn-ty-ja btn-offer" data-offer="isTV">Ja takk!</button>
                 </div> 
             </div>
         </div>

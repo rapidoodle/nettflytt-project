@@ -660,7 +660,7 @@ input.person-input{
     color: #fff;
     background-color: #1D576F;
 }
-.save-person-collapse{
+.save-person-collapse, .clear-form{
     color:#138496;
     text-decoration: underline;
     font-size: 13px;
@@ -877,4 +877,19 @@ a.black-link{
 
 .dropdown-item.active, .dropdown-item:active {
     background-color: #1D576F!important;
+}
+.row:before, .row:after {
+display: flex !important;
+}
+.dropdown-item {
+    display: block!important;
+    width: 100%!important;
+    padding: .25rem 1.5rem!important;
+    clear: both!important;
+    font-weight: 400!important;
+    color: #212529!important;
+    text-align: inherit!important;
+    white-space: nowrap!important;
+    background-color: transparent!important;
+    border: 0!important;
 }

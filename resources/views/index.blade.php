@@ -6,6 +6,8 @@ $months  = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Sept
 $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December']; 
 
 $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbolig', 'tomannsbolig2' => 'Tommansbolig m/utleiedel', 'rekkehus' => 'Rekkehus', 'hybel' => 'Hybel'];
+
+// session()->put('customer', "");
 ?>
 <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out">
 <div class="row px-2 px-lg-4 mb-5">
@@ -29,19 +31,38 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
         <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid" alt="smiley couple taking selfie while packing move out" height="100%">
     </div>
 </div>  
-<form action="/getToken" method="POST" id="index-form">
+<script type="text/javascript">
+    //phone validator
+    function validateForm(){
+        if($("#isReq").val() == true || $("#isReq").val() == ""){
+            var phone = $("#phone").val();
+            phone = phone.substr(0,1) == "+" ? phone.substr(1,phone.length) : phone;
+            var message = "Ugyldig telefonnummer!";
+            if(phone.length != 10 || phone.substr(0, 2) != 47){
+                alert(message);
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return true;
+        }
+    }
+</script>
+<form action="/getToken" method="POST" id="index-form" onsubmit="return validateForm()">
 @csrf <!-- {{ csrf_field() }} -->
 <div class="row px-4 my-5 form" id="index-form-container">
     <div class="col-12 col-sm-12 col-lg-9 form-">
             <div class="row">
                 <div class="accordion bg-xs-light col-12 col-sm-12 col-lg-5">
-                    <div class="header-num">1</div> <h6>Personlig informasjon</h6>
+                    <div class="header-num">1</div> <h6>Personlig informasjon 
+                                        <a class="clear-form text-bold pointer float-right">Nullstill skjema</a></h6> 
                     <hr class="mb-2">
                     <div class="card bg-sm-light p-0 bg-xs-light" id="customer-form">
                         <div class="accordion mb-4 mb-md-0" id="extra-names">
                             <?php 
                             if(session('customer')){ 
-                                if(session('customer')['totalPerson'] != 0){
+                                if(isset(session('customer')['totalPerson']) && session('customer')['totalPerson'] != 0){
                                 for ($i=0; $i < session('customer')['totalPerson']; $i++){
                                     if(isset(session('customer')['person'.$i])){
 
@@ -83,7 +104,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                         ?>
                             <div class="card person" id="card_{{$newId}}">
                             <div class="p-2 pointer card-header d-flex align-items-center justify-content-between" id="{{$newId}}" data-toggle="collapse" data-target="#col_{{$newId}}" aria-expanded="true" aria-controls="collapseOne">
-                                <span>{{session('customer')['first_name']}} {{session('customer')['last_name']}}</span>
+                                <span>{{isset(session('customer')['first_name']) ?? session('customer')['first_name']}} {{isset(session('customer')['last_name']) ?? session('customer')['last_name']}}</span>
                                 <i class="fa fa-times float-right" data-id="card_{{$newId}}" style="margin-top:-3px;z-index:99999999999"></i>
                             </div>
                             <div id="col_{{$newId}}" class="collapse" aria-labelledby="{{$newId}}" data-parent="#extra-names">
@@ -91,19 +112,19 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                     <table class="w-100">
                                         <tr>
                                             <td>Full name</td>
-                                            <td><input type="text" class="person-input" value="{{session('customer')['first_name']}} {{session('customer')['last_name']}}" id="name_0"></td>
+                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['first_name']) ?? session('customer')['first_name']}} {{isset(session('customer')['last_name']) ?? session('customer')['last_name']}}" id="name_0"></td>
                                         </tr>
                                         <tr>
                                             <td>E-post</td>
-                                            <td><input type="text" class="person-input" value="{{session('customer')['email']}}" id="email_0"></td>
+                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['email']) ?? session('customer')['email']}}" id="email_0"></td>
                                         </tr>
                                         <tr>
                                             <td>Telefonnummer</td>
-                                            <td><input type="text" class="person-input" value="{{session('customer')['phone']}}" id="phone_0"></td>
+                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['phone']) ?? session('customer')['phone']}}" id="phone_0"></td>
                                         </tr>
                                         <tr>
                                             <td>Fødselsdato</td>
-                                            <td><input type="date" class="person-input" value="{{session('customer')['birth_year']}}-{{session('customer')['birth_month']}}-{{session('customer')['birth_day']}}" id="bday_0"></td>
+                                            <td><input type="date" class="person-input" value="{{isset(session('customer')['birth_year']) ?? session('customer')['birth_year']}}-{{isset(session('customer')['birth_month']) ?? session('customer')['birth_month']}}-{{isset(session('customer')['birth_day']) ?? session('customer')['birth_day']}}" id="bday_0"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -114,11 +135,11 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                         <div data-parent="#customer-form" class="multi-collapse">
                                 <div class="form-group">
                                     <label for="full-name">Fullt navn</label>
-                                    <input type="text" class="form-control smy-fld req-fld" id="full-name" data-conn="hk-full-name" placeholder="Fullt navn" required="true">
+                                    <input type="text" class="main-field form-control smy-fld req-fld" id="full-name" data-conn="hk-full-name" placeholder="Fullt navn" required="true">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-post</label>
-                                    <input type="email" name="email" class="form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email">
+                                    <input type="email" name="email" class="main-field form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Telefonnummer</label>
@@ -128,13 +149,13 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                                     <img src="{{ asset('images/norway-flag.png')}}" width="20px;">
                                                 </span>
                                             </div>
-                                            <input type="text" class="form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true">
+                                            <input type="text" class="main-field form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true">
                                         </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-4">
                                         <label for="day">Fødselsdato</label>
-                                        <select type="text" required="true" class="form-control req-fld" placeholder="Dag" id="birth_day" name="birth_day">
+                                        <select type="text" required="true" class="main-field form-control req-fld" placeholder="Dag" id="birth_day" name="birth_day">
                                             <option value="" disabled selected>Dag</option>
                                         <?php 
                                         for ($i=1; $i <=31 ; $i++) {?>
@@ -144,7 +165,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                     </div>
                                     <div class="col-4 pl-0">
                                         <label for="month">&nbsp;</label>
-                                        <select type="text" required="true" class="form-control req-fld"  id="birth_month" name="birth_month">
+                                        <select type="text" required="true" class="main-field form-control req-fld"  id="birth_month" name="birth_month">
                                             <option value="" disabled selected>Måned</option>
                                         <?php 
                                         foreach($months as $i => $month) {?>
@@ -154,7 +175,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                     </div>
                                     <div class="col-4 pl-0">
                                         <label for="year">&nbsp;</label>
-                                        <select type="text" required="true" class="form-control req-fld"  id="birth_year" name="birth_year">
+                                        <select type="text" required="true" class="main-field form-control req-fld"  id="birth_year" name="birth_year">
                                             <option value="" disabled selected>År</option>
                                         <?php 
                                         for ($i = 2020; $i >= 1920 ; $i--) {?>
@@ -268,7 +289,8 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                     <a class="dropdown-item pointer {{isset($others[$annet_option]) && $annet_option == $key ? 'active'  : ''}}" data-val="{{$key}}">{{$value}}</a>
                                     <?php } ?>
                                 </div>
-                                <input type="hidden" name="new_house_type" id="new_house_type" required="true">
+                                <input type="hidden" id="isReq">
+                                <input type="hidden" name="new_house_type" id="new_house_type" value="<?=isset(session('customer')['new_house_type']) ? session('customer')['new_house_type'] : ""?>">
                             </div>
                         </div>
                 </div>

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<!-- <?=json_encode(session('_token')); ?> -->
+<!-- <?=json_encode(session()->all()); ?> -->
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
@@ -51,7 +51,7 @@
 
                     <p>Med Strøm til lavpris får du en spotprisavtale, som ifølge Statistisk sentralbyrå har vært den billigste avtaleformen i over 10 år. Det betyr at du kan slappe av og fokusere på det som gir deg god energi!</p>
 
-                    <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">
+                    <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" data-type="1">
                     Bestill “Strøm til Lavpris”
                     </a>
                 </div>
@@ -63,7 +63,7 @@
 
                     <p>Strømavtalen Topp 5-garanti sikrer deg en variabel strømpris som på årlig basis alltid er blant de 10 beste, målt mot en representativ liste over konkurrentene våre.</p>
 
-                    <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill “Topp 5 Variabel”</a>
+                    <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" data-type="2">Bestill “Topp 5 Variabel”</a>
                 </div>
             </div>
         </div>  

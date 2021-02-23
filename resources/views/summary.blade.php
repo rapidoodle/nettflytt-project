@@ -1,6 +1,7 @@
 @extends('layouts.main')
 @section('content')
 <!-- <?=json_encode(session('customer'));?> -->
+<!-- <?=json_encode(session()->all());?> -->
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
@@ -55,6 +56,7 @@
             ?>
             <input type="hidden" id="total-price" value="<?=$totalPrice?>">
             <input type="hidden" id="pb-price" value="<?=$pbPrice?>">
+            <input type="hidden" id="phone" value="{{session('customer')['phone']}}">
             <table class="table">
                 <thead>
                     <tr>
@@ -99,19 +101,19 @@
             <h5>Gjennomgang av avtaler hos</h5>
             <table class="table">
                 <tr>
-                    <td width="30px"><?=isset(session('customer')['isStrom']) ? $check : $times; ?></td>
+                    <td width="30px"><?=isset(session('customer')['offers']['isStrom']) ? $check : $times; ?></td>
                     <td>Strøm</td>
                 </tr>
                 <tr>
-                    <td><?=isset(session('customer')['isTV']) ? $check : $times; ?></td>
+                    <td><?=isset(session('customer')['offers']['isTV']) ? $check : $times; ?></td>
                     <td>TV/Internet</td>
                 </tr>
                 <tr>
-                    <td><?=isset(session('customer')['isFlyttevask']) ? $check : $times; ?></td>
+                    <td><?=isset(session('customer')['offers']['isFlyttevask']) ? $check : $times; ?></td>
                     <td>Flyttevask</td>
                 </tr>
                 <tr>
-                    <td><?=isset(session('customer')['isBoligalarm']) ? $check : $times; ?></td>
+                    <td><?=isset(session('customer')['offers']['isBoligalarm']) ? $check : $times; ?></td>
                     <td>Boligalarm</td>
                 </tr>
             </table>
@@ -365,11 +367,29 @@
                 </tr>
             </table>
         </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="save-address">Lagre</button>
-        <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Avbryt</button>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="save-address">Lagre</button>
+            <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Avbryt</button>
         </div>
     </div>
+  </div>
+</div>
+
+
+
+<!--OTP-->
+<div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel" aria-hidden="true">
+  <div class="text-left modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header text-left">
+            <h5 class="modal-title">Payment Processing..</h5>      
+        </div>
+        <div class="modal-body text-center my-4">
+            <h3 id="otpCountdown"></h3>
+        </div>
+        <div class="modal-footer otpFooter">
+            <button type="button" class="btn btn-info mb-4 btn-send-vipps" data-dismiss="modal">Send Via Vipps</button>
+        </div>
   </div>
 </div>
 @endsection

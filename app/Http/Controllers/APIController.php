@@ -9,19 +9,35 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-         $token = Helper::getToken();
-        $storageToken  = Helper::initStorage($token);
-        //$token = session('_initToken');
+        // echo $token = Helper::getToken();
+        // echo json_encode(session()->all());
+        // $storageToken  = Helper::initStorage($token);
+       // echo $token = session('_initToken');
         // echo "<br>";
         // echo $sendOTP = Helper::sendOTP($token, "+4792445024", "Nettflytt");
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
-        echo Helper::getStorage($token, "f8BK2KyB8m5aWPjSoF6JEFF0xIM1wTcEPIVTlE9sQucbtSH2FKk2B1qr2ZW5oWbs2");
+        // echo Helper::getStorage($token, "JEU6bw1n24FF7GhZJhOVX3PoyBi2ZjstDvhrDKlbQ1wllcZxhNnU77KRobUWnrkY");
+        // echo Helper::tokenDetails("XU1ivp87caQsU6kBNYwNGHYlSct7eI9Pz36UpwIDDmz9n5MoF4qTvjiLPxlmfEqS");
+        // echo Helper::tokenDetails("mjwpt0bYSGdrKYlygevWmnn44lbDGJqz02OIEOrHKkSRlACvLSzT245apryFdxWP");
         // "This is a sample message for Norges AS";
         // echo Helper::sendSMS($token, session('customer')['phone'], "Nettflytt", $message);
     }
-    //
+
+    public function recoverStorage(Request $request){
+        $storageToken = $request->token;
+        Helper::getStorage(Helper::getToken(), $storageToken);
+        session(['customer'   => $newToken]);
+        return redirect('/');
+    }
+
+    public function storageStatus(Request $request){
+        $type         = $request->type;
+        $storageToken = session('_storageToken');
+        echo Helper::storageStatus(Helper::getToken(), $storageToken, $type);
+    }
+
     public function getToken(Request $request){
         $people = $request->people;
         $person = explode("---", $people);
@@ -60,12 +76,16 @@ class APIController extends Controller
             $request['pb-price'] = 0;
         }
 
-        $request['price']        = 149;
-        $request['adv-price']    = 0;
-        $request['totalPerson']  = $pctr;
-        $request['services']     = session('customer.services') != "" ? session('customer.services') : array();
-        $request['old_post']     = $request['old_zipcode'].' '.$request['old_place'];
-        $request['new_post']     = $request['new_zipcode'].' '.$request['new_place'];
+        $request['price']         = 149;
+        $request['adv-price']     = 0;
+        $request['phone']         = isset($request['phone']) ? $request['phone'] : $request['person0']['email'];
+        $request['totalPerson']   = $pctr == 0 ? 1 : $pctr;
+        $request['services']      = session('customer.services') != "" ? session('customer.services') : array();
+        $request['offers']        = session('customer.offers') != "" ? session('customer.offers') : array();
+        $request['postbox']       = session('customer.postbox') != "" ? session('customer.postbox') : array();
+
+        $request['old_post']      = $request['old_zipcode'].' '.$request['old_place'];
+        $request['new_post']      = $request['new_zipcode'].' '.$request['new_place'];
         
         // or when your server returns json
         // $content = json_decode($response->getBody(), true);
@@ -73,31 +93,19 @@ class APIController extends Controller
         unset($request['people']);
         unset($request['_token']);
         unset($request['_initToken']);
-
-        //customer unique token -- store in session
-        if(!session("_initToken")){
-            $token = Helper::getToken();
-        }else{
-            $token = session("_initToken");
+         // send otp for the first time
+        if(!$request->session()->has('_smsTransactionId')){
+            $tId = Helper::sendOTP(Helper::getToken(), $request['phone'], "Nettflytt");
+            session()->put("_smsTransactionId", $tId);
+            $request['_smsTransactionId'] = $tId;
         }
-
-        $token = Helper::getToken();
 
         session(['customer' => $request->all()]);
 
-        session(['_initToken'   => $token, 
-                 'old_post'     => $request['old_zipcode'].' '.$request['old_place'],
-                 'new_post'     => $request['new_zipcode'].' '.$request['new_place'],
-                 'customer'     => $request->all()]);
-
-
-         // send otp
-        if(!$request->session()->has('customer._smsTransactionId')){
-            $tId = Helper::sendOTP($token, $request['phone'], "Nettflytt");
-            session()->put("customer._smsTransactionId", $tId);
-        }
-
-
+        session(['old_post'          => $request['old_zipcode'].' '.$request['old_place'],
+                 'new_post'          => $request['new_zipcode'].' '.$request['new_place'],
+                 '_smsTransactionId' => session("_smsTransactionId"),
+                 'customer'          => $request->all()]);
 
         if(!isset($request['person0'])){
             session()->put("customer.person0.name", $request['full-name']);
@@ -112,40 +120,39 @@ class APIController extends Controller
 
         //save to storage
         $storage = session('customer');
-         
-        if(isset(session('customer')['_storageToken'])){
+
+        if($request->session()->has('_storageToken')){
             //update storage
-            Helper::updateStorage($storage);
+            Helper::updateStorage(Helper::getToken(), session('_storageToken'), $storage);
         }else{
             //new storage 
-            $storageToken  = Helper::initStorage($token);
+            $storageToken  = Helper::initStorage(Helper::getToken());
 
             if($storageToken){
+                session()->put("_storageToken", $storageToken);
                 session()->put("customer._storageToken", $storageToken);
+                //update storage
+                echo Helper::updateStorage(Helper::getToken(), $storageToken, $storage);
             }
         }
 
-         return redirect('/receiver/');
+
+        # echo session('customer')['_storageToken'];
+        return redirect('/receiver/');
 
     }
-
     public function sendSMS(Request $request){
-        $token   = session("_initToken");
-        $message = "This is a message to get when purchasing Norges";
-        
-        //send sms
-        Helper::sendSMS($token, session('customer')['phone'], "Nettflytt", $message);
+        $message = $request->type == 1 ? "Sample message for type 1 power supplier" : "This is a sample message for special offer type 2";
+        Helper::sendSMS(Helper::getToken(), session('customer')['phone'], "Nettflytt", $message);
     }
 
     public function confirmOtp(Request $request){
-        $token          = session("_initToken");
         $otp            = $request->otp;
-        $token          = session("_initToken");
         $phone          = session('customer')['phone'];
-        $transactionId  = session('customer')['_smsTransactionId'];
+        $transactionId  = session('_smsTransactionId');
         
         //check otp
-        echo Helper::confirmOtp($token, session('customer')['phone'], $transactionId, $otp);
+        echo Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp);
     }
 
     public function updateCompanyList(Request $request){
@@ -174,8 +181,7 @@ class APIController extends Controller
             $newKey = substr($key, 0, 6) == "person" ? str_replace("-", ".", $key) : $key;
             $sessionKey = 'customer.'.$newKey;
             session()->put($sessionKey, $value);
-
-            Helper::updateStorage(session('customer'));
+            Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));
         }
 
         echo json_encode(session('customer'));

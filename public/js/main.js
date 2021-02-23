@@ -1,23 +1,27 @@
 $(document).ready(function() {
 
 
-    var fullName   = $("#full-name");
-    var email      = $("#email");
-    var phone      = $("#phone");
-    var day        = $("#birth_day");
-    var month      = $("#birth_month");
-    var year       = $("#birth_year");
-    var csrf       = $("#csrf");
-    var rcvrSlct   = "";
-    var rcvrNum    = "";
-    var rcvrDlt    = "";
-    var months     = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
-    var companies  = [];
-    var searchComp = $("#receiver-search-input");
-    var globalAllNames   = [];
-    var movingDate = $("#moving-date");
+    var fullName        = $("#full-name");
+    var email           = $("#email");
+    var phone           = $("#phone");
+    var day             = $("#birth_day");
+    var month           = $("#birth_month");
+    var year            = $("#birth_year");
+    var csrf            = $("#csrf");
+    var rcvrSlct        = "";
+    var rcvrNum         = "";
+    var rcvrDlt         = "";
+    var months          = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
+    var companies       = [];
+    var searchComp      = $("#receiver-search-input");
+    var globalAllNames  = [];
+    var movingDate      = $("#moving-date");
     var isPowerSupplier = false;
-    var companyNumbers = [];
+    var companyNumbers  = [];
+    var otpInterval     = "";
+    var otpTimeout      = 1000;
+    var otpConfirmed    = false;
+    var otpProcessing   = false;
     //INDEX PAGE
 
     $(".save-person-collapse-cont").hide();
@@ -25,12 +29,19 @@ $(document).ready(function() {
         if($("#name_0").length != 0){
             if(fullName.val() != "" || email.val() != "" || phone.val() != "" || day.val() != null || month.val() != null || year.val() != null){
                 $(".req-fld").attr("required", true);
+                $(".isReq").val(true);
                 $(".save-person-collapse-cont").show();
             }else{
                 $(".req-fld").removeAttr("required");
+                $(".isReq").val(false);
                 $(".save-person-collapse-cont").hide();
             }
         }
+    });
+    $(".clear-form").click(function(){
+        $(".main-field").val('');
+        $("#isReq").val(false);
+        $(".req-fld").removeAttr("required");
     });
 
     if($("#customer-form").length != 0){
@@ -129,7 +140,6 @@ $(document).ready(function() {
         var company = $(this).attr("data-parent");
         if($("#"+company).children().eq(1).text() == "NorgesEnergi AS"){
             updateCustomerData({"isNorges" : 0});
-            sendSMS();
         }
         $("#"+company).remove();
         updateCompanyList();
@@ -207,6 +217,20 @@ $(document).ready(function() {
             searchCompany(val, "orgnr");
         }
     })
+    $("#receiver-search-input").on('keypress',function(e) {
+        if($(this).val().length > 1){
+            if(e.which == 13) {
+                var val = searchComp.val();
+                $(".search-no-result").hide();
+                if(val.length > 1){
+                    var html = '<tr class="item"><td align="center">Laster selskaper..</td></tr>';
+                    $(".receiver-search-result").html(html);
+                    $(".receiver-search-result").show();
+                    searchCompany(val, "orgnr");
+                }
+            }
+        }
+    });
 
     if($("#company-search").length > 0){
         loadingCompanies();
@@ -225,15 +249,7 @@ $(document).ready(function() {
     });
     $("#btn-add-postbox").click(function(){
         updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1});
-        sendSMS();
-    });
-
-    $(".btn-offer").click(function(){
-        console.log($(this).attr("data-offer"));
-        var fields = {};
-        fields[$(this).attr("data-offer")] = 1;
-
-        updateCustomerData(fields);
+        sendSMS(2);
     });
 
     $(".btn-postbox").click(function(){
@@ -246,7 +262,9 @@ $(document).ready(function() {
 
     $(".btn-go-power").click(function(){
         updateCustomerData({"isNorges" : 1});
-        sendSMS();
+        var type = $(this).attr("data-type");
+
+        sendSMS(type);
         // window.location.href = "/offers/";
     });
 
@@ -320,7 +338,7 @@ $(document).ready(function() {
         //if norges is selected from the list
         if(companyName == "NorgesEnergi AS"){
             updateCustomerData({"isNorges" : 1});
-            sendSMS();
+            sendSMS(2);
         }
     });
 
@@ -339,6 +357,15 @@ $(document).ready(function() {
       var prev = $("div.card-header.active").removeClass("active");
     })
 
+    $(".btn-offer").click(function(){
+        console.log($(this).attr("data-offer"));
+        var fields = {};
+        fields["offers."+$(this).attr("data-offer")] = 1;
+
+        updateCustomerData(fields);
+    });
+
+
     //POSTBOX
     if($(".pb-field").length > 0){
         postboxNames();
@@ -348,7 +375,9 @@ $(document).ready(function() {
     });
 
     $(".pb-address").click(function(){
-        updateCustomerData({"pb-address" : $('input[name="radios"]:checked').val()});
+        var names = $(".postbox-summary").html().replace(/\<br>/g, ',');
+        console.log(names);
+        updateCustomerData({"postbox.address" : $('input[name="radios"]:checked').val(), "postbox.names" : names});
         window.location.href = "/summary/";
     });
 
@@ -374,17 +403,6 @@ $(document).ready(function() {
     $(".btn-next-summary").click(function(){
         console.log($(this).attr("data-power"));
         $('#addressModal').modal('toggle');
-
-
-        // if(!$(this).attr("data-power")){
-        //         window.location.href = "/summary/";
-        // }else{
-        //     if(globalAllNames.length == 0){
-        //         $('#confirmModal').modal('toggle')
-        //     }else{
-        //         window.location.href = "/summary/";
-        //     }
-        // }
     })
 
     $(".continue-summary").click(function(){
@@ -405,22 +423,12 @@ $(document).ready(function() {
     });
 
     //SUMMARY
+    $(".otpFooter").hide();
     $("#btn-summary-send").click(function(){
         var otp = $("#otp").val();
-        console.log(otp);
         if(otp.length > 0){
-            $.ajax({
-                type: "POST",
-                data: { _token : csrf.val(), otp : otp},
-                url: "/confirmOtp",
-                success: function(response){
-                    var obj = JSON.parse(response);
-                    console.log(obj.status);
-                    if(obj.status != 200){
-                        alert("Invalid OTP");
-                    }
-                }
-            });
+            $('#otpModal').modal('toggle');
+            confirmOtp();
         }else{
             alert("Invalid OTP");
         }
@@ -527,6 +535,64 @@ $(document).ready(function() {
         });
     }
 
+    function confirmOtp(){
+        otpProcessing = true;
+        var otp           = $("#otp").val();
+        var otpTimeoutSec = 15;
+        var newPhone = phone = phone.val().substr(0,1) == "+" ? phone.val().substr(3, phone.val().length) : phone.val().substr(2,phone.val().length);
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val(), otp : otp},
+            url: "/confirmOtp",
+            success: function(response){
+                var obj = JSON.parse(response);
+                console.log(obj.status);
+
+                if(obj.status == 0){
+
+                    //get the payment status
+                    otpInterval = setInterval(function(){
+                        if(otpProcessing == false){
+                            otpProcessing = true;
+                            console.log("Checking payment status..");
+                            $.ajax({
+                                type: "POST",
+                                data: { _token : csrf.val(), type : "payment"},
+                                url: "/storageStatus",
+                                success: function(response){
+                                    console.log(response)
+                                    otpProcessing == false;
+                                    if(response.status != "Ok"){
+                                        $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                                        clearInterval(otpInterval);
+                                        window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
+                                    }
+                                }
+                            });
+                        }
+
+                        otpTimeoutSec--;
+                        if(otpTimeoutSec == 0){
+                            $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                            clearInterval(otpInterval);
+                            window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
+                        }
+
+                        $("#otpCountdown").html(otpTimeoutSec);
+
+                    }, otpTimeout);
+
+                }else{
+                    $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                    clearInterval(otpInterval);
+                    window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
+                }
+                //otp processing is done, can check again if failed.
+                otpProcessing = false;
+            }
+        });
+    }
+
     function updateCustomerData(data){
         $.ajax({
             type: "POST",
@@ -538,10 +604,10 @@ $(document).ready(function() {
         });
     }
 
-    function sendSMS(){
+    function sendSMS(type){
         $.ajax({
             type: "POST",
-            data: { _token : csrf.val()},
+            data: { _token : csrf.val(), type: type},
             url: "/sendSMS",
             success: function(response){
                 console.log(response);

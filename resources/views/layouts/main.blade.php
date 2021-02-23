@@ -28,6 +28,7 @@
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                         <a href="/" class="dropdown-item" type="button">Hjem</a>
+                        <a href="/" class="dropdown-item" type="button">Start flytting</a>
                         <a href="/about-us" class="dropdown-item" type="button">Personvern</a>
                         <a href="/contact-us" class="dropdown-item" type="button">Kontakt oss</a>
                     </div>

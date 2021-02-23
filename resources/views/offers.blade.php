@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<!-- <?=json_encode(session('customer')); ?> -->
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
@@ -57,6 +58,7 @@
                     <div class="col-12 col-md-8">
                         <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
                         <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+                        <?php if(!isset(session('customer')['offers']['isStrom']) || session('customer')['offers']['isStrom'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
                                 <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nei takk</a>
@@ -65,6 +67,7 @@
                                 <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" data-offer="isStrom">Ja takk!</a>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                     <div class="col col-md-4 d-none d-md-inline">
                         <img src="{{ asset('images/windmill.png')}}" class="img-fluid" alt="windmill image">
@@ -90,6 +93,7 @@
                         <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
                         <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
 
+                        <?php if(!isset(session('customer')['offers']['isTV']) || session('customer')['offers']['isTV'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
                                 <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Nei takk</a>
@@ -98,6 +102,7 @@
                                 <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" data-offer="isTV">Ja takk!</a>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                     <div class="col col-md-4 d-none d-md-inline">
                         <img src="{{ asset('images/windmill.png')}}" class="img-fluid">
@@ -120,7 +125,7 @@
                     <div class="col-12 col-md-8">
                         <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
                         <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
-
+                        <?php if(!isset(session('customer')['offers']['isFlyttevask']) || session('customer')['offers']['isFlyttevask'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
                                 <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Nei takk</a>
@@ -129,6 +134,7 @@
                                 <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" data-offer="isFlyttevask">Ja takk!</a>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                     <div class="col col-md-4 d-none d-md-inline">
                         <img src="{{ asset('images/windmill.png')}}" class="img-fluid">
@@ -152,7 +158,7 @@
                     <div class="col-12 col-md-8">
                         <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
                         <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
-
+                        <?php if(!isset(session('customer')['offers']['isBoligalarm']) || session('customer')['offers']['isBoligalarm'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
                                 <a class="btn btn-info btn-block btn-blur py-3" href="/postbox-sign">Nei takk</a>
@@ -161,6 +167,7 @@
                                 <a class="btn btn-info btn-block py-3 btn-offer" href="/postbox-sign" data-offer="isBoligalarm">Ja takk!</a>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
                     <div class="col col-md-4 d-none d-md-inline">
                         <img src="{{ asset('images/windmill.png')}}" class="img-fluid">
