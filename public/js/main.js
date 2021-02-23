@@ -38,6 +38,8 @@ $(document).ready(function() {
             }
         }
     });
+    
+    $("#isReq").val(false);
     $(".clear-form").click(function(){
         $(".main-field").val('');
         $("#isReq").val(false);
