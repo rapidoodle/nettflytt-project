@@ -132,6 +132,7 @@ class Helper
 
     public static function sendOTP($token, $phone, $sender = "Nettflytt"){
 		$u 	  	  = "u46114";
+		$phone 	  = substr($phone, 0) != "+" ? "+".$phone : $phone;
 		$data 	  = array("msn" => $phone, "sender" => $sender); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
