@@ -158,13 +158,14 @@
                     <td><?php
                     $people = explode(",", $service[2]);
                     $names  = "";
+
                     if(count($people) > 1){
                         foreach ($people as $person) {
                             $names .= session('customer')[$person]['name'].", ";
                         }
                         echo $names = rtrim($names, ", ");
                     }else{
-                        echo session('customer')['person0']['name'];
+                        echo session('customer')[$service[2]]['name'];
                     }
                     ?></td>
                     <td> <i class="fas fa-times pointer company-list" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$service[0]}}" data-company-number="{{$service[1]}}" data-company-people="{{$service[2]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i></td>

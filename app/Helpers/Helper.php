@@ -31,7 +31,7 @@ class Helper
     public static function getToken(){
     	$dateNow = date("Y-m-d H:i:s");
     	//check if token exists
-    	echo session("_tokenTimeout").'-------'.$dateNow;
+    	// echo session("_tokenTimeout").'-------'.$dateNow;
 
     	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") > $dateNow){
     		return session("_accessToken");
@@ -134,8 +134,7 @@ class Helper
 
     public static function sendOTP($token, $phone, $sender = "Nettflytt"){
 		$u 	  	  = "u46114";
-		$phone 	  = substr($phone, 0, 1) != "+" ? "+".$phone : $phone;
-		$data 	  = array("msn" => $phone, "sender" => $sender); 
+		$data 	  = array("msn" => "+47".$phone, "sender" => $sender); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
@@ -152,7 +151,7 @@ class Helper
 
     public static function sendSMS($token, $phone, $sender = "Nettflytt", $message){
 		$u 	  	  = "u46114";
-		$data 	  = array("msn" => $phone, "sender" => $sender, "message" => $message); 
+		$data 	  = array("msn" => "+47".$phone, "sender" => $sender, "message" => $message); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/sms-message";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
@@ -169,8 +168,7 @@ class Helper
 
     public static function confirmOtp($token, $phone, $transactionid, $otp){
 		$u 	  	  = "u46114";
-		$phone 	  = substr($phone, 0, 1) != "+" ? "+".$phone : $phone;
-		$data 	  = array("msn" => $phone, "transactionid" => $transactionid, "otp" => $otp); 
+		$data 	  = array("msn" => "+47".$phone, "transactionid" => $transactionid, "otp" => $otp); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [

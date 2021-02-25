@@ -428,6 +428,7 @@ $(document).ready(function() {
     $(".otpFooter").hide();
     $("#btn-summary-send").click(function(){
         var otp = $("#otp").val();
+        $("#otpCountdown").html();  
         if(otp.length > 0){
             $('#otpModal').modal('toggle');
             confirmOtp();
@@ -551,7 +552,12 @@ $(document).ready(function() {
                 var obj = JSON.parse(response);
                 console.log(obj.status);
 
-                if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
+                if(obj.status == 0 && obj.strex_resultcode == "Ok"){
+                    $("#otpCountdown").html("Suksess!");
+                    clearInterval(otpInterval);
+                    $("#otpModal").toggle();
+                    window.location.href = "/thank-you";
+                }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
                     $("#otpCountdown").html("OTP Feil. Vennligst prøv igjen");
                 }else if(obj.status == 530){
                     $("#otpCountdown").html("Payment failed. Attempting another payment method..");
@@ -559,13 +565,12 @@ $(document).ready(function() {
                     otpInterval = setInterval(function(){
                         if(otpProcessing == false){
                             otpProcessing = true;
-                            console.log("Checking payment status..");
+                            console.log("Checking payment status again..");
                             $.ajax({
                                 type: "POST",
                                 data: { _token : csrf.val()},
                                 url: "/getOtpStatus",
                                 success: function(response){
-                                    console.log(response)
                                     otpProcessing == false;
                                     if(response.status == 0 && response.strex_resultcode == "Ok"){
                                         $("#otpCountdown").html("Suksess!");
@@ -580,7 +585,7 @@ $(document).ready(function() {
                         if(otpTimeoutSec == 0){
                             $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                             clearInterval(otpInterval);
-                            window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
+                            // window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
                         }
 
                         $("#otpCountdown").html(otpTimeoutSec);

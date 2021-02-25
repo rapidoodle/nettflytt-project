@@ -149,7 +149,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                                     <img src="{{ asset('images/norway-flag.png')}}" width="20px;">
                                                 </span>
                                             </div>
-                                            <input type="text" class="main-field form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true">
+                                            <input type="number" class="main-field form-control smy-fld req-fld" data-conn="hk-phone" id="phone" placeholder="12345678" required="true" maxlength="8" minlength="8">
                                         </div>
                                 </div>
                                 <div class="row">
@@ -256,7 +256,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                 <select type="text" required="true" class="form-control"  id="moving_date_year" name="moving_date_year">
                                     <option value="" disabled selected>År</option>
                                 <?php 
-                                for ($i = 2023; $i >= 2020; $i--) {?>
+                                for ($i = 2023; $i >= 2021; $i--) {?>
                                     <option value="<?=$i?>"{{isset(session('customer')['moving_date_year']) && session('customer')['moving_date_year'] == $i ? 'selected' : ''}}><?=$i?></option>
                                 <?php } ?>
                                 </select>
