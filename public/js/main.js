@@ -585,7 +585,7 @@ $(document).ready(function() {
                         if(otpTimeoutSec == 0){
                             $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                             clearInterval(otpInterval);
-                            // window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
+                            window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
                         }
 
                         $("#otpCountdown").html(otpTimeoutSec);
@@ -593,7 +593,7 @@ $(document).ready(function() {
                 }else{
                     $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                     clearInterval(otpInterval);
-                    // window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
+                    window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
                 }
                 //otp processing is done, can check again if failed.
                 otpProcessing = false;
