@@ -31,6 +31,8 @@ class Helper
     public static function getToken(){
     	$dateNow = date("Y-m-d H:i:s");
     	//check if token exists
+    	echo session("_tokenTimeout").'-------'.$dateNow;
+
     	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") > $dateNow){
     		return session("_accessToken");
     	}else{
@@ -132,7 +134,7 @@ class Helper
 
     public static function sendOTP($token, $phone, $sender = "Nettflytt"){
 		$u 	  	  = "u46114";
-		$phone 	  = substr($phone, 0) != "+" ? "+".$phone : $phone;
+		$phone 	  = substr($phone, 0, 1) != "+" ? "+".$phone : $phone;
 		$data 	  = array("msn" => $phone, "sender" => $sender); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
@@ -167,6 +169,7 @@ class Helper
 
     public static function confirmOtp($token, $phone, $transactionid, $otp){
 		$u 	  	  = "u46114";
+		$phone 	  = substr($phone, 0, 1) != "+" ? "+".$phone : $phone;
 		$data 	  = array("msn" => $phone, "transactionid" => $transactionid, "otp" => $otp); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
@@ -178,6 +181,23 @@ class Helper
 	    $context  = stream_context_create( $options );
 	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
 		$response = json_decode($json);
+
+	    // return json_encode([$token, $phone, $transactionid, $otp]);
+	    return $json;
+    }
+
+    public static function getOtpStatus($token, $transactionid){
+		$u 	  	  = "u46114";
+		$data 	  = array("transactionid" => $transactionid); 
+		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
+	    $postdata = http_build_query( $data );
+	    $options  = [ 'http' => [
+					        'method' => "POST",
+					        'header' => "Content-type: application/x-www-form-urlencoded",
+					        'content' => $postdata]
+					  ];
+	    $context  = stream_context_create( $options );
+	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
 
 	    return $json;
     }

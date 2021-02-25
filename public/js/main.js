@@ -541,7 +541,8 @@ $(document).ready(function() {
         otpProcessing = true;
         var otp           = $("#otp").val();
         var otpTimeoutSec = 15;
-        var newPhone = phone = phone.val().substr(0,1) == "+" ? phone.val().substr(3, phone.val().length) : phone.val().substr(2,phone.val().length);
+        console.log(phone);
+        var newPhone = phone.val().substr(0,1) == "+" ? phone.val().substr(3, phone.val().length) : phone.val().substr(2,phone.val().length);
         $.ajax({
             type: "POST",
             data: { _token : csrf.val(), otp : otp},
@@ -550,29 +551,31 @@ $(document).ready(function() {
                 var obj = JSON.parse(response);
                 console.log(obj.status);
 
-                if(obj.status == 0){
-
-                    //get the payment status
+                if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
+                    $("#otpCountdown").html("OTP Feil. Vennligst prøv igjen");
+                }else if(obj.status == 530){
+                    $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                }else if(obj.status == 0 && obj.strex_resultcode == "Queued"){
                     otpInterval = setInterval(function(){
                         if(otpProcessing == false){
                             otpProcessing = true;
                             console.log("Checking payment status..");
                             $.ajax({
                                 type: "POST",
-                                data: { _token : csrf.val(), type : "payment"},
-                                url: "/storageStatus",
+                                data: { _token : csrf.val()},
+                                url: "/getOtpStatus",
                                 success: function(response){
                                     console.log(response)
                                     otpProcessing == false;
-                                    if(response.status != "Ok"){
-                                        $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                                    if(response.status == 0 && response.strex_resultcode == "Ok"){
+                                        $("#otpCountdown").html("Suksess!");
                                         clearInterval(otpInterval);
+                                        $("#otpModal").toggle();
                                         window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
                                     }
                                 }
                             });
                         }
-
                         otpTimeoutSec--;
                         if(otpTimeoutSec == 0){
                             $("#otpCountdown").html("Payment failed. Attempting another payment method..");
@@ -581,13 +584,11 @@ $(document).ready(function() {
                         }
 
                         $("#otpCountdown").html(otpTimeoutSec);
-
                     }, otpTimeout);
-
                 }else{
                     $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                     clearInterval(otpInterval);
-                    window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
+                    // window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
                 }
                 //otp processing is done, can check again if failed.
                 otpProcessing = false;

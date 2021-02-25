@@ -14,7 +14,8 @@ class APIController extends Controller
         // $storageToken  = Helper::initStorage($token);
        // echo $token = session('_initToken');
         // echo "<br>";
-        // echo $sendOTP = Helper::sendOTP($token, "+4792445024", "Nettflytt");
+        echo $sendOTP = Helper::sendOTP(Helper::getToken(), "+4792445024", "Nettflytt");
+        session()->put("_smsTransactionId", $sendOTP);
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
@@ -153,6 +154,12 @@ class APIController extends Controller
         
         //check otp
         echo Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp);
+    }
+
+    public function getOtpStatus(Request $request){
+        $transactionId  = session('_smsTransactionId');
+        //check otp
+        echo Helper::getOtpStatus(Helper::getToken(), $transactionId);
     }
 
     public function updateCompanyList(Request $request){

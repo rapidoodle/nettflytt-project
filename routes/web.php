@@ -62,3 +62,4 @@ Route::post('/updateCompanyList', 'APIController@updateCompanyList');
 Route::post('/searchCompany', 'APIController@searchCompany');
 Route::post('/updateCustomerData', 'APIController@updateCustomerData');
 Route::post('/storageStatus', 'APIController@storageStatus');
+Route::post('/getOtpStatus', 'APIController@getOtpStatus');
