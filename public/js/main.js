@@ -571,7 +571,7 @@ $(document).ready(function() {
                                         $("#otpCountdown").html("Suksess!");
                                         clearInterval(otpInterval);
                                         $("#otpModal").toggle();
-                                        window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
+                                        window.location.href = "/thank-you";
                                     }
                                 }
                             });
