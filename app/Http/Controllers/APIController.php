@@ -79,8 +79,7 @@ class APIController extends Controller
 
         $request['price']         = 149;
         $request['adv-price']     = 0;
-        $request['phone']         = isset($request['phone']) ? $request['phone'] : $request['person0']['email'];
-        $request['phone']         = strlen($request['phone']) > 8 ? substr($request['phone'], 2, strlen($request['phone'])) : $request['phone'];
+        $request['phone']         = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
         $request['totalPerson']   = $pctr == 0 ? 1 : $pctr;
         $request['services']      = session('customer.services') != "" ? session('customer.services') : array();
         $request['offers']        = session('customer.offers') != "" ? session('customer.offers') : array();
