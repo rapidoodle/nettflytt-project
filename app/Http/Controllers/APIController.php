@@ -80,6 +80,7 @@ class APIController extends Controller
         $request['price']         = 149;
         $request['adv-price']     = 0;
         $request['phone']         = isset($request['phone']) ? $request['phone'] : $request['person0']['email'];
+        $request['phone']         = strlen($request['phone']) > 8 ? substr($request['phone'], 2, strlen($request['phone'])) : $request['phone'];
         $request['totalPerson']   = $pctr == 0 ? 1 : $pctr;
         $request['services']      = session('customer.services') != "" ? session('customer.services') : array();
         $request['offers']        = session('customer.offers') != "" ? session('customer.offers') : array();
@@ -144,7 +145,7 @@ class APIController extends Controller
     }
     public function sendSMS(Request $request){
         $message = $request->type == 1 ? "Sample message for type 1 power supplier" : "This is a sample message for special offer type 2";
-        Helper::sendSMS(Helper::getToken(), session('customer')['phone'], "Nettflytt", $message);
+        Helper::sendSMS(Helper::getToken(), session('customer')['phone'], 2099, $message);
     }
 
     public function confirmOtp(Request $request){
