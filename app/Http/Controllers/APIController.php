@@ -143,7 +143,11 @@ class APIController extends Controller
 
     }
     public function sendSMS(Request $request){
-        $message = $request->type == 1 ? "Sample message for type 1 power supplier" : "This is a sample message for special offer type 2";
+        $message = $request->type == 1 ? "Topp 5 Garanti
+«Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Topp 5 garanti. Du får strøm til kun 77,99 øre/kWh! Ingen månedsavgift. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/topp-5-garanti/. Vennligst bekreft avtalen med å svare JA på denne meldingen.
+Mvh Nettflytt.» " : "Strøm til Lavpris
+«Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Strøm til lavpris. Du får strøm til spotpris! Månedsbeløp 27 kr + 3,49øre/kWh. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/strom-til-lavpris/. Vennligst bekreft avtalen med å svare JA på denne meldingen.
+Mvh Nettflytt.»";
         Helper::sendSMS(Helper::getToken(), session('customer')['phone'], 2099, $message);
     }
 
