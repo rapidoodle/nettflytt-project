@@ -32,9 +32,9 @@ class Helper
     	$dateNow = date("Y-m-d H:i:s");
     	//check if token exists
     	// echo session("_tokenTimeout").'-------'.$dateNow;
-    	$isValid = session("_tokenTimeout") > $dateNow;
+    	// $isValid = session("_tokenTimeout") > $dateNow;
 
-    	if(session("_accessToken") !== null && session("_tokenTimeout") != null && $isValid == 1){
+    	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") == 1){
     		return session("_accessToken");
     	}else{
 		    $u 	  = "u46114";
