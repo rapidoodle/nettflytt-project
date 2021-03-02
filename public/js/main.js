@@ -170,6 +170,7 @@ $(document).ready(function() {
     });
     //select option
     $(".index-option").click(function(){
+        console.log($(this).text());
         $(".index-option").removeClass("active-option");
         $(this).addClass("active-option");
         var val = $(this).attr("data-value");
