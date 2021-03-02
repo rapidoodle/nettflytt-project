@@ -106,7 +106,9 @@
         </div>
 
     </div>
-    <?php if(!isset(session('customer')['isNorges']) || session('customer')['isNorges'] == 0){ ?>
+    <?php 
+
+    if(!Session::has('customer.isNorges') || session('customer')['isNorges'] == 0){ ?>
     <div class="col-12 col-lg-3 text-center">
         <div class="collapse multi-collapse show">
                 <h5 class="d-lg-none mt-4">Kampane! Gratis postkasseskilt ved bestilling av strøm</h5>

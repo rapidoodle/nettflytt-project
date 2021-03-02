@@ -42,7 +42,7 @@
 <div class="row px-4 mt-0 mb-4 mb-md-5 my-lg-5  mt-lg-0">
     <div class="col-12 col-lg-8">
         <div class="accordion" id="offersAcdn">
-            <?php if(!isset(session('customer')['isNorges']) || session('customer')['isNorges'] == 0){ ?>
+            <?php if(!Session::has('customer.isNorges') || session('customer')['isNorges'] == 0){ ?>
           <div class="card">
             <div class="card-header active" id="headingOne">
               <h2 class="mb-0">
@@ -78,14 +78,14 @@
           </div>
       <?php } ?>
           <div class="card">
-            <div class="card-header  <?=isset(session('customer')['isNorges']) && session('customer')['isNorges'] == 1 ? 'active' : ''?>" id="headingTwo">
+            <div class="card-header  <?=Session::has('customer.isNorges') && session('customer')['isNorges'] == 1 ? 'active' : ''?>" id="headingTwo">
               <h2 class="mb-0">
                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                   TV/Internet <i class="fas fa-lock"></i>
                 </button>
               </h2>
             </div>
-            <div id="collapseTwo" class="collapse <?=isset(session('customer')['isNorges']) && session('customer')['isNorges'] == 1  ? 'show' : ''?>" aria-labelledby="headingTwo" data-parent="#offersAcdn">
+            <div id="collapseTwo" class="collapse <?=Session::has('customer.isNorges') && session('customer')['isNorges'] == 1  ? 'show' : ''?>" aria-labelledby="headingTwo" data-parent="#offersAcdn">
                <div class="card-body">
                 <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
                 <div class="row">
