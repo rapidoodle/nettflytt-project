@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<!-- <?=json_encode(session('customer')); ?> -->
+<?=json_encode(session('customer')); ?>
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
@@ -61,10 +61,10 @@
                         <?php if(!isset(session('customer')['offers']['isStrom']) || session('customer')['offers']['isStrom'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3 btn-actions" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" data-offer="isStrom">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" data-offer="isStrom">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>
@@ -96,10 +96,10 @@
                         <?php if(!isset(session('customer')['offers']['isTV']) || session('customer')['offers']['isTV'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3 btn-actions" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" data-offer="isTV">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" data-offer="isTV">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>
@@ -128,10 +128,10 @@
                         <?php if(!isset(session('customer')['offers']['isFlyttevask']) || session('customer')['offers']['isFlyttevask'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3 btn-actions" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" data-offer="isFlyttevask">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" data-offer="isFlyttevask">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>
@@ -161,10 +161,10 @@
                         <?php if(!isset(session('customer')['offers']['isBoligalarm']) || session('customer')['offers']['isBoligalarm'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3" href="/postbox-sign">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3 btn-actions" href="/postbox-sign">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer" href="/postbox-sign" data-offer="isBoligalarm">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" href="/postbox-sign" data-offer="isBoligalarm">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>
@@ -250,7 +250,7 @@
         
     </div>
     <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
-        <a href="/postbox-sign/" id="btn-go-offer" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
+        <a id="btn-go-postbox" class="btn btn-next float-right">Videre <i class="fas fa-arrow-right"></i></a>
     </div>
 </div>
 

@@ -697,6 +697,27 @@ a.page-link{
 #contact-page .card-body i{
     font-size: 15px;
 }
+h5.loading > span:after {
+    content: ' .';
+    animation: dots 3s steps(1, end) infinite;
+}
+@keyframes dots {
+    0%, 12.5% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    37.5% {
+        text-shadow: .5em 0;
+    }
+    50% {
+        text-shadow: .5em 0, 1em 0;
+    }
+    62.5% {
+        text-shadow: .5em 0, 1em 0, 1.5em 0;
+    }
+}
 /*responsive mobile*/
 @media (max-width: 992px) {
     sub.sub-3{

@@ -383,7 +383,7 @@
   <div class="text-left modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
         <div class="modal-header text-left">
-            <h5 class="modal-title">Behandler..</h5>      
+            <h5 class="modal-title loading">Behandler<span></span></h5>      
         </div>
         <div class="modal-body text-center my-4">
             <h3 id="otpCountdown"></h3>

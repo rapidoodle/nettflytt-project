@@ -272,7 +272,7 @@ $(document).ready(function() {
 
     $("#btn-go-offer").click(function(){
         var isNorges = false;
-        var isPowerSupplier
+        var isPowerSupplier;
         $(".cl").each(function(ind, elem){
             companies.push($(elem).text());
             if($(elem).text() == "NorgesEnergi AS"){
@@ -346,6 +346,12 @@ $(document).ready(function() {
 
 
     //OFFERS PAGE
+
+    $("#btn-go-postbox").click(function(){
+        // alert($("a.btn-actions:visible").length);
+        alert("Venligst svar JA eller NEI for kategoriene i boligsjekken");
+    });
+
     $('#offersAcdn').collapse({
       toggle: false
     });

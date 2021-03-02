@@ -9,13 +9,13 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-        // echo $token = Helper::getToken();
+        echo $token = Helper::getToken();
         // echo json_encode(session()->all());
         // $storageToken  = Helper::initStorage($token);
        // echo $token = session('_initToken');
         // echo "<br>";
-        echo $sendOTP = Helper::sendOTP(Helper::getToken(), "+4792445024", "Nettflytt");
-        session()->put("billing_id_strex", $sendOTP);
+        // echo $sendOTP = Helper::sendOTP(Helper::getToken(), "+4792445024", "Nettflytt");
+        // session()->put("billing_id_strex", $sendOTP);
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
@@ -53,7 +53,7 @@ class APIController extends Controller
                 $firstName = Helper::firstName($record['0']);
                 $lastName  = Helper::lastName($record['0']);
                 if($firstName != "" && $lastName != "" && $record[1] != "" && $record[2] != ""){
-                    $request['person'.$pos] = array("name" => $record[0], "under18" => false, "bday" => $record[3], "last_name" => $lastName, "first_name" => $firstName, "phone" => $record[1], "email" => $record[2]);
+                    $request['person'.$pos] = array("name" => $record[0], "bday" => $record[3], "last_name" => $lastName, "first_name" => $firstName, "phone" => $record[1], "email" => $record[2]);
                     $pctr++;
                 }
             }
@@ -111,7 +111,6 @@ class APIController extends Controller
 
         if(!isset($request['person0'])){
             session()->put("customer.person0.name", $request['full-name']);
-            session()->put("customer.person0.under18", true);
             session()->put("customer.person0.bday", $request['birth_year'].'-'.$request['birth_month'].'-'.$request['birth_day']);
 
             session()->put("customer.person0.last_name", $request['last_name']);
@@ -144,7 +143,7 @@ class APIController extends Controller
 
     }
     public function sendSMS(Request $request){
-        $message = $request->type == 1 ? "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Topp 5 garanti. Du får strøm til kun 77,99 øre/kWh! Ingen månedsavgift. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/topp-5-garanti/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Nettflytt. " : "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Strøm til lavpris. Du får strøm til spotpris! Månedsbeløp 27 kr + 3,49øre/kWh. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/strom-til-lavpris/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Nettflytt.";
+        $message = $request->type == 1 ? "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Topp 5 garanti. Du får strøm til kun 77,99 øre/kWh! Ingen månedsavgift. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/topp-5-garanti/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Nettflytt." : "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Strøm til lavpris. Du får strøm til spotpris! Månedsbeløp 27 kr + 3,49øre/kWh. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/strom-til-lavpris/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Nettflytt.";
         
         Helper::sendSMS(Helper::getToken(), session('customer')['phone'], 2099, $message);
     }

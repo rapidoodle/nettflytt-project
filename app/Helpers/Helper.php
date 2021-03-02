@@ -32,8 +32,9 @@ class Helper
     	$dateNow = date("Y-m-d H:i:s");
     	//check if token exists
     	// echo session("_tokenTimeout").'-------'.$dateNow;
+    	$isValid = session("_tokenTimeout") > $dateNow;
 
-    	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") > $dateNow){
+    	if(session("_accessToken") !== null && session("_tokenTimeout") != null && $isValid == 1){
     		return session("_accessToken");
     	}else{
 		    $u 	  = "u46114";
@@ -54,9 +55,9 @@ class Helper
 		    $res 	 = json_decode($json, true);
 
 		    session()->put("_accessToken", $res["token"]);
-		    session()->put("_tokenTimeout", $res['timeout']);
+		    session()->put("_tokenTimeout", date("Y-m-d H:i:s", strtotime($res['_created']) + 60 * 30));
 
-		    return $res['token'];
+		    return json_encode($res);
     	}
     }
 
