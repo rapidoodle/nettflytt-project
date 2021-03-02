@@ -43,6 +43,10 @@ Route::get('/terms-of-use', function () {
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');
 });
+Route::get('/cookies-consent', function () {
+    return view('cookies-consent');
+});
+
 Route::get('/testapi', 'APIController@testapi')->name('testapi');
 Route::get('/recover', 'APIController@recoverStorage')->name('recoverStorage');
 
