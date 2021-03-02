@@ -15,7 +15,7 @@ class APIController extends Controller
        // echo $token = session('_initToken');
         // echo "<br>";
         echo $sendOTP = Helper::sendOTP(Helper::getToken(), "+4792445024", "Nettflytt");
-        session()->put("_smsTransactionId", $sendOTP);
+        session()->put("billing_id_strex", $sendOTP);
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
@@ -87,6 +87,7 @@ class APIController extends Controller
 
         $request['old_post']      = $request['old_zipcode'].' '.$request['old_place'];
         $request['new_post']      = $request['new_zipcode'].' '.$request['new_place'];
+        $request['tag ']          = "malabon01";
         
         // or when your server returns json
         // $content = json_decode($response->getBody(), true);
@@ -95,17 +96,17 @@ class APIController extends Controller
         unset($request['_token']);
         unset($request['_initToken']);
          // send otp for the first time
-        if(!$request->session()->has('_smsTransactionId')){
+        if(!$request->session()->has('billing_id_strex')){
             $tId = Helper::sendOTP(Helper::getToken(), $request['phone'], "Nettflytt");
-            session()->put("_smsTransactionId", $tId);
-            $request['_smsTransactionId'] = $tId;
+            session()->put("billing_id_strex", $tId);
+            $request['billing_id_strex'] = $tId;
         }
 
         session(['customer' => $request->all()]);
 
         session(['old_post'          => $request['old_zipcode'].' '.$request['old_place'],
                  'new_post'          => $request['new_zipcode'].' '.$request['new_place'],
-                 '_smsTransactionId' => session("_smsTransactionId"),
+                 'billing_id_strex' => session("billing_id_strex"),
                  'customer'          => $request->all()]);
 
         if(!isset($request['person0'])){
@@ -143,25 +144,22 @@ class APIController extends Controller
 
     }
     public function sendSMS(Request $request){
-        $message = $request->type == 1 ? "Topp 5 Garanti
-«Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Topp 5 garanti. Du får strøm til kun 77,99 øre/kWh! Ingen månedsavgift. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/topp-5-garanti/. Vennligst bekreft avtalen med å svare JA på denne meldingen.
-Mvh Nettflytt.» " : "Strøm til Lavpris
-«Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Strøm til lavpris. Du får strøm til spotpris! Månedsbeløp 27 kr + 3,49øre/kWh. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/strom-til-lavpris/. Vennligst bekreft avtalen med å svare JA på denne meldingen.
-Mvh Nettflytt.»";
+        $message = $request->type == 1 ? "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Topp 5 garanti. Du får strøm til kun 77,99 øre/kWh! Ingen månedsavgift. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/topp-5-garanti/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Nettflytt. " : "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Strøm til lavpris. Du får strøm til spotpris! Månedsbeløp 27 kr + 3,49øre/kWh. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/strom-til-lavpris/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Nettflytt.";
+        
         Helper::sendSMS(Helper::getToken(), session('customer')['phone'], 2099, $message);
     }
 
     public function confirmOtp(Request $request){
         $otp            = $request->otp;
         $phone          = session('customer')['phone'];
-        $transactionId  = session('_smsTransactionId');
+        $transactionId  = session('billing_id_strex');
         
         //check otp
         echo Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp);
     }
 
     public function getOtpStatus(Request $request){
-        $transactionId  = session('_smsTransactionId');
+        $transactionId  = session('billing_id_strex');
         //check otp
         echo Helper::getOtpStatus(Helper::getToken(), $transactionId);
     }

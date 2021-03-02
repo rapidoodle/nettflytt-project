@@ -229,7 +229,7 @@
     <div class="modal-content">
       <div class="modal-body mt-4">
         <div class="text-center mb-4">
-            <h5 class="modal-title">Are you sure you want to delete Postbox subscription?</h5>            
+            <h5 class="modal-title">Er du sikker på at du vil fjerne postkasseskilt til din nye adresse?</h5>            
         </div>
         <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="remove-pb">Ja</button>
         <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Nei</button>
@@ -244,7 +244,7 @@
     <div class="modal-content">
       <div class="modal-body mt-4">
         <div class="text-center mb-4">
-            <h5 class="modal-title">Are you sure you want to delete *AD REMOVAL?</h5>            
+            <h5 class="modal-title">Er du sikker på at du vil fjerne skiltet?</h5>            
         </div>
         <button type="button" class="btn btn-info mb-4" data-dismiss="modal" id="remove-ad">Ja</button>
         <button type="button" class="btn btn-info mb-4" data-dismiss="modal">Nei</button>
