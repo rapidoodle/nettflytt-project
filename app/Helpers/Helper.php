@@ -32,7 +32,7 @@ class Helper
     	$dateNow = date("Y-m-d H:i:s");
 		session()->put("_tokenTimeout", "2021-03-03 07:41:07");
     	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") >= $dateNow){
-    		return json_encode([$dateNow, session("_tokenTimeout"), session("_accessToken")]);
+    		return session("_accessToken");
     	}else{
 		    $u 	  = "u46114";
 		    $p 	  = "a6b15b2e218e3479ed99b7aaae3b5502";
@@ -54,7 +54,7 @@ class Helper
 		    session()->put("_accessToken", $res["token"]);
 		    session()->put("_tokenTimeout", date("Y-m-d H:i:s", strtotime($res['_created']) + 60 * 30));
 
-		    return json_encode($res);
+		    return $res['token'];
     	}
     }
 
@@ -132,6 +132,7 @@ class Helper
 
     public static function sendOTP($token, $phone, $sender = "Nettflytt"){
 		$u 	  	  = "u46114";
+		echo $token;
 		$data 	  = array("msn" => "+47".$phone, "sender" => $sender); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
