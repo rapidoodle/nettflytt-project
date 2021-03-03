@@ -139,7 +139,7 @@ class APIController extends Controller
 
 
         # echo session('customer')['_storageToken'];
-        return redirect('/receiver/');
+        return redirect('/mottakere/');
 
     }
     public function sendSMS(Request $request){

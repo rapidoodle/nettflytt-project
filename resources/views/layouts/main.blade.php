@@ -30,8 +30,8 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                         <a href="/" class="dropdown-item" type="button">Hjem</a>
                         <a href="/" class="dropdown-item" type="button">Start flytting</a>
-                        <a href="/about-us" class="dropdown-item" type="button">Personvern</a>
-                        <a href="/contact-us" class="dropdown-item" type="button">Kontakt oss</a>
+                        <a href="/personvern" class="dropdown-item" type="button">Personvern</a>
+                        <a href="/kontakt-oss" class="dropdown-item" type="button">Kontakt oss</a>
                     </div>
                 </div>               
             </li>
@@ -68,13 +68,13 @@
         <h5>Informasjon</h5>
         <ul class="list-unstyled">
           <li>
-            <a href="/privacy-policy">Personvern</a>
+            <a href="/personvern">Personvern</a>
           </li>
           <li>
-            <a href="/terms-of-use/">Kjøpsvilkår</a>
+            <a href="/kjopsvilkaar/">Kjøpsvilkår</a>
           </li>
           <li>
-            <a href="/contact-us/">Kontakt oss</a>
+            <a href="/kontakt-oss/">Kontakt oss</a>
           </li>
         </ul>
       </div>

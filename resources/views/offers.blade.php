@@ -160,10 +160,10 @@
                         <?php if(!isset(session('customer')['offers']['isBoligalarm']) || session('customer')['offers']['isBoligalarm'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-2 order-md-1">
-                                <a class="btn btn-info btn-block btn-blur py-3 btn-actions" href="/postbox-sign">Nei takk</a>
+                                <a class="btn btn-info btn-block btn-blur py-3 btn-actions" href="/postkasse">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-1 order-md-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" href="/postbox-sign" data-offer="isBoligalarm">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" href="/postkasse" data-offer="isBoligalarm">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>

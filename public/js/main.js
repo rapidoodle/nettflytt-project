@@ -284,7 +284,7 @@ $(document).ready(function() {
         //  || $("i[data-isps='true']").length > 0
 
         if(isNorges == true || $(this).attr("data-isnorges") == 1 || $(this).attr("data-action") == "go"){
-            window.location.href = "/offers/";
+            window.location.href = "/boligsjekk/";
         }else if( $("i[data-isps='true']").length > 0){
             $("#receiver-main-section, .title-receiver").hide();
                 $(".ps-cont").show();
@@ -300,7 +300,7 @@ $(document).ready(function() {
                 $(".ps-cont").show();
                 isPowerSupplier = true;
             }else{
-                window.location.href = "/offers/";
+                window.location.href = "/boligsjekk/";
             }
         }
 
@@ -387,7 +387,7 @@ $(document).ready(function() {
         var names = $(".postbox-summary").html().replace(/\<br>/g, ',');
         console.log(names);
         updateCustomerData({"postbox.address" : $('input[name="radios"]:checked').val(), "postbox.names" : names});
-        window.location.href = "/summary/";
+        window.location.href = "/oppsummering/";
     });
 
     $(".btn-legg-till").click(function(){
@@ -415,7 +415,7 @@ $(document).ready(function() {
     })
 
     $(".continue-summary").click(function(){
-        window.location.href = "/summary/";
+        window.location.href = "/oppsummering/";
     });
 
     $(".btn-legg-till-2").click(function(){
@@ -563,7 +563,7 @@ $(document).ready(function() {
                     $("#otpCountdown").html("Suksess!");
                     clearInterval(otpInterval);
                     $("#otpModal").toggle();
-                    window.location.href = "/thank-you";
+                    window.location.href = "/takk";
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
                     $("#otpCountdown").html("OTP Feil. Vennligst prøv igjen");
                 }else if(obj.status == 530){
@@ -583,7 +583,7 @@ $(document).ready(function() {
                                         $("#otpCountdown").html("Suksess!");
                                         clearInterval(otpInterval);
                                         $("#otpModal").toggle();
-                                        window.location.href = "/thank-you";
+                                        window.location.href = "/takk";
                                     }
                                 }
                             });

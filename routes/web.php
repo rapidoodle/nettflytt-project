@@ -16,31 +16,31 @@ $session = session('request');
 Route::get('/', function () {
     return view('index');
 });
-Route::get('/receiver', function () {
+Route::get('/mottakere', function () {
     return view('receiver');
 });
 Route::get('/power-supplier', function () {
     return view('power-supplier-confirm');
 });
-Route::get('/offers', function () {
+Route::get('/boligsjekk', function () {
     return view('offers');
 });
-Route::get('/postbox-sign', function () {
+Route::get('/postkasse', function () {
     return view('postbox-sign');
 });
-Route::get('/thank-you', function () {
+Route::get('/takk', function () {
     return view('thank-you');
 });
-Route::get('/summary', function () {
+Route::get('/oppsummering', function () {
     return view('summary');
 });
-Route::get('/contact-us', function () {
+Route::get('/kontakt-oss', function () {
     return view('contact-us');
 });
-Route::get('/terms-of-use', function () {
+Route::get('/kjopsvilkaar', function () {
     return view('terms-of-use');
 });
-Route::get('/privacy-policy', function () {
+Route::get('/personvern', function () {
     return view('privacy-policy');
 });
 Route::get('/cookies-consent', function () {
