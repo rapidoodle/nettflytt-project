@@ -56,7 +56,7 @@ class Helper
 
 		    return $res['token'];
     // 	}
-    // }
+    }
 
     public static function tokenDetails($token){
 		    $u 	  	  = "u46114";
