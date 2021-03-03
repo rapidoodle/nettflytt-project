@@ -110,7 +110,7 @@ class Helper
    	}
 
     public static function updateStorage($token, $storageToken, $data){
-    	echo "token: ".$token;
+    	echo "storageToken: ".$storageToken;
 		    $u 	  = "u46114";
 		    $p 	  = "a6b15b2e218e3479ed99b7aaae3b5502";
 		    $url  = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$storageToken."/update";
