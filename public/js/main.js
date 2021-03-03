@@ -264,9 +264,7 @@ $(document).ready(function() {
     });
 
     $(".btn-go-power").click(function(){
-        updateCustomerData({"isNorges" : 1});
         var type = $(this).attr("data-type");
-
         sendSMS(type);
         // window.location.href = "/offers/";
     });
@@ -341,7 +339,6 @@ $(document).ready(function() {
         //if norges is selected from the list
         if(companyName == "NorgesEnergi AS"){
             updateCustomerData({"isNorges" : 1});
-            sendSMS(2);
         }
     });
 
@@ -625,7 +622,7 @@ $(document).ready(function() {
             data: { _token : csrf.val(), type: type},
             url: "/sendSMS",
             success: function(response){
-                console.log(response);
+                updateCustomerData({"isNorges" : 1});
             }
         });
     }

@@ -225,7 +225,7 @@
             
         </div>
         <div class="col-12 btn-sm-6 col-md-6 order-1 order-md-2">
-            <a href="#receiver-section" id="btn-go-offer" class="btn btn-next float-right" data-isnorges="<?=Session::has('customer.isNorges') ? 1 : 0?>">Videre <i class="fas fa-arrow-right"></i></a>
+            <a href="#receiver-section" id="btn-go-offer" class="btn btn-next float-right" data-isnorges="<?=Session::has('customer.isNorges') && Session::has('customer.isNorges') == 1 ? 1 : 0; ?>">Videre <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
     <!-- OPTIONS MODAL -->
