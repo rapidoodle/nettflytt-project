@@ -41,7 +41,7 @@
     <!--Navbar-->
 <!--/.Navbar-->
         <div class="container mt-md-5">
-            <?php echo json_encode(session('customer')); ?>
+            <!-- <?php echo json_encode(session('customer')); ?> -->
 <!--             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
