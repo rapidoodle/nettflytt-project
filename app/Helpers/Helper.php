@@ -30,12 +30,9 @@ class Helper
 
     public static function getToken(){
     	$dateNow = date("Y-m-d H:i:s");
-    	//check if token exists
-    	// echo session("_tokenTimeout").'-------'.$dateNow;
-    	// $isValid = session("_tokenTimeout") > $dateNow;
-
-    	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") == 1){
-    		return session("_accessToken");
+		session()->put("_tokenTimeout", "2021-03-03 07:41:07");
+    	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") >= $dateNow){
+    		return json_encode([$dateNow, session("_tokenTimeout"), session("_accessToken")]);
     	}else{
 		    $u 	  = "u46114";
 		    $p 	  = "a6b15b2e218e3479ed99b7aaae3b5502";
