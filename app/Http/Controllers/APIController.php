@@ -11,8 +11,9 @@ class APIController extends Controller
     public function testAPI(){
         // echo $token = Helper::getToken();
 
-        session()->forget('customer.isNorges');
-        echo json_encode(session('customer'));
+        echo Helper::searchCompanies("norges", "orgnr");
+        // session()->forget('customer.isNorges');
+        // echo json_encode(session('customer'));
         // $storageToken  = Helper::initStorage($token);
        // echo $token = session('_initToken');
         // echo "<br>";

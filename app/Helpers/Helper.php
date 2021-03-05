@@ -29,12 +29,11 @@ class Helper
     }
 
     public static function getToken(){
-  //   	$dateNow = date("Y-m-d H:i:s");
-		// session()->put("_tokenTimeout", "2021-03-03 07:41:07");
-  //   	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") >= $dateNow){
-  //   		return session("_accessToken");
-  //   	}else{
-		    $u 	  = "u46114";
+    	$dateNow = date("Y-m-d H:i:s");
+    	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") >= $dateNow){
+    		return session("_accessToken");
+    	}else{
+		    $u 	  = "u46114-";
 		    $p 	  = "a6b15b2e218e3479ed99b7aaae3b5502";
 		    $url  = "https://api.nettflytt.no/api/nettflytt/2020-10/token/init";
 		    $vars = [
@@ -52,14 +51,15 @@ class Helper
 		    $res 	 = json_decode($json, true);
 
 		    session()->put("_accessToken", $res["token"]);
+		    session()->put("_sessionSalt", $res["session_salt"]);
 		    session()->put("_tokenTimeout", date("Y-m-d H:i:s", strtotime($res['_created']) + 60 * 30));
 
 		    return $res['token'];
-    // 	}
+    	}
     }
 
     public static function tokenDetails($token){
-		    $u 	  	  = "u46114";
+		    $u 	  	  = "u46114-".session("_sessionSalt");
 		    $newToken = Helper::getToken();
 		    $url 	  = "https://".$u.":".$newToken."@api.nettflytt.no/api/nettflytt/2020-10/token/".$token."/details";
 		    $json 	  = file_get_contents( $url, FALSE);
@@ -70,7 +70,7 @@ class Helper
 
 
     public static function initStorage($token){
-		    $u 	  = "u46114";
+		    $u 	  	  = "u46114-".session("_sessionSalt");
 		    $p 	  = "a6b15b2e218e3479ed99b7aaae3b5502";
 		    $url = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/init";
 		    $vars = [
@@ -91,7 +91,7 @@ class Helper
     }
 
    	public static function getStorage($token, $storageToken){
-		$u 	  = "u46114";
+		$u 	  	  = "u46114-".session("_sessionSalt");
 
 	    // Get storage
 	    $url = "https://". $u .":". $token ."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$storageToken."/details";
@@ -102,7 +102,7 @@ class Helper
    	}
 
    	public static function storageStatus($token, $storageToken, $type = "payment"){
-		$u 	  = "u46114";
+		$u 	  	  = "u46114-".session("_sessionSalt");
 	    $url  = "https://". $u .":". $token ."@api.nettflytt.no/api/nettflytt/2020-10/storage-status/".$storageToken."/details/".$type;
 	    $json = file_get_contents( $url, FALSE);
 
@@ -110,8 +110,7 @@ class Helper
    	}
 
     public static function updateStorage($token, $storageToken, $data){
-    	echo "storageToken: ".$storageToken;
-		    $u 	  = "u46114";
+		    $u 	  	  = "u46114-".session("_sessionSalt");
 		    $p 	  = "a6b15b2e218e3479ed99b7aaae3b5502";
 		    $url  = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$storageToken."/update";
 		    $vars = [
@@ -132,8 +131,7 @@ class Helper
     }
 
     public static function sendOTP($token, $phone, $sender = "Nettflytt"){
-		$u 	  	  = "u46114";
-		echo $token;
+		$u 	  	  = "u46114-".session("_sessionSalt");
 		$data 	  = array("msn" => "+47".$phone, "sender" => $sender); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
@@ -150,7 +148,7 @@ class Helper
     }
 
     public static function sendSMS($token, $phone, $sender = 2099, $message){
-		$u 	  	  = "u46114";
+		$u 	  	  = "u46114-".session("_sessionSalt");
 		$data 	  = array("msn" => "+47".$phone, "sender" => $sender, "message" => $message); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/sms-message";
 	    $postdata = http_build_query( $data );
@@ -167,7 +165,7 @@ class Helper
     }
 
     public static function confirmOtp($token, $phone, $transactionid, $otp){
-		$u 	  	  = "u46114";
+		$u 	  	  = "u46114-".session("_sessionSalt");
 		$data 	  = array("msn" => "+47".$phone, "transactionid" => $transactionid, "otp" => $otp); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
@@ -185,7 +183,7 @@ class Helper
     }
 
     public static function getOtpStatus($token, $transactionid){
-		$u 	  	  = "u46114";
+		$u 	  	  = "u46114-".session("_sessionSalt");
 		$data 	  = array("transactionid" => $transactionid); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
@@ -232,7 +230,7 @@ class Helper
     }
 
     public static function getSearchToken(){
-	        $user = "guest";
+	        $user = "guest-".session('_sessionSalt');
 	        $pass = "guest";
 			$endpoint = "https://api.nettflytt.no/api/nettflytt/2020-10/token/init";
 	        $creds = array( "username" => $user, "password" => $pass);
@@ -256,41 +254,47 @@ class Helper
     	if(session('searchToken')){
     		$token = session('searchToken');
     	}else{
-	        $user = "guest";
-	        $pass = "guest";
-			$endpoint = "https://api.nettflytt.no/api/nettflytt/2020-10/token/init";
-	        $creds = array( "username" => $user, "password" => $pass);
-			$ch = curl_init();
-			curl_setopt($ch, CURLOPT_URL, $endpoint);
+		    $u 	  = "guest-";
+		    $p 	  = "guest";
+		    $url  = "https://api.nettflytt.no/api/nettflytt/2020-10/token/init";
+		    $vars = [
+		        "username" => $u,
+		        "password" => $p,
+		    ];
+		    $postdata = http_build_query( $vars );
+		    $options  = [ 'http' => [
+		        'method'  => "POST",
+		        'header'  => "Content-type: application/x-www-form-urlencoded",
+		        'content' => $postdata
+		    ]];
+		    $context = stream_context_create( $options );
+		    $json 	 = file_get_contents( $url, FALSE, $context );
+		    $res 	 = json_decode($json, true);
+			$token 	 = $res['token'];
+			$salt 	 = $res['session_salt'];
+			session(['searchToken' => $token]);
+			session(['searchSalt' => $salt]);
+    	}
+
+	        $postvars   = ["q" => $query];
+	        $url 		= "https://guest-".session('searchSalt').":".session('searchToken')."@api.nettflytt.no/api/nettflytt/2020-10/".$type;
+			$ch 		= curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, $creds);
-			$output = curl_exec($ch);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
+			$output 	= curl_exec($ch);
 			curl_close($ch);
-			$response = json_decode($output, false);
-			$token = $response->token;
-			session(['searchToken' => $token]);
-    	}
 
-        $postvars   = ["q" => $query];
-        $url 		= "https://guest:".$token."@api.nettflytt.no/api/nettflytt/2020-10/".$type;
-		$ch 		= curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
-		$output 	= curl_exec($ch);
-		curl_close($ch);
+			//put to session for future search
+			if($type == "categories"){
+	            session()->put('allcompanies', $output);
+			}
 
-		//put to session for future search
-		if($type == "categories"){
-            session()->put('allcompanies', $output);
-		}
-
-        return $output;
+			return $output;
     }
 }
+
 
 ?>
