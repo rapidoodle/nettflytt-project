@@ -62,6 +62,7 @@ $(document).ready(function() {
     }
 
     $("#add-name").click(function(){
+        $("#isReq").val("0");
         if($(".multi-collapse.collapse.show").length != 0){
             addName(true);
         }else{
