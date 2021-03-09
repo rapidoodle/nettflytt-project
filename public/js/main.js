@@ -252,7 +252,9 @@ $(document).ready(function() {
         }
     });
     $("#btn-add-postbox").click(function(){
-        updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1});
+        updateCustomerData({"isNorges" : 1});
+        updateCustomerData({"pb-price": 0, "mailbox-sign" : 1});
+        
         sendSMS(2);
     });
 
