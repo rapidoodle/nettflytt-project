@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('content')
+<?=json_encode(session('customer'));?>
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
@@ -74,7 +75,7 @@
                 ">
                     <div class="postbox-summary d-flex align-items-center justify-content-center text-center px-4"></div>
 
-                <?php if(!isset(session('customer')['mailbox-sign'])){ ?>
+                <?php if(!isset(session('customer')['mailbox-sign']) || session('customer')['mailbox-sign'] == 0){ ?>
                     <div class="d-flex mt-4 justify-content-md-between">
                         <span class="disp-none post-warn"><b>Tusen takk. Når du svarer “JA” på SMSen sender vi deg et gratis postkasseskilt.</b><br><div class="text-red">NB! Du må fylle inn navnene på postkasseskiltet før du klikker videre på denne siden!</div></span>
                         <h6 class="mb-0 ml-4 ml-md-0 d-flex align-items-end postbox-sub sub-1 align-bottom order-2">Kr. 149 inkl. frakt</h6>

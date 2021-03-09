@@ -579,10 +579,11 @@ $(document).ready(function() {
                     $("#otpModal").toggle();
                     window.location.href = "/takk";
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
-                    $("#otpCountdown").html("Koden du tastet inn var feil. Vennligst prøv igjen");
+                    $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Koden du tastet inn var feil. Vennligst prøv igjen");
+
                     failedProgress();
                 }else if(obj.status == 530){
-                    $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                    // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                             window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
                 }else if(obj.status == 0 && obj.strex_resultcode == "Queued"){
                     otpInterval = setInterval(function(){
@@ -788,6 +789,7 @@ $(document).ready(function() {
     }
 
     function failedProgress(){
+        $("#tbl-loading tr:nth-child(3) td:nth-child(1) i").remove();
         $("#tbl-loading tr:nth-child(3) td:nth-child(1) > div.spinner-border, #tbl-loading tr:nth-child(4) td:nth-child(1) > div.spinner-border").hide();
         $("#tbl-loading tr:nth-child(3) td:nth-child(1), #tbl-loading tr:nth-child(4) td:nth-child(1)").append(timesIcon);
         $("#tbl-loading tr:nth-child(3) td:nth-child(2) span, #tbl-loading tr:nth-child(4) td:nth-child(2) span").addClass("text-danger");
@@ -800,8 +802,11 @@ $(document).ready(function() {
             $("#tbl-loading tr:nth-child("+pos+") td:nth-child(2) span").addClass("text-success");
         }else{
             $("#tbl-loading span").removeClass("text-success");
+            $("#tbl-loading span").removeClass("text-danger");
             $("#tbl-loading tr td > div.spinner-border").show();
             $("#tbl-loading tr td i").remove();
+            $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Fullfører");
+
         }
     }
 });
