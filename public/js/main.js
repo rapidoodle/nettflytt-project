@@ -252,10 +252,9 @@ $(document).ready(function() {
         }
     });
     $("#btn-add-postbox").click(function(){
-        updateCustomerData({"pb-price": 0, "mailbox-sign" : 1});
-        // updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1});
-        
-        sendSMS(2);
+        updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1});
+
+        sendSMS(2, false);
     });
 
     $(".btn-postbox").click(function(){
@@ -268,7 +267,7 @@ $(document).ready(function() {
 
     $(".btn-go-power").click(function(){
         var type = $(this).attr("data-type");
-        sendSMS(type);
+        sendSMS(type, true);
         // window.location.href = "/offers/";
     });
 
@@ -639,13 +638,15 @@ $(document).ready(function() {
         });
     }
 
-    function sendSMS(type){
+    function sendSMS(type, isUpdate){
         $.ajax({
             type: "POST",
             data: { _token : csrf.val(), type: type},
             url: "/sendSMS",
             success: function(response){
-                updateCustomerData({"isNorges" : 1});
+                if(isUpdate){
+                    updateCustomerData({"isNorges" : 1});
+                }
             }
         });
     }
