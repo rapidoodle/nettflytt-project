@@ -34,11 +34,16 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
 <script type="text/javascript">
     //phone validator
     function validateForm(){
-        if($("#isReq").val() == true || $("#isReq").val() == ""){
+
+        console.log($("#isReq").val());
+        if($("#isReq").val() == "1"){
             var phone = $("#phone").val();
-            phone = phone.substr(0,1) == "+" ? phone.substr(1,phone.length) : phone;
-            var message = "Ugyldig telefonnummer!";
-            if(phone.length != 10 || phone.substr(0, 2) != 47){
+            var validN = phone.substr(phone.length - 8);
+            console.log("phone: "+validN);
+            var message = "Koden du tastet inn var feil. Vennligst prøv igjen";
+
+            if(validN.substr(0, 1) != "4" && validN.substr(0, 1) != "9"){
+                console.log("error 2: "+validN.substr(0, 1));
                 alert(message);
                 return false;
             }else{
@@ -289,7 +294,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                     <a class="dropdown-item pointer {{isset($others[$annet_option]) && $annet_option == $key ? 'active'  : ''}}" data-val="{{$key}}">{{$value}}</a>
                                     <?php } ?>
                                 </div>
-                                <input type="hidden" id="isReq">
+                                <input type="hidden" id="isReq" value="1">
                                 <input type="hidden" name="new_house_type" id="new_house_type" value="<?=isset(session('customer')['new_house_type']) ? session('customer')['new_house_type'] : ""?>">
                             </div>
                         </div>

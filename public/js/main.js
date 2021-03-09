@@ -22,6 +22,8 @@ $(document).ready(function() {
     var otpTimeout      = 1000;
     var otpConfirmed    = false;
     var otpProcessing   = false;
+    var checkIcon       = "<i class='fa fa-check text-success'></i>";
+    var timesIcon       = "<i class='fa fa-times text-danger'></i>";
     //INDEX PAGE
 
     $(".save-person-collapse-cont").hide();
@@ -29,20 +31,19 @@ $(document).ready(function() {
         if($("#name_0").length != 0){
             if(fullName.val() != "" || email.val() != "" || phone.val() != "" || day.val() != null || month.val() != null || year.val() != null){
                 $(".req-fld").attr("required", true);
-                $(".isReq").val(true);
+                $("#isReq").val("1");
                 $(".save-person-collapse-cont").show();
             }else{
                 $(".req-fld").removeAttr("required");
-                $(".isReq").val(false);
+                $("#isReq").val("0");
                 $(".save-person-collapse-cont").hide();
             }
         }
     });
     
-    $("#isReq").val(false);
     $(".clear-form").click(function(){
         $(".main-field").val('');
-        $("#isReq").val(false);
+        $("#isReq").val("0");
         $(".req-fld").removeAttr("required");
     });
 
@@ -430,14 +431,31 @@ $(document).ready(function() {
 
     //SUMMARY
     $(".otpFooter").hide();
+    $('#otpModal').on('hidden.bs.modal', function (e) {
+        loadingProgress(0, true);
+    });
     $("#btn-summary-send").click(function(){
+        $('#otpModal').modal('toggle');
         var otp = $("#otp").val();
         $("#otpCountdown").html();  
-        if(otp.length > 0){
+        if(otp.length > 3){
             $('#otpModal').modal('toggle');
-            confirmOtp();
+            var ctr = 3;
+            var sumInterval = setInterval(function(){
+
+                if(ctr == 3){
+                    loadingProgress(1);
+                }
+                if(ctr == 2){
+                    loadingProgress(2);
+                    confirmOtp();
+                    clearInterval(sumInterval);
+                }
+                ctr--;
+                console.log(ctr);
+            }, 3000);
         }else{
-            alert("Invalid OTP");
+            alert("Koden du tastet inn var feil. Vennligst prøv igjen");
         }
     });
 
@@ -554,17 +572,18 @@ $(document).ready(function() {
             url: "/confirmOtp",
             success: function(response){
                 var obj = JSON.parse(response);
-                console.log(obj.status);
-
+                loadingProgress(3);
                 if(obj.status == 0 && obj.strex_resultcode == "Ok"){
-                    $("#otpCountdown").html("Suksess!");
+                    loadingProgress(4);
                     clearInterval(otpInterval);
                     $("#otpModal").toggle();
                     window.location.href = "/takk";
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
-                    $("#otpCountdown").html("OTP Feil. Vennligst prøv igjen");
+                    $("#otpCountdown").html("Koden du tastet inn var feil. Vennligst prøv igjen");
+                    failedProgress();
                 }else if(obj.status == 530){
                     $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                            window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
                 }else if(obj.status == 0 && obj.strex_resultcode == "Queued"){
                     otpInterval = setInterval(function(){
                         if(otpProcessing == false){
@@ -577,8 +596,9 @@ $(document).ready(function() {
                                 success: function(response){
                                     otpProcessing == false;
                                     if(response.status == 0 && response.strex_resultcode == "Ok"){
-                                        $("#otpCountdown").html("Suksess!");
+                                        // $("#otpCountdown").html("Suksess!");
                                         clearInterval(otpInterval);
+                                        loadingProgress(4);
                                         $("#otpModal").toggle();
                                         window.location.href = "/takk";
                                     }
@@ -587,15 +607,15 @@ $(document).ready(function() {
                         }
                         otpTimeoutSec--;
                         if(otpTimeoutSec == 0){
-                            $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                            // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                             clearInterval(otpInterval);
                             window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
                         }
 
-                        $("#otpCountdown").html(otpTimeoutSec);
+                        // $("#otpCountdown").html(otpTimeoutSec);
                     }, otpTimeout);
                 }else{
-                    $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                    // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                     clearInterval(otpInterval);
                     window.location.href = "https://nettflytt.no/betaling/#"+newPhone;
                 }
@@ -764,6 +784,24 @@ $(document).ready(function() {
 
             //REMOVE REQUIRED FIELD TO PERSONAL INFORMATION IF FIRST PERSON IS ADDED
             $(".req-fld").removeAttr("required");
+        }
+    }
+
+    function failedProgress(){
+        $("#tbl-loading tr:nth-child(3) td:nth-child(1) > div.spinner-border, #tbl-loading tr:nth-child(4) td:nth-child(1) > div.spinner-border").hide();
+        $("#tbl-loading tr:nth-child(3) td:nth-child(1), #tbl-loading tr:nth-child(4) td:nth-child(1)").append(timesIcon);
+        $("#tbl-loading tr:nth-child(3) td:nth-child(2) span, #tbl-loading tr:nth-child(4) td:nth-child(2) span").addClass("text-danger");
+    }
+
+    function loadingProgress(pos, reset = false){
+        if(!reset){
+            $("#tbl-loading tr:nth-child("+pos+") td:nth-child(1) > div.spinner-border").hide();
+            $("#tbl-loading tr:nth-child("+pos+") td:nth-child(1)").append(checkIcon);
+            $("#tbl-loading tr:nth-child("+pos+") td:nth-child(2) span").addClass("text-success");
+        }else{
+            $("#tbl-loading span").removeClass("text-success");
+            $("#tbl-loading tr td > div.spinner-border").show();
+            $("#tbl-loading tr td i").remove();
         }
     }
 });

@@ -701,6 +701,16 @@ h5.loading > span:after {
     content: ' .';
     animation: dots 3s steps(1, end) infinite;
 }
+.spinner-border{
+    width: 1rem;
+    height: 1rem;
+}
+#tbl-loading tr td{
+    color:#007bff!important;
+}
+#tbl-loading tr td:nth-child(2) {
+    font-size: 16px;
+}
 @keyframes dots {
     0%, 12.5% {
         opacity: 0;

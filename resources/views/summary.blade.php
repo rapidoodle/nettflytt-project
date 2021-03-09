@@ -382,14 +382,41 @@
 <div class="modal fade" id="otpModal" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel" aria-hidden="true">
   <div class="text-left modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-        <div class="modal-header text-left">
-            <h5 class="modal-title loading">Behandler<span></span></h5>      
-        </div>
         <div class="modal-body text-center my-4">
-            <h3 id="otpCountdown"></h3>
-        </div>
-        <div class="modal-footer otpFooter">
-            <button type="button" class="btn btn-info mb-4 btn-send-vipps" data-dismiss="modal">Send Via Vipps</button>
+            <table width="100%" id="tbl-loading">
+                <tr>
+                    <td width="50px;" class="summary-step-icon">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </td>
+                    <td align="left" class="summary-step-1"><span>Vennligst vent</span></td>
+                </tr>
+                <tr>
+                    <td class="summary-step-icon">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </td>
+                    <td align="left" class="summary-step-2"><span>Behandler flyttemelding</span></td>
+                </tr>
+                <tr>
+                    <td class="summary-step-icon">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </td>
+                    <td align="left" class="summary-step-3"><span>Sender flyttemeldinger</span></td>
+                </tr>
+                <tr>
+                    <td class="summary-step-icon">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </td>
+                    <td align="left" class="summary-step-4"><span>Fullfører</span></td>
+                </tr>
+            </table>
         </div>
   </div>
 </div>

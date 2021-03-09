@@ -9,9 +9,9 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-        // echo $token = Helper::getToken();
+        $token = Helper::getToken();
 
-        echo Helper::searchCompanies("norges", "orgnr");
+        // echo Helper::searchCompanies("norges", "orgnr");
         // session()->forget('customer.isNorges');
         // echo json_encode(session('customer'));
         // $storageToken  = Helper::initStorage($token);
@@ -22,7 +22,7 @@ class APIController extends Controller
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
-        // echo Helper::getStorage($token, "JEU6bw1n24FF7GhZJhOVX3PoyBi2ZjstDvhrDKlbQ1wllcZxhNnU77KRobUWnrkY");
+        echo Helper::storageStatus($token, "AByLg4ofukOK0w0T3xeNtnZmTUjhqxZiXcvpOYoKMepRmH749dqK2iEbW3ibKWzZ", "info");
         // echo Helper::tokenDetails("XU1ivp87caQsU6kBNYwNGHYlSct7eI9Pz36UpwIDDmz9n5MoF4qTvjiLPxlmfEqS");
         // echo Helper::tokenDetails("mjwpt0bYSGdrKYlygevWmnn44lbDGJqz02OIEOrHKkSRlACvLSzT245apryFdxWP");
         // "This is a sample message for Norges AS";
