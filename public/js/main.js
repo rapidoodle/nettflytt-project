@@ -62,7 +62,6 @@ $(document).ready(function() {
     }
 
     $("#add-name").click(function(){
-        $("#isReq").val("0");
         if($(".multi-collapse.collapse.show").length != 0){
             addName(true);
         }else{
@@ -726,6 +725,7 @@ $(document).ready(function() {
     }
 
     function addName(collapse = true){
+        $("#isReq").val("0");
         if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
             alert("Fyll ut skjemaet før du legger til et nytt navn.");
         }

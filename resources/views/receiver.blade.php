@@ -58,11 +58,11 @@
             <div class="col-12 col-md-5 text-center p-4">
                 <div class="ps-option p-4 mx-0 mx-lg-5">
                     <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
-                    <h5 class="my-4">TOPP 5 VARIABEL</h5>
+                    <h5 class="my-4">TOPP 5 GARANTI</h5>
 
                     <p>Strømavtalen Topp 5-garanti sikrer deg en variabel strømpris som på årlig basis alltid er blant de 10 beste, målt mot en representativ liste over konkurrentene våre.</p>
 
-                    <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" data-type="2">Bestill “Topp 5 Variabel”</a>
+                    <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" data-type="2">Bestill “Topp 5 Garanti</a>
                 </div>
             </div>
         </div>  
