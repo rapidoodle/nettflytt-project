@@ -726,10 +726,14 @@ $(document).ready(function() {
 
     function addName(collapse = true){
         $("#isReq").val("0");
+        var validN = phone.substr(phone.length - 8);
+        console.log(validN)
         if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
             alert("Fyll ut skjemaet før du legger til et nytt navn.");
-        }
-        else{
+        }else if(validN.substr(0, 1) != "4" && validN.substr(0, 1) != "9"){
+            console.log("error 2: "+validN.substr(0, 1));
+            alert("Koden du tastet inn var feil. Vennligst prøv igjen");
+        }else{
          var pCtr   = $(".person").length;
          var newId  = Date.now();
          var type   = pCtr == 0 ? "(hovedperson)" : "(ekstraperson)";

@@ -34,7 +34,6 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
 <script type="text/javascript">
     //phone validator
     function validateForm(){
-
         console.log($("#isReq").val());
         if($("#isReq").val() == "1"){
             var phone = $("#phone").val();
