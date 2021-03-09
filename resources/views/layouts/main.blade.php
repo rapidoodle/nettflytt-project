@@ -13,6 +13,14 @@
         <link href="{{ asset('css/tavo-calendar.css') }}?v={{ time() }}" rel="stylesheet">
         <link href="{{ asset('css/main.css') }}?v={{ time() }}" rel="stylesheet">
         <!-- <link href="{{ asset('css/purecookie.css') }}?v={{ time() }}" rel="stylesheet"> -->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYNS0X2K2Y"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-DYNS0X2K2Y');
+        </script>
     </head>
     <body>
     <div class="container">
@@ -105,5 +113,4 @@
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/pagination.js') }}"></script>
     <!-- <script src="{{ asset('js/purecookie.js') }}"></script> -->
-
 </html>
