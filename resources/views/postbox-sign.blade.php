@@ -2,6 +2,8 @@
 @section('content')
 <!-- <?=json_encode(session('customer'));?> -->
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
+<input type="hidden" id="isPostbox" value="{{session('customer')['mailbox-sign']}}">
+<input type="hidden" id="isNorges" value="{{session('customer')['isNorges']}}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">
             <div class="text-center">
