@@ -81,7 +81,7 @@ class APIController extends Controller
         }
         $request['price']         = 149;
         $request['adv-price']     = 0;
-        $request['mailbox-sign']  = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 0;
+        $request['mailbox-sign']  = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 55555;
         $request['phone']         = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
         $request['totalPerson']   = $pctr == 0 ? 1 : $pctr;
         $request['services']      = session('customer.services') != "" ? session('customer.services') : array();
