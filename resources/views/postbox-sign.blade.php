@@ -35,7 +35,7 @@
     </div>
 </div>  
 <div class="row px-4 mt-0 mb-4 my-lg-5 mt-lg-0">
-    <div class="col-12 col-lg-9 <?=Session::has('customer.isNorges') && session('customer')['isNorges'] == 1 ? 'offset-md-2' : ''?>">
+    <div class="col-12 col-lg-9 <?=session('customer')['isNorges'] == 1 ? 'offset-md-2' : ''?>">
         <div class="bg-light p-4">
             <h4>Navn på skiltet</h4>
             <div class="row align-items-center">
@@ -108,7 +108,7 @@
     </div>
     <?php 
 
-    if(Session::has('customer.isNorges') && session('customer')['isNorges'] == 0){ ?>
+    if(session('customer')['isNorges'] == 0){ ?>
     <div class="col-12 col-lg-3 text-center">
         <div class="collapse multi-collapse show">
                 <h5 class="d-lg-none mt-4">Kampane! Gratis postkasseskilt ved bestilling av strøm</h5>
