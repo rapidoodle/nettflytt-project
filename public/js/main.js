@@ -386,7 +386,7 @@ $(document).ready(function() {
         var names = $(".postbox-summary").html().replace(/\<br>/g, ',');
         console.log(names);
         updateCustomerData({"postbox.address" : $('input[name="radios"]:checked').val(), "postbox.names" : names});
-        window.location.href = "/oppsummering/";
+        // window.location.href = "/oppsummering/";
     });
 
     $(".btn-legg-till").click(function(){

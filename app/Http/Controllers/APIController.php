@@ -91,7 +91,7 @@ class APIController extends Controller
         $request['old_post']      = $request['old_zipcode'].' '.$request['old_place'];
         $request['new_post']      = $request['new_zipcode'].' '.$request['new_place'];
         $request['tag ']          = "malabon01";
-        $request['isNorger ']     = 0;
+        $request['isNorges']     = 0;
         
         // or when your server returns json
         // $content = json_decode($response->getBody(), true);

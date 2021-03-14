@@ -711,6 +711,9 @@ h5.loading > span:after {
 #tbl-loading tr td:nth-child(2) {
     font-size: 16px;
 }
+div.pricing-details{
+    font-size: 14px;
+}
 @keyframes dots {
     0%, 12.5% {
         opacity: 0;

@@ -78,4 +78,7 @@
         </div>
     </div>
 </div>
+
+<!-- RESTART ALL SESSION -->
+<?php session()->flush(); ?> 
 @endsection
