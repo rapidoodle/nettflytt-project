@@ -265,6 +265,7 @@ $(document).ready(function() {
 
     $(".btn-postbox").click(function(){
         updateCustomerData({"mailbox-sign" : 1, "pb-price" : 149});
+        $("#isPostbox").val("1");
         $(".btn-next-summary").attr("data-postbox", "1");
     });
 
@@ -564,9 +565,6 @@ $(document).ready(function() {
 
         $.ajax({
             type: "POST",
-            processData: false,
-            contentType: false,
-            cache: false,
             data: { _token : csrf.val(), services : services},
             url: "/updateCompanyList",
             success: function(response){
