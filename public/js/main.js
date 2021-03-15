@@ -253,8 +253,8 @@ $(document).ready(function() {
     });
     $("#btn-add-postbox").click(function(){
         updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1});
-        $("#isNorges").val(1);
-        $("#isPostbox").val(1);
+        $("#isNorges").val("1");
+        $("#isPostbox").val("1");
 
         sendSMS(2, false);
     });
@@ -388,7 +388,7 @@ $(document).ready(function() {
         var names     = $(".postbox-summary").html().replace(/\<br>/g, ',');
         var isPostBox = $("#isPostbox").val();
         var isNorges  = $("#isNorges").val();
-        
+
         console.log(names);
         updateCustomerData({"isNorges" :isNorges, "mailbox-sign" :isPostbox, "postbox.address" : $('input[name="radios"]:checked').val(), "postbox.names" : names});
         // window.location.href = "/oppsummering/";
