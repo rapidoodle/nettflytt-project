@@ -324,7 +324,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                             <li>Flytteskjema til Folkeregisteret direkte utfylt med dine data</li>
                             <li>Egen flytteside for oppbevaring av dine adresser og dokumenter</li>
                         </ul>
-                        <p>Tjenesten koster kr 149,- som belastes ditt mobilabonnement ved fullføring av tjenesten.</p>
+                        <p><b>Tjenesten koster kr 149,- som belastes ditt mobilabonnement ved fullføring av tjenesten.</b></p>
                     </div>
                     <div class="text-center px-5 px-lg-0">
                         <button class="float-lg-right btn btn-info mt-2 mb-auto px-4 py-2" id="submit-form">Meld flytting</button> 

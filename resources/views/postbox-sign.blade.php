@@ -135,7 +135,7 @@
         <a href="/offers/" class="btn btn-previous float-left"><i class="fas fa-arrow-left"></i> Gå tilbake</a>
     </div>
     <div class="col-12 btn-sm-6 col-md-6  order-1 order-md-2">
-        <button class="btn btn-next float-right btn-next-summary">Videre <i class="fas fa-arrow-right"></i></button>
+        <button class="btn btn-next float-right btn-next-summary" is-postbox="{{session('customer')['mailbox-sign']}}">Videre <i class="fas fa-arrow-right"></i></button>
     </div>
 </div>
     <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModallLabel" aria-hidden="true">

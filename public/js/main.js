@@ -259,12 +259,13 @@ $(document).ready(function() {
         updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1});
         $("#isNorges").val("1");
         $("#isPostbox").val("1");
-
+        $(".btn-next-summary").attr("data-postbox", "1");
         sendSMS(2, false);
     });
 
     $(".btn-postbox").click(function(){
         updateCustomerData({"mailbox-sign" : 1, "pb-price" : 149});
+        $(".btn-next-summary").attr("data-postbox", "1");
     });
 
     $(".btn-adv").click(function(){
@@ -419,7 +420,11 @@ $(document).ready(function() {
 
     $(".btn-next-summary").click(function(){
         console.log($(this).attr("data-power"));
-        $('#addressModal').modal('toggle');
+        if($(this).attr("data-postbox") == 1){
+            $('#addressModal').modal('toggle');
+        }else{
+            window.location.href = "/oppsummering/";
+        }
     })
 
     $(".continue-summary").click(function(){

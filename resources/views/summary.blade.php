@@ -69,7 +69,7 @@
                         <td>Behandling av flyttemeldinger</td>
                         <td>kr 149,-</td>
                     </tr>
-                    <?php if(isset(session('customer')['mailbox-sign']) && session('customer')['mailbox-sign'] == 1) { ?>
+                    <?php if(session('customer')['mailbox-sign'] == 1) { ?>
                     <tr class="tr-pb">
                         <td>Postkasseskilt</td>
                         <td><?=isset(session('customer')['pb-price']) && session('customer')['pb-price'] != 0 ? "kr ".session('customer')['pb-price'].",-" : 'GRATIS'?></td>
