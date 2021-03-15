@@ -130,7 +130,7 @@ class Helper
 		    return $json;
     }
 
-    public static function sendOTP($token, $phone, $sender = "Nettflytt"){
+    public static function sendOTP($token, $phone, $sender = "Flytteregisteret"){
 		$u 	  	  = "u46114-".session("_sessionSalt");
 		$data 	  = array("msn" => "+47".$phone, "sender" => $sender); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";

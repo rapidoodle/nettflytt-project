@@ -46,6 +46,9 @@ Route::get('/personvern', function () {
 Route::get('/cookies-consent', function () {
     return view('cookies-consent');
 });
+Route::get('/folkeregisteret', function () {
+    return view('index', ['type' => "folkeregisteret"]);
+});
 
 Route::get('/testapi', 'APIController@testapi')->name('testapi');
 Route::get('/recover', 'APIController@recoverStorage')->name('recoverStorage');

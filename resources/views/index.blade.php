@@ -7,14 +7,20 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
 
 $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbolig', 'tomannsbolig2' => 'Tommansbolig m/utleiedel', 'rekkehus' => 'Rekkehus', 'hybel' => 'Hybel'];
 
-// session()->put('customer', "");
 ?>
 <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out">
 <div class="row px-2 px-lg-4 mb-5">
     <div class="col-12 col-sm-6 d-flex align-content-center flex-wrap">
-        <h3 class="flex-item">Adresseendring for Norge</h3>
+        <h3 class="flex-item">{{isset($type) ? 'Folkeregisteret' : 'Adresseendring for Norge'}}</h3>
 
-        <p class="mt-0 mt-sm-4">Her kan du fylle ut én enkelt flyttemelding til alle selskaper og organisasjoner du er medlem hos. Du får også ferdigutfylte dokumenter til posten og folkeregisteret</p>
+        <?php if(!isset($type)) { ?>
+        <p class="mt-0">Her kan du fylle ut én enkelt flyttemelding til alle selskaper og organisasjoner du er medlem hos. Du får også ferdigutfylte dokumenter til posten og folkeregisteret</p>
+        <?php }else{ ?>
+        <p class="mt-0"><b>Det holder ikke å kun melde flytting til Folkeregisteret hvis du ønsker å motta posten på din nye adresse. Meld flytting her.</b></p>
+        <p class="mt-0">Når du melder flytting til Folkeregisteret er det kun Folkeregisteret som får din nye adresseinformasjon. Det er derimot noen som benytter Folkeregisteret til å hente ut adresseinformasjon om deg. Dette gjelder blant annet alle banker og offentlige etater som NAV, Skattekontoret, Lånekassen og Forsvaret. Alle dine kontakter, kundeforhold og medlemskap utenfor dette må ha en flyttemelding fra deg.</p>
+        <p class="mt-0">Gjennom flytteregisteret adresseendringstjeneste kan du si ifra til alle dine kontakter, kundeforhold og medlemskap. Du fyller bare ut din adresseinformasjon én gang og velger hvem du vil informere til blant vår liste over selskaper og organisasjoner.</p>
+        <p class="mt-0">Når du er ferdig med adresseendringstjenesten kan du laste ned <b>Folkeregisterets flytteskjema</b> utfylt med informasjonen du la inn</p>
+        <?php } ?>
 
         <a class="btn btn-info mt-2 px-4 py-2" href="#index-form-container">Start flytting</a> 
 

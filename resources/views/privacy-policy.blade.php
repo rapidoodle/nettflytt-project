@@ -8,12 +8,12 @@
 <div class="row px-4 mt-0 mb-5 my-lg-5 mt-lg-0 text-left text-break">
     <div class="bg-light p-5">
         <b>Innledning</b>
-        <p>Hos Nettflytt.no tar vi ditt personvern og behandlingen av dine personopplysninger veldig seriøst. Derfor har vi utarbeidet denne personvernserklæringen hvor vi beskriver vår kontaktinformasjon, informasjon angående hvilke personopplysninger vi behandler og hvilke rettigheter du har overfor oss og hvordan du måtte forsvare dem. Du kan alltid kontakte kundeservice hvis du måtte ha noen spørsmål angående vår behandling av personopplysninger eller denne personvernserklæringen.</p>
+        <p>Hos Flytteregisterett.no tar vi ditt personvern og behandlingen av dine personopplysninger veldig seriøst. Derfor har vi utarbeidet denne personvernserklæringen hvor vi beskriver vår kontaktinformasjon, informasjon angående hvilke personopplysninger vi behandler og hvilke rettigheter du har overfor oss og hvordan du måtte forsvare dem. Du kan alltid kontakte kundeservice hvis du måtte ha noen spørsmål angående vår behandling av personopplysninger eller denne personvernserklæringen.</p>
 
         <table class="mb-4">
             <tr>
                 <td>Navn på selskapet:</td>
-                <td>Nettflytt AS</td>
+                <td>Flytteregisterett AS</td>
             </tr>
             <tr>
                 <td>Organisasjonsnummer:</td>
@@ -40,7 +40,7 @@
 
                     <p>Personopplysninger er all informasjon knyttet til en identifiserbar eller identifisert person (deg som bruker). En identifiserbar person er noen som kan identifiseres, direkte eller indirekte, for eksempel ved henvisning til et identifikasjonsnummer eller til en eller flere faktorer spesifikke for hans eller hennes fysiske, fysiologisk, mentale, økonomiske, kulturelle eller sosiale identitet. Personopplysninger vi behandler</p>
 
-                    <p>Dine personopplysninger kan bare behandles av oss med ditt samtykke, når det er nødvendig for utførelse av en kontrakt som du er del av, eller når det er nødvendig for at vi overholder en juridisk forpliktelse. Behandlingen av personopplysningene, de spesifikke formålene for behandlingen, de juridiske grunnlagene for behandlingen, og hvor lenge vi lagrer dine personopplysninger er beskrevet nedenfor. All behandling av data hos Nettflytt.no foregår på dedikerte norske servere og deles ikke med andre.</p>
+                    <p>Dine personopplysninger kan bare behandles av oss med ditt samtykke, når det er nødvendig for utførelse av en kontrakt som du er del av, eller når det er nødvendig for at vi overholder en juridisk forpliktelse. Behandlingen av personopplysningene, de spesifikke formålene for behandlingen, de juridiske grunnlagene for behandlingen, og hvor lenge vi lagrer dine personopplysninger er beskrevet nedenfor. All behandling av data hos Flytteregisterett.no foregår på dedikerte norske servere og deles ikke med andre.</p>
 
                     <b> Navn</b><br>
                     <p> Ditt navn vil bli samlet inn og behandlet av oss da det er nødvendig for å identifisere deg hos dine leverenadører.<br> Emailadresse, telefonnummer og hjemmeadresse<br> For å kunne sende deg epostvarsler angående bestillingen din, vil emailadresse, telefonnummer og hjemmeadresse bli samlet inn og behandlet av oss, da det er nødvendig for utførelsen av en kontrakt der du er en part. Vi verner om din emailadresse, telefonnummer og hjemmeadresse under tidsrommet av kontraktsforhold der du er en part, og i 3 månederderetter.<br> Hvis du gjennomfører et kjøp i vår flyttebutikk vil din emailadresse, telefonnummer og hjemmeadresse vil bli delt med vår tredjeparts logistikkleverandør, Rektor AS, ettersom at personopplysningene er nødvendig for at et transportselskap skal kunne levere dine bestilte produkter.<br> Du kan også, med ditt samtykke, abonnere på vårt nyhetsbrev. I så fall vil epostadressen din være lagret hos oss for dette formålet inntil du trekker tilbake ditt samtykke ved å melde deg av.</p>

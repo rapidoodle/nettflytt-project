@@ -256,7 +256,7 @@ $(document).ready(function() {
         }
     });
     $("#btn-add-postbox").click(function(){
-        updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1});
+        updateCustomerData({"isNorges" : 1, "pb-price": 0, "mailbox-sign" : 1, "pb-free" : 1});
         $("#isNorges").val("1");
         $("#isPostbox").val("1");
         $(".btn-next-summary").attr("data-postbox", "1");
