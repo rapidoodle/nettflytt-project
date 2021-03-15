@@ -26,6 +26,10 @@ $(document).ready(function() {
     var timesIcon       = "<i class='fa fa-times text-danger'></i>";
     //INDEX PAGE
 
+    if($("#name_0").length > 0){
+        $("#isReq").val("0");
+        $(".req-fld").removeAttr("required");
+    }
     $(".save-person-collapse-cont").hide();
     $(".req-fld").keyup(function(){
         if($("#name_0").length != 0){
