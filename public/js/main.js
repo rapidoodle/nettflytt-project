@@ -389,6 +389,8 @@ $(document).ready(function() {
         var isPostBox = $("#isPostbox").val();
         var isNorges  = $("#isNorges").val();
 
+        console.log([isPostbox, isNorges]);
+
         console.log(names);
         updateCustomerData({"isNorges" :isNorges, "mailbox-sign" :isPostbox, "postbox.address" : $('input[name="radios"]:checked').val(), "postbox.names" : names});
         // window.location.href = "/oppsummering/";
