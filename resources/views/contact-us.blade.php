@@ -1,5 +1,12 @@
 @extends('layouts.main')
 @section('content')
+<script type="text/javascript" async src="https://cdn.reamaze.com/assets/reamaze.js"></script>
+<script type="text/javascript">
+  var _support = _support || { 'ui': {}, 'user': {} };
+  _support['account'] = 'flytteregisteret';
+  _support['contact_custom_fields'] = _support['contact_custom_fields'] || {};
+  _support['contact_custom_fields']['rmz_form_id_23129'] = {};
+</script>
 <div class="row px-4 mb-5 mt-5 mt-md-0" id="contact-page">
     <div class="col-12 col-md-8 offset-md-2 text-center">
         <h2 class="d-inline-block">Velkommen til vårt kundesenter</h2>
@@ -51,9 +58,9 @@
 
             <div class="card-body p-md-5 m-md-0 text-center d-hiddens" id="contact-5">
                 <h5 class="mb-0">Send oss gjerne en e-post så svarer vi deg fortløpende</h5>
-                <div class="py-4"><i class="far fa-envelope"></i>  <a href="mailto:kundesenter@nettflytt.no">kundesenter@nettflytt.no</a></div>
-                </table>
-                <p>Husk å inkludere ditt telefonnummer i henvendelsen slik at vi kan finne din flyttemelding)</p>
+                <div class="py-4">
+                    <div data-reamaze-embed="contact" data-reamaze-embed-form-id="23129"></div>
+                </div>
             </div>
         </div>
     </div>
