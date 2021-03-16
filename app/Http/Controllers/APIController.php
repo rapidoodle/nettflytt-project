@@ -80,6 +80,8 @@ class APIController extends Controller
                 $request['pb-price'] = 149;
             }elseif(session('customer.pb-free') != "" && session('customer.pb-free') == 1){
                 $request['pb-price'] = 0;
+            }else{
+                $request['pb-price'] = 169;
             }
         }else{
             $request['pb-price'] = 0;

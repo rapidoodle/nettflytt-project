@@ -50,45 +50,13 @@
     <div class="col-12 col-md-5">
         <div class="smry-rcrd p-4 h-auto">
             <?php
-            $pbPrice    = session('customer')['pb-price'];
+            $pbPrice    = session('customer')['pb-price'] != "" ? session('customer')['pb-price'] : 0;
             $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
             $totalPrice = session('customer')['price'] + $pbPrice + $advPrice;
             ?>
             <input type="hidden" id="total-price" value="<?=$totalPrice?>">
             <input type="hidden" id="pb-price" value="<?=$pbPrice?>">
             <input type="hidden" id="phone" value="{{session('customer')['phone']}}">
-<!--             <table class="table">
-                <thead>
-                    <tr>
-                        <th><b>Produkt</b></th>
-                        <th><b>Pris</b></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Behandling av flyttemeldinger</td>
-                        <td>kr 149,-</td>
-                    </tr>
-                    <?php if(session('customer')['mailbox-sign'] == 1) { ?>
-                    <tr class="tr-pb">
-                        <td>Postkasseskilt</td>
-                        <td><?=isset(session('customer')['pb-price']) && session('customer')['pb-price'] != 0 ? "kr ".session('customer')['pb-price'].",-" : 'GRATIS'?></td>
-                        <td><i class="fa fa-trash-o pointer remove-pb" data-toggle="modal" data-target="#remove-pbModal" data-toggle="modal"></i></td>
-                    </tr>
-                    <?php } ?>
-                    <?php if(isset(session('customer')['isAdv']) && session('customer')['isAdv'] == 1) { ?>
-                    <tr class="tr-ad">
-                        <td>Uadressert reklame nei takk</td>
-                        <td>kr 89,-</td>
-                        <td><i class="fa fa-trash-o pointer remove-ad" data-toggle="modal" data-target="#remove-adModal" data-toggle="modal"></i></td>
-                    </tr>
-                    <?php } ?>
-                    <tr>
-                        <td>Totalt:</td>
-                        <td>kr <span id="total-price-cont"><?=$totalPrice?></span>,-</td>
-                    </tr>
-                </tbody>
-            </table> -->
             <table class="table">
                 <thead>
                     <tr>
