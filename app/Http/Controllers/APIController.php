@@ -85,7 +85,7 @@ class APIController extends Controller
             $request['pb-price'] = 0;
         }
         $request['price']         = 149;
-        $request['adv-price']     = 0;
+        $request['adv-price']     = session('customer.adv-price') != "" ? session('customer.adv-price') : 0;
         $request['pb-free']       = session('customer.pb-free') != "" ? session('customer.pb-free') : 0;
         $request['mailbox-sign']  = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 0;
         $request['phone']         = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
@@ -97,9 +97,9 @@ class APIController extends Controller
         $request['old_post']      = $request['old_zipcode'].' '.$request['old_place'];
         $request['new_post']      = $request['new_zipcode'].' '.$request['new_place'];
         $request['tag']          = "malabon01";
-        $request['isNorges']      = 0;
-        $request['_status']       = "in progress";
-        $request['_keyLogin']     = md5($request['full-name']."-".date("Y-m-d h:i:s"));
+        $request['isNorges']      = session('customer.isNorges') != "" ? session('customer.isNorges') : 0;
+        $request['_status']       = session('customer._status') != "" ? session('customer._status') : "in progress";
+        $request['_keyLogin']     = session('customer._keyLogin') != "" ? session('customer._keyLogin') : md5($request['full-name']."-".date("Y-m-d h:i:s"));
         
         // or when your server returns json
         // $content = json_decode($response->getBody(), true);

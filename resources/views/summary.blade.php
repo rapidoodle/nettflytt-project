@@ -173,7 +173,7 @@
             <span class="mt-4 text-sm-gray disp-field">E-post: <span data-parent="person0-email"><?=session('customer')['person0']['email']?></span></span>
             <span class="text-sm-gray disp-field">Født: <span data-parent="person0-bday"><?=session('customer')['person0']['bday']?></span></span>
 
-            <?php if(session('customer')['totalPerson'] > 1){ ?>
+            <?php if(isset(session("customer")["totalPerson"]) && session("customer")["totalPerson"] > 1){ ?>
             <hr>
             <h5>Andre personer i hustanden</h5>
             <?php for($i=1; $i < session('customer')['totalPerson']; $i++){ ?>
