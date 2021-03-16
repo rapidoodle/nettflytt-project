@@ -9,20 +9,21 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-        $token = Helper::getToken();
-
+        // $token = Helper::getToken();
+        // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");
         // session()->forget('customer.isNorges');
         // echo json_encode(session('customer'));
         // $storageToken  = Helper::initStorage($token);
        // echo $token = session('_initToken');
         // echo "<br>";
-        // echo $sendOTP = Helper::sendOTP(Helper::getToken(), "+4792445024", "Flytteregisteret");
+        echo Helper::getToken();
+        // echo $sendOTP = Helper::sendOTP(Helper::getToken(), "92445024", "Flytteregisteret");
         // session()->put("billing_id_strex", $sendOTP);
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
-        echo Helper::storageStatus($token, "AByLg4ofukOK0w0T3xeNtnZmTUjhqxZiXcvpOYoKMepRmH749dqK2iEbW3ibKWzZ", "info");
+        // echo Helper::storageStatus($token, "AByLg4ofukOK0w0T3xeNtnZmTUjhqxZiXcvpOYoKMepRmH749dqK2iEbW3ibKWzZ", "info");
         // echo Helper::tokenDetails("XU1ivp87caQsU6kBNYwNGHYlSct7eI9Pz36UpwIDDmz9n5MoF4qTvjiLPxlmfEqS");
         // echo Helper::tokenDetails("mjwpt0bYSGdrKYlygevWmnn44lbDGJqz02OIEOrHKkSRlACvLSzT245apryFdxWP");
         // "This is a sample message for Norges AS";
@@ -32,7 +33,7 @@ class APIController extends Controller
     public function recoverStorage(Request $request){
         $storageToken = $request->token;
         Helper::getStorage(Helper::getToken(), $storageToken);
-        session(['customer'   => $newToken]);
+        // session(['customer'   => $newToken]);
         return redirect('/');
     }
 
@@ -75,12 +76,17 @@ class APIController extends Controller
         }
 
         if(isset($request['mailbox-sign']) && $request['mailbox-sign'] == 1){
-            $request['pb-price'] = 169;
+            if(session('customer.pb-free') != "" && session('customer.pb-price') == 149){
+                $request['pb-price'] = 149;
+            }elseif(session('customer.pb-free') != "" && session('customer.pb-free') == 1){
+                $request['pb-price'] = 0;
+            }
         }else{
             $request['pb-price'] = 0;
         }
         $request['price']         = 149;
         $request['adv-price']     = 0;
+        $request['pb-free']       = session('customer.pb-free') != "" ? session('customer.pb-free') : 0;
         $request['mailbox-sign']  = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 0;
         $request['phone']         = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
         $request['totalPerson']   = $pctr == 0 ? 1 : $pctr;
@@ -90,8 +96,10 @@ class APIController extends Controller
 
         $request['old_post']      = $request['old_zipcode'].' '.$request['old_place'];
         $request['new_post']      = $request['new_zipcode'].' '.$request['new_place'];
-        $request['tag ']          = "malabon01";
-        $request['isNorges']     = 0;
+        $request['tag']          = "malabon01";
+        $request['isNorges']      = 0;
+        $request['_status']       = "in progress";
+        $request['_keyLogin']     = md5($request['full-name']."-".date("Y-m-d h:i:s"));
         
         // or when your server returns json
         // $content = json_decode($response->getBody(), true);

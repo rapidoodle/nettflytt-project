@@ -6,7 +6,7 @@ $months  = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','Sept
 $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December']; 
 
 $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbolig', 'tomannsbolig2' => 'Tommansbolig m/utleiedel', 'rekkehus' => 'Rekkehus', 'hybel' => 'Hybel'];
-
+// XzDgiIikzQLdksklE0OdQW572ifi8f9d9ztgs6IHVhHSUNfws33U81c7UKeZfUer
 ?>
 <img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out">
 <div class="row px-2 px-lg-4 mb-5">
@@ -41,6 +41,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
     //phone validator
     function validateForm(){
         console.log($("#isReq").val());
+        var valid  = false;
         if($("#isReq").val() == "1"){
             var phone = $("#phone").val();
             var validN = phone.substr(phone.length - 8);
@@ -48,15 +49,35 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
             var message = "Koden du tastet inn var feil. Vennligst prøv igjen";
 
             if(validN.substr(0, 1) != "4" && validN.substr(0, 1) != "9"){
-                console.log("error 2: "+validN.substr(0, 1));
                 alert(message);
-                return false;
+                valid = false;
             }else{
-                return true;
+                valid = true;
             }
         }else{
-            return true;
+            valid = true;
         }
+
+        if($("#name_0").length == 0){
+            var birthDate = new Date($("#birth_year").val()+"-"+$("#birth_month").val()+"-"+$("#birth_day").val());
+            var today = new Date();
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }    
+            console.log(age);
+            if(age > 18){
+                valid = true;
+            }else{
+                alert("Hovedpersonen må være 18 år gammel");
+                valid = false;
+            }
+        }
+
+        console.log("isValid: "+valid);
+        // return valid;
+        return valid;
     }
 </script>
 <form action="/getToken" method="POST" id="index-form" onsubmit="return validateForm()">
@@ -71,7 +92,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                     <div class="card bg-sm-light p-0 bg-xs-light" id="customer-form">
                         <div class="accordion mb-4 mb-md-0" id="extra-names">
                             <?php 
-                            if(session('customer')){ 
+                            if(Session::has('customer')){ 
                                 if(isset(session('customer')['totalPerson']) && session('customer')['totalPerson'] != 0){
                                 for ($i=0; $i < session('customer')['totalPerson']; $i++){
                                     if(isset(session('customer')['person'.$i])){

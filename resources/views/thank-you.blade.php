@@ -78,7 +78,13 @@
         </div>
     </div>
 </div>
-
+<!-- Event snippet for Gjennomført kjøp conversion page -->
+<script>
+gtag('event', 'conversion', {
+'send_to': 'AW-654782287/o8CcCLaL5MsBEM_enLgC',
+'transaction_id': ''
+});
+</script>
 <!-- RESTART ALL SESSION -->
-<?php session()->flush(); ?> 
+<!-- <?php session()->flush(); ?>  -->
 @endsection

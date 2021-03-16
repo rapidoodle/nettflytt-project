@@ -57,7 +57,7 @@
             <input type="hidden" id="total-price" value="<?=$totalPrice?>">
             <input type="hidden" id="pb-price" value="<?=$pbPrice?>">
             <input type="hidden" id="phone" value="{{session('customer')['phone']}}">
-            <table class="table">
+<!--             <table class="table">
                 <thead>
                     <tr>
                         <th><b>Produkt</b></th>
@@ -87,6 +87,50 @@
                         <td>Totalt:</td>
                         <td>kr <span id="total-price-cont"><?=$totalPrice?></span>,-</td>
                     </tr>
+                </tbody>
+            </table> -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><b>Produkt</b></th>
+                        <?php if(session('customer')['pb-free'] == 1) { ?>
+                        <!-- <th><b>Pris</b></th> -->
+                        <th></th>
+                        <?php } ?>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Behandling av flyttemeldinger</td>
+
+                        <?php if(session('customer')['pb-free'] == 1) { ?>
+                        <td></td>
+                        <?php } ?>
+                    </tr>
+                    <?php if(session('customer')['mailbox-sign'] == 1) { ?>
+                    <tr class="tr-pb">
+                        <td>Postkasseskilt</td>
+
+                        <?php if(session('customer')['pb-free'] == 1) { ?>
+                        <td>GRATIS</td>
+                        <!-- <td><i class="fa fa-trash-o pointer remove-pb" data-toggle="modal" data-target="#remove-pbModal" data-toggle="modal"></i></td> -->
+                        <?php } ?>
+                    </tr>
+                    <?php } ?>
+                    <?php if(isset(session('customer')['isAdv']) && session('customer')['isAdv'] == 1) { ?>
+                    <tr class="tr-ad">
+                        <td>Uadressert reklame nei takk</td>
+                        <?php if(session('customer')['pb-free'] == 1) { ?>
+                        <td></td>
+<!--                         <td><i class="fa fa-trash-o pointer remove-ad" data-toggle="modal" data-target="#remove-adModal" data-toggle="modal"></i></td> -->
+                        <?php } ?>
+                    </tr>
+                    <?php } ?>
+
+<!--                     <tr>
+                        <td>Totalt:</td>
+                        <td>kr <span id="total-price-cont"><?=$totalPrice?></span>,-</td>
+                    </tr> -->
                 </tbody>
             </table>
         </div>

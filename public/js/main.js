@@ -397,7 +397,7 @@ $(document).ready(function() {
 
         console.log(names);
         updateCustomerData({"isNorges" :isNorges, "mailbox-sign" :$("#isPostbox").val(), "postbox.address" : $('input[name="radios"]:checked').val(), "postbox.names" : names});
-        // window.location.href = "/oppsummering/";
+        window.location.href = "/oppsummering/";
     });
 
     $(".btn-legg-till").click(function(){
@@ -593,7 +593,9 @@ $(document).ready(function() {
                     loadingProgress(4);
                     clearInterval(otpInterval);
                     $("#otpModal").toggle();
+                    updateCustomerData({"_status" : "done"});
                     window.location.href = "/takk";
+
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
                     $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Koden du tastet inn var feil. Vennligst prøv igjen");
 
@@ -616,8 +618,10 @@ $(document).ready(function() {
                                         // $("#otpCountdown").html("Suksess!");
                                         clearInterval(otpInterval);
                                         loadingProgress(4);
+                                        updateCustomerData({"_status" : "done"});
                                         $("#otpModal").toggle();
                                         window.location.href = "/takk";
+
                                     }
                                 }
                             });
@@ -741,13 +745,23 @@ $(document).ready(function() {
 
     function addName(collapse = true){
         $("#isReq").val("0");
-        var validN = phone.substr(phone.length - 8);
-        console.log(validN)
+        var validN = phone.val().substr(phone.length - 9);
+        var birthDate = new Date($("#birth_year").val()+"-"+$("#birth_month").val()+"-"+$("#birth_day").val());
+        var today = new Date();
+        var age = today.getFullYear() - birthDate.getFullYear();
+        var m = today.getMonth() - birthDate.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }    
+
+        console.log("persons "+$(".person").length)
         if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
             alert("Fyll ut skjemaet før du legger til et nytt navn.");
         }else if(validN.substr(0, 1) != "4" && validN.substr(0, 1) != "9"){
             console.log("error 2: "+validN.substr(0, 1));
             alert("Koden du tastet inn var feil. Vennligst prøv igjen");
+        }else if($(".person").length == 0 && age <= 18){
+                alert("Hovedpersonen må være 18 år gammel");
         }else{
          var pCtr   = $(".person").length;
          var newId  = Date.now();

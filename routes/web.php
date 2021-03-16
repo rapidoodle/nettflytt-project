@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -66,3 +67,4 @@ Route::post('/searchCompany', 'APIController@searchCompany');
 Route::post('/updateCustomerData', 'APIController@updateCustomerData');
 Route::post('/storageStatus', 'APIController@storageStatus');
 Route::post('/getOtpStatus', 'APIController@getOtpStatus');
+Route::post('/loginAuth', 'Auth\LoginController@loginAuth');

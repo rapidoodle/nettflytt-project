@@ -30,6 +30,7 @@ class Helper
 
     public static function getToken(){
     	$dateNow = date("Y-m-d H:i:s");
+
     	if(session("_accessToken") !== null && session("_tokenTimeout") != null && session("_tokenTimeout") >= $dateNow){
     		return session("_accessToken");
     	}else{

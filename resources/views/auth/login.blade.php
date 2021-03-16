@@ -1,6 +1,22 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
+
+<?php 
+    $storageToken = Session::has("_storageToken") ? session("_storageToken") : (isset($_GET['_token']) ? $_GET['_token'] : "");
+
+    // $storage = Helper::getStorage(Helper::getToken(), $storageToken);
+    // echo $storage;
+    // session(['customer' => json_decode($storage, false)]);
+    if($storageToken != ""){
+        $storage = Helper::getStorage(Helper::getToken(), $storageToken);
+        echo $storage;
+            session(['customer' => $storage]);
+
+    }else{
+        header('Location: /');
+    }
+?>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -8,11 +24,12 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="/loginAuth">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <input type="hidden" name="_storageToken" value="{{$storageToken}}">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail/Phone Number') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
