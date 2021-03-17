@@ -39,8 +39,8 @@
             </div>
 
             <div class="card-body p-md-5 m-md-0 d-hiddens" id="contact-3">
-                <h5 class="mb-0">Vi opplever for tiden mange som kontakter for adresseendring som ikke har noe med Flytteregisterett å gjøre.</h5>
-                <p>Er du helt sikker på at du har meldt adresseendring hos Flytteregisterett? (Vi ber om at du ser om Flytteregisterett er avsender av SMS og bekreftelses e-post)</p>
+                <h5 class="mb-0">Vi opplever for tiden mange som kontakter for adresseendring som ikke har noe med Flytteregisteret å gjøre.</h5>
+                <p>Er du helt sikker på at du har meldt adresseendring hos Flytteregisteret? (Vi ber om at du ser om Flytteregisteret er avsender av SMS og bekreftelses e-post)</p>
                 <div class="row mt-4 ">
                     <div class="col-12 col-md-6 text-md-right">
                         <button data-next="contact-4" data-from="contact-3" class="btn btn-contact w-100 btn-info px-5 py-2">Nei</button>
@@ -52,7 +52,7 @@
             </div>
 
             <div class="card-body p-md-5 m-md-0 d-hiddens" id="contact-4">
-                <h5 class="mb-0">Vi kan dessverre ikke hjelpe deg med flyttemeldinger som er sendt via andre portaler enn Flytteregisterett.no</h5>
+                <h5 class="mb-0">Vi kan dessverre ikke hjelpe deg med flyttemeldinger som er sendt via andre portaler enn Flytteregisteret.no</h5>
                 <p>Vi anbefaler at du tar kontakt med selskapet som har håndtert din flyttemelding direkte.</p>
             </div>
 
@@ -76,9 +76,9 @@
         <h2>Viktig informasjon</h2>
         <div class="row">
             <div class="col-12 col-md-9">
-                <p>Vi opplever økende antall forespørsler fra brukere av andre tjenester for adresseendring som ikke har noe med Flytteregisterett å gjøre.
+                <p>Vi opplever økende antall forespørsler fra brukere av andre tjenester for adresseendring som ikke har noe med Flytteregisteret å gjøre.
                 </p>
-                <p> Vi ber om at du sjekker hvilken nettside du faktisk har brukt først dersom din henvendelse gjelder manglende tilbakemelding e.l etter å ha meldt adresseendring. Vi kan ikke hjelpe deg med evt flyttemeldinger som er sendt via andre nett-tjenester enn Flytteregisterett sine.</p>
+                <p> Vi ber om at du sjekker hvilken nettside du faktisk har brukt først dersom din henvendelse gjelder manglende tilbakemelding e.l etter å ha meldt adresseendring. Vi kan ikke hjelpe deg med evt flyttemeldinger som er sendt via andre nett-tjenester enn Flytteregisteret sine.</p>
             </div>
             <div class="col-12 col-md-3">
                 <img class="img-fluid" src="{{ asset('images/call-center-working-night.png')}}" alt="call center working night" width="300px">
@@ -90,7 +90,7 @@
                 <p class="bold-red bold text-red">MERK!</p>
             </div>
             <div class="col-12 col-md-11">
-                <p>Flytteregisterett er ikke en del av Posten Norge eller folkeregisteret.<br> Har du spørsmål vedrørende adressen som er registrert hos dem ber vi deg kontakt direkte med dem.</p>
+                <p>Flytteregisteret er ikke en del av Posten Norge eller folkeregisteret.<br> Har du spørsmål vedrørende adressen som er registrert hos dem ber vi deg kontakt direkte med dem.</p>
             </div>
         </div>
     </div>

@@ -165,9 +165,9 @@ class Helper
 	    return $json;
     }
 
-    public static function confirmOtp($token, $phone, $transactionid, $otp){
+    public static function confirmOtp($token, $phone, $transactionid, $otp, $totalPrice){
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("msn" => "+47".$phone, "transactionid" => $transactionid, "otp" => $otp); 
+		$data 	  = array("msn" => "+47".$phone, "transactionid" => $transactionid, "otp" => $otp, "price" => $totalPrice); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [

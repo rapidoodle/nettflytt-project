@@ -27,15 +27,15 @@
 
 <div class="row px-4 mb-5 mt-5 mt-md-0 d-none d-md-inline">
     <div class="col-12 col-md-8 offset-md-2 text-center">
-        <h2>La leverandørene konkurere om deg!</h2>
-        <p class="mt-3">Motta helt uforpliktende tilbud til din nye bolig</p>
+        <h2>Sammen står vi sterkere!</h2>
+        <p class="mt-3">For å effektivt holde prisen nede holder vi to anbudskonkurranser i året der den leverandøren som strekker seg lengst vinner.</p>
     </div>
 </div>  
 
 <div class="row px-4 mb-4 mt-5 mt-md-0 d-md-none">
     <div class="col-12 col-md-8 offset-md-2 text-center">
-        <h2>Gå gjennom boligsjekken</h2>
-        <p class="mt-3">Du må svare JA/NEI om du ønsker et helt uforpliktende tilbud på tjenester til din nye bolig</p>
+        <h2>Sammen står vi sterkere!</h2>
+        <p class="mt-3">For å effektivt holde prisen nede holder vi to anbudskonkurranser i året der den leverandøren som strekker seg lengst vinner.</p>
     </div>
 </div>  
 <div class="row px-4 mt-0 mb-4 mb-md-5 my-lg-5  mt-lg-0">
@@ -86,11 +86,10 @@
             </div>
             <div id="collapseTwo" class="collapse <?=Session::has('customer.isNorges') && session('customer')['isNorges'] == 1  ? 'show' : ''?>" aria-labelledby="headingTwo" data-parent="#offersAcdn">
                <div class="card-body">
-                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
+                <h5>Ønsker du tilbud på den beste TV/Internett-avtalen i ditt område?</h5>
                 <div class="row">
                     <div class="col-12 col-md-8">
-                        <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
-                        <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+                        <p>La leverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
 
                         <?php if(!isset(session('customer')['offers']['isTV']) || session('customer')['offers']['isTV'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
@@ -119,11 +118,10 @@
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#offersAcdn">
                <div class="card-body">
-                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
+                <h5>Ønsker du å motta et uforpliktende tilbud på den beste flyttevasken-leverandøren i ditt område?</h5>
                 <div class="row">
                     <div class="col-12 col-md-8">
-                        <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
-                        <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+                        <p>100% fornøyd, eller pengene tibake.</p>
                         <?php if(!isset(session('customer')['offers']['isFlyttevask']) || session('customer')['offers']['isFlyttevask'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-1">
@@ -152,11 +150,10 @@
             </div>
             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#offersAcdn">
                <div class="card-body">
-                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
+                <h5>Ønsker du tilbud på den beste boligalarm-avtalen i ditt område?</h5>
                 <div class="row">
                     <div class="col-12 col-md-8">
-                        <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
-                        <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+                        <p>La alarmleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
                         <?php if(!isset(session('customer')['offers']['isBoligalarm']) || session('customer')['offers']['isBoligalarm'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-1">

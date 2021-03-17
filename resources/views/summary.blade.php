@@ -53,6 +53,7 @@
             $pbPrice    = session('customer')['pb-price'] != "" ? session('customer')['pb-price'] : 0;
             $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
             $totalPrice = session('customer')['price'] + $pbPrice + $advPrice;
+            session()->put("customer.total_price", $totalPrice);
             ?>
             <input type="hidden" id="total-price" value="<?=$totalPrice?>">
             <input type="hidden" id="pb-price" value="<?=$pbPrice?>">

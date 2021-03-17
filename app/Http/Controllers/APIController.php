@@ -84,10 +84,12 @@ class APIController extends Controller
                 $request['pb-price'] = 169;
             }
         }else{
-            $request['pb-price'] = 0;
+            $request['pb-price']  = 0;
         }
-        $request['price']         = 149;
         $request['adv-price']     = session('customer.adv-price') != "" ? session('customer.adv-price') : 0;
+        $request['isAdv']         = session('customer.isAdv') != "" ? session('customer.isAdv') : 0;
+        $request['price']         = 149;
+        $request['total_price']   = 149 + $request['pb-price'] + $request['adv-price'];
         $request['pb-free']       = session('customer.pb-free') != "" ? session('customer.pb-free') : 0;
         $request['mailbox-sign']  = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 0;
         $request['phone']         = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
@@ -168,7 +170,7 @@ class APIController extends Controller
         $transactionId  = session('billing_id_strex');
         
         //check otp
-        echo Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp);
+        echo Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp, session('customer')['total_price']);
     }
 
     public function getOtpStatus(Request $request){
