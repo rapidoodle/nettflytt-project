@@ -46,7 +46,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
             var phone = $("#phone").val();
             var validN = phone.substr(phone.length - 8);
             console.log("phone: "+validN);
-            var message = "Koden du tastet inn var feil. Vennligst prøv igjen";
+            var message = "Telefonnumeret i skjemaet er feil, vennligst skriv inn riktig telefonnummer.";
 
             if(validN.substr(0, 1) != "4" && validN.substr(0, 1) != "9"){
                 alert(message);
