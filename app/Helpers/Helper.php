@@ -167,7 +167,7 @@ class Helper
 
     public static function confirmOtp($token, $phone, $transactionid, $otp, $totalPrice){
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("msn" => "+47".$phone, "transactionid" => $transactionid, "otp" => $otp, "price" => $totalPrice); 
+		$data 	  = array("msn" => "+47".$phone, "billing_id_strex" => $transactionid, "otp" => $otp, "price" => $totalPrice); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
@@ -185,7 +185,7 @@ class Helper
 
     public static function getOtpStatus($token, $transactionid){
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("transactionid" => $transactionid); 
+		$data 	  = array("billing_id_strex" => $transactionid); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
