@@ -193,14 +193,14 @@ class APIController extends Controller
     public function confirmOtp(Request $request){
         $otp            = $request->otp;
         $phone          = session('customer')['phone'];
-        $transactionId  = session('billing_id_strex');
+        $transactionId  = session('customer')['billing_id_strex'];
         
         //check otp
         echo Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp, session('customer')['total_price']);
     }
 
     public function getOtpStatus(Request $request){
-        $transactionId  = session('billing_id_strex');
+        $transactionId  = session('customer')['billing_id_strex'];
         //check otp
         echo Helper::getOtpStatus(Helper::getToken(), $transactionId);
     }

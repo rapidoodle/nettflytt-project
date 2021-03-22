@@ -166,7 +166,7 @@ class Helper
 
     public static function sendSMS($token, $phone, $sender = 2099, $message){
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("msn" => "+47".$phone, "sender" => $sender, "message" => $message); 
+		$data 	  = array("msn" => "+47".$phone, "sender" => "Flytteregisteret", "message" => $message); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/sms-message";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
@@ -183,7 +183,7 @@ class Helper
 
     public static function confirmOtp($token, $phone, $transactionid, $otp, $totalPrice){
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("msn" => "+47".$phone, "billing_id_strex" => $transactionid, "otp" => $otp, "price" => $totalPrice); 
+		$data 	  = array("msn" => "+47".$phone, "transactionid" => $transactionid, "otp" => $otp, "price" => $totalPrice, "sender" => "Flytteregisteret"); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
@@ -201,7 +201,7 @@ class Helper
 
     public static function getOtpStatus($token, $transactionid){
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("billing_id_strex" => $transactionid); 
+		$data 	  = array("transactionid" => $transactionid); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
