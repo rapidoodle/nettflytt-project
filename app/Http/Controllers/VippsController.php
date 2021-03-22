@@ -9,7 +9,11 @@ class VippsController extends Controller
 {
 	public function index($number)
 	{	
-	    return view('vipps', ['number' => $number]);
+		if(session('customer._storageToken') != ""){
+	    	return view('vipps', ['number' => $number]);
+		}else{
+	    	return redirect('/');
+		}
 	}
 
 	public function checker(){	
