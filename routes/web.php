@@ -50,6 +50,8 @@ Route::get('/cookies-consent', function () {
 Route::get('/folkeregisteret', function () {
     return view('index', ['type' => "folkeregisteret"]);
 });
+Route::get('/betaling/{number}', 'VippsController@index');
+Route::get('/betaling', 'VippsController@checker');
 
 Route::get('/testapi', 'APIController@testapi')->name('testapi');
 Route::get('/recover', 'APIController@recoverStorage')->name('recoverStorage');
@@ -68,3 +70,4 @@ Route::post('/updateCustomerData', 'APIController@updateCustomerData');
 Route::post('/storageStatus', 'APIController@storageStatus');
 Route::post('/getOtpStatus', 'APIController@getOtpStatus');
 Route::post('/loginAuth', 'Auth\LoginController@loginAuth');
+Route::post('/submitVipps', 'VippsController@processPayment');

@@ -79,6 +79,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
         // return valid;
         return valid;
     }
+
 </script>
 <form action="/getToken" method="POST" id="index-form" onsubmit="return validateForm()">
 @csrf <!-- {{ csrf_field() }} -->

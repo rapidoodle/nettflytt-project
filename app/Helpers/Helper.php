@@ -130,7 +130,23 @@ class Helper
 
 		    return $json;
     }
+	public static function sendVipps($token, $phone){
+		$u 	  	  = "u46114-".session("_sessionSalt");
+		$data 	  = array("msn" => "+47".$phone); 
+		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-vipps";
+	    $postdata = http_build_query( $data );
+	    $options  = [ 'http' => [
+					        'method' => "POST",
+					        'header' => "Content-type: application/x-www-form-urlencoded",
+					        'content' => $postdata]
+					  ];
+	    $context  = stream_context_create( $options );
+	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
+		$response = json_decode($json);
 
+	    return json_encode($response);
+
+	}
     public static function sendOTP($token, $phone, $sender = "Flytteregisteret"){
 		$u 	  	  = "u46114-".session("_sessionSalt");
 		$data 	  = array("msn" => "+47".$phone, "sender" => $sender); 

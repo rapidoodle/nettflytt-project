@@ -48,6 +48,21 @@ button.btn-info, a.btn-info{
     font-weight: bold;
     max-width: 130px;
 }
+button.btn-info-100{
+    font-size: 14px;
+    border-radius: 4px!important;
+    border: 1px solid #495057;
+    padding:.3rem 1.3rem;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #1D576F;
+    border-color: #1D576F;
+    width: 100%;
+}
+button.btn-info-100:hover{
+    color:#fff!important;
+}
 div.steps{
     width: 500px;
 }
@@ -712,7 +727,7 @@ h5.loading > span:after {
     font-size: 16px;
 }
 div.pricing-details{
-    font-size: 14px;
+    font-size: 12px;
 }
 @keyframes dots {
     0%, 12.5% {

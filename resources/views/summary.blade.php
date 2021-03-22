@@ -82,7 +82,7 @@
 
                         <?php if(session('customer')['pb-free'] == 1) { ?>
                         <td>GRATIS</td>
-                        <!-- <td><i class="fa fa-trash-o pointer remove-pb" data-toggle="modal" data-target="#remove-pbModal" data-toggle="modal"></i></td> -->
+                        <td><i class="fa fa-trash-o pointer remove-pb" data-toggle="modal" data-target="#remove-pbModal" data-toggle="modal"></i></td>
                         <?php } ?>
                     </tr>
                     <?php } ?>
@@ -91,7 +91,7 @@
                         <td>Uadressert reklame nei takk</td>
                         <?php if(session('customer')['pb-free'] == 1) { ?>
                         <td></td>
-<!--                         <td><i class="fa fa-trash-o pointer remove-ad" data-toggle="modal" data-target="#remove-adModal" data-toggle="modal"></i></td> -->
+                        <td><i class="fa fa-trash-o pointer remove-ad" data-toggle="modal" data-target="#remove-adModal" data-toggle="modal"></i></td>
                         <?php } ?>
                     </tr>
                     <?php } ?>

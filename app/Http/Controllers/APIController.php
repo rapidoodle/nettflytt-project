@@ -9,6 +9,8 @@ class APIController extends Controller
 {
 
     public function testAPI(){
+
+        // echo Helper::getStorage(Helper::getToken(), "jl2QNLvdTok2mF9tRRUKVQgem9G27cTyCNBBWeb3IA4eCWTy0NvolvVXMKhrtDMN");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");
@@ -17,13 +19,13 @@ class APIController extends Controller
         // $storageToken  = Helper::initStorage($token);
        // echo $token = session('_initToken');
         // echo "<br>";
-        echo Helper::getToken();
+        // echo Helper::getToken();
         // echo $sendOTP = Helper::sendOTP(Helper::getToken(), "92445024", "Flytteregisteret");
         // session()->put("billing_id_strex", $sendOTP);
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
-        // echo Helper::storageStatus($token, "AByLg4ofukOK0w0T3xeNtnZmTUjhqxZiXcvpOYoKMepRmH749dqK2iEbW3ibKWzZ", "info");
+        echo Helper::storageStatus(Helper::getToken(), "jl2QNLvdTok2mF9tRRUKVQgem9G27cTyCNBBWeb3IA4eCWTy0NvolvVXMKhrtDMN", "payment");
         // echo Helper::tokenDetails("XU1ivp87caQsU6kBNYwNGHYlSct7eI9Pz36UpwIDDmz9n5MoF4qTvjiLPxlmfEqS");
         // echo Helper::tokenDetails("mjwpt0bYSGdrKYlygevWmnn44lbDGJqz02OIEOrHKkSRlACvLSzT245apryFdxWP");
         // "This is a sample message for Norges AS";
@@ -86,9 +88,11 @@ class APIController extends Controller
         }else{
             $request['pb-price']  = 0;
         }
+
         $request['adv-price']     = session('customer.adv-price') != "" ? session('customer.adv-price') : 0;
         $request['isAdv']         = session('customer.isAdv') != "" ? session('customer.isAdv') : 0;
         $request['price']         = 149;
+        $request['basis']         = 149;
         $request['total_price']   = 149 + $request['pb-price'] + $request['adv-price'];
         $request['pb-free']       = session('customer.pb-free') != "" ? session('customer.pb-free') : 0;
         $request['mailbox-sign']  = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 0;
@@ -135,6 +139,28 @@ class APIController extends Controller
             session()->put("customer.person0.email", $request['email']);
         }
 
+        //mailbox sign pricing
+        if(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
+            session()->forget('customer.sign_mailbox-a');
+            session()->put("customer.sign_mailbox-b", true);
+            session()->forget('customer.sign_mailbox-c');
+        }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
+            session()->forget('customer.sign_mailbox-a');
+            session()->forget('customer.sign_mailbox-b');
+            session()->put("customer.sign_mailbox-c", true);
+        }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
+            session()->put("customer.sign_mailbox-a", true);
+            session()->forget('customer.sign_mailbox-b');
+            session()->forget('customer.sign_mailbox-c');
+        }
+
+
+        if(!$request->session()->has('customer.mailbox-sign')){
+            session()->forget('customer.sign_mailbox-a');
+            session()->forget('customer.sign_mailbox-b');
+            session()->forget('customer.sign_mailbox-c');
+
+        }
         //save to storage
         $storage = session('customer');
 
@@ -206,9 +232,36 @@ class APIController extends Controller
             $newKey = substr($key, 0, 6) == "person" ? str_replace("-", ".", $key) : $key;
             $sessionKey = 'customer.'.$newKey;
             session()->put($sessionKey, $value);
-            Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));
+
+            //mailbox sign pricing
+            if(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
+                session()->forget('customer.sign_mailbox-a');
+                session()->put("customer.sign_mailbox-b", true);
+                session()->forget('customer.sign_mailbox-c');
+            }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
+                session()->forget('customer.sign_mailbox-a');
+                session()->forget('customer.sign_mailbox-b');
+                session()->put("customer.sign_mailbox-c", true);
+            }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
+                session()->put("customer.sign_mailbox-a", true);
+                session()->forget('customer.sign_mailbox-b');
+                session()->forget('customer.sign_mailbox-c');
+            }else{
+                session()->forget('customer.sign_mailbox-a');
+                session()->forget('customer.sign_mailbox-b');
+                session()->forget('customer.sign_mailbox-c');                
+            }
+
+            //no ads pricing
+            if(session('customer.isAdv') != "" && session('customer.isAdv') == 1){
+                session()->put("customer.sign_noads-a", true);
+            }else{
+                session()->forget("customer.sign_noads-a");
+            }
+
         }
 
+        Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));
         echo json_encode(session('customer'));
     }
 }
