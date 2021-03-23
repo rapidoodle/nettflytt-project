@@ -599,7 +599,7 @@ $(document).ready(function() {
                     failedProgress();
                 }else if(obj.status == 530){
                     // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
-                    window.location.href = "/betaling/"+newPhone;
+                    // window.location.href = "/betaling/"+newPhone;
                     console.log("fail 1");
                 }else if(obj.status == 0 && obj.strex_resultcode == "Queued"){
                     otpInterval = setInterval(function(){
@@ -629,7 +629,7 @@ $(document).ready(function() {
                         if(otpTimeoutSec == 0){
                             // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                             clearInterval(otpInterval);
-                            window.location.href = "/betaling/"+newPhone;
+                            // window.location.href = "/betaling/"+newPhone;
                             failedProgress();
                             console.log("fail 2");
 
@@ -639,7 +639,9 @@ $(document).ready(function() {
                     }, otpTimeout);
                 }else{
                     // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
+                    alert(newPhone);
                     clearInterval(otpInterval);
+                    failedProgress();
                     window.location.href = "/betaling/"+newPhone;
                     console.log("fail 3: ", obj);
 
