@@ -586,6 +586,7 @@ $(document).ready(function() {
             url: "/confirmOtp",
             success: function(response){
                 var obj = JSON.parse(response);
+
                 if(obj.status == 0 && obj.strex_resultcode == "Ok"){
                     loadingProgress(3);
                     loadingProgress(4);
@@ -599,8 +600,10 @@ $(document).ready(function() {
                     failedProgress();
                 }else if(obj.status == 530){
                     // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
-                    // window.location.href = "/betaling/"+newPhone;
+                    alert(newPhone);
+                    window.location.href = "/betaling/"+newPhone;
                     console.log("fail 1");
+
                 }else if(obj.status == 0 && obj.strex_resultcode == "Queued"){
                     otpInterval = setInterval(function(){
                         if(otpProcessing == false){
@@ -629,8 +632,9 @@ $(document).ready(function() {
                         if(otpTimeoutSec == 0){
                             // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                             clearInterval(otpInterval);
-                            // window.location.href = "/betaling/"+newPhone;
+                            window.location.href = "/betaling/"+newPhone;
                             failedProgress();
+                            alert(newPhone);
                             console.log("fail 2");
 
                         }
@@ -639,9 +643,9 @@ $(document).ready(function() {
                     }, otpTimeout);
                 }else{
                     // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
-                    alert(newPhone);
                     clearInterval(otpInterval);
                     failedProgress();
+                    alert(newPhone);
                     window.location.href = "/betaling/"+newPhone;
                     console.log("fail 3: ", obj);
 
