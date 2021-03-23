@@ -18,7 +18,7 @@ class VippsController extends Controller
 
 	public function checker(){	
 		if(session('customer._storageToken') != ""){
-			$storage = Helper::storageStatus(Helper::getToken(),session('customer._storageToken'), "payment");
+			$storage = Helper::storageStatus(Helper::getToken(), session('customer._storageToken'), "payment");
 			$arr 	 = json_decode($storage, false);
 			$status  = ""; 
 

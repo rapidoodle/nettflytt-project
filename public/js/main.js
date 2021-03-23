@@ -600,7 +600,6 @@ $(document).ready(function() {
                     failedProgress();
                 }else if(obj.status == 530){
                     // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
-                    alert(newPhone);
                     window.location.href = "/betaling/"+newPhone;
                     console.log("fail 1");
 
@@ -634,7 +633,6 @@ $(document).ready(function() {
                             clearInterval(otpInterval);
                             window.location.href = "/betaling/"+newPhone;
                             failedProgress();
-                            alert(newPhone);
                             console.log("fail 2");
 
                         }
@@ -645,7 +643,6 @@ $(document).ready(function() {
                     // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                     clearInterval(otpInterval);
                     failedProgress();
-                    alert(newPhone);
                     window.location.href = "/betaling/"+newPhone;
                     console.log("fail 3: ", obj);
 
