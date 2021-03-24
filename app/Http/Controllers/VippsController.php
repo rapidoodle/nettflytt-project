@@ -37,7 +37,7 @@ class VippsController extends Controller
 	    		return redirect('/betaling/'.session('customer')['phone'], ["error" => "Betaling feilet. Venligst prøv igjen."]);
 			}else{
 				Log::info("Vipps payment success; redirect to thank you page.");
-	    		return view('/takk');
+	    		return redirect('/takk');
 			}
 		}else{
 			Log::error("Illegal access to vipps page");
