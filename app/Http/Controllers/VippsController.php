@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Helper;
+use Illuminate\Support\Facades\Log;
 
 class VippsController extends Controller
 {
@@ -33,7 +34,7 @@ class VippsController extends Controller
 
 			if($status != 200){
 				Log::error("Vipps payment cancelled by user: ");
-	    		return redirect('/betaling/'+session('customer.phone'));
+	    		return redirect('/betaling/'.session('customer')['phone']);
 			}else{
 				Log::info("Vipps payment success; redirect to thank you page.");
 	    		return view('/takk');
