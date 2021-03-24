@@ -43,6 +43,11 @@
 <div class="row px-4 mt-0 mb-5 my-lg-5  mt-4">
     <div class="col-12 col-md-4 offset-md-4">
         <div class="card shadow">
+            <?php if($error){ ?>
+            <div class="alert alert-danger" role="alert">
+              Betaling feilet. Venligst prøv igjen.
+            </div>
+            <?php } ?>
             <form action="/submitVipps" method="POST" onsubmit="return validatePhone()">
                 @csrf
                 <div class="card-header text-center">

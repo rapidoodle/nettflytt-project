@@ -34,7 +34,7 @@ class VippsController extends Controller
 
 			if($status != 200){
 				Log::error("Vipps payment cancelled by user: ");
-	    		return redirect('/betaling/'.session('customer')['phone']);
+	    		return redirect('/betaling/'.session('customer')['phone'], ["error" => "Betaling feilet. Venligst prøv igjen."]);
 			}else{
 				Log::info("Vipps payment success; redirect to thank you page.");
 	    		return view('/takk');
