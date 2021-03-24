@@ -166,13 +166,13 @@
                 <h5 class="modal-title">Hvilke adresse ønsker du at vi sender postkasseskiltet til?</h5>            
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="radios" id="radio1" value="{{session('customer')['new_address']}}" checked>
+              <input class="form-check-input" type="radio" name="radios" id="radio1" value="new" checked>
               <label class="form-check-label" for="radio1">
                {{session('customer')['new_address']}}
               </label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="radios" id="radio2" value="{{session('customer')['old_address']}}">
+              <input class="form-check-input" type="radio" name="radios" id="radio2" value="old">
               <label class="form-check-label" for="radio2">
                {{session('customer')['old_address']}}
               </label>

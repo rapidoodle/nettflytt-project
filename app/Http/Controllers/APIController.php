@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Helper;
+use Illuminate\Support\Facades\Log;
 
 class APIController extends Controller
 {
 
     public function testAPI(){
-
+        Log::info("TEST API");
         // echo Helper::getStorage(Helper::getToken(), "jl2QNLvdTok2mF9tRRUKVQgem9G27cTyCNBBWeb3IA4eCWTy0NvolvVXMKhrtDMN");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
@@ -25,7 +26,7 @@ class APIController extends Controller
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
-        echo Helper::storageStatus(Helper::getToken(), "jl2QNLvdTok2mF9tRRUKVQgem9G27cTyCNBBWeb3IA4eCWTy0NvolvVXMKhrtDMN", "payment");
+        // echo Helper::storageStatus(Helper::getToken(), "jl2QNLvdTok2mF9tRRUKVQgem9G27cTyCNBBWeb3IA4eCWTy0NvolvVXMKhrtDMN", "payment");
         // echo Helper::tokenDetails("XU1ivp87caQsU6kBNYwNGHYlSct7eI9Pz36UpwIDDmz9n5MoF4qTvjiLPxlmfEqS");
         // echo Helper::tokenDetails("mjwpt0bYSGdrKYlygevWmnn44lbDGJqz02OIEOrHKkSRlACvLSzT245apryFdxWP");
         // "This is a sample message for Norges AS";
@@ -46,11 +47,13 @@ class APIController extends Controller
     }
 
     public function getToken(Request $request){
+        Log::info("Request: ".json_encode($request->all()));
         $people = $request->people;
         $person = explode("---", $people);
         $pctr   = 0;
         $request['first_name'] = Helper::firstName($request['full-name']);
         $request['last_name']  = Helper::lastName($request['full-name']);
+        $names = array();
 
         foreach ($person as $key => $value) {
             if($value){
@@ -62,8 +65,12 @@ class APIController extends Controller
                     $request['person'.$pos] = array("name" => $record[0], "bday" => $record[3], "last_name" => $lastName, "first_name" => $firstName, "phone" => $record[1], "email" => $record[2]);
                     $pctr++;
                 }
+
+                $names[] = $record[0];
             }
         }
+
+
 
         if(isset($request['person0'])){
             $bdayArr = explode("-", $request['person0']['bday']);
@@ -101,16 +108,14 @@ class APIController extends Controller
         $request['services']      = session('customer.services') != "" ? session('customer.services') : array();
         $request['offers']        = session('customer.offers') != "" ? session('customer.offers') : array();
         $request['postbox']       = session('customer.postbox') != "" ? session('customer.postbox') : array();
-
         $request['old_post']      = $request['old_zipcode'].' '.$request['old_place'];
+        $request['sign_send_to_address'] = $request['sign_send_to_address'] != "" ? session('sign_send_to_address') : "";
         $request['new_post']      = $request['new_zipcode'].' '.$request['new_place'];
         $request['tag']          = "malabon01";
         $request['isNorges']      = session('customer.isNorges') != "" ? session('customer.isNorges') : 0;
         $request['_status']       = session('customer._status') != "" ? session('customer._status') : "in progress";
         $request['_keyLogin']     = session('customer._keyLogin') != "" ? session('customer._keyLogin') : md5($request['full-name']."-".date("Y-m-d h:i:s"));
-        
-        // or when your server returns json
-        // $content = json_decode($response->getBody(), true);
+        $request["pb-names"]      = $names;
 
         unset($request['people']);
         unset($request['_token']);
@@ -137,19 +142,21 @@ class APIController extends Controller
             session()->put("customer.person0.first_name", $request['first_name']);
             session()->put("customer.person0.phone", $request['phone']);
             session()->put("customer.person0.email", $request['email']);
+
+            session()->put("customer.pb-names", $request['full-name']);
         }
 
         //mailbox sign pricing
         if(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
             session()->forget('customer.sign_mailbox-a');
-            session()->put("customer.sign_mailbox-b", true);
+            session()->put("customer.sign_mailbox-b", $names);
             session()->forget('customer.sign_mailbox-c');
         }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
             session()->forget('customer.sign_mailbox-a');
             session()->forget('customer.sign_mailbox-b');
-            session()->put("customer.sign_mailbox-c", true);
+            session()->put("customer.sign_mailbox-c", $names);
         }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
-            session()->put("customer.sign_mailbox-a", true);
+            session()->put("customer.sign_mailbox-a", $names);
             session()->forget('customer.sign_mailbox-b');
             session()->forget('customer.sign_mailbox-c');
         }
@@ -236,14 +243,14 @@ class APIController extends Controller
             //mailbox sign pricing
             if(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
                 session()->forget('customer.sign_mailbox-a');
-                session()->put("customer.sign_mailbox-b", true);
+                session()->put("customer.sign_mailbox-b", session('customer')['pb-names']);
                 session()->forget('customer.sign_mailbox-c');
             }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
                 session()->forget('customer.sign_mailbox-a');
                 session()->forget('customer.sign_mailbox-b');
-                session()->put("customer.sign_mailbox-c", true);
+                session()->put("customer.sign_mailbox-c", session('customer')['pb-names']);
             }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
-                session()->put("customer.sign_mailbox-a", true);
+                session()->put("customer.sign_mailbox-a", session('customer')['pb-names']);
                 session()->forget('customer.sign_mailbox-b');
                 session()->forget('customer.sign_mailbox-c');
             }else{

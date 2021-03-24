@@ -396,7 +396,10 @@ $(document).ready(function() {
         var isNorges  = $("#isNorges").val();
 
         console.log(names);
-        updateCustomerData({"isNorges" :isNorges, "mailbox-sign" :$("#isPostbox").val(), "postbox.address" : $('input[name="radios"]:checked').val(), "postbox.names" : names});
+        updateCustomerData({"isNorges" :isNorges, 
+            "mailbox-sign" :$("#isPostbox").val(), 
+            "sign_send_to_address" : $('input[name="radios"]:checked').val(), 
+            "postbox.names" : names});
         window.location.href = "/oppsummering/";
     });
 
@@ -424,6 +427,8 @@ $(document).ready(function() {
         if($(this).attr("data-postbox") == 1){
             $('#addressModal').modal('toggle');
         }else{
+            var names     = $(".postbox-summary").html().replace(/\<br>/g, ',');
+            updateCustomerData({"pb-names" : names});
             window.location.href = "/oppsummering/";
         }
     })

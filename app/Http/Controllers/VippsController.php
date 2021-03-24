@@ -22,21 +22,25 @@ class VippsController extends Controller
 			$arr 	 = json_decode($storage, false);
 			$status  = ""; 
 
+			Log::info("Checking vipps storage: ".$storage);
 			foreach ($arr->_storage_status_list as $key => $value) {
 				if($value->status == "reserved" && $value->id == "no.vipps"){
 					$status = 200;
 					$message = "Payment Success!";
 					break;
-	    			return view('/takk');
 				}
 			}
 
 			if($status != 200){
+				Log::error("Vipps payment cancelled by user: ");
 	    		return redirect('/betaling/'+session('customer.phone'));
+			}else{
+				Log::info("Vipps payment success; redirect to thank you page.");
+	    		return view('/takk');
 			}
-
 		}else{
-	    			return redirect('/');
+			Log::error("Illegal access to vipps page");
+	    	return redirect('/');
 		}
 	}
 

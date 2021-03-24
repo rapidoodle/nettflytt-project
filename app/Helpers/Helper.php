@@ -166,7 +166,7 @@ class Helper
 
     public static function sendSMS($token, $phone, $sender = 2099, $message){
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("msn" => "+47".$phone, "sender" => "Flytteregisteret", "message" => $message); 
+		$data 	  = array("msn" => "+47".$phone, "sender" => $sender, "message" => $message); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/sms-message";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
