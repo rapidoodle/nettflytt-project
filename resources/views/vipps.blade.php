@@ -43,9 +43,9 @@
 <div class="row px-4 mt-0 mb-5 my-lg-5  mt-4">
     <div class="col-12 col-md-4 offset-md-4">
         <div class="card shadow">
-            <?php if(isset($error)){ ?>
+            <?php if(session("customer")['vipps-result']['error'] != ""){ ?>
             <div class="alert alert-danger" role="alert">
-              Din betaling var avvist eller avbrutt. Venligst prøv igjen.
+              {{session("customer")['vipps-result']['error']}}
             </div>
             <?php } ?>
             <form action="/submitVipps" method="POST" onsubmit="return validatePhone()">

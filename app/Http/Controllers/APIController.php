@@ -11,6 +11,7 @@ class APIController extends Controller
 
     public function testAPI(){
         Log::info("TEST API");
+        return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
         // echo Helper::getStorage(Helper::getToken(), "jl2QNLvdTok2mF9tRRUKVQgem9G27cTyCNBBWeb3IA4eCWTy0NvolvVXMKhrtDMN");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
