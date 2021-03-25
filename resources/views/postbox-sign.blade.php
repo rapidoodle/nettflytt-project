@@ -1,6 +1,17 @@
 @extends('layouts.main')
 @section('content')
 <!-- <?=json_encode(session('customer'));?> -->
+<?php
+
+$pbNames = explode(",", session('customer')['pb-names']);
+
+$name1   = isset($pbNames[0]) ? $pbNames[0] : "";
+$name2   = isset($pbNames[1]) ? $pbNames[1] : "";
+$name3   = isset($pbNames[2]) ? $pbNames[2] : "";
+$name4   = isset($pbNames[3]) ? $pbNames[3] : "";
+$name5   = isset($pbNames[4]) ? $pbNames[4] : "";
+
+?>
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <input type="hidden" id="isPostbox" value="{{session('customer')['mailbox-sign']}}">
 <input type="hidden" id="isNorges" value="{{session('customer')['isNorges']}}">
@@ -45,31 +56,31 @@
                     <div class="form-group row">
                         <label for="rad1" class="col-4 col-md-3 col-form-label">Rad 1:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad1" value="{{isset(session('customer')['person0']) ? session('customer')['person0']['name'] : ''}}">
+                            <input type="text" class="form-control pb-field" id="rad1" value="{{$name1}}">
                         </div>
                     </div> 
                     <div class="form-group row">
                         <label for="rad2" class="col-4 col-md-3 col-form-label">Rad 2:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad2" value="{{isset(session('customer')['person1']) ? session('customer')['person1']['name'] : ''}}">
+                            <input type="text" class="form-control pb-field" id="rad2" value="{{$name2}}">
                         </div>
                     </div> 
                     <div class="form-group row">
                         <label for="rad3" class="col-4 col-md-3 col-form-label">Rad 3:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad3" value="{{isset(session('customer')['person2']) ? session('customer')['person2']['name'] : ''}}">
+                            <input type="text" class="form-control pb-field" id="rad3" value="{{$name3}}">
                         </div>
                     </div> 
                     <div class="form-group row">
                         <label for="rad4" class="col-4 col-md-3 col-form-label">Rad 4:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad4" value="{{isset(session('customer')['person3']) ? session('customer')['person3']['name'] : ''}}">
+                            <input type="text" class="form-control pb-field" id="rad4" value="{{$name4}}">
                         </div>
                     </div>  
                     <div class="form-group row">
                         <label for="rad4" class="col-4 col-md-3 col-form-label">Rad 5:</label>
                         <div class="col-8">
-                            <input type="text" class="form-control pb-field" id="rad5" value="{{isset(session('customer')['person4']) ? session('customer')['person4']['name'] : ''}}">
+                            <input type="text" class="form-control pb-field" id="rad5" value="{{$name5}}">
                         </div>
                     </div>  
                 </div>
