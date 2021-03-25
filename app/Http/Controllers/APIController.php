@@ -117,6 +117,7 @@ class APIController extends Controller
         $request['_status']       = session('customer._status') != "" ? session('customer._status') : "in progress";
         $request['_keyLogin']     = session('customer._keyLogin') != "" ? session('customer._keyLogin') : md5($request['full-name']."-".date("Y-m-d h:i:s"));
         $request["pb-names"]      = $names;
+        $request["vipps-result"]  = [];
 
         unset($request['people']);
         unset($request['_token']);
