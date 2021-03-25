@@ -45,7 +45,7 @@
         <div class="card shadow">
             <?php if(isset($error)){ ?>
             <div class="alert alert-danger" role="alert">
-              Betaling feilet. Venligst prøv igjen.
+              Din betaling var avvist eller avbrutt. Venligst prøv igjen.
             </div>
             <?php } ?>
             <form action="/submitVipps" method="POST" onsubmit="return validatePhone()">
