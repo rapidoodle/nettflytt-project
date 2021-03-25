@@ -44,7 +44,7 @@
     <div class="col-12 col-md-4 offset-md-4">
         <div class="card shadow">
             <?php if(session("customer")['vipps-result']['error'] != ""){ ?>
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger mb-5" role="alert">
               {{session("customer")['vipps-result']['error']}}
             </div>
             <?php } ?>
