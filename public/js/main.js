@@ -376,7 +376,7 @@ $(document).ready(function() {
     $(".btn-offer").click(function(){
         console.log($(this).attr("data-offer"));
         var fields = {};
-        fields["offers."+$(this).attr("data-offer")] = 1;
+        fields["switch_service."+$(this).attr("data-offer")] = 1;
 
         updateCustomerData(fields);
     });
@@ -592,15 +592,20 @@ $(document).ready(function() {
             success: function(response){
                 var obj = JSON.parse(response);
 
-                if(obj.status == 0 && obj.strex_resultcode == "Ok"){
+                if(obj.status == 0 && obj.strex_resultcode == "Ok" && obj.strex_detailedstatuscode == "Delivered"){
                     loadingProgress(3);
                     loadingProgress(4);
                     clearInterval(otpInterval);
                     $("#otpModal").toggle();
                     updateCustomerData({"_status" : "done"});
                     window.location.href = "/takk";
-
+                }else if(obj.status == 0 && obj.strex_resultcode == "Ok" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
+                    $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Koden du tastet inn var feil. Vennligst prøv igjen");
+                    failedProgress();
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
+                    $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Koden du tastet inn var feil. Vennligst prøv igjen");
+                    failedProgress();
+                }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordExpired"){
                     $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Koden du tastet inn var feil. Vennligst prøv igjen");
                     failedProgress();
                 }else if(obj.status == 530){

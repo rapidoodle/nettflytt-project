@@ -3,13 +3,21 @@
 <!-- <?=json_encode(session('customer'));?> -->
 <?php
 
-$pbNames = explode(",", session('customer')['pb-names']);
+$pbNames = session('customer')['pb-names'];
 
-$name1   = isset($pbNames[0]) ? $pbNames[0] : "";
-$name2   = isset($pbNames[1]) ? $pbNames[1] : "";
-$name3   = isset($pbNames[2]) ? $pbNames[2] : "";
-$name4   = isset($pbNames[3]) ? $pbNames[3] : "";
-$name5   = isset($pbNames[4]) ? $pbNames[4] : "";
+if(is_array($pbNames)){
+    $name1   = isset($pbNames[0]) ? $pbNames[0] : "";
+    $name2   = isset($pbNames[1]) ? $pbNames[1] : "";
+    $name3   = isset($pbNames[2]) ? $pbNames[2] : "";
+    $name4   = isset($pbNames[3]) ? $pbNames[3] : "";
+    $name5   = isset($pbNames[4]) ? $pbNames[4] : "";    
+}else{
+    $name1   = $pbNames;
+    $name2   = "";
+    $name3   = "";
+    $name4   = "";
+    $name5   = "";   
+}
 
 ?>
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">

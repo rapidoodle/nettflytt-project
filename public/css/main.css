@@ -1,3 +1,8 @@
+html, body{
+min-height: 100%;
+height: auto !important;
+height: 100%;
+}
 @font-face {
     font-family: AcuminProBold;
     font-weight: bold;
@@ -26,6 +31,10 @@ input, .page-item{
 }
 .bold, b, h1, h2, h3, h4, h5, h6, div.header-mini, label, .text-sm-gray, .text-bold{
     font-family: 'AcuminProBold', sans-serif;
+}
+footer{
+    bottom: 0!important;
+    width: 100%!important;
 }
 footer a, footer h5, .footer-copyright{
     color:#fff!important;

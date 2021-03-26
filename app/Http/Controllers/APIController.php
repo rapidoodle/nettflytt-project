@@ -107,7 +107,7 @@ class APIController extends Controller
         $request['phone']         = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
         $request['totalPerson']   = $pctr == 0 ? 1 : $pctr;
         $request['services']      = session('customer.services') != "" ? session('customer.services') : array();
-        $request['offers']        = session('customer.offers') != "" ? session('customer.offers') : array();
+        $request['switch_service']        = session('customer.switch_service') != "" ? session('customer.switch_service') : array();
         $request['postbox']       = session('customer.postbox') != "" ? session('customer.postbox') : array();
         $request['old_post']      = $request['old_zipcode'].' '.$request['old_place'];
         $request['sign_send_to_address'] = $request['sign_send_to_address'] != "" ? session('sign_send_to_address') : "";
@@ -115,9 +115,11 @@ class APIController extends Controller
         $request['tag']          = "malabon01";
         $request['isNorges']      = session('customer.isNorges') != "" ? session('customer.isNorges') : 0;
         $request['_status']       = session('customer._status') != "" ? session('customer._status') : "in progress";
-        $request['_keyLogin']     = session('customer._keyLogin') != "" ? session('customer._keyLogin') : md5($request['full-name']."-".date("Y-m-d h:i:s"));
+        $request['_storageToken']       = session('customer._storageToken') != "" ? session('customer._storageToken') : "";
+        $request['_keyLogin']     = session('customer._keyLogin') != "" ? session('customer._keyLogin') : substr(time(), -5);
         $request["pb-names"]      = $names;
         $request["vipps-result"]  = [];
+        $request['isLogged']      = session('customer.isLogged') != "" ? session('customer.isLogged') : false;
 
         unset($request['people']);
         unset($request['_token']);
@@ -205,7 +207,8 @@ class APIController extends Controller
         $transactionId  = session('customer')['billing_id_strex'];
         
         //check otp
-        echo Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp, session('customer')['total_price']);
+        echo $result = Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp, session('customer')['total_price']);
+        Log::info("Confirm otp result: ".$result);
     }
 
     public function getOtpStatus(Request $request){

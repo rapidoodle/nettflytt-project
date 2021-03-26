@@ -42,10 +42,10 @@
 </div>
 <div class="row px-4 mt-0 mb-5 my-lg-5  mt-4">
     <div class="col-12 col-md-4 offset-md-4">
-        <?php if(session("customer")['vipps-result']['error'] != ""){ ?>
-        <div class="alert alert-danger mb-5" role="alert">
-          {{session("customer")['vipps-result']['error']}}
-        </div>
+        <?php if(!empty(session('customer')['vipps-result'])){ ?>
+            <div class="alert alert-danger mb-5" role="alert">
+            {{session("customer")['vipps-result']['error']}}
+            </div>
         <?php } ?>
         <div class="card shadow">
             <form action="/submitVipps" method="POST" onsubmit="return validatePhone()">

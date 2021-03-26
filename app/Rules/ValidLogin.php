@@ -4,7 +4,7 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-class APILogin implements Rule
+class ValidLogin implements Rule
 {
     /**
      * Create a new rule instance.

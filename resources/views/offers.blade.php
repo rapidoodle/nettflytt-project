@@ -57,7 +57,7 @@
                     <div class="col-12 col-md-8">
                         <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
                         <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
-                        <?php if(!isset(session('customer')['offers']['isStrom']) || session('customer')['offers']['isStrom'] == 0){ ?>
+                        <?php if(!isset(session('customer')['switch_service']['isStrom']) || session('customer')['switch_service']['isStrom'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-1">
                                 <a class="btn btn-info btn-block btn-blur py-3 btn-actions" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nei takk</a>
@@ -91,7 +91,7 @@
                     <div class="col-12 col-md-8">
                         <p>La leverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
 
-                        <?php if(!isset(session('customer')['offers']['isTV']) || session('customer')['offers']['isTV'] == 0){ ?>
+                        <?php if(!isset(session('customer')['switch_service']['isTV']) || session('customer')['switch_service']['isTV'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-1">
                                 <a class="btn btn-info btn-block btn-blur py-3 btn-actions" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Nei takk</a>
@@ -122,7 +122,7 @@
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>100% fornøyd, eller pengene tibake.</p>
-                        <?php if(!isset(session('customer')['offers']['isFlyttevask']) || session('customer')['offers']['isFlyttevask'] == 0){ ?>
+                        <?php if(!isset(session('customer')['switch_service']['isFlyttevask']) || session('customer')['switch_service']['isFlyttevask'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-1">
                                 <a class="btn btn-info btn-block btn-blur py-3 btn-actions" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Nei takk</a>
@@ -154,7 +154,7 @@
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>La alarmleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
-                        <?php if(!isset(session('customer')['offers']['isBoligalarm']) || session('customer')['offers']['isBoligalarm'] == 0){ ?>
+                        <?php if(!isset(session('customer')['switch_service']['isBoligalarm']) || session('customer')['switch_service']['isBoligalarm'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-1">
                                 <a class="btn btn-info btn-block btn-blur py-3 btn-actions" href="/postkasse">Nei takk</a>
