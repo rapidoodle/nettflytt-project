@@ -54,11 +54,6 @@
                         <a href="/personvern" class="dropdown-item" type="button">Personvern</a>
                         <a href="/kontakt-oss" class="dropdown-item" type="button">Kontakt oss</a>
                         <a href="/profile" class="dropdown-item" type="button">Logg inn</a>
-                        <!-- <?php if(session('customer')['isLogged'] == "" || session('customer')['isLogged'] == false){ ?>
-                        <a href="/profile" class="dropdown-item" type="button">Logg Inn</a>
-                        <?php }else{ ?>
-                        <a href="/profile" class="dropdown-item" type="button">Profile</a>
-                        <?php } ?> -->
                     </div>
                 </div>               
             </li>
