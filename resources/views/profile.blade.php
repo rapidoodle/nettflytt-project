@@ -111,9 +111,6 @@
             <?php for($i=1; $i < session('customer')['totalPerson']; $i++){ ?>
             <h5 class="disp-field"><span data-parent="person{{$i}}-name"><?=session('customer')['person'.$i]['name'];?></span></h5>
             <?php } } ?>
-            <div class="text-right mt-5">
-               <button class="btn btn-info btn-lg btn-endre" data-toggle="modal" data-target="#personEditModal" data-toggle="modal">Endre</button>
-            </div>
         </div>
     </div>
     <div class="col-12 col-md-5 offset-md-2">
@@ -144,7 +141,6 @@
                         echo session('customer')[$service[2]]['name'];
                     }
                     ?></td>
-                    <td> <i class="fas fa-times pointer company-list" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$service[0]}}" data-company-number="{{$service[1]}}" data-company-people="{{$service[2]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal"></i></td>
                 </tr>
             <?php } }else{ ?> 
                 <tr>
@@ -169,16 +165,13 @@
             <span class="text-sm-gray">Adresse: <span data-parent="new_address"><?=session('customer')['new_address']?></span></span>
             <span class="text-sm-gray">Postnummer: <span data-parent="new_zipcode"><?=session('customer')['new_zipcode']?></span></span>
             <span class="text-sm-gray">Poststed: <span data-parent="new_place"><?=session('customer')['new_place']?></span></span>
-            <div class="text-right mt-5">
-               <button class="btn btn-info btn-lg btn-endre" data-toggle="modal" data-target="#addressEditModal" data-toggle="modal">Endre</button>
-            </div>
         </div>
     </div>
     <div class="col-12 col-sm-6 col-md-5 offset-md-2">
         <div class="smry-rcrd p-4 mt-5 mt-md-0">
             <h3 class="mb-5"><i class="fa fa-user"></i> Flyttedato</h3>
             <input type="hidden" id="moving-date" value="<?=session('customer')['moving_date_year']?>-<?=session('customer')['moving_date_month']?>-<?=session('customer')['moving_date_day']?>">
-            <div id="my-calendar"></div>
+            <div id="my-calendar3"></div>
         </div>
     </div>
 </div>

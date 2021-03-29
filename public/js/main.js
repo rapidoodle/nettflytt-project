@@ -494,6 +494,13 @@ $(document).ready(function() {
         $("#total-price-cont").html(newPrice);
     });
 
+    const myCalendar3 = new TavoCalendar('#my-calendar3', {
+        locale: "da",
+        date: movingDate.val(),
+        selected: [movingDate.val()],
+        past_select: true,
+    })
+
     const myCalendar = new TavoCalendar('#my-calendar', {
         locale: "da",
         date: movingDate.val(),

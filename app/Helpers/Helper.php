@@ -147,7 +147,7 @@ class Helper
 	    return json_encode($response);
 
 	}
-    public static function sendOTP($token, $phone, $sender = "Flytteregisteret"){
+    public static function sendOTP($token, $phone, $sender = "Flyttereg"){
 		$u 	  	  = "u46114-".session("_sessionSalt");
 		$data 	  = array("msn" => "+47".$phone, "sender" => $sender); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
@@ -162,6 +162,22 @@ class Helper
 		$response = json_decode($json);
 
 	    return $response->transactionid;
+    }
+    public static function login($token, $phone, $password){
+		$u 	  	  = "u46114-".session("_sessionSalt");
+		$data 	  = array("msn" => "+47".$phone, "password" => $password); 
+		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/login";
+	    $postdata = http_build_query( $data );
+	    $options  = [ 'http' => [
+					        'method' => "POST",
+					        'header' => "Content-type: application/x-www-form-urlencoded",
+					        'content' => $postdata]
+					  ];
+	    $context  = stream_context_create( $options );
+	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
+		$response = json_decode($json);
+
+	    return $json;
     }
 
     public static function sendSMS($token, $phone, $sender = 2099, $message){
@@ -183,7 +199,7 @@ class Helper
 
     public static function confirmOtp($token, $phone, $transactionid, $otp, $totalPrice){
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("msn" => "+47".$phone, "transactionid" => $transactionid, "otp" => $otp, "price" => $totalPrice, "sender" => "Flytteregisteret"); 
+		$data 	  = array("msn" => "+47".$phone, "transactionid" => $transactionid, "otp" => $otp, "price" => $totalPrice, "sender" => "Flyttereg"); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/billing-otp";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [

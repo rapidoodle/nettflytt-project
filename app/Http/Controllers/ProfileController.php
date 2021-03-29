@@ -21,6 +21,8 @@ class ProfileController extends Controller
         		session()->put("customer.isLogged", false);
         		return redirect("/logginn");
         	}
+    	}elseif(session('customer') && session('customer')['isLogged'] == true){    
+	        return view("/profile");
     	}else{
     		return redirect('/logginn');
     	}
@@ -31,18 +33,35 @@ class ProfileController extends Controller
 	}
 
 	public function loginAuth(Request $request){
-        $login          = $request->email;
+        $phone          = $request->number;
         $password       = $request->password;
         $_storageToken  = $request->_storageToken;
 
-        if($login == session("customer")['email'] && $password == session("customer")['_keyLogin']){
-
-        	Log::info("Customer Login: ".session('customer')['full-name']."/".date("Y-m-d H:i:s"));
-            session()->put('customer.isLogged', true);                
-
-        	return redirect("/profile");
+        $login = Helper::login(Helper::getToken(), $phone, $password);
+        $arr = json_decode($login);
+        
+        if($arr->status == 10){
+    		// return redirect('/logginn')->with('error', 'Passordet er feil!')->withInput();
         }else{
-        	return redirect("/logginn");
+        	if(session('customer')){
+	            session()->put('customer.isLogged', true);  
+	        	return redirect("/profile");
+        	}else{
+	            session()->put('customer.isLogged', true);                
+	        	return redirect("/profile");
+        		echo $arr['_token'];
+        	}
+	        //     session()->put('customer.isLogged', true);                
+
+	        // 	return redirect("/profile");
         }
+        // if($login == session("customer")['number'] && $password == session("customer")['_keyLogin']){
+        // 	Log::info("Customer Login: ".session('customer')['full-name']."/".date("Y-m-d H:i:s"));
+        //     session()->put('customer.isLogged', true);                
+
+        // 	return redirect("/profile");
+        // }else{
+        // 	return redirect("/logginn");
+        // }
 	}
 }

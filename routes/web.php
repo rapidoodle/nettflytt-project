@@ -54,6 +54,10 @@ Route::get('/betaling/{number}', 'VippsController@index');
 Route::get('/betaling', 'VippsController@checker');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/logginn', 'ProfileController@logginn');
+Route::get('/logout', function () {
+    session()->put("customer.isLogged", false);
+    return redirect('/logginn');
+});
 
 Route::get('/testapi', 'APIController@testapi')->name('testapi');
 Route::get('/recover', 'APIController@recoverStorage')->name('recoverStorage');
