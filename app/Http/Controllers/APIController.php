@@ -192,7 +192,7 @@ class APIController extends Controller
 
 
         # echo session('customer')['_storageToken'];
-        Log::info("Saving storage update: ".session('customer'));
+        Log::info("Saving storage update: ".json_encode(session('customer')));
         return redirect('/mottakere/');
 
     }

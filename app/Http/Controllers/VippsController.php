@@ -50,9 +50,8 @@ class VippsController extends Controller
 	public function processPayment(Request $request){
 		$phone 	  = $request->phoneNumber;
 		$respObj  = json_decode(Helper::sendVipps(Helper::getToken(), $phone));
-
+		Log::info("Vipps response: ".json_encode($respObj));	
 		$status = $respObj->status;
-		echo json_encode($respObj);		
 		if($status == 0){
 			 return redirect($respObj->url);
 		}else{

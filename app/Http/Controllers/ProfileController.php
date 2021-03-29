@@ -19,14 +19,10 @@ class ProfileController extends Controller
         	}else{
         		session()->put("customer", json_decode($storage, true));
         		session()->put("customer.isLogged", false);
-        		return redirect("/profile");
+        		return redirect("/logginn");
         	}
-    	}elseif(session('customer')['isLogged'] != "" && session('customer')['isLogged'] == true){
-    		return view('profile');
-    	}elseif(session('customer')['isLogged'] != "" && session('customer')['isLogged'] === false){
-    		return redirect('/logginn');
     	}else{
-        	return redirect("/");
+    		return redirect('/logginn');
     	}
 	}
 

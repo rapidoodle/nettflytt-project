@@ -53,7 +53,7 @@
                         <a href="/" class="dropdown-item" type="button">Start flytting</a>
                         <a href="/personvern" class="dropdown-item" type="button">Personvern</a>
                         <a href="/kontakt-oss" class="dropdown-item" type="button">Kontakt oss</a>
-                        <a href="/profile" class="dropdown-item" type="button">Logg inn</a>
+                        <a href="/logginn" class="dropdown-item" type="button">Logg inn</a>
                     </div>
                 </div>               
             </li>
