@@ -21,9 +21,9 @@ class ProfileController extends Controller
         		session()->put("customer.isLogged", false);
         		return redirect("/profile");
         	}
-    	}elseif(session('customer')['isLogged'] != "" || session('customer')['isLogged'] == true){
+    	}elseif(session('customer')['isLogged'] != "" && session('customer')['isLogged'] == true){
     		return view('profile');
-    	}elseif(session('customer')['isLogged'] != "" || session('customer')['isLogged'] === false){
+    	}elseif(session('customer')['isLogged'] != "" && session('customer')['isLogged'] === false){
     		return redirect('/logginn');
     	}else{
         	return redirect("/");
