@@ -281,6 +281,37 @@ class Helper
 
 			return $token;
     }
+    public static function searchLocation($keyword){
+        $file = fopen(storage_path("geo/no.txt"), "r");
+        $isHere = false;
+        $matched = "";
+        $response = array();
+        while(!feof($file)) {
+            $line = fgets($file);
+            $arr = explode("\t", $line);
+
+            if(isset($arr[1])){
+                if($keyword == $arr[1]){
+                	$matched = $arr[2];
+                	$isHere = true;
+                	break;
+                }
+            }
+
+        }
+
+        fclose($file);
+    
+        if($isHere){
+        	$response['error'] = 0;
+        	$response['result'] = $matched;
+        }else{
+        	$response['error'] = 1;
+        	$response['result'] = "Not found";
+        }
+
+        return $response;
+    }
 
     public static function searchCompanies($query, $type){
       

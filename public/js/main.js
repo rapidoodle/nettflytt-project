@@ -24,8 +24,15 @@ $(document).ready(function() {
     var otpProcessing   = false;
     var checkIcon       = "<i class='fa fa-check text-success'></i>";
     var timesIcon       = "<i class='fa fa-times text-danger'></i>";
-    //INDEX PAGE
 
+    //INDEX PAGE
+    if($(".post-search").length > 0){
+        $(".post-search").keyup(function(){
+            if($(this).val().length > 3){
+                searchLocation($(this).val(), $(this).attr("data-search"));
+            }
+        });
+    }
     if($("#name_0").length > 0){
         $("#isReq").val("0");
         $(".req-fld").removeAttr("required");
@@ -692,6 +699,21 @@ $(document).ready(function() {
                 }
             }
         });
+    }
+
+    function searchLocation(postcode, field){
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val(), keyword : postcode},
+            url: "/searchLocation",
+            success: function(response){
+                var obj = JSON.parse(response);
+                if(obj.error == 0){
+                    $("#"+field).val(obj.result);
+                }
+            }
+        });
+
     }
 
     function searchCompany(query, cat){

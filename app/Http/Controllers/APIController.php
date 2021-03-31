@@ -10,8 +10,10 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-        Log::info("TEST API");
-        return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
+        echo json_encode(Helper::searchLocation("1461"));
+
+        // Log::info("TEST API");
+        // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
         // echo Helper::getStorage(Helper::getToken(), "jl2QNLvdTok2mF9tRRUKVQgem9G27cTyCNBBWeb3IA4eCWTy0NvolvVXMKhrtDMN");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
@@ -32,6 +34,11 @@ class APIController extends Controller
         // echo Helper::tokenDetails("mjwpt0bYSGdrKYlygevWmnn44lbDGJqz02OIEOrHKkSRlACvLSzT245apryFdxWP");
         // "This is a sample message for Norges AS";
         // echo Helper::sendSMS($token, session('customer')['phone'], "Flytteregisteret", $message);
+    }
+
+    public function searchLocation(Request $request){
+        $keyword  = $request->keyword;
+        echo json_encode(Helper::searchLocation($keyword ));
     }
 
     public function recoverStorage(Request $request){
@@ -126,7 +133,7 @@ class APIController extends Controller
         unset($request['_initToken']);
          // send otp for the first time
         if(!$request->session()->has('billing_id_strex')){
-            $tId = Helper::sendOTP(Helper::getToken(), $request['phone'], "Flytteregisteret");
+            $tId = Helper::sendOTP(Helper::getToken(), $request['phone'], "Flyttereg");
             session()->put("billing_id_strex", $tId);
             $request['billing_id_strex'] = $tId;
         }

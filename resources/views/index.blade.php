@@ -83,6 +83,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
 </script>
 <form action="/getToken" method="POST" id="index-form" onsubmit="return validateForm()">
 @csrf <!-- {{ csrf_field() }} -->
+<input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="row px-4 my-5 form" id="index-form-container">
     <div class="col-12 col-sm-12 col-lg-9 form-">
             <div class="row">
@@ -241,7 +242,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                         <div class="row">
                             <div class="col-6">
                                 <label for="post-number">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="old_zipcode" max="4" data-conn="gamel-address-2" name="old_zipcode" value="{{session('customer')['old_zipcode'] ?? ''}}">
+                                <input type="text" required="true" class="form-control smy-fld post-search" placeholder="1234" id="old_zipcode" max="4" data-conn="gamel-address-2" name="old_zipcode" value="{{session('customer')['old_zipcode'] ?? ''}}" data-search="old_place">
                             </div>
                             <div class="col-6">
                                 <label for="poststed">Poststed</label>
@@ -255,11 +256,11 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                         <div class="form-group row">
                             <div class="col-6">
                                 <label for="post-number2">Postnummer</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="1234" id="new_zipcode" data-conn="ny-address-2" name="new_zipcode" value="{{session('customer')['new_zipcode'] ?? ''}}">
+                                <input type="text" required="true" class="form-control smy-fld post-search" placeholder="1234" id="new_zipcode" data-conn="ny-address-2" name="new_zipcode" value="{{session('customer')['new_zipcode'] ?? ''}}" data-search="new_place">
                             </div>
                             <div class="col-6">
                                 <label for="poststed2">Poststed</label>
-                                <input type="text" required="true" class="form-control smy-fld" placeholder="Poststed" id="new_place" name="new_place" value="{{session('customer')['new_zipcode'] ?? ''}}">
+                                <input type="text" required="true" class="form-control smy-fld poststed-2" placeholder="Poststed" id="new_place" name="new_place" value="{{session('customer')['new_zipcode'] ?? ''}}">
                             </div>
                         </div>
                         <div class="row">
