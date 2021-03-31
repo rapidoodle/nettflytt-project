@@ -25,13 +25,15 @@ class VippsController extends Controller
 				$status  = ""; 
 
 				Log::info("Checking vipps storage: ".$storage);
-				foreach ($arr->_storage_status_list as $key => $value) {
-					if(($value->status == "reserved" || $value->status == "captured") && $value->id == "no.vipps"){
-						$status = 200;
-						$message = "Payment Success!";
-						Log::info("Vipps payment success; redirect to thank you page.");
-			    		return redirect('/takk');
-						break;
+				if(isset(($arr->_storage_status_list)){
+					foreach ($arr->_storage_status_list as $key => $value) {
+						if(($value->status == "reserved" || $value->status == "captured") && $value->id == "no.vipps"){
+							$status = 200;
+							$message = "Payment Success!";
+							Log::info("Vipps payment success; redirect to thank you page.");
+				    		return redirect('/takk');
+							break;
+						}
 					}
 				}
 				if($status == 200)
