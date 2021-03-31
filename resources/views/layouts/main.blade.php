@@ -54,6 +54,7 @@
                         <a href="/personvern" class="dropdown-item" type="button">Personvern</a>
                         <a href="/kontakt-oss" class="dropdown-item" type="button">Kontakt oss</a>
                         <?php if(session('customer') && session('customer')['isLogged'] == true) { ?>
+                        <a href="/profile" class="dropdown-item" type="button">Profile</a>
                         <a href="/logout" class="dropdown-item" type="button">Logg ut</a>
                     <?php }else{ ?>
                         <a href="/logginn" class="dropdown-item" type="button">Logg inn</a>
