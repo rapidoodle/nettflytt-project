@@ -25,7 +25,7 @@ class VippsController extends Controller
 				$status  = ""; 
 
 				Log::info("Checking vipps storage: ".$storage);
-				if(isset(($arr->_storage_status_list)){
+				if(isset($arr->_storage_status_list)){
 					foreach ($arr->_storage_status_list as $key => $value) {
 						if(($value->status == "reserved" || $value->status == "captured") && $value->id == "no.vipps"){
 							$status = 200;

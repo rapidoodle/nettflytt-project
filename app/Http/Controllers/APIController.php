@@ -127,6 +127,7 @@ class APIController extends Controller
         $request["pb-names"]      = $names;
         $request["vipps-result"]  = [];
         $request['isLogged']      = session('customer.isLogged') != "" ? session('customer.isLogged') : false;
+        $request['moving_date']   = session('customer.moving_date_year') != "" ? session('customer.moving_date_year') : $request['moving_date_year']."-".$request['moving_date_month']."-".$request['moving_date_day'];
 
         unset($request['people']);
         unset($request['_token']);
