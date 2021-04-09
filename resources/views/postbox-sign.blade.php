@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Postkasse')
 @section('content')
 <!-- <?=json_encode(session('customer'));?> -->
 <?php

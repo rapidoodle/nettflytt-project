@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Oppsummering')
 @section('content')
 <!-- <?=json_encode(session('customer'));?> -->
 <!-- <?=json_encode(session()->all());?> -->

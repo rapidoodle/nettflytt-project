@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Kontakt Oss')
 @section('content')
 <script type="text/javascript" async src="https://cdn.reamaze.com/assets/reamaze.js"></script>
 <script type="text/javascript">

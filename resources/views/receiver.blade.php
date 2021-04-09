@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Mottakere')
 @section('content')
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">

@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Takk')
 @section('content')
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">

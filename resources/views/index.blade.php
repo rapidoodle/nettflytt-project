@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Home')
 @section('content')
 <?php
 $months  = ['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];

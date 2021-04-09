@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta description="Flytteregisteret home page">
 
-        <title>Flytteregisteret</title>
+        <title>Flytteregisteret - @yield('title')</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">

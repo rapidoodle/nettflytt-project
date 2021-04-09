@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Vipps')
 @section('content')
 <script type="text/javascript">
     function validatePhone(){

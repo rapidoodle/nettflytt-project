@@ -1,4 +1,5 @@
 @extends('layouts.main')
+@section('title', 'Kjopsvilkaar')
 @section('content')
 <div class="row px-4 mb-5 mt-5 mt-md-0">
     <div class="col-12 col-md-8 offset-md-2 text-center">
