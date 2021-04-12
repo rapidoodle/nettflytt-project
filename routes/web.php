@@ -50,8 +50,8 @@ Route::get('/cookies-consent', function () {
 Route::get('/folkeregisteret', function () {
     return view('index', ['type' => "folkeregisteret"]);
 });
-Route::get('/betaling/{number}', 'VippsController@index');
-Route::get('/betaling', 'VippsController@checker');
+Route::get('/betaling/#{number}', 'VippsController@index');
+Route::get('/betaling', 'VippsController@index');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/logginn', 'ProfileController@logginn');
 Route::get('/logout', function () {

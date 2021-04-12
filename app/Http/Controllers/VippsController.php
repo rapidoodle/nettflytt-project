@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Log;
 
 class VippsController extends Controller
 {
-	public function index($number)
+	public function index()
 	{	
-	    return view('vipps', ['number' => $number]);
+	    return view('vipps');
 
 	}
 
@@ -28,7 +28,7 @@ class VippsController extends Controller
 							$status = 200;
 							$message = "Payment Success!";
 							Log::info("Vipps payment success; redirect to thank you page.");
-				    		return redirect('/takk');
+				    		return redirect('/logginn');
 							break;
 						}
 					}
@@ -40,7 +40,7 @@ class VippsController extends Controller
 			if($status != 200){
 				Log::error("Vipps payment cancelled by user: ");
 				session()->put("customer.vipps-result", ["error" => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-	    		return redirect('/betaling/'.session('customer')['phone']);
+	    		return redirect('/betaling#'.session('customer')['phone']);
 			}
 		}else{
 			Log::error("Illegal access to vipps page");

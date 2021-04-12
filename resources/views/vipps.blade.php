@@ -55,7 +55,7 @@
                     <img src="{{ asset('images/vipps.png')}}" width="50%">
                 </div>
                 <div class="card-body">
-                    <input type="text" name="phoneNumber" class="form-control" placeholder="Telefonnummer" required="" value="{{$number}}" id="phoneNumber" required="true" maxlength="8" minlength="8">
+                    <input type="text" name="phoneNumber" class="form-control" placeholder="Telefonnummer" required="" value="" id="phoneNumber" required="true" maxlength="8" minlength="8">
                 </div>
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info-100 btn-lg">Fullfør betaling</button>    
@@ -64,4 +64,13 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    if(window.location.hash){
+        var hash = window.location.hash;
+        var number = hash.substr(1, hash.length)
+        document.getElementById('phoneNumber').value = number;
+    }else{
+        window.location.href = "/profile";
+    }
+</script>
 @endsection
