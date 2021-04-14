@@ -13,11 +13,20 @@ if(is_array($pbNames)){
     $name4   = isset($pbNames[3]) ? $pbNames[3] : "";
     $name5   = isset($pbNames[4]) ? $pbNames[4] : "";    
 }else{
-    $name1   = $pbNames;
-    $name2   = "";
-    $name3   = "";
-    $name4   = "";
-    $name5   = "";   
+    $names   = explode(",", $pbNames);
+    if(count($names) > 0){
+        $name1   = isset($names[0]) ? $names[0] : "";
+        $name2   = isset($names[1]) ? $names[1] : "";
+        $name3   = isset($names[2]) ? $names[2] : "";
+        $name4   = isset($names[3]) ? $names[3] : "";
+        $name5   = isset($names[4]) ? $names[4] : ""; 
+    }else{
+        $name1   = $pbNames;
+        $name2   = "";
+        $name3   = "";
+        $name4   = "";
+        $name5   = ""; 
+    }
 }
 
 ?>

@@ -14,7 +14,7 @@ class APIController extends Controller
 
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-        // echo Helper::getStorage(Helper::getToken(), "jl2QNLvdTok2mF9tRRUKVQgem9G27cTyCNBBWeb3IA4eCWTy0NvolvVXMKhrtDMN");
+        echo Helper::getStorage(Helper::getToken(), "hxhZn2GGKJbUUYbVAfRJ5yPjCqQENiXhfbV8bNCwiHVK7PYFsyc1wVspAbrB8FVM");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");
@@ -29,7 +29,7 @@ class APIController extends Controller
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
-        // echo Helper::storageStatus(Helper::getToken(), "jl2QNLvdTok2mF9tRRUKVQgem9G27cTyCNBBWeb3IA4eCWTy0NvolvVXMKhrtDMN", "payment");
+        // echo Helper::storageStatus(Helper::getToken(), "hxhZn2GGKJbUUYbVAfRJ5yPjCqQENiXhfbV8bNCwiHVK7PYFsyc1wVspAbrB8FVM", "payment");
         // echo Helper::tokenDetails("XU1ivp87caQsU6kBNYwNGHYlSct7eI9Pz36UpwIDDmz9n5MoF4qTvjiLPxlmfEqS");
         // echo Helper::tokenDetails("mjwpt0bYSGdrKYlygevWmnn44lbDGJqz02OIEOrHKkSRlACvLSzT245apryFdxWP");
         // "This is a sample message for Norges AS";
@@ -155,7 +155,7 @@ class APIController extends Controller
             session()->put("customer.person0.phone", $request['phone']);
             session()->put("customer.person0.email", $request['email']);
 
-            session()->put("customer.pb-names", $request['full-name']);
+            session()->put("customer.pb-names", array($request['full-name']));
         }
 
         //mailbox sign pricing
@@ -253,18 +253,19 @@ class APIController extends Controller
             $newKey = substr($key, 0, 6) == "person" ? str_replace("-", ".", $key) : $key;
             $sessionKey = 'customer.'.$newKey;
             session()->put($sessionKey, $value);
+            $names = is_array(session('customer')['pb-names']) ? session('customer')['pb-names'] : explode(",", session('customer')['pb-names']);
 
             //mailbox sign pricing
             if(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
                 session()->forget('customer.sign_mailbox-a');
-                session()->put("customer.sign_mailbox-b", session('customer')['pb-names']);
+                session()->put("customer.sign_mailbox-b", $names);
                 session()->forget('customer.sign_mailbox-c');
             }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
                 session()->forget('customer.sign_mailbox-a');
                 session()->forget('customer.sign_mailbox-b');
-                session()->put("customer.sign_mailbox-c", session('customer')['pb-names']);
+                session()->put("customer.sign_mailbox-c", $names);
             }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
-                session()->put("customer.sign_mailbox-a", session('customer')['pb-names']);
+                session()->put("customer.sign_mailbox-a", $names);
                 session()->forget('customer.sign_mailbox-b');
                 session()->forget('customer.sign_mailbox-c');
             }else{
