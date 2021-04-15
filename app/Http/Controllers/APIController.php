@@ -14,7 +14,7 @@ class APIController extends Controller
 
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-        echo Helper::getStorage(Helper::getToken(), "hxhZn2GGKJbUUYbVAfRJ5yPjCqQENiXhfbV8bNCwiHVK7PYFsyc1wVspAbrB8FVM");
+        echo Helper::getStorage(Helper::getToken(), "ERjGu81DJpRbkWM1IrM1bD2SHliDuX9XQm0CxYqaAxFP7ilLfl0wDzYjtKHg3hDY");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");

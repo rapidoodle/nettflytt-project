@@ -824,19 +824,19 @@ $(document).ready(function() {
                                 '<table class="w-100">'+
                                     '<tr>'+
                                         '<td>Full name</td>'+
-                                        '<td><input type="text" class="person-input" value="'+fullName.val()+'" id="name_'+pCtr+'"></td>'+
+                                        '<td><input type="text" class="person-input" value="'+fullName.val()+'" id="name_'+pCtr+'" required="true"></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>E-post</td>'+
-                                        '<td><input type="text" class="person-input" value="'+email.val()+'" id="email_'+pCtr+'"></td>'+
+                                        '<td><input type="text" class="person-input" value="'+email.val()+'" id="email_'+pCtr+'" required="true"></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>Telefonnummer</td>'+
-                                        '<td><input type="text" class="person-input" value="'+phone.val()+'" id="phone_'+pCtr+'"></td>'+
+                                        '<td><input type="text" class="person-input" value="'+phone.val()+'" id="phone_'+pCtr+'" required="true"></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>Fødselsdato</td>'+
-                                         '<td><input type="date" class="person-input" value="'+year.val()+'-'+month.val()+'-'+day.val()+'" id="bday_'+pCtr+'"></td>'+
+                                         '<td><input type="date" class="person-input" value="'+year.val()+'-'+month.val()+'-'+day.val()+'" id="bday_'+pCtr+'" required="true"></td>'+
                                         // '<td><input type="date" class="person-input" value="2020-10-10" id="bday_'+pCtr+'"></td>'+
                                     '</tr>'+
                                 '</table>'+

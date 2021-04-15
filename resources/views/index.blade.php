@@ -115,19 +115,19 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                     <table class="w-100">
                                         <tr>
                                             <td>Full name</td>
-                                            <td><input type="text" class="person-input" value="{{session('customer')['person'.$i]['first_name']}} {{session('customer')['person'.$i]['last_name']}}" id="name_{{$i}}"></td>
+                                            <td><input type="text" class="person-input" value="{{session('customer')['person'.$i]['first_name']}} {{session('customer')['person'.$i]['last_name']}}" id="name_{{$i}}" required="true"></td>
                                         </tr>
                                         <tr>
                                             <td>E-post</td>
-                                            <td><input type="text" class="person-input" value="{{session('customer')['person'.$i]['email']}}" id="email_{{$i}}"></td>
+                                            <td><input type="text" class="person-input" value="{{session('customer')['person'.$i]['email']}}" id="email_{{$i}}" required="true"></td>
                                         </tr>
                                         <tr>
                                             <td>Telefonnummer</td>
-                                            <td><input type="text" class="person-input" value="{{session('customer')['person'.$i]['phone']}}" id="phone_{{$i}}"></td>
+                                            <td><input type="text" class="person-input" value="{{session('customer')['person'.$i]['phone']}}" id="phone_{{$i}}" required="true"></td>
                                         </tr>
                                         <tr>
                                             <td>Fødselsdato</td>
-                                            <td><input type="date" class="person-input" value="{{session('customer')['person'.$i]['bday']}}" id="bday_{{$i}}"></td>
+                                            <td><input type="date" class="person-input" value="{{session('customer')['person'.$i]['bday']}}" id="bday_{{$i}}" required="true"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -146,19 +146,19 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                     <table class="w-100">
                                         <tr>
                                             <td>Full name</td>
-                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['first_name']) ?? session('customer')['first_name']}} {{isset(session('customer')['last_name']) ?? session('customer')['last_name']}}" id="name_0"></td>
+                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['first_name']) ?? session('customer')['first_name']}} {{isset(session('customer')['last_name']) ?? session('customer')['last_name']}}" id="name_0" required="true"></td>
                                         </tr>
                                         <tr>
                                             <td>E-post</td>
-                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['email']) ?? session('customer')['email']}}" id="email_0"></td>
+                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['email']) ?? session('customer')['email']}}" id="email_0" required="true"></td>
                                         </tr>
                                         <tr>
                                             <td>Telefonnummer</td>
-                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['phone']) ?? session('customer')['phone']}}" id="phone_0"></td>
+                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['phone']) ?? session('customer')['phone']}}" id="phone_0" required="true"></td>
                                         </tr>
                                         <tr>
                                             <td>Fødselsdato</td>
-                                            <td><input type="date" class="person-input" value="{{isset(session('customer')['birth_year']) ?? session('customer')['birth_year']}}-{{isset(session('customer')['birth_month']) ?? session('customer')['birth_month']}}-{{isset(session('customer')['birth_day']) ?? session('customer')['birth_day']}}" id="bday_0"></td>
+                                            <td><input type="date" class="person-input" value="{{isset(session('customer')['birth_year']) ?? session('customer')['birth_year']}}-{{isset(session('customer')['birth_month']) ?? session('customer')['birth_month']}}-{{isset(session('customer')['birth_day']) ?? session('customer')['birth_day']}}" id="bday_0" required="true"></td>
                                         </tr>
                                     </table>
                                 </div>
