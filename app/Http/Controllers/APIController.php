@@ -14,7 +14,7 @@ class APIController extends Controller
 
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-        echo Helper::getStorage(Helper::getToken(), "ERjGu81DJpRbkWM1IrM1bD2SHliDuX9XQm0CxYqaAxFP7ilLfl0wDzYjtKHg3hDY");
+        echo Helper::getStorage(Helper::getToken(), "3xJh5hkkL28NDzOfz1sPhDp6j8EmfSeVLG8RU2RHm5Fbqk5byQZlcqr6z1WbHoyx");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");
@@ -122,10 +122,11 @@ class APIController extends Controller
         $request['tag']          = "malabon01";
         $request['isNorges']      = session('customer.isNorges') != "" ? session('customer.isNorges') : 0;
         $request['_status']       = session('customer._status') != "" ? session('customer._status') : "in progress";
-        $request['_storageToken']       = session('customer._storageToken') != "" ? session('customer._storageToken') : "";
+        $request['_storageToken'] = session('customer._storageToken') != "" ? session('customer._storageToken') : "";
         $request['_keyLogin']     = session('customer._keyLogin') != "" ? session('customer._keyLogin') : substr(time(), -5);
-        $request["pb-names"]      = $names;
-        $request["vipps-result"]  = [];
+        $request['pb-names']      = session('customer.pb-names') != "" ? session('customer.pb-names') : $names;
+        $request['is-subscribe']  = session('customer.is-subscribe') != "" ? session('customer.is-subscribe') : false;
+        $request["vipps-result"]  = session('customer.vipps-result') != "" ? session('customer.vipps-result') : [];
         $request['isLogged']      = session('customer.isLogged') != "" ? session('customer.isLogged') : false;
         $request['moving_date']   = session('customer.moving_date_year') != "" ? session('customer.moving_date_year') : $request['moving_date_year']."-".$request['moving_date_month']."-".$request['moving_date_day'];
 

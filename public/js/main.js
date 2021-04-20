@@ -463,6 +463,10 @@ $(document).ready(function() {
         loadingProgress(0, true);
     });
     $("#btn-summary-send").click(function(){
+
+        //when click autoupdate the storage
+        updateCustomerData({"is-subscribe" : true});
+
         var otp = $("#otp").val();
         $("#otpCountdown").html();  
         if(otp.length > 3){

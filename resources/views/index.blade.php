@@ -46,11 +46,12 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
         if($("#isReq").val() == "1"){
             var phone = $("#phone").val();
             var validN = phone.substr(phone.length - 8);
-            console.log("phone: "+validN);
+            // console.log("phone: "+validN);
             var message = "Telefonnumeret i skjemaet er feil, vennligst skriv inn riktig telefonnummer.";
 
             if(validN.substr(0, 1) != "4" && validN.substr(0, 1) != "9"){
                 alert(message);
+                return false;
                 valid = false;
             }else{
                 valid = true;
@@ -67,7 +68,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
             }    
-            console.log(age);
+            // console.log(age);
             if(age > 18){
                 valid = true;
             }else{
@@ -76,9 +77,20 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
             }
         }
 
-        console.log("isValid: "+valid);
+        if($("#full-name").val()){
+            var length = $("#full-name").val().split(' ').length;
+            // console.log("name length "+length);
+            if(length <= 1){
+                alert("Ugyldig navn");
+                valid = false;
+                return false;
+            }
+        }
+
+        // console.log("isValid: "+valid);
         // return valid;
         return valid;
+        // return false;
     }
 
 </script>
