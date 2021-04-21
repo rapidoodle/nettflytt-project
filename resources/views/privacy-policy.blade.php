@@ -25,8 +25,8 @@
                 <td>Norge</td>
             </tr>
             <tr>
-                <td>Emailadresse:</td>
-                <td>kundesenter@nettflytt.no</td>
+                <td>Kontakt oss:</td>
+                <td><a href="/kontakt-oss">https://www.flytteregisteret.no/kontakt-oss</a></td>
             </tr>
             <tr>
                 <td>Telefonnummer:</td>

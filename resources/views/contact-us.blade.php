@@ -6,7 +6,16 @@
   var _support = _support || { 'ui': {}, 'user': {} };
   _support['account'] = 'flytteregisteret';
   _support['contact_custom_fields'] = _support['contact_custom_fields'] || {};
-  _support['contact_custom_fields']['rmz_form_id_23129'] = {};
+  _support['contact_custom_fields']['rmz_form_id_23129'] = {
+      'Telefonnummer': {
+        pos: 1618988198911,
+        type: 'phone',
+        value: '',
+        required: true,
+        placeholder: '',
+        connectContact: 'true',
+      }
+  };
 </script>
 <div class="row px-4 mb-5 mt-5 mt-md-0" id="contact-page">
     <div class="col-12 col-md-8 offset-md-2 text-center">
@@ -60,7 +69,7 @@
             <div class="card-body p-md-5 m-md-0 text-center d-hiddens" id="contact-5">
                 <h5 class="mb-0">Send oss gjerne en e-post så svarer vi deg fortløpende</h5>
                 <div class="py-4">
-                    <div data-reamaze-embed="contact" data-reamaze-embed-form-id="23129"></div>
+                    <div data-reamaze-embed="contact" data-reamaze-embed-disable-subject="true" data-reamaze-embed-form-id="23129"></div>
                 </div>
             </div>
         </div>
