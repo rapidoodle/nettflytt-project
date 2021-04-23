@@ -7,7 +7,7 @@
     $(document).ready(function() {
         $('#reportTable').DataTable( {
             columnDefs: [ { type: 'date', 'targets': [3] } ],
-            order: [[ 4, 'desc' ]],
+            order: [[ 5, 'desc' ]],
             "bDestroy": true 
         });
     });
