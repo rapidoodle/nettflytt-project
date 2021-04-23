@@ -27,4 +27,9 @@ class HomeController extends Controller
         $norges = DB::table('norgesenergi')->where('created_date', '>=', '2021-04-01 00:00:00')->get();
         return view('home', ['records' => $norges]);
     }
+    public function salesReport()
+    {
+        $sales = DB::table('sales')->get();
+        return view('sales-report', ['records' => $sales]);
+    }
 }

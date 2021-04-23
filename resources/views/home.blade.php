@@ -12,13 +12,13 @@
         });
     });
 </script>
-<div class="container">
-    <div class="row justify-content-center">
+<div class="container-fluid">
+    <div class="row">
         <div class="col-md-3">
             <div class="card">
                 <div class="card-header">{{ __('Menu') }}</div>
                 <div class="card-body">
-                    <ul class="nav nav-pills nav-stacked">
+                    <ul>
                         <li class="active"><a href="/sales-report">Sales Report</a></li>
                         <li><a href="/home">Norges Energi Subscription</a></li>
                     </ul>

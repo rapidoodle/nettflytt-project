@@ -681,6 +681,7 @@ $(document).ready(function() {
             }
         });
     }
+                    saveSale();
 
     function saveSale(){
         $.ajax({
@@ -908,4 +909,6 @@ $(document).ready(function() {
 
         }
     }
+
+    
 });

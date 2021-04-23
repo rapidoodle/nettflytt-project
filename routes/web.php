@@ -65,6 +65,7 @@ Route::get('/recover', 'APIController@recoverStorage')->name('recoverStorage');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/sales-report', 'HomeController@salesReport')->name('salesReport');
 
 //API
 Route::post('/saveSale', 'APIController@saveSale');
