@@ -5,7 +5,11 @@
 <script type="application/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <script type="application/javascript">
     $(document).ready(function() {
-        $('#reportTable').DataTable();
+        $('#reportTable').DataTable( {
+            columnDefs: [ { type: 'date', 'targets': [3] } ],
+            order: [[ 4, 'desc' ]],
+            "bDestroy": true 
+        });
     });
 </script>
 <div class="container">
@@ -30,7 +34,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <!-- <th width="100px">Token</th> -->
+                                <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Responded</th>
                                 <th>Date</th>
@@ -40,7 +44,7 @@
                             @foreach ($records as $data)
                                 <tr>
                                     <td>{{$data->name}}</td>
-                                    <!-- <td>{{$data->storage_token}}</td> -->
+                                    <td>{{$data->email}}</td>
                                     <td>{{$data->phone_number}}</td>
                                     <td>{{$data->responded}}</td>
                                     <td>{{$data->created_date}}</td>
@@ -50,7 +54,7 @@
                         <tfoot>
                             <tr>
                                 <th>Name</th>
-                                <!-- <th>Token</th> -->
+                                <th>Email</th>
                                 <th>Phone Number</th>
                                 <th>Responded</th>
                                 <th>Date</th>

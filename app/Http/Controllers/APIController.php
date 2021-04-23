@@ -11,6 +11,9 @@ class APIController extends Controller
 {
 
     public function testAPI(){
+
+           // echo $list =  Helper::storageStatus(Helper::getToken(), "mWyG79kTUYOL60u2kJZ5MlxMcore7SzmE3VJJH1bzU2xuxAVbelOCepWQjf06wBe", "info");
+
         $file     = fopen(storage_path("app/public/tokens.txt"), "r");
         $isHere   = false;
         $matched  = "";
@@ -18,24 +21,13 @@ class APIController extends Controller
         while(!feof($file)) {
             $line = fgets($file);
             $arr  = explode("\t", $line);
-           $list = Helper::getStorage(Helper::getToken(), $line);
-            // $list =  Helper::storageStatus(Helper::getToken(), $line, "info");
+            $list = Helper::getStorage(Helper::getToken(), $line);
             $json = json_decode($list);
-            // echo $json->email;
-            // echo $json->first_name;
-            // echo $json->last_name;
-            // echo $json->phone;
-            // echo $json->email;
-            // foreach($json->_storage_status_list as $key => $data){
-            //     echo json_encode($data);
-            //     echo "<br>";
-            // }
-            DB::insert('Insert into norgesenergi (storage_token, name, phone_number, email, created_date) values (?, ?, ?, ?, ?)', [$line, $json->first_name.' '.$json->last_name, $json->phone, $json->email, $json->_created]);   
 
-            // echo "<br>---------------<br>";
+            DB::insert('Insert into norgesenergi (storage_token, name, phone_number, email, created_date) values (?, ?, ?, ?, ?)', [$line, $json->first_name.' '.$json->last_name, $json->phone, $json->email, $json->_created]);   
         }
 
-        // fclose($file);
+        fclose($file);
         // echo Helper::storageStatus(Helper::getToken(), "ezF6ebG0090NRQdV8YKgCSFBotUXfGMfYIuKK6vftKQgTHH8WBu4ZuIBd52YaNpk", "info");        
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "6jHeiGjv1j4qxaSGq4WBAjxpfpE9R9NcC9xCv7McEOBmLUe3DQ7RgLNAB3LdHruv", "info");
@@ -323,5 +315,12 @@ class APIController extends Controller
 
         Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));
         echo json_encode(session('customer'));
+    }
+
+
+    //saving sales
+    public function saveSale(Request $request){
+        $provider = $request->type;
+        Helper::saveSale($provider); 
     }
 }

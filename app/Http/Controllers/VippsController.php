@@ -27,6 +27,7 @@ class VippsController extends Controller
 						if(($value->status == "reserved" || $value->status == "captured") && $value->id == "no.vipps"){
 							$status = 200;
 							$message = "Payment Success!";
+							Helper::saveSale("vipps");
 							Log::info("Vipps payment success; redirect to thank you page.");
 				    		return redirect('/logginn');
 							break;

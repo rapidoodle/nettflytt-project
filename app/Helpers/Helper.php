@@ -1,9 +1,15 @@
 <?php // Code within app\Helpers\Helper.php
 
 namespace App\Helpers;
+use Illuminate\Support\Facades\DB;
 
 class Helper
 {
+
+    public static function saveSale($provider = "strex"){
+        return DB::insert('Insert into sales (storage_token, name, phone_number, email, total_price, is_postbox, is_advertise, provider) values (?, ?, ?, ?, ?, ?, ?, ?)', [session('customer._storageToken'), session('customer.full-name'), session('customer.phone'), session('customer.email'), session('customer.total_price'), session('customer.mailbox-sign'), session('customer.isAdv'), $provider]);   
+    }
+
 	public static function firstName(string $string){
 		return implode(' ', array_slice(explode(' ', $string), 0, -1));
     }

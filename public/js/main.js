@@ -617,6 +617,7 @@ $(document).ready(function() {
                     $("#otpModal").toggle();
                     updateCustomerData({"_status" : "done"});
                     window.location.href = "/takk";
+                    saveSale();
                 }else if(obj.status == 0 && obj.strex_resultcode == "Ok" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
                     $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Koden du tastet inn var feil. Vennligst prøv igjen");
                     failedProgress();
@@ -650,7 +651,7 @@ $(document).ready(function() {
                                         updateCustomerData({"_status" : "done"});
                                         $("#otpModal").toggle();
                                         window.location.href = "/takk";
-
+                                        saveSale();
                                     }
                                 }
                             });
@@ -677,6 +678,17 @@ $(document).ready(function() {
                 }
                 //otp processing is done, can check again if failed.
                 otpProcessing = false;
+            }
+        });
+    }
+
+    function saveSale(){
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val(), type : "strex"},
+            url: "/saveSale",
+            success: function(response){
+                console.log(response);
             }
         });
     }

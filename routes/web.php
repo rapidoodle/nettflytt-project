@@ -67,6 +67,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 //API
+Route::post('/saveSale', 'APIController@saveSale');
 Route::post('/searchLocation', 'APIController@searchLocation');
 Route::post('/getToken', 'APIController@getToken');
 Route::post('/sendSMS', 'APIController@sendSMS');
