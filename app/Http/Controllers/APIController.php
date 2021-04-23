@@ -5,16 +5,48 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Helper;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class APIController extends Controller
 {
 
     public function testAPI(){
-        echo json_encode(Helper::searchLocation("1461"));
+        $file     = fopen(storage_path("app/public/tokens.txt"), "r");
+        $isHere   = false;
+        $matched  = "";
+        $response = array();
+        while(!feof($file)) {
+            $line = fgets($file);
+            $arr  = explode("\t", $line);
+           $list = Helper::getStorage(Helper::getToken(), $line);
+            // $list =  Helper::storageStatus(Helper::getToken(), $line, "info");
+            $json = json_decode($list);
+            // echo $json->email;
+            // echo $json->first_name;
+            // echo $json->last_name;
+            // echo $json->phone;
+            // echo $json->email;
+            // foreach($json->_storage_status_list as $key => $data){
+            //     echo json_encode($data);
+            //     echo "<br>";
+            // }
+            DB::insert('Insert into norgesenergi (storage_token, name, phone_number, email, created_date) values (?, ?, ?, ?, ?)', [$line, $json->first_name.' '.$json->last_name, $json->phone, $json->email, $json->_created]);   
 
+            // echo "<br>---------------<br>";
+        }
+
+        // fclose($file);
+        // echo Helper::storageStatus(Helper::getToken(), "ezF6ebG0090NRQdV8YKgCSFBotUXfGMfYIuKK6vftKQgTHH8WBu4ZuIBd52YaNpk", "info");        
+        // echo "<br>---------------<br>";
+        // echo Helper::storageStatus(Helper::getToken(), "6jHeiGjv1j4qxaSGq4WBAjxpfpE9R9NcC9xCv7McEOBmLUe3DQ7RgLNAB3LdHruv", "info");
+
+        // echo Helper::getStorage(Helper::getToken(), "6jHeiGjv1j4qxaSGq4WBAjxpfpE9R9NcC9xCv7McEOBmLUe3DQ7RgLNAB3LdHruv");
+
+
+        // echo json_encode(Helper::searchLocation("1461"));
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-        echo Helper::getStorage(Helper::getToken(), "3xJh5hkkL28NDzOfz1sPhDp6j8EmfSeVLG8RU2RHm5Fbqk5byQZlcqr6z1WbHoyx");
+        // echo Helper::getStorage(Helper::getToken(), "6jHeiGjv1j4qxaSGq4WBAjxpfpE9R9NcC9xCv7McEOBmLUe3DQ7RgLNAB3LdHruv");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");
@@ -29,7 +61,7 @@ class APIController extends Controller
         //$storageToken = session('customer')['_storageToken'];
         //$token = session('_initToken');
         // echo Helper::updateStorage($token, $storageToken, session('customer'));
-        // echo Helper::storageStatus(Helper::getToken(), "hxhZn2GGKJbUUYbVAfRJ5yPjCqQENiXhfbV8bNCwiHVK7PYFsyc1wVspAbrB8FVM", "payment");
+        // echo Helper::storageStatus(Helper::getToken(), "6jHeiGjv1j4qxaSGq4WBAjxpfpE9R9NcC9xCv7McEOBmLUe3DQ7RgLNAB3LdHruv", "payment");
         // echo Helper::tokenDetails("XU1ivp87caQsU6kBNYwNGHYlSct7eI9Pz36UpwIDDmz9n5MoF4qTvjiLPxlmfEqS");
         // echo Helper::tokenDetails("mjwpt0bYSGdrKYlygevWmnn44lbDGJqz02OIEOrHKkSRlACvLSzT245apryFdxWP");
         // "This is a sample message for Norges AS";
@@ -282,6 +314,11 @@ class APIController extends Controller
                 session()->forget("customer.sign_noads-a");
             }
 
+
+            //if norges energi - insert record
+            if($key == "isNorges"){
+                DB::insert('Insert into norgesenergi (storage_token, name, phone_number, email) values (?, ?, ?, ?)', [session('customer._storageToken'),session('customer.full-name'), session('customer.phone'), session('customer.email')]);   
+            }
         }
 
         Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));

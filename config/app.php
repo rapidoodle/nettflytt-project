@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Nettflytt'),
+    'name' => env('APP_NAME', 'Flytteregisteret'),
 
     /*
     |--------------------------------------------------------------------------
