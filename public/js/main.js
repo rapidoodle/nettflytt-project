@@ -681,8 +681,6 @@ $(document).ready(function() {
             }
         });
     }
-                    saveSale();
-
     function saveSale(){
         $.ajax({
             type: "POST",
