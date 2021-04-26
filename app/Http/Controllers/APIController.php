@@ -13,18 +13,9 @@ class APIController extends Controller
 
     public function testAPI(){
 
-        $oClient = new Client([
-            'host'          => 'smtp.mandrillapp.com',
-            'port'          => 587,
-            'encryption'    => 'ssl',
-            'validate_cert' => false,
-            'username'      => 'Nettflytt',
-            'password'      => '_4uUqOZfxOM6gbD1LL5W_w',
-            'protocol'      => 'imap'
-        ]);
         $oClient = Client::account('default');
-        //Connect to the IMAP Server
         $oClient->connect();
+        //Connect to the IMAP Server
         //Get all Mailboxes
         /** @var \Webklex\IMAP\Support\FolderCollection $aFolder */
         $aFolder = $oClient->getFolders();
