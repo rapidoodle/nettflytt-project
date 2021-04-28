@@ -253,7 +253,7 @@ class APIController extends Controller
     public function sendSMS(Request $request){
         $message = $request->type == 1 ? "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Topp 5 garanti. Du får strøm til kun 77,99 øre/kWh! Ingen månedsavgift. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/topp-5-garanti/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Flytteregisteret." : "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Strøm til lavpris. Du får strøm til spotpris! Månedsbeløp 27 kr + 3,49øre/kWh. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/strom-til-lavpris/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Flytteregisteret.";
         
-        Helper::sendSMS(Helper::getToken(), session('customer')['phone'], 2099, $message);
+        echo Helper::sendPowerSMS(Helper::getToken(), session('customer')['phone'], 2099, $message, "power", session('customer._storageToken'));
 
         DB::insert('Insert into norgesenergi (storage_token, name, phone_number, email, type) values (?, ?, ?, ?, ?)', [session('customer._storageToken'),session('customer.full-name'), session('customer.phone'), session('customer.email'), $request->type]);   
     }

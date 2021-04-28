@@ -710,7 +710,7 @@ $(document).ready(function() {
             url: "/sendSMS",
             success: function(response){
                 if(isUpdate){
-                    updateCustomerData({"isNorges" : 1});
+                    // updateCustomerData({"isNorges" : 1});
                 }
             }
         });

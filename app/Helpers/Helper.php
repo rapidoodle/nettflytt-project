@@ -203,6 +203,23 @@ class Helper
 	    return $json;
     }
 
+    public static function sendPowerSMS($token, $phone, $sender = 2099, $message, $type = "power", $storageToken){
+		$u 	  	  = "u46114-".session("_sessionSalt");
+		$data 	  = array("msn" => "+47".$phone, "message" => $message, "type" => $type, "storageid" => $storageToken, "hid" => 132); 
+		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/sms-confirmation/request";
+	    $postdata = http_build_query( $data );
+	    $options  = [ 'http' => [
+					        'method' => "POST",
+					        'header' => "Content-type: application/x-www-form-urlencoded",
+					        'content' => $postdata]
+					  ];
+	    $context  = stream_context_create( $options );
+	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
+		$response = json_decode($json);
+
+	    return $json;
+    }
+
     public static function confirmOtp($token, $phone, $transactionid, $otp, $totalPrice){
 		$u 	  	  = "u46114-".session("_sessionSalt");
 		$data 	  = array("msn" => "+47".$phone, "transactionid" => $transactionid, "otp" => $otp, "price" => $totalPrice, "sender" => "Flyttereg"); 

@@ -37,13 +37,20 @@ class HomeController extends Controller
     {
         $sales = DB::table('norgesenergi')->where("responded", 0)->get();
 
-        // foreach ($sales as $sale) {
-            // var_dump($sale->storage_token);
-            // echo $sale->storage_token;
-            echo $list =  Helper::storageStatus(Helper::getToken(), "GgV4j4X8VEXEL9xrMrmmu1qglw9NduRVpeFwdwawAaIl2np0b2abS66cWUrCbJFt
-", "info");
-            // echo "<br>";
-        // }
-        // return view('sales-report', ['records' => $sales]);
+        foreach ($sales as $sale) {
+            $list =  Helper::storageStatus(Helper::getToken(), $sale->storage_token, "lead");
+            $obj = json_decode($list);
+
+            if($obj->_status != 150){
+                foreach ($obj->_storage_status_list as $key => $value) {
+
+                    if($value->detail == "+47".$sale->phone_number.":ja"){
+                        DB::table('norgesenergi')->where('id', $sale->id)->update(['responded' => 1]);
+                    }
+                }
+            }
+        }
+
+        return redirect('/home');
     }
 }
