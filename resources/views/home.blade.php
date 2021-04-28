@@ -28,7 +28,13 @@
         </div>
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header">{{ __('Norges Energi Subscription') }}</div>
+                <div class="card-header">
+                    <form action="/update-norges" method="post">
+                        @csrf
+                        <span class="float-left">{{ __('Norges Energi Subscription') }}</span>
+                        <button type="submit" value="submit" class="btn btn-info btn-md float-right">Refresh</button>
+                    </form>
+                </div>
                 <div class="card-body">
                     <table id="reportTable" class="display table" style="width:100%">
                         <thead>

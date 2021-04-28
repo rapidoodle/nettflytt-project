@@ -66,6 +66,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/sales-report', 'HomeController@salesReport')->name('salesReport');
+Route::post('/update-norges', 'HomeController@updateNorges')->name('updateNorges');
 
 //API
 Route::post('/saveSale', 'APIController@saveSale');

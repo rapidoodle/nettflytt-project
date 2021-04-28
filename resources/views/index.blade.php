@@ -131,7 +131,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                         </tr>
                                         <tr>
                                             <td>E-post</td>
-                                            <td><input type="text" class="person-input" value="{{session('customer')['person'.$i]['email']}}" id="email_{{$i}}" required="true"></td>
+                                            <td><input type="email" class="person-input" value="{{session('customer')['person'.$i]['email']}}" id="email_{{$i}}" required="true" oninvalid="alert('Invalid E-post');"></td>
                                         </tr>
                                         <tr>
                                             <td>Telefonnummer</td>
@@ -162,7 +162,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                         </tr>
                                         <tr>
                                             <td>E-post</td>
-                                            <td><input type="text" class="person-input" value="{{isset(session('customer')['email']) ?? session('customer')['email']}}" id="email_0" required="true"></td>
+                                            <td><input type="email" class="person-input" value="{{isset(session('customer')['email']) ?? session('customer')['email']}}" id="email_0" required="true" oninvalid="alert('Invalid E-post');"></td>
                                         </tr>
                                         <tr>
                                             <td>Telefonnummer</td>

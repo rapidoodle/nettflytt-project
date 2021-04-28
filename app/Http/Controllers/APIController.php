@@ -13,26 +13,26 @@ class APIController extends Controller
 
     public function testAPI(){
 
-        $oClient = Client::account('default');
-        $oClient->connect();
-        //Connect to the IMAP Server
-        //Get all Mailboxes
-        /** @var \Webklex\IMAP\Support\FolderCollection $aFolder */
-        $aFolder = $oClient->getFolders();
-        //Loop through every Mailbox
-        /** @var \Webklex\IMAP\Folder $oFolder */
-        foreach($aFolder as $oFolder){
-            //Get all Messages of the current Mailbox $oFolder
-            /** @var \Webklex\IMAP\Support\MessageCollection $aMessage */
-            $aMessage = $oFolder->messages()->all()->get();
+        // $oClient = Client::account('default');
+        // $oClient->connect();
+        // //Connect to the IMAP Server
+        // //Get all Mailboxes
+        // /** @var \Webklex\IMAP\Support\FolderCollection $aFolder */
+        // $aFolder = $oClient->getFolders();
+        // //Loop through every Mailbox
+        // /** @var \Webklex\IMAP\Folder $oFolder */
+        // foreach($aFolder as $oFolder){
+        //     //Get all Messages of the current Mailbox $oFolder
+        //     /** @var \Webklex\IMAP\Support\MessageCollection $aMessage */
+        //     $aMessage = $oFolder->messages()->all()->get();
             
-            /** @var \Webklex\IMAP\Message $oMessage */
-            foreach($aMessage as $oMessage){
-                echo $oMessage->getSubject().'<br />';
-                echo 'Attachments: '.$oMessage->getAttachments()->count().'<br />';
-                echo $oMessage->getHTMLBody(true);
-            }
-        }
+        //     /** @var \Webklex\IMAP\Message $oMessage */
+        //     foreach($aMessage as $oMessage){
+        //         echo $oMessage->getSubject().'<br />';
+        //         echo 'Attachments: '.$oMessage->getAttachments()->count().'<br />';
+        //         echo $oMessage->getHTMLBody(true);
+        //     }
+        // }
            // echo $list =  Helper::storageStatus(Helper::getToken(), "mWyG79kTUYOL60u2kJZ5MlxMcore7SzmE3VJJH1bzU2xuxAVbelOCepWQjf06wBe", "info");
 
         // $file     = fopen(storage_path("app/public/tokens.txt"), "r");
@@ -59,7 +59,7 @@ class APIController extends Controller
         // echo json_encode(Helper::searchLocation("1461"));
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-        // echo Helper::getStorage(Helper::getToken(), "6jHeiGjv1j4qxaSGq4WBAjxpfpE9R9NcC9xCv7McEOBmLUe3DQ7RgLNAB3LdHruv");
+        echo Helper::getStorage(Helper::getToken(), "LgYRqXEkHrNJfDPk60Vrq9BM5S7IhNsnjfBM66nRnHxPzx6HFiSFimMyKjHZeu0P");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");

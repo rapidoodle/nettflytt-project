@@ -109,7 +109,7 @@ class Helper
    	}
 
    	public static function storageStatus($token, $storageToken, $type){
-		$u 	  	  = "u46114-".session("_sessionSalt");
+		$u 	  = "u46114-".session("_sessionSalt");
 	    $url  = "https://". $u .":". $token ."@api.nettflytt.no/api/nettflytt/2020-10/storage-status/".$storageToken."/details/".$type;
 	    $json = file_get_contents( $url, FALSE);
 
