@@ -64,9 +64,14 @@ Route::get('/recover', 'APIController@recoverStorage')->name('recoverStorage');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/sales-report', 'HomeController@salesReport')->name('salesReport');
+//admin page
+Route::get('/power-report', 'ReportsController@index')->name('index');
+Route::get('/sales-report', 'ReportsController@salesReport')->name('salesReport');
+Route::get('/storage-update', 'StorageUpdateController@index')->name('index');
+
+//admin page form
 Route::post('/update-norges', 'HomeController@updateNorges')->name('updateNorges');
+
 
 //API
 Route::post('/saveSale', 'APIController@saveSale');

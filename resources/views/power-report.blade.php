@@ -7,13 +7,19 @@
     $(document).ready(function() {
         $('#reportTable').DataTable( {
             columnDefs: [ { type: 'date', 'targets': [3] } ],
-            order: [[ 7, 'desc' ]],
+            order: [[ 5, 'desc' ]],
             "bDestroy": true 
         });
     });
 </script>
 <div class="card">
-    <div class="card-header">{{ __('Sales Report') }}</div>
+    <div class="card-header">
+        <form action="/update-norges" method="post">
+            @csrf
+            <span class="float-left">{{ __('Norges Energi Subscription') }}</span>
+            <button type="submit" value="submit" class="btn btn-info btn-md float-right">Refresh</button>
+        </form>
+    </div>
     <div class="card-body">
         <table id="reportTable" class="display table" style="width:100%">
             <thead>
@@ -21,10 +27,8 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
-                    <th>Postbox</th>
-                    <th>No Advertisement</th>
-                    <th>Total Price</th>
-                    <th>Provider</th>
+                    <th>Responded</th>
+                    <th>Type</th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -34,11 +38,9 @@
                         <td>{{$data->name}}</td>
                         <td>{{$data->email}}</td>
                         <td>{{$data->phone_number}}</td>
-                        <td>{{$data->is_postbox}}</td>
-                        <td>{{$data->is_advertise}}</td>
-                        <td>{{$data->total_price}}</td>
-                        <td>{{$data->provider}}</td>
-                        <td>{{$data->sales_date}}</td>
+                        <td>{{$data->responded}}</td>
+                        <td>{{$data->type == 1 ? "Topp 5 garanti" : ($data->type == 2 ? "Strøm til lavpris" : "N/A")}}</td>
+                        <td>{{$data->created_date}}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -47,10 +49,8 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Phone Number</th>
-                    <th>Postbox</th>
-                    <th>No Advertisement</th>
-                    <th>Total Price</th>
-                    <th>Provider</th>
+                    <th>Responded</th>
+                    <th>Type</th>
                     <th>Date</th>
                 </tr>
             </tfoot>

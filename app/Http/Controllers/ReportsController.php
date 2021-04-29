@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Helper;
 
-class HomeController extends Controller
+class ReportsController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $norges = DB::table('norgesenergi')->where('created_date', '>=', '2021-04-01 00:00:00')->get();
-        return view('home', ['records' => $norges]);
+        return view('power-report', ['records' => $norges]);
     }
     public function salesReport()
     {
@@ -51,6 +51,6 @@ class HomeController extends Controller
             }
         }
 
-        return redirect('/home');
+        return redirect('/power-report');
     }
 }

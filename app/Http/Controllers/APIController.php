@@ -51,15 +51,15 @@ class APIController extends Controller
         // fclose($file);
         // echo Helper::storageStatus(Helper::getToken(), "ezF6ebG0090NRQdV8YKgCSFBotUXfGMfYIuKK6vftKQgTHH8WBu4ZuIBd52YaNpk", "info");        
         // echo "<br>---------------<br>";
-        // echo Helper::storageStatus(Helper::getToken(), "6jHeiGjv1j4qxaSGq4WBAjxpfpE9R9NcC9xCv7McEOBmLUe3DQ7RgLNAB3LdHruv", "info");
+        // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        // echo Helper::getStorage(Helper::getToken(), "6jHeiGjv1j4qxaSGq4WBAjxpfpE9R9NcC9xCv7McEOBmLUe3DQ7RgLNAB3LdHruv");
+        echo Helper::getStorage(Helper::getToken(), "mak0O8GCCg0R1WjZcWUXzjRaEhrYf0vGw83oZtBJJg4Hobx3oKkxYuFmXHBpyNje");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-        echo Helper::getStorage(Helper::getToken(), "LgYRqXEkHrNJfDPk60Vrq9BM5S7IhNsnjfBM66nRnHxPzx6HFiSFimMyKjHZeu0P");
+        // echo Helper::getStorage(Helper::getToken(), "sdzsDDe1LuyX2k5WAxurnHgptDRdmxEOg0WtlvKh2UydMPHRCA4eXRXCZv7AeH7f");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");

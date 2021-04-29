@@ -77,7 +77,33 @@
         </nav>
 
         <main class="py-4">
+            <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-header">{{ __('Reports') }}</div>
+                <div class="card-body">
+                    <ul>
+                        <li><a href="/sales-report">Sales Report</a></li>
+                        <li class="active"><a href="/power-report">Norges Energi Subscription</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mt-4">
+                <div class="card-header">{{ __('Admin Tools') }}</div>
+                <div class="card-body">
+                    <ul>
+                        <li><a href="/storage-update">Storage Update</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-md-9">
             @yield('content')
+        </div>
+    </div>
+</div>
         </main>
     </div>
 </body>
