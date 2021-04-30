@@ -86,9 +86,14 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                 return false;
             }
         }
+        var hasNumber  = /\d/;
+        if(hasNumber.test($("#old_place").val()) === true || hasNumber.test($("#new_place").val()) === true){
+            alert("Invalid Poststed!");
+                valid = false;
+                return false;
+        }
 
         // console.log("isValid: "+valid);
-        // return valid;
         return valid;
         // return false;
     }
