@@ -70,7 +70,7 @@ Route::get('/sales-report', 'ReportsController@salesReport')->name('salesReport'
 Route::get('/storage-update', 'StorageUpdateController@index')->name('index');
 
 //admin page form
-Route::post('/update-norges', 'HomeController@updateNorges')->name('updateNorges');
+Route::post('/update-norges', 'ReportsController@updateNorges')->name('updateNorges');
 
 
 //API
