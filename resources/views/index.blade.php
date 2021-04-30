@@ -88,7 +88,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
         }
         var hasNumber  = /\d/;
         if(hasNumber.test($("#old_place").val()) === true || hasNumber.test($("#new_place").val()) === true){
-            alert("Invalid Poststed!");
+            alert("Feil postnummer. Vennligst sjekk at postnummeret er riktig.");
                 valid = false;
                 return false;
         }

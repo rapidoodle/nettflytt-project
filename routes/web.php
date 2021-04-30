@@ -68,6 +68,7 @@ Auth::routes();
 Route::get('/power-report', 'ReportsController@index')->name('index');
 Route::get('/sales-report', 'ReportsController@salesReport')->name('salesReport');
 Route::get('/storage-update', 'StorageUpdateController@index')->name('index');
+Route::post('/search-storage', 'StorageUpdateController@search')->name('search');
 
 //admin page form
 Route::post('/update-norges', 'ReportsController@updateNorges')->name('updateNorges');

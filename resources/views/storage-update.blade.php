@@ -14,14 +14,17 @@
 </script>
 <div class="card">
     <div class="card-header">
-        <form action="/update-norges" method="post">
-            @csrf
-            <span class="float-left">{{ __('Storage Update By Search') }}</span>
-        </form>
+        <span class="float-left">{{ __('Storage Update By Search') }}</span>
     </div>
     <div class="card-body">
-        <form action="/get-storage" method="post">
-            
+        <form action="/search-storage" method="post">
+            @csrf
+            <table>
+                <tr>
+                    <td><input type="text" name="query" class="form-control" id="query" placeholder="Search"></td>
+                    <td><input type="submit" name="submit" class="btn btn-info" value="Go"></td>
+                </tr>
+            </table>
         </form>
     </div>
 </div>
