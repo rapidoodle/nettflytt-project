@@ -15,9 +15,11 @@ class StorageUpdateController extends Controller
         return view('storage-update', ['records' => $norges]);
     }
     public function search(Request $request){
+    	$token 	  = Helper::getToken(); 
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("type" => "OR", "search" => ["phone" => $request->query]); 
-		$endpoint = "https://".$u.":".Helper::getToken()."@api.nettflytt.no/api/nettflytt/2020-10/storage/search";
+		// $data 	  = array("type" => "OR", "search" => json_encode(["phone" => $request->query])); 
+		$data 	  = array("type" => "AND", "search" => json_encode(["_recordid" => 175719])); 
+		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/search";
 	    $postdata = http_build_query( $data );
 	    $options  = [ 'http' => [
 					        'method' => "POST",

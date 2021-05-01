@@ -267,7 +267,7 @@ $(document).ready(function() {
         $("#isNorges").val("1");
         $("#isPostbox").val("1");
         $(".btn-next-summary").attr("is-postbox", "1");
-        sendSMS(2, false);
+        sendSMS(3, false);
     });
 
     $(".btn-postbox").click(function(){

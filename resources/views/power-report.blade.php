@@ -39,7 +39,7 @@
                         <td>{{$data->email}}</td>
                         <td>{{$data->phone_number}}</td>
                         <td>{{$data->responded}}</td>
-                        <td>{{$data->type == 1 ? "Topp 5 garanti" : ($data->type == 2 ? "Strøm til lavpris" : "N/A")}}</td>
+                        <td>{{$data->type == 1 ? "Topp 5 garanti" : ($data->type == 2 ? "Strøm til lavpris" : ($data->type == 3 ? "Strøm til lavpris" : "N/A"))}}</td>
                         <td>{{$data->created_date}}</td>
                     </tr>
                 @endforeach
