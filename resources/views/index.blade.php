@@ -94,7 +94,10 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
         }
 
         // console.log("isValid: "+valid);
-        return valid;
+        if(valid == true){
+            $("#submit-form").attr("disabled", true);
+        }
+        return false;
         // return false;
     }
 
