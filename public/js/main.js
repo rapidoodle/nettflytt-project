@@ -843,7 +843,7 @@ $(document).ready(function() {
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>E-post</td>'+
-                                        '<td><input type="text" class="person-input" value="'+email.val()+'" id="email_'+pCtr+'" required="true"></td>'+
+                                        '<td><input type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="person-input email-input" value="'+email.val()+'" id="email_'+pCtr+'" required="true"></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>Telefonnummer</td>'+

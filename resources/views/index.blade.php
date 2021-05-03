@@ -139,7 +139,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                         </tr>
                                         <tr>
                                             <td>E-post</td>
-                                            <td><input type="email" class="person-input" value="{{session('customer')['person'.$i]['email']}}" id="email_{{$i}}" required="true" oninvalid="alert('Invalid E-post');"></td>
+                                            <td><input type="email" class="person-input" value="{{session('customer')['person'.$i]['email']}}" id="email_{{$i}}" required="true" oninvalid="alert('Invalid E-post');" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"></td>
                                         </tr>
                                         <tr>
                                             <td>Telefonnummer</td>
@@ -170,7 +170,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                         </tr>
                                         <tr>
                                             <td>E-post</td>
-                                            <td><input type="email" class="person-input" value="{{isset(session('customer')['email']) ?? session('customer')['email']}}" id="email_0" required="true" oninvalid="alert('Invalid E-post');"></td>
+                                            <td><input type="email" class="person-input" value="{{isset(session('customer')['email']) ?? session('customer')['email']}}" id="email_0" required="true" oninvalid="alert('Invalid E-post');" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"></td>
                                         </tr>
                                         <tr>
                                             <td>Telefonnummer</td>
@@ -193,7 +193,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-post</label>
-                                    <input type="email" name="email" class="main-field form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email">
+                                    <input type="email" name="email" class="main-field form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Telefonnummer</label>
@@ -281,7 +281,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                             </div>
                             <div class="col-6">
                                 <label for="poststed2">Poststed</label>
-                                <input type="text" required="true" class="form-control smy-fld poststed-2" placeholder="Poststed" id="new_place" name="new_place" value="{{session('customer')['new_zipcode'] ?? ''}}">
+                                <input type="text" required="true" class="form-control smy-fld poststed-2" placeholder="Poststed" id="new_place" name="new_place" value="{{session('customer')['new_place'] ?? ''}}">
                             </div>
                         </div>
                         <div class="row">
