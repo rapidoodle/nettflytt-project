@@ -1,17 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<script type="application/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="application/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-<script type="application/javascript">
-    $(document).ready(function() {
-        $('#reportTable').DataTable( {
-            columnDefs: [ { type: 'date', 'targets': [3] } ],
-            order: [[ 5, 'desc' ]],
-            "bDestroy": true 
-        });
-    });
-</script>
+<input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="card">
     <div class="card-header">
         <form action="/update-norges" method="post">
@@ -26,21 +16,24 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Phone Number</th>
                     <th>Responded</th>
                     <th>Type</th>
                     <th>Date</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($records as $data)
+                <?php
+                    $type =$data->type == 1 ? "Topp 5 garanti" : ($data->type == 2 ? "Strøm til lavpris" : ($data->type == 3 ? "Strøm til lavpris" : "N/A"));
+                ?>
                     <tr>
                         <td>{{$data->name}}</td>
                         <td>{{$data->email}}</td>
-                        <td>{{$data->phone_number}}</td>
                         <td>{{$data->responded}}</td>
-                        <td>{{$data->type == 1 ? "Topp 5 garanti" : ($data->type == 2 ? "Strøm til lavpris" : ($data->type == 3 ? "Strøm til lavpris" : "N/A"))}}</td>
+                        <td>{{$type}}</td>
                         <td>{{$data->created_date}}</td>
+                        <td><button class="btn btn-sm btn-success get-storage" data-token="{{$data->storage_token}}" data-modal="powerModal" data-table="powerTable" data-title="powerTitle" data-type="{{$type}}">View</button></td>
                     </tr>
                 @endforeach
             </tbody>
@@ -48,13 +41,33 @@
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Phone Number</th>
                     <th>Responded</th>
                     <th>Type</th>
                     <th>Date</th>
+                    <th></th>
                 </tr>
             </tfoot>
         </table>
     </div>
 </div>
+    <!--CONFIRMATION MODAL-->
+    <div class="modal fade" id="powerModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="text-center modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+          <div class="modal-body mt-4">
+            <div class="text-center mb-4">
+                <h5 class="modal-title powerTitle"></h5>            
+            </div>
+            <table class="table table-striped table-bordered powerTable text-align-left">
+                <tr>
+                    <td><b>LOADING CUSTOMER DATA..</b></td>
+                </tr>
+            </table>
+          </div>
+          <div class="modal-footer text-center">
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection

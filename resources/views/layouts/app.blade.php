@@ -3,23 +3,26 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta description="Flytteregisteret home page">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Flytteregisteret</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.min.css') }}?v={{ time() }}" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet">
 
+        <link href="{{ asset('css/bootstrap.min.css') }}?v={{ time() }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style type="text/css">
-        
+        table tr td{
+            text-align: left!important;
+        }
     </style>
 </head>
 <body>
@@ -107,4 +110,8 @@
         </main>
     </div>
 </body>
+    <script type="application/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="application/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="application/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script type="application/javascript" src="{{ asset('js/admin.js') }}"></script>
 </html>

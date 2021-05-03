@@ -14,6 +14,12 @@ class StorageUpdateController extends Controller
         $norges = DB::table('norgesenergi')->where('created_date', '>=', '2021-04-01 00:00:00')->get();
         return view('storage-update', ['records' => $norges]);
     }
+    public function recoverStorage(Request $request){
+    	$storageToken = $request->token;
+    	$token = Helper::getToken();
+    	return Helper::getStorage($token, $storageToken);
+    }
+
     public function search(Request $request){
     	$token 	  = Helper::getToken(); 
 		$u 	  	  = "u46114-".session("_sessionSalt");

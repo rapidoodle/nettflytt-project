@@ -53,7 +53,7 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "3QaIlhvatgd4t6i0db8UjuyJlnT3XJ8vKN1qobFcf9QCJ1cHWKjL66djMZXyUKRf");
+        echo Helper::getStorage(Helper::getToken(), "oFYPTzjWqDPNQj6sOVZIXQzu1ZD0V29dj5ZlVNjtTFiEswpdZdqc7pz2nE3seVQL");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
@@ -81,6 +81,7 @@ class APIController extends Controller
         // echo Helper::sendSMS($token, session('customer')['phone'], "Flytteregisteret", $message);
     }
 
+
     public function searchLocation(Request $request){
         $keyword  = $request->keyword;
         echo json_encode(Helper::searchLocation($keyword ));
@@ -88,9 +89,7 @@ class APIController extends Controller
 
     public function recoverStorage(Request $request){
         $storageToken = $request->token;
-        Helper::getStorage(Helper::getToken(), $storageToken);
-        // session(['customer'   => $newToken]);
-        return redirect('/');
+        return Helper::getStorage(Helper::getToken(), $storageToken);
     }
 
     public function storageStatus(Request $request){

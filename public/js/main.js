@@ -566,7 +566,17 @@ $(document).ready(function() {
         $("#"+next).fadeIn();
     });
 
+    //POWER REPORTS
+    $(".btn-contact").click(function(){
+        var from = $(this).attr("data-from");
+        var next = $(this).attr("data-next");
+
+        $("#"+from).hide();
+        $("#"+next).fadeIn();
+    });
+
     //IN FUNCTIONS
+
     function updateCompanyList(){
         var services = [];
         
