@@ -24,8 +24,6 @@ $(document).ready(function() {
     var otpProcessing   = false;
     var checkIcon       = "<i class='fa fa-check text-success'></i>";
     var timesIcon       = "<i class='fa fa-times text-danger'></i>";
-
-saveSale();
     //INDEX PAGE
     if($(".post-search").length > 0){
         $(".post-search").keyup(function(){

@@ -53,7 +53,7 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "oFYPTzjWqDPNQj6sOVZIXQzu1ZD0V29dj5ZlVNjtTFiEswpdZdqc7pz2nE3seVQL");
+        echo Helper::getStorage(Helper::getToken(), "X6VGHrG4IEMIWdnHHzaaWn7BuFzHwjyqNx8Yh1rVTnbQDWrIKYiJK61EnaLt3920");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
