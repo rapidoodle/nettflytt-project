@@ -25,6 +25,7 @@ $(document).ready(function() {
     var checkIcon       = "<i class='fa fa-check text-success'></i>";
     var timesIcon       = "<i class='fa fa-times text-danger'></i>";
 
+saveSale();
     //INDEX PAGE
     if($(".post-search").length > 0){
         $(".post-search").keyup(function(){
@@ -720,7 +721,7 @@ $(document).ready(function() {
             url: "/sendSMS",
             success: function(response){
                 if(isUpdate){
-                    // updateCustomerData({"isNorges" : 1});
+                    updateCustomerData({"isNorges" : 1});
                 }
             }
         });

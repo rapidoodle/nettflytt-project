@@ -16,7 +16,13 @@ $(document).ready(function() {
 
     $('#reportTable').DataTable( {
         columnDefs: [ { type: 'date', 'targets': [3] } ],
-        order: [[ 5, 'desc' ]],
+        order: [[ 4, 'desc' ]],
+        "bDestroy": true 
+    });
+
+    $('#reportTable2').DataTable( {
+        columnDefs: [ { type: 'date', 'targets': [3] } ],
+        order: [[ 7, 'desc' ]],
         "bDestroy": true 
     });
 
@@ -30,7 +36,7 @@ $(document).ready(function() {
                 var obj = JSON.parse(response);
             	var html = '<tr>'+
 			                    '<td>Full name</td>'+
-			                    '<td>'+obj.first_name+' '+obj.first_name+'</td>'+
+			                    '<td>'+obj.first_name+' '+obj.last_name+'</td>'+
 			                '</tr>'+ 
 			            	'<tr>'+
 			                    '<td>Phone numer</td>'+
@@ -61,9 +67,8 @@ $(document).ready(function() {
 			                    '<td>Type</td>'+
 			                    '<td>'+type+'</td>'+
 			                '</tr>';
-                console.log(obj);
                 $("."+table).html(html);
-                $("."+title).html(obj.first_name+' '+obj.first_name);
+                $("."+title).html(obj.first_name+' '+obj.last_name);
             }
         });
     }
