@@ -41,7 +41,11 @@ $(document).ready(function() {
 			            	'<tr>'+
 			                    '<td>Phone numer</td>'+
 			                    '<td>'+obj.phone+'</td>'+
-			                '</tr>'+ 
+			                '</tr>'+  
+                            '<tr>'+
+                                '<td>Email</td>'+
+                                '<td>'+obj.email+'</td>'+
+                            '</tr>'+
 			            	'<tr>'+
 			                    '<td>New Address</td>'+
 			                    '<td>'+obj.new_address+'</td>'+

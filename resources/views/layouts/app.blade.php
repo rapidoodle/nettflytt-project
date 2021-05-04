@@ -87,7 +87,7 @@
                 <div class="card-header">{{ __('Reports') }}</div>
                 <div class="card-body">
                     <ul>
-                        <li><a href="/sales-report">Sales Report</a></li>
+                        <!-- <li><a href="/sales-report">Sales Report</a></li> -->
                         <li class="active"><a href="/power-report">Norges Energi Subscription</a></li>
                     </ul>
                 </div>
