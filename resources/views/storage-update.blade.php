@@ -27,6 +27,28 @@
             </table>
         </form>
 
+        @if(isset($response['searchResult']))
+        <div class="card mt-4">
+            <div class="card-header">
+                Please select storage to edit:
+            </div>
+            <div class="card-body">
+                @foreach($response['result']->sids as $key => $sid)
+                <form action="/select-update" method="post">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="token" value="{{$sid}}">
+                    <table>
+                        <tr>
+                            <td width="100"><b>{{$key}}</b></td>
+                            <td><button type="submit" class="btn btn-danger btn-sm">Edit</button></td>
+                        </tr>
+                    </table>
+                </form>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
         @if(isset($response['error']) && $response['error'] == 0)
         <form action="/save-storage" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">

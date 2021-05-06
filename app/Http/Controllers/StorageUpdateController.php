@@ -37,15 +37,16 @@ class StorageUpdateController extends Controller
 	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
 	    $obj  	  = json_decode($json);
 
-	    if(isset($obj->_status) && $obj->_status == 0){
-	    	$response['error'] 	  = 0;
-		    $response['storage']  = Helper::getStorage($token, $obj->sids[0]);
+	    $response['searchResult'] = true;
+	    $response['result'] 	  = $obj;
+        return view('storage-update', ['response' => $response]);
+    }
 
-		    session(['new_storage' => $response['storage']]);
-	    }else{
-	    	$response['error'] 	  = 1;
-	    	$response['storage']  = null;
-	    }
+    public function selectUpdate(Request $request){
+	    $storageToken = $request->token;
+    	$response['error'] 	  = 0;
+	    $response['storage']  = Helper::getStorage(Helper::getToken(), $storageToken);
+	    session(['new_storage' => $response['storage']]);
 
         return view('storage-update', ['response' => $response]);
     }
@@ -62,7 +63,10 @@ class StorageUpdateController extends Controller
     		}
     		$response = array("error" => 0, "storage" => json_encode($json));
     		Helper::updateStorage(Helper::getToken(), $json->_token, $json);
-    		
+
+    		//save log for backups
+    		DB::insert('Insert into logs (action, token, storage) values (?, ?, ?)', ["update", $json->_token, session("new_storage")]);   
+
     		return view('storage-update', ['response' => $response]);
     }
 }
