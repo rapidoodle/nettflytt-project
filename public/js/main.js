@@ -354,7 +354,7 @@ $(document).ready(function() {
 
         //if norges is selected from the list
         if(companyName == "NorgesEnergi AS"){
-            updateCustomerData({"isNorges" : 1});
+            // updateCustomerData({"isNorges" : 1});
         }
     });
 

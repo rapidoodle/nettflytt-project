@@ -21,11 +21,29 @@
             @csrf
             <table>
                 <tr>
-                    <td><input type="text" name="query" class="form-control" id="query" placeholder="Search"></td>
+                    <td><input type="text" name="query" class="form-control" id="query" placeholder="Search phone number"></td>
                     <td><input type="submit" name="submit" class="btn btn-info" value="Go"></td>
                 </tr>
             </table>
         </form>
+
+        @if(isset($response['error']) && $response['error'] == 0)
+        <form action="/save-storage" method="post">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <table class="mt-4">
+            <?php $count = 0; ?>
+             @foreach(json_decode($response['storage']) as $key => $value)
+                @if(!is_object($value) && !is_array($value) && substr($key, 0, 1) != "_")
+                <tr>
+                    <td width="10%">{{$key}}</td>
+                    <td><input type="text" name="{{$key}}" value="{{$value}}" class="form-control"></td>
+                </tr>
+                @endif
+            @endforeach
+            </table>
+            <button type="submit" name="submit" class="btn btn-primary">Update</button>
+        </form>
+        @endif
     </div>
 </div>
 @endsection

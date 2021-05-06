@@ -23,7 +23,7 @@ class StorageUpdateController extends Controller
     public function search(Request $request){
     	$token 	  = Helper::getToken(); 
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("type" => "AND", "search" => json_encode(["phone" => $request->query])); 
+		$data 	  = array("type" => "AND", "search" => json_encode(["phone" => $request['query']])); 
 		// $data 	  = array("type" => "AND", "search" => json_encode(["_recordid" => 175719])); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/search";
 	    $postdata = http_build_query( $data );
@@ -32,10 +32,37 @@ class StorageUpdateController extends Controller
 					        'header' => "Content-type: application/x-www-form-urlencoded",
 					        'content' => $postdata]
 					  ];
+		$response  = array();
 	    $context  = stream_context_create( $options );
-	    echo $json 	  = file_get_contents( $endpoint, FALSE, $context);
-		// $response = json_decode($json);
+	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
+	    $obj  	  = json_decode($json);
 
-		// return $response;
+	    if(isset($obj->_status) && $obj->_status == 0){
+	    	$response['error'] 	  = 0;
+		    $response['storage']  = Helper::getStorage($token, $obj->sids[0]);
+
+		    session(['new_storage' => $response['storage']]);
+	    }else{
+	    	$response['error'] 	  = 1;
+	    	$response['storage']  = null;
+	    }
+
+        return view('storage-update', ['response' => $response]);
+    }
+
+    public function saveStorage(Request $request){
+    		$json = json_decode(session("new_storage"));
+
+    		foreach ($request->all() as $key => $value) {
+    			if(isset($json->$key) && $key != "_token"){
+    					if($json->$key != $value){
+    							$json->$key = $value;
+    					}
+    			}
+    		}
+    		$response = array("error" => 0, "storage" => json_encode($json));
+    		Helper::updateStorage(Helper::getToken(), $json->_token, $json);
+    		
+    		return view('storage-update', ['response' => $response]);
     }
 }
