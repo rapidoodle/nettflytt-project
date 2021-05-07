@@ -355,7 +355,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                     <hr>
                     <div class="d-flex flex-row align-items-center index-step-3 fle">
                         <img src="{{ asset('images/newspaper.png')}}" alt="newspaper image">
-                        <p class="p-2">Ved fullføring tilbyr vi mulighet for å laste ned direkte utfylt skjema for flyttemelding til Folkeregisteret. Husk at du er pliktig til å melde flytting til Folkeregisteret.</p>
+                        <p class="p-2">Ved fullføring tilbyr vi mulighet for å laste ned direkte utfylt skjema for flyttemelding til Folkeregisteret. <b>Husk at du er pliktig til å melde flytting til Folkeregisteret.</b></p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-7 pt-4">

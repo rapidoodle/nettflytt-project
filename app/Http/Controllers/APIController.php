@@ -148,6 +148,7 @@ class APIController extends Controller
             $request['pb-price']  = 0;
         }
 
+        $request['power-type']     = session('customer.power-type') != "" ? session('customer.power-type') : 0;
         $request['adv-price']     = session('customer.adv-price') != "" ? session('customer.adv-price') : 0;
         $request['isAdv']         = session('customer.isAdv') != "" ? session('customer.isAdv') : 0;
         $request['price']         = 149;
@@ -163,7 +164,7 @@ class APIController extends Controller
         $request['old_post']      = $request['old_zipcode'].' '.$request['old_place'];
         $request['sign_send_to_address'] = $request['sign_send_to_address'] != "" ? session('sign_send_to_address') : "";
         $request['new_post']      = $request['new_zipcode'].' '.$request['new_place'];
-        $request['tag']          = "malabon01";
+        $request['tag']           = "malabon01";
         $request['isNorges']      = session('customer.isNorges') != "" ? session('customer.isNorges') : 0;
         $request['_status']       = session('customer._status') != "" ? session('customer._status') : "in progress";
         $request['_storageToken'] = session('customer._storageToken') != "" ? session('customer._storageToken') : "";
@@ -254,6 +255,10 @@ class APIController extends Controller
         
         echo Helper::sendPowerSMS(Helper::getToken(), session('customer')['phone'], 2099, $message, "power", session('customer._storageToken'));
 
+        //set power type to storage
+        session()->put("customer.power-type", $request->type);
+
+        //save power subsction customer
         DB::insert('Insert into norgesenergi (storage_token, name, phone_number, email, type) values (?, ?, ?, ?, ?)', [session('customer._storageToken'),session('customer.full-name'), session('customer.phone'), session('customer.email'), $request->type]);   
     }
 
