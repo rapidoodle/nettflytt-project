@@ -87,7 +87,7 @@
                 <div class="card-header">{{ __('Reports') }}</div>
                 <div class="card-body">
                     <ul>
-                        <!-- <li><a href="/sales-report">Sales Report</a></li> -->
+                        <li><a href="/sales-report">Sales Report</a></li>
                         <li class="active"><a href="/power-report">Norges Energi Subscription</a></li>
                     </ul>
                 </div>
@@ -114,4 +114,5 @@
     <script type="application/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script type="application/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="application/javascript" src="{{ asset('js/admin.js') }}"></script>
+    <script type="application/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </html>

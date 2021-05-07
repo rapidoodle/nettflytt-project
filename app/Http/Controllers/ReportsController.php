@@ -30,7 +30,8 @@ class ReportsController extends Controller
     }
     public function salesReport()
     {
-        $sales = DB::table('sales')->get();
+        // $sales = DB::table('sales')->get();
+        $sales = DB::table('sales')->select(DB::raw('count(*) as total'), DB::raw('DATE(sales_date) as date'))->groupByRaw(DB::raw("DATE(sales_date)"))->get();
         return view('sales-report', ['records' => $sales]);
     }
     public function updateNorges()
