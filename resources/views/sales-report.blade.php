@@ -8,10 +8,7 @@ $dataPoints = array();
  }
 ?>
 <div class="card">
-    <div class="card-header">{{ __('Sales Report') }}</div>
-    <div class="card-body">
-        <div id="chartContainer" style="width: 100%;"></div>
-    </div>
+    <div id="chartContainer" style="width: 100%;"></div>
 </div>
 
 <script type="application/javascript">
