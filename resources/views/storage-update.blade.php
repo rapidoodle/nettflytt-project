@@ -55,7 +55,7 @@
             <table class="mt-4">
             <?php $count = 0; ?>
              @foreach(json_decode($response['storage']) as $key => $value)
-                @if(!is_object($value) && !is_array($value) && substr($key, 0, 1) != "_")
+                @if(!is_object($value) && !is_array($value))
                 <tr>
                     <td width="10%">{{$key}}</td>
                     <td><input type="text" name="{{$key}}" value="{{$value}}" class="form-control"></td>

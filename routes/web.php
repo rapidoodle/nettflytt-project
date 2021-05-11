@@ -76,6 +76,11 @@ Route::post('/select-update', 'StorageUpdateController@selectUpdate')->name('sel
 //admin page form
 Route::post('/update-norges', 'ReportsController@updateNorges')->name('updateNorges');
 
+//users management
+
+Route::get('/users-management', 'UserManagementController@index')->name('index');
+Route::post('/create-user', 'UserManagementController@create')->name('create');
+
 //API
 Route::post('/saveSale', 'APIController@saveSale');
 Route::post('/searchLocation', 'APIController@searchLocation');

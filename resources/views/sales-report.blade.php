@@ -8,7 +8,7 @@ $dataPoints = array();
  }
 ?>
 <div class="card">
-    <div id="chartContainer" style="width: 100%;"></div>
+        <div id="chartContainer" style="width: 100%;"></div>
 </div>
 
 <script type="application/javascript">

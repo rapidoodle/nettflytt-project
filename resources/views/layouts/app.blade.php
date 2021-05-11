@@ -81,32 +81,44 @@
 
         <main class="py-4">
             <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-header">{{ __('Reports') }}</div>
-                <div class="card-body">
-                    <ul>
-                        <li><a href="/sales-report">Sales Report</a></li>
-                        <li class="active"><a href="/power-report">Norges Energi Subscription</a></li>
-                    </ul>
+                <div class="row">
+                    <div class="col-md-3">
+                        @if(Auth::user()->type == 1)
+                        <div class="card">
+                            <div class="card-header"><h5>{{ __('Reports') }}</h5></div>
+                            <div class="card-body">
+                                <ul>
+                                    <li><a href="/sales-report">Sales Report</a></li>
+                                    <li class="active"><a href="/power-report">Norges Energi Subscription</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-header"><h4>{{ __('Admin Tools') }}</h4></div>
+                            <div class="card-body">
+                                <ul>
+                                    <li><a href="/storage-update">Storage Update</a></li>
+                                    <li><a href="/users-management">Manage Users</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        @else
+                        <div class="card">
+                            <div class="card-header"><h5>{{ __('Sales Management Tools') }}</h5></div>
+                            <div class="card-body">
+                                <ul>
+                                    <li><a href="/storage-update">Storage Update</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                    <div class="col-md-9">
+                        @yield('content')
+                    </div>
                 </div>
             </div>
-            <div class="card mt-4">
-                <div class="card-header">{{ __('Admin Tools') }}</div>
-                <div class="card-body">
-                    <ul>
-                        <li><a href="/storage-update">Storage Update</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-        </div>
-        <div class="col-md-9">
-            @yield('content')
-        </div>
-    </div>
-</div>
         </main>
     </div>
 </body>

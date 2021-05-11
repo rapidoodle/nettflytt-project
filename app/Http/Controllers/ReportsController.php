@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Helper;
+use Illuminate\Support\Facades\Auth;
 
 class ReportsController extends Controller
 {
@@ -24,15 +25,23 @@ class ReportsController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        $norges = DB::table('norgesenergi')->where('created_date', '>=', '2021-04-01 00:00:00')->get();
-        return view('power-report', ['records' => $norges]);
+    {   
+        if(Auth::user()->type == 1){
+            $norges = DB::table('norgesenergi')->where('created_date', '>=', '2021-04-01 00:00:00')->get();
+            return view('power-report', ['records' => $norges]);
+        }else{
+            return redirect('/storage-update');
+        }
     }
     public function salesReport()
     {
-        // $sales = DB::table('sales')->get();
-        $sales = DB::table('sales')->select(DB::raw('count(*) as total'), DB::raw('DATE(sales_date) as date'))->groupByRaw(DB::raw("DATE(sales_date)"))->get();
-        return view('sales-report', ['records' => $sales]);
+        if(Auth::user()->type == 1){
+            // $sales = DB::table('sales')->get();
+            $sales = DB::table('sales')->select(DB::raw('count(*) as total'), DB::raw('DATE(sales_date) as date'))->groupByRaw(DB::raw("DATE(sales_date)"))->get();
+            return view('sales-report', ['records' => $sales]);
+        }else{
+            return redirect('/storage-update');
+        }
     }
     public function updateNorges()
     {
