@@ -23,6 +23,9 @@
         table tr td{
             text-align: left!important;
         }
+        .mw-300{
+            max-width: 350px;
+        }
     </style>
 </head>
 <body>
