@@ -104,6 +104,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
 </script>
 <form action="/getToken" method="POST" id="index-form" onsubmit="return validateForm()">
 @csrf <!-- {{ csrf_field() }} -->
+<input type="hidden" name="gclid" id="gclid">
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="row px-4 my-5 form" id="index-form-container">
     <div class="col-12 col-sm-12 col-lg-9 form-">

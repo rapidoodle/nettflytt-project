@@ -24,6 +24,10 @@ $(document).ready(function() {
     var otpProcessing   = false;
     var checkIcon       = "<i class='fa fa-check text-success'></i>";
     var timesIcon       = "<i class='fa fa-times text-danger'></i>";
+
+    if($("#gclid").length > 0){
+        $("#gclid").val(getGclid());
+    }
     //INDEX PAGE
     if($(".post-search").length > 0){
         $(".post-search").keyup(function(){
@@ -122,7 +126,7 @@ $(document).ready(function() {
             var companyName   = $(event.target).attr("data-company-name");
             var companyNumber = $(event.target).attr("data-company-number");
             var isPS          = $(event.target).attr("data-ispowersupplier") === "true" ? "|ps" : "";
-            console.log("isPS: "+isPS);
+            // console.log("isPS: "+isPS);
             rcvrSlct = "";
             rcvrSlct = companyName+"|"+companyNumber+isPS;
 
@@ -181,7 +185,7 @@ $(document).ready(function() {
     });
     //select option
     $(".index-option").click(function(){
-        console.log($(this).text());
+        // console.log($(this).text());
         $(".index-option").removeClass("active-option");
         $(this).addClass("active-option");
         var val = $(this).attr("data-value");
@@ -380,7 +384,7 @@ $(document).ready(function() {
     })
 
     $(".btn-offer").click(function(){
-        console.log($(this).attr("data-offer"));
+        // console.log($(this).attr("data-offer"));
         var fields = {};
         fields["switch_service."+$(this).attr("data-offer")] = 1;
 
@@ -401,7 +405,7 @@ $(document).ready(function() {
         var isPostBox = $("#isPostbox").val();
         var isNorges  = $("#isNorges").val();
 
-        console.log(names);
+        // console.log(names);
         updateCustomerData({"isNorges" :isNorges, 
             "mailbox-sign" :$("#isPostbox").val(), 
             "sign_send_to_address" : $('input[name="radios"]:checked').val(), 
@@ -429,7 +433,7 @@ $(document).ready(function() {
     });
 
     $(".btn-next-summary").click(function(){
-        console.log($(this).attr("data-power"));
+        // console.log($(this).attr("data-power"));
         if($(this).attr("is-postbox") == 1){
             $('#addressModal').modal('toggle');
         }else{
@@ -482,7 +486,7 @@ $(document).ready(function() {
                     clearInterval(sumInterval);
                 }
                 ctr--;
-                console.log(ctr);
+                // console.log(ctr);
             }, 3000);
         }else{
             alert("Koden du tastet inn var feil. Vennligst prøv igjen");
@@ -585,7 +589,7 @@ $(document).ready(function() {
             var companyNumber = $(obj).attr("data-company-number");
             var companyPeople = $(obj).attr("data-company-people");
             var isPS          = $(obj).attr("data-isps");
-            console.log($(obj).attr("data-isps"));
+            // console.log($(obj).attr("data-isps"));
             var compObj       = [companyName, companyNumber, companyPeople];
             
             if(isPS == "true"){
@@ -639,13 +643,13 @@ $(document).ready(function() {
                 }else if(obj.status == 530){
                     // $("#otpCountdown").html("Payment failed. Attempting another payment method..");
                     window.location.href = "/betaling#"+newPhone;
-                    console.log("fail 1");
+                    // console.log("fail 1");
 
                 }else if(obj.status == 0 && obj.strex_resultcode == "Queued"){
                     otpInterval = setInterval(function(){
                         if(otpProcessing == false){
                             otpProcessing = true;
-                            console.log("Checking payment status again..");
+                            // console.log("Checking payment status again..");
                             $.ajax({
                                 type: "POST",
                                 data: { _token : csrf.val()},
@@ -671,7 +675,7 @@ $(document).ready(function() {
                             clearInterval(otpInterval);
                             window.location.href = "/betaling#"+newPhone;
                             failedProgress();
-                            console.log("fail 2");
+                            // console.log("fail 2");
 
                         }
 
@@ -682,7 +686,7 @@ $(document).ready(function() {
                     clearInterval(otpInterval);
                     failedProgress();
                     window.location.href = "/betaling#"+newPhone;
-                    console.log("fail 3: ", obj);
+                    // console.log("fail 3: ", obj);
 
                 }
                 //otp processing is done, can check again if failed.
@@ -696,7 +700,7 @@ $(document).ready(function() {
             data: { _token : csrf.val(), type : "strex"},
             url: "/saveSale",
             success: function(response){
-                console.log(response);
+                // console.log(response);
             }
         });
     }
@@ -707,7 +711,7 @@ $(document).ready(function() {
             data: { _token : csrf.val(), fields : data},
             url: "/updateCustomerData",
             success: function(response){
-                console.log(response);
+                // console.log(response);
             }
         });
     }
@@ -824,11 +828,11 @@ $(document).ready(function() {
             age--;
         }    
 
-        console.log("persons "+$(".person").length)
+        // console.log("persons "+$(".person").length)
         if(fullName.val() == ""  || email.val() == "" || phone.val() == "" || day.val() == null || month.val() == null || year.val() == null){
             alert("Fyll ut skjemaet før du legger til et nytt navn.");
         }else if(validN.substr(0, 1) != "4" && validN.substr(0, 1) != "9"){
-            console.log("error 2: "+validN.substr(0, 1));
+            // console.log("error 2: "+validN.substr(0, 1));
             alert("Telefonnumeret i skjemaet er feil, vennligst skriv inn riktig telefonnummer.");
         }else if($(".person").length == 0 && age <= 18){
                 alert("Hovedpersonen må være 18 år gammel");
@@ -915,6 +919,14 @@ $(document).ready(function() {
             $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Fullfører");
 
         }
+    }
+
+    function getGclid(){
+        var url        = window.location.href;
+        var gclidObj   = url.split("gclid=");
+        var gclid      = gclidObj[1];
+    
+        return gclid;
     }
 
 

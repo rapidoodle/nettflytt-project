@@ -149,6 +149,7 @@ class APIController extends Controller
         }
 
         $request['power-type']     = session('customer.power-type') != "" ? session('customer.power-type') : 0;
+        $request['gclid']           = session('customer.gclid') != "" ? session('customer.gclid') : $request['gclid'];
         $request['adv-price']     = session('customer.adv-price') != "" ? session('customer.adv-price') : 0;
         $request['isAdv']         = session('customer.isAdv') != "" ? session('customer.isAdv') : 0;
         $request['price']         = 149;
