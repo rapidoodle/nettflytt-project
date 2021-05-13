@@ -25,8 +25,8 @@ $(document).ready(function() {
     var checkIcon       = "<i class='fa fa-check text-success'></i>";
     var timesIcon       = "<i class='fa fa-times text-danger'></i>";
 
-    if($("#gclid").length > 0){
-        $("#gclid").val(getGclid());
+    if($("#tracking_gclid").length > 0){
+        $("#tracking_gclid").val(getGclid());
     }
     //INDEX PAGE
     if($(".post-search").length > 0){
