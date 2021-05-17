@@ -951,3 +951,18 @@ display: flex !important;
     background-color: transparent!important;
     border: 0!important;
 }
+div.card-profile{
+    min-height:290px;
+}
+.card-profile table tr td{
+    letter-spacing: 0.45px;
+    color: #00000080;
+    opacity: 1;    
+    font-size: 14px;
+}
+.card-profile p{
+    margin-bottom: 0px;
+}
+.card-profile hr{
+    /*margin-left:-20px;*/
+}

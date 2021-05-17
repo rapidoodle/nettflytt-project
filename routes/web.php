@@ -72,14 +72,15 @@ Route::post('/save-storage', 'StorageUpdateController@saveStorage')->name('saveS
 Route::post('/recover-storage', 'StorageUpdateController@recoverStorage')->name('recoverStorage');
 Route::post('/search-storage', 'StorageUpdateController@search')->name('search');
 Route::post('/select-update', 'StorageUpdateController@selectUpdate')->name('selectUpdate');
-
 //admin page form
 Route::post('/update-norges', 'ReportsController@updateNorges')->name('updateNorges');
-
 //users management
-
 Route::get('/users-management', 'UserManagementController@index')->name('index');
 Route::post('/create-user', 'UserManagementController@create')->name('create');
+
+
+//CRONS
+Route::get('/get-inbox', 'Crontroller@getInbox')->name('getInbox');
 
 //API
 Route::post('/saveSale', 'APIController@saveSale');

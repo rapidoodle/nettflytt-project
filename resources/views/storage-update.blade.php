@@ -55,7 +55,7 @@
             <table class="mt-4">
             <?php $count = 0; ?>
              @foreach(json_decode($response['storage']) as $key => $value)
-                @if(!is_object($value) && !is_array($value) && substr($key, 0, 1) != "_")
+                @if(!is_object($value) && !is_array($value))
                 <?php 
                     $key = str_replace(array("_", "-"), " ", $key);
                     $key = ucfirst(strtolower($key));

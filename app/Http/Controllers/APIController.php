@@ -12,27 +12,29 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-
+        $oClient = Client::account('default');    //Connect to the IMAP Server
+        $oClient->connect();
         // $oClient = Client::account('default');
         // $oClient->connect();
         // //Connect to the IMAP Server
         // //Get all Mailboxes
         // /** @var \Webklex\IMAP\Support\FolderCollection $aFolder */
-        // $aFolder = $oClient->getFolders();
+        $aFolder = $oClient->getFolders();
         // //Loop through every Mailbox
         // /** @var \Webklex\IMAP\Folder $oFolder */
-        // foreach($aFolder as $oFolder){
-        //     //Get all Messages of the current Mailbox $oFolder
-        //     /** @var \Webklex\IMAP\Support\MessageCollection $aMessage */
-        //     $aMessage = $oFolder->messages()->all()->get();
+        foreach($aFolder as $oFolder){
+            //Get all Messages of the current Mailbox $oFolder
+            /** @var \Webklex\IMAP\Support\MessageCollection $aMessage */
+            $aMessage = $oFolder->messages()->all()->get();
             
-        //     /** @var \Webklex\IMAP\Message $oMessage */
-        //     foreach($aMessage as $oMessage){
-        //         echo $oMessage->getSubject().'<br />';
-        //         echo 'Attachments: '.$oMessage->getAttachments()->count().'<br />';
-        //         echo $oMessage->getHTMLBody(true);
-        //     }
-        // }
+            /** @var \Webklex\IMAP\Message $oMessage */
+            foreach($aMessage as $oMessage){
+                echo  Helper::getRef($oMessage->getSubject());
+                echo "<br>";
+                // echo 'Attachments: '.$oMessage->getAttachments()->count().'<br />';
+                // echo $oMessage->getHTMLBody(true);
+            }
+        }
            // echo $list =  Helper::storageStatus(Helper::getToken(), "mWyG79kTUYOL60u2kJZ5MlxMcore7SzmE3VJJH1bzU2xuxAVbelOCepWQjf06wBe", "info");
 
         // $file     = fopen(storage_path("app/public/tokens.txt"), "r");
@@ -53,7 +55,7 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "6LKe208mV263MrvVVZcSYFrZCOPD4IqAazK7p5ybZYjjMZDH3CUacgKvmdu3isfT");
+        // echo Helper::getStorage(Helper::getToken(), "6LKe208mV263MrvVVZcSYFrZCOPD4IqAazK7p5ybZYjjMZDH3CUacgKvmdu3isfT");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
