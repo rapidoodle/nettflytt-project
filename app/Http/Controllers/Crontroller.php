@@ -21,15 +21,19 @@ class Crontroller extends Controller
         $x 		  = 0;
 
         foreach($aMessage as $oMessage){
-        	$ref 			= Helper::getRef($oMessage->getSubject());
-        	if($ref != ""){
-				$i = Inbox::where('ref', '=', $ref)->first();
-					if ($i === null) {
-				        $inbox 			= new Inbox;
-				        $inbox->ref 	= $ref;
-				        $inbox->save();
-					}
-        	}
+        	echo $oMessage->getSubject();
+        	echo "<br>";
+        	echo $oMessage->getHTMLBody(true);
+    //     	$ref 			= Helper::getRef($oMessage->getSubject());
+    //     	if($ref != ""){
+				// $i = Inbox::where('ref', '=', $ref)->first();
+				// 	if ($i === null) {
+				//         $inbox 			= new Inbox;
+				//         $inbox->ref 	= $ref;
+				//         $inbox->save();
+				// 	}
+    //     	}
+        	echo "<br><br>";
         }
     }
 }
