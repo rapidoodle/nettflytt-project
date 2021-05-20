@@ -138,9 +138,9 @@
                     <b class="text-bold">Eller, </b> viderefør din eksisterende avtale
                 </p>
                 <div class="bg-light w-100 p-4 search-no-result">
-                    <h5>Ingen treff i vårt register</h5>
-                    <p> <b>Fant du ikke det du lette etter?</b></p>
-                    <button class="btn btn-other-search">Søk videre i brønnøysundregstrene</button>
+                    <h5>Det er dessverre ingen Norske selskaper som passer med søket ditt</h5>
+<!--                <p> <b>Fant du ikke det du lette etter?</b></p>
+                    <button class="btn btn-other-search">Søk videre i brønnøysundregstrene</button> -->
                 </div>
                 <table class="table table-striped receiver-search-result">
 

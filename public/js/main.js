@@ -24,6 +24,7 @@ $(document).ready(function() {
     var otpProcessing   = false;
     var checkIcon       = "<i class='fa fa-check text-success'></i>";
     var timesIcon       = "<i class='fa fa-times text-danger'></i>";
+    var extraCompanies  = "";
 
     if($("#tracking_gclid").length > 0){
         $("#tracking_gclid").val(getGclid());
@@ -218,6 +219,11 @@ $(document).ready(function() {
 
 
     //RECEIVER'S PAGE
+    $(document).on("click", "a.show-extra-comp", function(){
+        $(".extra-tr").hide();
+        var len = $(this).attr("data-length");
+        loadExtraCompanies(len);
+    });
     $(".bolig-menu a").click(function(){
         var val = $(this).attr("data-val");
         $(".annet-options").attr("data-value", val);
@@ -750,22 +756,46 @@ $(document).ready(function() {
             data: { _token : csrf.val(), query : query, cat : cat},
             url: "/searchCompany",
             success: function(response){
-                var obj = JSON.parse(response);
-                var html = "";
+                var obj   = JSON.parse(response);
+                var html  = "";
+                var extra = 0;
+                var main  = 0;
+                extraCompanies = "";
+                console.log("Count: "+obj.length);
                 if(obj.length > 0){
                     for(var q = 0; q < obj.length; q++){
                         var org = obj[q];
                         var isPowerSupplier = query == "strÃ¸m" ? " data-ispowersupplier='true'" : "";
-
                         if(!companyNumbers.includes(org.orgnr)){
-                            html += '<tr class="item">'+
-                            '<td>'+org.name+
-                                '<button class="float-right btn btn-info btn-company-option" data-type="companyList" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'" '+isPowerSupplier+'>Legg til</button>'+
-                            '</td>'+
-                            '</tr>';
+                            if(!isUpperCase(org.name)){
+                                html += '<tr class="item">'+
+                                '<td>'+org.name+
+                                    '<button class="float-right btn btn-info btn-company-option" data-type="companyList" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'" '+isPowerSupplier+'>Legg til</button>'+
+                                '</td>'+
+                                '</tr>';
+                                main++;
+                            }else{
+                                extraCompanies += '<tr class="item">'+
+                                '<td>'+org.name+
+                                    '<button class="float-right btn btn-info btn-company-option" data-type="companyList" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'" '+isPowerSupplier+'>Legg til</button>'+
+                                '</td>'+
+                                '</tr>';
+                                extra++;                            
+                            }
                             companyNumbers.push(org.orgnr);
                         }
                     }
+
+                    if(main == 0 && extra != 0){
+                        html = extraCompanies;
+                    }
+
+                    if(extra != 0 && main != 0){
+                        html += '<tr class="item extra-tr">'+
+                        '<td class="font-sm">Fant du ikke selskapet du lette etter? <br> <a href="javascript:void(0)" class="show-extra-comp" data-length="'+obj.length+'"><i class="fas fa-search"></i> Søk videre i brønnøysundregistrene</a></td>'+
+                        '</tr>';
+                    }
+
                     $(".receiver-search-result").show();
                     $(".search-no-result").hide();
                 }else{
@@ -774,10 +804,16 @@ $(document).ready(function() {
                 }
 
                 $(".receiver-search-result").html(html);
-                if(obj.length > 10){
+
+                if(main > 10){
                     $('.pagination').rpmPagination({
                       domElement:'.item',
-                      total: obj.length
+                      total: main
+                    });
+                }else if(main == 0 && extra > 10){
+                    $('.pagination').rpmPagination({
+                      domElement:'.item',
+                      total: extra
                     });
                 }else{
                     $(".pagination").html("");
@@ -788,6 +824,18 @@ $(document).ready(function() {
         });
     }
 
+    function loadExtraCompanies(length){
+        $(".receiver-search-result").append(extraCompanies);
+        $(".pagination").html("");
+        $('.pagination').rpmPagination({
+          domElement:'.item',
+          total: parseInt(length)
+        });
+    }
+
+    function isUpperCase(str) {
+        return str === str.toUpperCase();
+    }
     function loadingCompanies(){
         var html = '<tr class="item"><td align="center">Laster selskaper..</td></tr>';
         $(".receiver-search-result").html(html);
