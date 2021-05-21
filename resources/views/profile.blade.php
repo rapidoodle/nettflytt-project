@@ -82,9 +82,9 @@
                     <div class="col-md-6 col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5>Status per 22.Mars 2021 Klokken 13:30</h5>
-                                <lottie-player style="height:200px" src="{{ asset('lottie/status_orange.json') }}" background="transparent"  speed="1" autoplay loop></lottie-player>
-                                <h6>Behandles hes leverander</h6>
+                                <h5 class="text-center">Status per {{date("d.M Y")}} Klokken {{date("H:i")}}</h5>
+                                <lottie-player style="height:150px" src="{{ asset('lottie/status_orange.json') }}" background="transparent"  speed="1" autoplay loop></lottie-player>
+                                <h6 class="text-center">Behandles hes leverander</h6>
                             </div>
                         </div>
                     </div>

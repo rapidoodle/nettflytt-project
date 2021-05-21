@@ -12,8 +12,8 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-            // $query = "norges";
-            // echo Helper::searchCompanies($query, "orgnr");
+            $query = "norges";
+            echo Helper::searchCompanies($query, "$request->cat");
         // $oClient = Client::account('default');    //Connect to the IMAP Server
         // $oClient->connect();
         // // $oClient = Client::account('default');
@@ -55,9 +55,9 @@ class APIController extends Controller
         // fclose($file);
         // echo Helper::storageStatus(Helper::getToken(), "ezF6ebG0090NRQdV8YKgCSFBotUXfGMfYIuKK6vftKQgTHH8WBu4ZuIBd52YaNpk", "info");        
         // echo "<br>---------------<br>";
-        // echo Helper::storageStatus(Helper::getToken(), "fOO1AsOvKSvLl3ynJWsLux2Nq9TfRkXMN7ghyDRikjLnAJGxE8RxAsB8j1t2PFp3", "info");
+        // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "fOO1AsOvKSvLl3ynJWsLux2Nq9TfRkXMN7ghyDRikjLnAJGxE8RxAsB8j1t2PFp3");
+        // echo Helper::getStorage(Helper::getToken(), "j9xzCd0rRgNVyI7LW1Jrkd3yrrVQJqcBNzIByI1izfrKcuOSB6QGCTv9Icnpf8nh");
 
 
         // echo json_encode(Helper::searchLocation("1461"));

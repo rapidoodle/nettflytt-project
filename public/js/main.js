@@ -761,21 +761,23 @@ $(document).ready(function() {
                 var extra = 0;
                 var main  = 0;
                 extraCompanies = "";
-                console.log("Count: "+obj.length);
+                // console.log("Count: "+obj.length);
                 if(obj.length > 0){
                     for(var q = 0; q < obj.length; q++){
                         var org = obj[q];
                         var isPowerSupplier = query == "strÃ¸m" ? " data-ispowersupplier='true'" : "";
                         if(!companyNumbers.includes(org.orgnr)){
+                            // console.log(org.name, isUpperCase(org.name));
                             if(!isUpperCase(org.name)){
-                                html += '<tr class="item">'+
+                                html += '<tr class="page-item">'+
                                 '<td>'+org.name+
                                     '<button class="float-right btn btn-info btn-company-option" data-type="companyList" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'" '+isPowerSupplier+'>Legg til</button>'+
                                 '</td>'+
                                 '</tr>';
                                 main++;
-                            }else{
-                                extraCompanies += '<tr class="item">'+
+                            }
+                            else{
+                                extraCompanies += '<tr class="page-item">'+
                                 '<td>'+org.name+
                                     '<button class="float-right btn btn-info btn-company-option" data-type="companyList" data-toggle="modal" data-target="#optionModal" data-company-name="'+org.name+'" data-company-number="'+org.orgnr+'" '+isPowerSupplier+'>Legg til</button>'+
                                 '</td>'+
@@ -791,9 +793,13 @@ $(document).ready(function() {
                     }
 
                     if(extra != 0 && main != 0){
-                        html += '<tr class="item extra-tr">'+
+                        main++;
+                        html += '<tr class="page-item extra-tr">'+
                         '<td class="font-sm">Fant du ikke selskapet du lette etter? <br> <a href="javascript:void(0)" class="show-extra-comp" data-length="'+obj.length+'"><i class="fas fa-search"></i> Søk videre i brønnøysundregistrene</a></td>'+
                         '</tr>';
+                        // console.log("with", extra, main);
+                    }else{
+                        // console.log("without", extra, main);
                     }
 
                     $(".receiver-search-result").show();
@@ -807,13 +813,12 @@ $(document).ready(function() {
 
                 if(main > 10){
                     $('.pagination').rpmPagination({
-                      domElement:'.item',
-                      total: main
+                      domElement:'.page-item'
                     });
+                    console.log("main", main);
                 }else if(main == 0 && extra > 10){
                     $('.pagination').rpmPagination({
-                      domElement:'.item',
-                      total: extra
+                      domElement:'.page-item'
                     });
                 }else{
                     $(".pagination").html("");
@@ -828,8 +833,7 @@ $(document).ready(function() {
         $(".receiver-search-result").append(extraCompanies);
         $(".pagination").html("");
         $('.pagination').rpmPagination({
-          domElement:'.item',
-          total: parseInt(length)
+          domElement:'.page-item'
         });
     }
 
