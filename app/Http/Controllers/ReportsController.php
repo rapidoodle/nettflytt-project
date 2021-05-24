@@ -36,9 +36,9 @@ class ReportsController extends Controller
     public function salesReport()
     {
         if(Auth::user()->type == 1){
-            // $sales = DB::table('sales')->get();
-            $sales = DB::table('sales')->select(DB::raw('count(*) as total'), DB::raw('DATE(sales_date) as date'))->groupByRaw(DB::raw("DATE(sales_date)"))->get();
-            return view('sales-report', ['records' => $sales]);
+            $allSales = DB::table('sales')->get();
+            $sales    = DB::table('sales')->select(DB::raw('count(*) as total'), DB::raw('DATE(sales_date) as date'))->groupByRaw(DB::raw("DATE(sales_date)"))->get();
+            return view('sales-report', ['records' => $sales, 'allSales' => $allSales]);
         }else{
             return redirect('/storage-update');
         }

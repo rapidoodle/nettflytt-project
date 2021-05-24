@@ -3,6 +3,37 @@
 @section('content')
 <!-- 46231866 -->
 <!-- 88639 -->
+<!-- {{json_encode(session('customer'))}} -->
+<?php
+$now        = time(); // or your date as well
+$your_date  = strtotime(session('customer')['_created']);
+
+$datediff   = $now - $your_date;
+$days       = round($datediff / (60 * 60 * 24));
+$hours      = $days * 24;
+
+$replied    = false;
+
+if($hours < 1){
+    $status = "status_orange.json"; 
+    $title  = "Behandles hes leverander";
+}elseif($hours >= 1 && $hours < 20 ){
+    $status = "status_blue.json"; 
+    $title  = "Sendt";
+}elseif($hours >= 20 && $hours >= 336){
+    $status = "status_yellow.json"; 
+    $title  = "Behandles hos leverandør";
+}else{
+    $status = "status_green.json"; 
+    $title  = "Bekreftet";
+}
+
+if($replied == true && $hours < 20){
+    $status = "status_green.json"; 
+    $title  = "Bekreftet";
+}
+
+?>
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="container">
     <div class="row mb-4 mt-5 mt-md-0">
@@ -83,8 +114,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="text-center">Status per {{date("d.M Y")}} Klokken {{date("H:i")}}</h5>
-                                <lottie-player style="height:150px" src="{{ asset('lottie/status_orange.json') }}" background="transparent"  speed="1" autoplay loop></lottie-player>
-                                <h6 class="text-center">Behandles hes leverander</h6>
+                                <lottie-player style="height:150px" src="{{ asset('lottie/'.$status) }}" background="transparent"  speed="1" autoplay loop></lottie-player>
+                                <h6 class="text-center">{{$title}}</h6>
                             </div>
                         </div>
                     </div>

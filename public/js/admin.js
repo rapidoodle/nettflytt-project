@@ -22,7 +22,7 @@ $(document).ready(function() {
 
     $('#reportTable2').DataTable( {
         columnDefs: [ { type: 'date', 'targets': [3] } ],
-        order: [[ 7, 'desc' ]],
+        order: [[ 3, 'desc' ]],
         "bDestroy": true 
     });
 
