@@ -230,7 +230,7 @@
                 if (pageArray[i] === '...') {
                     menuHtml += '<li class="' + rpmListClass + ' page-inf disabled"><a class="' + rpmAnchorClass + '" data-page_no="..." href="#">...</a></li>';
                 } else {
-                    menuHtml += '<li class="' + rpmListClass + ' page-' + pageArray[i] + ' ' + (pageArray[i] === current_page ? 'disabled' : '') + '"><a class="' + rpmAnchorClass + '" data-page_no="' + pageArray[i] + '" href="#">' + pageArray[i] + '</a></li>';
+                    menuHtml += '<li class="' + rpmListClass + ' page-' + pageArray[i] + ' ' + (pageArray[i] === current_page ? 'disabled' : '') + '"><a class="'+(pageArray[i] === current_page ? 'active ' : '')+ rpmAnchorClass + '" data-page_no="' + pageArray[i] + '" href="#">' + pageArray[i] + '</a></li>';
                 }
             }
         }

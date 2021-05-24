@@ -219,11 +219,17 @@ $(document).ready(function() {
 
 
     //RECEIVER'S PAGE
+    $(document).on("click", "a.page-link", function(){
+        $("a.page-link").removeClass("active");
+        $(this).addClass("active");
+    });
+
     $(document).on("click", "a.show-extra-comp", function(){
         $(".extra-tr").hide();
         var len = $(this).attr("data-length");
         loadExtraCompanies(len);
     });
+
     $(".bolig-menu a").click(function(){
         var val = $(this).attr("data-val");
         $(".annet-options").attr("data-value", val);
@@ -815,7 +821,6 @@ $(document).ready(function() {
                     $('.pagination').rpmPagination({
                       domElement:'.page-item'
                     });
-                    console.log("main", main);
                 }else if(main == 0 && extra > 10){
                     $('.pagination').rpmPagination({
                       domElement:'.page-item'

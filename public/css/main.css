@@ -969,3 +969,8 @@ div.card-profile{
 .card-profile hr{
     /*margin-left:-20px;*/
 }
+
+a.page-link.active { 
+    background-color:#495057!important; 
+    color:#fff!important;
+}
