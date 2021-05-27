@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ini_set('MAX_EXECUTION_TIME', '-1');
 use Illuminate\Http\Request;
 use Helper;
 use Illuminate\Support\Facades\Log;
@@ -20,20 +20,16 @@ class Crontroller extends Controller
         $aMessage = $aFolder[4]->messages()->all()->get();
         $x 		  = 0;
 
-        foreach($aMessage as $oMessage){
-        	echo $oMessage->getSubject();
-        	echo "<br>";
-        	echo $oMessage->getHTMLBody(true);
-    //     	$ref 			= Helper::getRef($oMessage->getSubject());
+    //     foreach($aMessage as $oMessage){
+    //     	$ref = Helper::getRef($oMessage->getSubject());
     //     	if($ref != ""){
 				// $i = Inbox::where('ref', '=', $ref)->first();
 				// 	if ($i === null) {
 				//         $inbox 			= new Inbox;
-				//         $inbox->ref 	= $ref;
+				//         $inbox->ref 	= str_replce("_", "", $ref);
 				//         $inbox->save();
 				// 	}
     //     	}
-        	echo "<br><br>";
-        }
+    //     }
     }
 }

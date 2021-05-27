@@ -843,7 +843,8 @@ $(document).ready(function() {
     }
 
     function isUpperCase(str) {
-        return str === str.toUpperCase();
+        var stObj = str.split(" ");
+        return stObj[0] === stObj[0].toUpperCase();
     }
     function loadingCompanies(){
         var html = '<tr class="item"><td align="center">Laster selskaper..</td></tr>';

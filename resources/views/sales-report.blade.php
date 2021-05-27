@@ -21,6 +21,7 @@ $dataPoints = array();
             <thead>
                 <tr>
                     <th>Name</th>
+                    <th>Phone</th>
                     <th>Email</th>
                     <th>Total</th>
                     <th>Sales date</th>
@@ -30,6 +31,7 @@ $dataPoints = array();
                 @foreach ($allSales as $data)
                     <tr>
                         <td>{{$data->name}}</td>
+                        <td>{{$data->phone_number}}</td>
                         <td>{{$data->email}}</td>
                         <td>{{$data->total_price}}</td>
                         <td>{{$data->sales_date}}</td>
@@ -39,6 +41,7 @@ $dataPoints = array();
             <tfoot>
                 <tr>
                     <th>Name</th>
+                    <th>Phone</th>
                     <th>Email</th>
                     <th>Total</th>
                     <th>Sales date</th>

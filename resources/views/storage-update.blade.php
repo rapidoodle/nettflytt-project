@@ -12,6 +12,7 @@
         });
     });
 </script>
+
 <div class="card">
     <div class="card-header">
         <span class="float-left">{{ __('Storage Update By Search') }}</span>
@@ -53,8 +54,10 @@
         <form action="/save-storage" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <table class="mt-4">
-            <?php $count = 0; ?>
-             @foreach(json_decode($response['storage']) as $key => $value)
+            <?php $count = 0; 
+            $storage = json_decode($response['storage']);
+            ?>
+             @foreach( $storage as $key => $value)
                 @if(!is_object($value) && !is_array($value))
                 <?php 
                     $key = str_replace(array("_", "-"), " ", $key);
@@ -66,6 +69,7 @@
                 </tr>
                 @endif
             @endforeach
+
             </table>
             <button type="submit" name="submit" class="btn btn-primary">Update</button>
         </form>

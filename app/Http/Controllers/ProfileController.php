@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Helper;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use App\Inbox;
 
 class ProfileController extends Controller
 {
@@ -22,6 +23,21 @@ class ProfileController extends Controller
         		return redirect("/logginn");
         	}
     	}elseif(session('customer') && session('customer')['isLogged'] == true){    
+
+            $status = Helper::storageStatus(Helper::getToken(), session('customer')['_storageToken'], "service");   
+            $status = json_decode($status);
+
+            if($status->_storage_status_list){
+                foreach ($status->_storage_status_list as $key => $value) {
+                    if (str_contains($value->detail, 'mailtrackingid')) {
+                        $data = explode("|", $value->detail);
+                        $ref  = explode(":", $data[1]);
+                        $sql = Inbox::where('ref', '=', "_h55AD7Hb0")->first();
+                    }
+                }
+            }
+
+
 	        return view("/profile");
     	}else{
     		return redirect('/logginn');
