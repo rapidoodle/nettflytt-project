@@ -13,7 +13,7 @@
                 <span class="steps-circle">2</span>
                 <sub>Mottakere</sub>
             </div>
-            <div><hr></div>
+            <div><hr></div>13813 92415024
             <div>
                 <span class="steps-circle">3</span>
                 <sub class="sub-3">Boligsjekk</sub>

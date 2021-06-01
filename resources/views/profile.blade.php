@@ -124,11 +124,11 @@ if($replied == true && $hours < 20){
             @endif
         </div>
     </div>
-    <div class="row mt-4">
+<!--     <div class="row mt-4">
         <div class="col-12">
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary btn-lg">Avslutt</a>
         </div>
-    </div>
+    </div> -->
 </div>
 @endsection
 
