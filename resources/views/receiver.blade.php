@@ -68,9 +68,6 @@
             </div>
         </div>  
     </div>
-<!--     <h3 class="mini-header d-md-none mb-4 label-none">
-        Velg ny strømavtale for <?=session('customer')['new_address'];?>        
-    </h3> -->
     <div class="row px-4 mt-0 mb-5 my-lg-5  mt-lg-0 form" id="receiver-main-section">
         <div class="col-12 col-lg-8">
             <div class="cat-n-search">

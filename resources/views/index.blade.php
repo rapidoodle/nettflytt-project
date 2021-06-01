@@ -9,7 +9,7 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
 $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbolig', 'tomannsbolig2' => 'Tommansbolig m/utleiedel', 'rekkehus' => 'Rekkehus', 'hybel' => 'Hybel'];
 // XzDgiIikzQLdksklE0OdQW572ifi8f9d9ztgs6IHVhHSUNfws33U81c7UKeZfUer
 ?>
-<img src="{{ asset('images/couple-desktop.png')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out">
+<img src="{{ asset('images/couple-desktop.webp')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out">
 <div class="row px-2 px-lg-4 mb-5">
     <div class="col-12 col-sm-6 d-flex align-content-center flex-wrap">
         <h3 class="flex-item">{{isset($type) ? 'Folkeregisteret' : 'Adresseendring for Norge'}}</h3>

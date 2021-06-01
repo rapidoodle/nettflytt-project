@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-ini_set('MAX_EXECUTION_TIME', '-1');
 use Illuminate\Http\Request;
 use Helper;
 use Illuminate\Support\Facades\Log;
@@ -17,19 +16,20 @@ class Crontroller extends Controller
         $oClient->connect();
 
         $aFolder  = $oClient->getFolders();
-        $aMessage = $aFolder[4]->messages()->all()->get();
-        $x 		  = 0;
-
-    //     foreach($aMessage as $oMessage){
-    //     	$ref = Helper::getRef($oMessage->getSubject());
-    //     	if($ref != ""){
-				// $i = Inbox::where('ref', '=', $ref)->first();
-				// 	if ($i === null) {
-				//         $inbox 			= new Inbox;
-				//         $inbox->ref 	= str_replce("_", "", $ref);
-				//         $inbox->save();
-				// 	}
-    //     	}
-    //     }
+         // for ($q = 1; $q < 31; $q++) { 
+            $aMessage = $aFolder[4]->query()->on(date("d.m.Y"))->get();
+            $x        = 0;
+            foreach($aMessage as $oMessage){
+                $ref = Helper::getRef($oMessage->getSubject());
+                if($ref != ""){
+                    $i = Inbox::where('ref', '=', $ref)->first();
+                        if ($i === null) {
+                            $inbox          = new Inbox;
+                            $inbox->ref     = str_replace("_", "", $ref);
+                            $inbox->save();
+                        }
+                }
+            }
+         // }
     }
 }

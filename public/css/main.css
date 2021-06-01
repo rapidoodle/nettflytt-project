@@ -955,7 +955,8 @@ display: flex !important;
     border: 0!important;
 }
 div.card-profile{
-    min-height:290px;
+    height: 100%!important;
+    border:2px solid #CCCCCC!important;
 }
 .card-profile table tr td{
     letter-spacing: 0.45px;
@@ -967,9 +968,15 @@ div.card-profile{
     margin-bottom: 0px;
 }
 .card-profile hr{
-    /*margin-left:-20px;*/
+    margin-left:-20px;
+    width: 80%!important;
+    margin-top:.5rem!important;
+    margin-bottom:.5rem!important;
+    border-top: 2px solid #CCCCCC!important;
 }
-
+.card-profile h6{
+    font-size: 14px!important;
+}
 a.page-link.active { 
     background-color:#495057!important; 
     color:#fff!important;

@@ -12,6 +12,9 @@ class APIController extends Controller
 {
 
     public function testAPI(){
+        echo Helper::getToken();
+        // echo "<br>";
+        // echo Helper::initStorage(Helper::getToken());
             // $query = "norges";
             // echo Helper::searchCompanies($query, "$request->cat");
         // $oClient = Client::account('default');    //Connect to the IMAP Server
@@ -57,7 +60,7 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "C6p2iecDzIuA1kSDwImwGS6KCRHZoZKqxV2RwlZFfkvGcyEdFN6KnMvJTwBRipRv");
+        // echo Helper::getStorage(Helper::getToken(), "C6p2iecDzIuA1kSDwImwGS6KCRHZoZKqxV2RwlZFfkvGcyEdFN6KnMvJTwBRipRv");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
@@ -244,17 +247,27 @@ class APIController extends Controller
             if($storageToken){
                 session()->put("_storageToken", $storageToken);
                 session()->put("customer._storageToken", $storageToken);
+
                 //update storage
-                echo Helper::updateStorage(Helper::getToken(), $storageToken, $storage);
+                Helper::updateStorage(Helper::getToken(), $storageToken, $storage);
             }
         }
 
 
         # echo session('customer')['_storageToken'];
-        Log::info("Saving storage update: ".json_encode(session('customer')));
+        // Log::info("Saving storage update: ".json_encode(session('customer')));
         return redirect('/mottakere/');
 
     }
+
+    public function initTokens(){
+        if(!$request->session()->has('_storageToken')){
+            $storageToken  = Helper::initStorage(Helper::getToken());
+            session()->put("_storageToken", $storageToken);
+            session()->put("customer._storageToken", $storageToken);
+        }
+    }
+
     public function sendSMS(Request $request){
         $message = $request->type == 1 ? "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Topp 5 garanti. Du får strøm til kun 77,99 øre/kWh! Ingen månedsavgift. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/topp-5-garanti/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Flytteregisteret." : "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Strøm til lavpris. Du får strøm til spotpris! Månedsbeløp 27 kr + 3,49øre/kWh. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/strom-til-lavpris/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Flytteregisteret.";
         

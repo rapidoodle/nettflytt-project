@@ -1,8 +1,6 @@
 @extends('layouts.main')
 @section('title', 'Oppsummering')
 @section('content')
-<!-- <?=json_encode(session('customer'));?> -->
-<!-- <?=json_encode(session()->all());?> -->
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="mb-5 container steps-container">
     <div class="nav-steps d-flex justify-content-center">

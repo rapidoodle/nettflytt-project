@@ -48,14 +48,16 @@ class Helper
 		        "password" => $p,
 		    ];
 		    $postdata = http_build_query( $vars );
-		    $options  = [ 'http' => [
-		        'method'  => "POST",
-		        'header'  => "Content-type: application/x-www-form-urlencoded",
-		        'content' => $postdata
-		    ]];
-		    $context = stream_context_create( $options );
-		    $json 	 = file_get_contents( $url, FALSE, $context );
-		    $res 	 = json_decode($json, true);
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
+
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+			$server_output  = curl_exec($ch);
+			$res 	 		= json_decode($server_output, true);
+			curl_close ($ch);
 
 		    session()->put("_accessToken", $res["token"]);
 		    session()->put("_sessionSalt", $res["session_salt"]);
