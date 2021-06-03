@@ -66,6 +66,7 @@ Auth::routes();
 
 //admin page
 Route::get('/power-report', 'ReportsController@index')->name('index');
+Route::get('/offers-report', 'ReportsController@offers')->name('offersReport');
 Route::get('/sales-report', 'ReportsController@salesReport')->name('salesReport');
 Route::get('/storage-update', 'StorageUpdateController@index')->name('index');
 Route::post('/save-storage', 'StorageUpdateController@saveStorage')->name('saveStorage');
@@ -96,3 +97,4 @@ Route::post('/getOtpStatus', 'APIController@getOtpStatus');
 Route::post('/loginAuth', 'ProfileController@loginAuth');
 Route::post('/submitVipps', 'VippsController@processPayment');
 Route::post('/initTokens', 'ApiController@initTokens');
+Route::post('/addOffer', 'ApiController@addOffer');

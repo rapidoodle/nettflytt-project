@@ -12,7 +12,7 @@ class APIController extends Controller
 {
 
     public function testAPI(){
-        echo Helper::getToken();
+        // echo Helper::getToken();
         // echo "<br>";
         // echo Helper::initStorage(Helper::getToken());
             // $query = "norges";
@@ -60,7 +60,7 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        // echo Helper::getStorage(Helper::getToken(), "C6p2iecDzIuA1kSDwImwGS6KCRHZoZKqxV2RwlZFfkvGcyEdFN6KnMvJTwBRipRv");
+        echo Helper::getStorage(Helper::getToken(), "0TqcrColNxKkWVIAv0ZJelFT95VGpv78dbQmQygWqPBSiMd94UDosZ29yobySdCK");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
@@ -225,7 +225,11 @@ class APIController extends Controller
             session()->put("customer.sign_mailbox-a", $names);
             session()->forget('customer.sign_mailbox-b');
             session()->forget('customer.sign_mailbox-c');
-        }
+        }else{
+                session()->forget('customer.sign_mailbox-a');
+                session()->forget('customer.sign_mailbox-b');
+                session()->forget('customer.sign_mailbox-c');                
+            }
 
 
         if(!$request->session()->has('customer.mailbox-sign')){
@@ -361,5 +365,9 @@ class APIController extends Controller
     public function saveSale(Request $request){
         $provider = $request->type;
         Helper::saveSale($provider); 
+    }
+    public function addOffer(Request $request){
+        $offer = $request->offer;
+        Helper::addOffer($offer); 
     }
 }

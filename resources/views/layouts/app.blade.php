@@ -92,7 +92,8 @@
                             <div class="card-body">
                                 <ul>
                                     <li><a href="/sales-report">Sales Report</a></li>
-                                    <li class="active"><a href="/power-report">Norges Energi Subscription</a></li>
+                                    <li><a href="/power-report">Norges Energi Report</a></li>
+                                    <li><a href="/offers-report">Offers Report</a></li>
                                 </ul>
                             </div>
                         </div>

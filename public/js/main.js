@@ -399,8 +399,11 @@ $(document).ready(function() {
         // console.log($(this).attr("data-offer"));
         var fields = {};
         fields["switch_service."+$(this).attr("data-offer")] = 1;
-
         updateCustomerData(fields);
+
+        var offer = $(this).attr("data-description");
+        addOffer(offer);
+
     });
 
 
@@ -649,6 +652,10 @@ $(document).ready(function() {
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordFailed"){
                     $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Koden du tastet inn var feil. Vennligst prøv igjen");
                     failedProgress();
+                }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "SubscriberBarred"){
+                    $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Ditt abonnement er dessverre sperret for mobilbetaling. Vennligst velg en annen betalingsmåte.");
+                    failedProgress();
+                    window.location.href = "/betaling#"+newPhone;
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordExpired"){
                     $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Koden du tastet inn var feil. Vennligst prøv igjen");
                     failedProgress();
@@ -724,6 +731,17 @@ $(document).ready(function() {
             url: "/updateCustomerData",
             success: function(response){
                 // console.log(response);
+            }
+        });
+    }
+
+    function addOffer(offer){
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val(), offer : offer},
+            url: "/addOffer",
+            success: function(response){
+                console.log(response);
             }
         });
     }

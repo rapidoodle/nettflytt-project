@@ -68,6 +68,7 @@
     <!--Navbar-->
 <!--/.Navbar-->
         <div class="container mt-md-5">
+            
 <!--             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth

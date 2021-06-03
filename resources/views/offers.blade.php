@@ -64,7 +64,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3 btn-actions" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" data-offer="isStrom">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo" data-offer="isStrom" data-description="Strom">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>
@@ -98,7 +98,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3 btn-actions" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" data-offer="isTV">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree" data-offer="isTV" data-description="TV">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>
@@ -129,7 +129,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3 btn-actions" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" data-offer="isFlyttevask">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour" data-offer="isFlyttevask" data-description="Flyttevask">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>
@@ -161,7 +161,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3 btn-actions" href="/postkasse">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" href="/postkasse" data-offer="isBoligalarm">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" href="/postkasse" data-offer="isBoligalarm" data-description="Boligalarm">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>

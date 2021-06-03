@@ -32,4 +32,8 @@ class Crontroller extends Controller
             }
          // }
     }
+
+    public function getRef(){
+        
+    }
 }
