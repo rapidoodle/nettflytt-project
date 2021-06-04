@@ -66,7 +66,7 @@ Auth::routes();
 
 //admin page
 Route::get('/power-report', 'ReportsController@index')->name('index');
-Route::get('/offers-report', 'ReportsController@offers')->name('offersReport');
+Route::get('/offers-report', 'ReportsController@offersReport')->name('offersReport');
 Route::get('/sales-report', 'ReportsController@salesReport')->name('salesReport');
 Route::get('/storage-update', 'StorageUpdateController@index')->name('index');
 Route::post('/save-storage', 'StorageUpdateController@saveStorage')->name('saveStorage');
@@ -82,6 +82,7 @@ Route::post('/create-user', 'UserManagementController@create')->name('create');
 
 //CRONS
 Route::get('/get-inbox', 'Crontroller@getInbox')->name('getInbox');
+Route::get('/get-offers', 'Crontroller@getOffers')->name('getOffers');
 
 //API
 Route::post('/saveSale', 'APIController@saveSale');

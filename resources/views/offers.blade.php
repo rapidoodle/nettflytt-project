@@ -53,7 +53,8 @@
             </div>
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#offersAcdn">
               <div class="card-body">
-                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
+                <!-- <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5> -->
+                <p class="f-125">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
@@ -87,7 +88,8 @@
             </div>
             <div id="collapseTwo" class="collapse <?=Session::has('customer.isNorges') && session('customer')['isNorges'] == 1  ? 'show' : ''?>" aria-labelledby="headingTwo" data-parent="#offersAcdn">
                <div class="card-body">
-                <h5>Ønsker du tilbud på den beste TV/Internett-avtalen i ditt område?</h5>
+                <!-- <h5>Ønsker du tilbud på den beste TV/Internett-avtalen i ditt område?</h5> -->
+                <p class="f-125">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>La leverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
@@ -119,7 +121,8 @@
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#offersAcdn">
                <div class="card-body">
-                <h5>Ønsker du å motta et uforpliktende tilbud på den beste flyttevasken-leverandøren i ditt område?</h5>
+                <!-- <h5>Ønsker du å motta et uforpliktende tilbud på den beste flyttevasken-leverandøren i ditt område?</h5> -->
+                <p class="f-125">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>100% fornøyd, eller pengene tibake.</p>
@@ -151,7 +154,8 @@
             </div>
             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#offersAcdn">
                <div class="card-body">
-                <h5>Ønsker du tilbud på den beste boligalarm-avtalen i ditt område?</h5>
+                <!-- <h5>Ønsker du tilbud på den beste boligalarm-avtalen i ditt område?</h5> -->
+                <p class="f-125">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>La alarmleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>

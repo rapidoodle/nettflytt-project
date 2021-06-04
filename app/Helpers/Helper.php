@@ -399,6 +399,27 @@ class Helper
 
 	    return substr($string, $ini, $len);
 	}
+
+	public static function seachStorageBy($query){
+        $token    = Helper::getToken(); 
+        $u        = "u46114-".session("_sessionSalt");
+        $data     = array("type" => "AND", "search" => json_encode($query)); 
+        // $data      = array("type" => "AND", "search" => json_encode(["_recordid" => 175719])); 
+        $endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/search";
+        $postdata = http_build_query( $data );
+        $options  = [ 'http' => [
+                    'method' => "POST",
+                    'header' => "Content-type: application/x-www-form-urlencoded",
+                    'content' => $postdata]
+              ];
+        $response  = array();
+        $context  = stream_context_create( $options );
+        $json     = file_get_contents( $endpoint, FALSE, $context);
+        $obj      = json_decode($json);
+
+
+        return $obj;
+    }
 }
 
 

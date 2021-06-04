@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta description="Flytteregisteret home page">
+        <meta description="Flyttesentralen home page">
 
-        <title>Flytteregisteret - @yield('title')</title>
+        <title>Flyttesentralen - @yield('title')</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
         <nav class="navbar navbar-expand-lg px-0">
         <a class="navbar-brand title" href="/">
         <img src="{{ asset('images/nettflytt-logo.png')}}" width="40" height="40" class="d-inline-block align-top" alt="Netflytt logo">
-        Flytteregisteret
+        Flyttesentralen
         </a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -109,7 +109,7 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="/">Flytteregisteret AS</a>
+            <a href="/">Nettflytt AS</a>
           </li>
           <li>
             <a href="/">924 729 341 MVA</a>
@@ -130,6 +130,6 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/pagination.js') }}"></script>
-    
+    <script src="https://cdn.websitepolicies.io/lib/cookieconsent/1.0.3/cookieconsent.min.js" defer></script><script>window.addEventListener("load",function(){window.wpcc.init({"corners":"normal","colors":{"popup":{"background":"#f6f6f6","text":"#000000","border":"#555555"},"button":{"background":"#555555","text":"#ffffff"}},"position":"bottom-right","border":"thin","content":{"href":"/personvern","link":"https://www.flytteregisteret.no/personvern","message":"Denne siden benytter seg av informasjonskapsler (cookies). Du kan fortsette å bruke siden som vanlig hvis du godtar dette. Les mer om bruk av informasjonskapsler i vår personvernerklæring"}})});</script>
     <!-- <script src="{{ asset('js/purecookie.js') }}"></script> -->
 </html>

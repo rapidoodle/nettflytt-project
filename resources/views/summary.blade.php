@@ -37,7 +37,7 @@
             <h4>Legg inn koden du fikk på SMS for å fullføre</h4>
             <input type="text" class="my-4 form-control" id="otp" placeholder="4-siffret kode">
             <div class="mb-5">
-                <p class="mb-4 text-left text-md-center">Ved å legge inn koden og akseptere <a href="/kjopsvilkaar/" class="text-underline">betingelsene</a> sender vi flyttemeldingen for deg.</p>
+                <p class="mb-4 text-left text-md-center">Ved å legge inn koden og aksepterer du <a href="/kjopsvilkaar/" class="text-underline" target="_blank">betingelsene</a> og vi sender flyttemeldingende for deg.</p>
                 <div class="px-md-5  px-md-0 text-center">
                     <button class="btn btn-info btn-lg" id="btn-summary-send">Send flyttemeldingene</button>
                 </div>  

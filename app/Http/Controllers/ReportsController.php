@@ -36,10 +36,9 @@ class ReportsController extends Controller
     public function salesReport()
     {
         if(Auth::user()->type == 1){
-            $allOffers = DB::table('offers')->get();
-            $offers    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_date) as date'))->groupByRaw(DB::raw("DATE(created_date)"))->get();
-
-            return view('offers-report', ['records' => $offers, 'allSales' => $allOffers]);
+            $allSales = DB::table('sales')->get();
+            $sales    = DB::table('sales')->select(DB::raw('count(*) as total'), DB::raw('DATE(sales_date) as date'))->groupByRaw(DB::raw("DATE(sales_date)"))->get();
+            return view('sales-report', ['records' => $sales, 'allSales' => $allSales]);
         }else{
             return redirect('/storage-update');
         }
@@ -47,9 +46,12 @@ class ReportsController extends Controller
     public function offersReport()
     {
         if(Auth::user()->type == 1){
-            $allSales = DB::table('offers')->get();
-            $sales    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(sales_date) as date'))->groupByRaw(DB::raw("DATE(sales_date)"))->get();
-            return view('sales-report', ['records' => $sales, 'allSales' => $allSales]);
+            $strom    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_date) as date'))->where("service", "Strom")->groupByRaw(DB::raw("DATE(created_date)"))->get();
+            $tv    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_date) as date'))->where("service", "TV")->groupByRaw(DB::raw("DATE(created_date)"))->get();
+            $flyttevask    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_date) as date'))->where("service", "Flyttevask")->groupByRaw(DB::raw("DATE(created_date)"))->get();
+            $boligalarm    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_date) as date'))->where("service", "Boligalarm")->groupByRaw(DB::raw("DATE(created_date)"))->get();
+
+            return view('offers-report', ['stromObj' => $strom, 'tvObj' => $tv, 'flyttevaskObj' => $flyttevask, 'boligalarmObj' => $boligalarm]);
         }else{
             return redirect('/storage-update');
         }

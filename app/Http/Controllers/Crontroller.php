@@ -33,7 +33,9 @@ class Crontroller extends Controller
          // }
     }
 
-    public function getRef(){
-        
+    public function getOffers(){
+        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-03 00:00:00", "_created_to" => "2021-06-03 23:59:59" ]);
+
+        echo json_encode($storages);
     }
 }

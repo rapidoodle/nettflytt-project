@@ -15,7 +15,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
         <h3 class="flex-item">{{isset($type) ? 'Folkeregisteret' : 'Adresseendring for Norge'}}</h3>
 
         <?php if(!isset($type)) { ?>
-        <p class="mt-0">Her kan du fylle ut én enkelt flyttemelding til alle selskaper og organisasjoner du er medlem hos. Du får også ferdigutfylte dokumenter til posten og folkeregisteret</p>
+        <p class="mt-0">Her kan du fylle ut én enkelt flyttemelding til alle selskaper og organisasjoner du er medlem hos. Du mottar også direkte utfylt skjema for Folkeregisteret ved fullføring</p>
         <?php }else{ ?>
         <p class="mt-0"><b>Det holder ikke å kun melde flytting til Folkeregisteret hvis du ønsker å motta posten på din nye adresse. Meld flytting her.</b></p>
         <p class="mt-0">Når du melder flytting til Folkeregisteret er det kun Folkeregisteret som får din nye adresseinformasjon. Det er derimot noen som benytter Folkeregisteret til å hente ut adresseinformasjon om deg. Dette gjelder blant annet alle banker og offentlige etater som NAV, Skattekontoret, Lånekassen og Forsvaret. Alle dine kontakter, kundeforhold og medlemskap utenfor dette må ha en flyttemelding fra deg.</p>
@@ -356,7 +356,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                     <hr>
                     <div class="d-flex flex-row align-items-center index-step-3 fle">
                         <img src="{{ asset('images/newspaper.png')}}" alt="newspaper image">
-                        <p class="p-2">Ved fullføring tilbyr vi mulighet for å laste ned direkte utfylt skjema for flyttemelding til Folkeregisteret. <b>Husk at du er pliktig til å melde flytting til Folkeregisteret.</b></p>
+                        <p class="p-2">Ved fullføring tilbyr vi mulighet for å laste ned direkte utfylt skjema for flyttemelding til Folkeregisteret. <b>Husk at du og er pliktig til å melde flytting til Folkeregisteret.</b></p>
                     </div>
                 </div>
                 <div class="col-12 col-lg-7 pt-4">

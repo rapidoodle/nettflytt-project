@@ -25,7 +25,7 @@
             <div class="card-header">
                 <h3 class="text-center mb-0">Kundeservice</h3>
             </div>
-            <div class="card-body p-md-5 m-md-0" id="contact-1">
+<!--             <div class="card-body p-md-5 m-md-0" id="contact-1">
                 <h5 class="mb-0">Gjelder din henvendelse spørsmål rettet til det norske folkeregisteret?</h5>
                 <p>Are you trying to contact the Norwegian national population register (Folkeregisteret)?</p>
                 <div class="row mt-4 ">
@@ -36,9 +36,9 @@
                         <button data-next="contact-2" data-from="contact-1" class="btn btn-contact w-100 btn-info px-5 py-2">Ja</button>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            <div class="card-body p-md-5 m-md-0 text-left d-hiddens" id="contact-2">
+            <div class="card-body p-md-5 m-md-0 text-left  d-hiddens" id="contact-2">
                 <h5>Kontaktinformasjon Folkeregisteret:</h5><br>
                 <i class="fa fa-phone"></i> Telefon: +47 800 80 000<br>
                 <span>Åpningstider på telefon: 09:00 - 15:30 alle hverdager</span><br><br>
@@ -48,7 +48,7 @@
                 <i class="fa fa-desktop"></i> For alle andre henvendelser gjeldende folkeregisteret besøk:<br> <span><a href="https://www.skatteetaten.no/kontakt/">https://www.skatteetaten.no/kontakt/</a></span>
             </div>
 
-            <div class="card-body p-md-5 m-md-0 d-hiddens" id="contact-3">
+            <div class="card-body p-md-5 m-md-0" id="contact-3">
                 <h5 class="mb-0">Vi opplever for tiden mange som kontakter for adresseendring som ikke har noe med Flytteregisteret å gjøre.</h5>
                 <p>Er du helt sikker på at du har meldt adresseendring hos Flytteregisteret? (Vi ber om at du ser om Flytteregisteret er avsender av SMS og bekreftelses e-post)</p>
                 <div class="row mt-4 ">

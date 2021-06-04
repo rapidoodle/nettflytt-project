@@ -1,12 +1,13 @@
 @extends('layouts.main')
+@section('title', 'Cookies Consent')
 @section('content')
 <div class="row px-4 mb-5 mt-5 mt-md-0" id="contact-page">
-    <div class="col-12 col-md-8 offset-md-2 text-center">
+    <div class="col-12 col-md-8 offset-md-2 text-left">
         <div class="inner">
-<h2>Cookie Policy Template</h2>
+<h2 class="text-center">Cookie Policy</h2>
 <p>Last updated <span style="color: #8351f9;">[{{date("m")}} {{date("d")}}, {{date("Y")}}]</span></p>
 <p><strong>INTRODUCTION</strong></p>
-<p><span style="color: #8351f9;">Nettflytt.no</span> (“we” or “us” or “our”) may use cookies, web beacons, tracking pixels, and other tracking technologies when you visit our website <span style="color: #8351f9;"><a href="/">nettflytt.no</a></span>, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the “Site”) to help customize the Site and improve your experience.</p>
+<p><span style="color: #8351f9;">Flytteregisteret.no</span> (“we” or “us” or “our”) may use cookies, web beacons, tracking pixels, and other tracking technologies when you visit our website <span style="color: #8351f9;"><a href="/">flytteregisteret.no</a></span>, including any other media form, media channel, mobile website, or mobile application related or connected thereto (collectively, the “Site”) to help customize the Site and improve your experience.</p>
 <p>We reserve the right to make changes to this Cookie Policy at any time and for any reason. We will alert you about any changes by updating the “Last Updated” date of this Cookie Policy. Any changes or modifications will be effective immediately upon posting the updated Cookie Policy on the Site, and you waive the right to receive specific notice of each such change or modification.</p>
 <p>You are encouraged to periodically review this Cookie Policy to stay informed of updates. You will be deemed to have been made aware of, will be subject to, and will be deemed to have accepted the changes in any revised Cookie Policy by your continued use of the Site after the date such revised Cookie Policy is posted.</p>
 <p><strong>USE OF COOKIES</strong></p>
@@ -48,12 +49,11 @@
 <p>For more information about how we use information collected by cookies and other tracking technologies, please refer to our Privacy Policy <span style="color: #008000;">[CLICK HERE]</span>/posted on the Site. This Cookie Policy is part of and is incorporated into our Privacy Policy. By using the Site, you agree to be bound by this Cookie Policy and our Privacy Policy.</p>
 <p><strong>CONTACT US</strong></p>
 <p><span style="color: #000000;">If you have questions or comments about this Cookie Policy, please contact us at:</span></p>
-<p><span style="color: #8351f9;">[Company Name]</span></p>
-<p><span style="color: #8351f9;">[Street Address]</span></p>
-<p><span style="color: #8351f9;">[City, State Zip]</span></p>
-<p><span style="color: #8351f9;">[Phone Number]</span></p>
-<p><span style="color: #8351f9;">[Fax Number]</span></p>
-<p><span style="color: #8351f9;">[Email] </span></p>
+<p><span style="color: #8351f9;">Nettflytt AS</span></p>
+<p><span style="color: #8351f9;">Att: Rektor AS, Sinsenveien 11, 0572 Oslo</span></p>
+<p><span style="color: #8351f9;">+47 940 59 094</span></p>
+<p><span style="color: #8351f9;"></span></p>
+<p><span style="color: #8351f9;">https://www.flytteregisteret.no/kontakt-oss</span></p>
 </div>
     </div>
 </div>
@@ -68,9 +68,9 @@
         <h2>Viktig informasjon</h2>
         <div class="row">
             <div class="col-12 col-md-9">
-                <p>Vi opplever økende antall forespørsler fra brukere av andre tjenester for adresseendring som ikke har noe med Nettflytt å gjøre.
+                <p>Vi opplever økende antall forespørsler fra brukere av andre tjenester for adresseendring som ikke har noe med Flytteregisteret å gjøre.
                 </p>
-                <p> Vi ber om at du sjekker hvilken nettside du faktisk har brukt først dersom din henvendelse gjelder manglende tilbakemelding e.l etter å ha meldt adresseendring. Vi kan ikke hjelpe deg med evt flyttemeldinger som er sendt via andre nett-tjenester enn Nettflytt sine.</p>
+                <p> Vi ber om at du sjekker hvilken nettside du faktisk har brukt først dersom din henvendelse gjelder manglende tilbakemelding e.l etter å ha meldt adresseendring. Vi kan ikke hjelpe deg med evt flyttemeldinger som er sendt via andre nett-tjenester enn Flytteregisteret sine.</p>
             </div>
             <div class="col-12 col-md-3">
                 <img class="img-fluid" src="{{ asset('images/call-center-working-night.png')}}" alt="call center working night" width="300px">
@@ -82,7 +82,7 @@
                 <p class="bold-red bold text-red">MERK!</p>
             </div>
             <div class="col-12 col-md-11">
-                <p>Nettflytt er ikke en del av Posten Norge eller folkeregisteret.<br> Har du spørsmål vedrørende adressen som er registrert hos dem ber vi deg kontakt direkte med dem.</p>
+                <p>Flytteregisteret er ikke en del av Posten Norge eller folkeregisteret.<br> Har du spørsmål vedrørende adressen som er registrert hos dem ber vi deg kontakt direkte med dem.</p>
             </div>
         </div>
     </div>
