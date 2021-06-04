@@ -25,9 +25,7 @@ $boligalarm = array();
 
 ?>
 <div class="tab-content w-100 pt-4" id="myTabContent">
-    {{json_encode($strom)}}
     <div id="chartContainer" class="w-100 mt-4" style="width: 100%!important;"></div>
-    }
 </div>
 
 <script type="application/javascript">

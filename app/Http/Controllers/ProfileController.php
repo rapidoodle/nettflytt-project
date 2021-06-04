@@ -34,10 +34,8 @@ class ProfileController extends Controller
                             $data  = explode("|", $value->detail);
                             $comp  = explode(":", $data[0]);
                             $ref   = explode(":", $data[1]);
-                            echo $comp[1];
                             $sql = Inbox::where('ref', '=', $ref[1])->first();
                         }
-                        echo "<br>";
                     }
                 }
             }

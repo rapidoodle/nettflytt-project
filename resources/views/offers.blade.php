@@ -53,12 +53,11 @@
             </div>
             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#offersAcdn">
               <div class="card-body">
-                <!-- <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5> -->
-                <p class="f-125">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
+                <h5>Ønsker du tilbud på den beste strømavtalen i ditt område?</h5>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>La strømleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
-                        <h6>TILBUD! Bestill strøm å få gratis postkasseskilt!</h6>
+                        <p class="f-12">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
                         <?php if(!isset(session('customer')['switch_service']['isStrom']) || session('customer')['switch_service']['isStrom'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-1">
@@ -88,11 +87,11 @@
             </div>
             <div id="collapseTwo" class="collapse <?=Session::has('customer.isNorges') && session('customer')['isNorges'] == 1  ? 'show' : ''?>" aria-labelledby="headingTwo" data-parent="#offersAcdn">
                <div class="card-body">
-                <!-- <h5>Ønsker du tilbud på den beste TV/Internett-avtalen i ditt område?</h5> -->
-                <p class="f-125">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
+                <h5>Ønsker du tilbud på den beste TV/Internett-avtalen i ditt område?</h5>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>La leverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
+                        <p class="f-12">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
 
                         <?php if(!isset(session('customer')['switch_service']['isTV']) || session('customer')['switch_service']['isTV'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
@@ -121,11 +120,11 @@
             </div>
             <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#offersAcdn">
                <div class="card-body">
-                <!-- <h5>Ønsker du å motta et uforpliktende tilbud på den beste flyttevasken-leverandøren i ditt område?</h5> -->
-                <p class="f-125">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
+                <h5>Ønsker du å motta et uforpliktende tilbud på den beste flyttevasken-leverandøren i ditt område?</h5>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>100% fornøyd, eller pengene tibake.</p>
+                        <p class="f-12">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
                         <?php if(!isset(session('customer')['switch_service']['isFlyttevask']) || session('customer')['switch_service']['isFlyttevask'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-1">
@@ -154,11 +153,11 @@
             </div>
             <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#offersAcdn">
                <div class="card-body">
-                <!-- <h5>Ønsker du tilbud på den beste boligalarm-avtalen i ditt område?</h5> -->
-                <p class="f-125">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
+                <h5>Ønsker du tilbud på den beste boligalarm-avtalen i ditt område?</h5>
                 <div class="row">
                     <div class="col-12 col-md-8">
                         <p>La alarmleverandørene konkurrere om deg. Vi finner den beste leverandøren basert på ditt nye område</p>
+                        <p class="f-12">Ved å takke ja godtar du å få et uforpliktende tilbud av en av våre sammarbeidspartnere per telefon.</p>
                         <?php if(!isset(session('customer')['switch_service']['isBoligalarm']) || session('customer')['switch_service']['isBoligalarm'] == 0){ ?>
                         <div class="row mt-4 mb-2 pl-md-4">
                             <div class="col pl-md-4 order-1">
