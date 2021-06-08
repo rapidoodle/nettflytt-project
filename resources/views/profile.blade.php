@@ -44,10 +44,6 @@ if($hours < 1){
 
             $people  = explode(",", $service[2]);
             $replied =  in_array($service[1], $response);
-            
-            // echo $service[1];
-            // echo json_encode($response);
-            // echo $replied;
             if($replied == 1 && $hours <= 20){
                 $status = "status_yellow.json"; 
                 $title  = "Behandles hos leverandør";
@@ -56,7 +52,7 @@ if($hours < 1){
                 $title  = "Bekreftet";
             }
             ?>
-            <div class="bg-light p-4 p-md-5 mb-4">
+            <div class="bg-light p-4 p-md-5 mb-5">
                 <h3 class="text-center mb-4">Flyttemelding til {{$service[0]}}</h3>
                 <div class="row">
                     <div class="col-md-3 col-12">
@@ -138,11 +134,9 @@ if($hours < 1){
             @endif
         </div>
     </div>
-<!--     <div class="row mt-4">
-        <div class="col-12">
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-primary btn-lg">Avslutt</a>
-        </div>
-    </div> -->
+    <center class="mb-4">
+        <a class="btn btn-extra-lg" href="/logout">Avslut</a>
+    </center>
 </div>
 @endsection
 
