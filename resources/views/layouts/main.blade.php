@@ -130,6 +130,7 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script type="text/javascript" src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/pagination.js') }}"></script>
-    <script src="https://cdn.websitepolicies.io/lib/cookieconsent/1.0.3/cookieconsent.min.js" defer></script><script>window.addEventListener("load",function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#f6f6f6","text":"#000000","border":"#555555"},"button":{"background":"#555555","text":"#ffffff"}},"content":{"button":"Ok","href":"https://www.flytteregisteret.no/personvern","message":"Denne siden benytter seg av informasjonskapsler (cookies). Du kan fortsette å bruke siden som vanlig hvis du godtar dette. Les mer om bruk av informasjonskapsler i vår personvernerklæring","link":"https://www.flytteregisteret.no/personvern"},"position":"bottom-right"})});</script>
+    <script src="https://cdn.websitepolicies.io/lib/cookieconsent/1.0.3/cookieconsent.min.js" defer></script>
+ <!--    <script>window.addEventListener("load",function(){window.wpcc.init({"border":"thin","corners":"small","colors":{"popup":{"background":"#f6f6f6","text":"#000000","border":"#555555"},"button":{"background":"#555555","text":"#ffffff"}},"content":{"button":"Ok","href":"https://www.flytteregisteret.no/personvern","message":"Denne siden benytter seg av informasjonskapsler (cookies). Du kan fortsette å bruke siden som vanlig hvis du godtar dette. Les mer om bruk av informasjonskapsler i vår personvernerklæring","link":"https://www.flytteregisteret.no/personvern"},"position":"bottom-right"})});</script> -->
     <!-- <script src="{{ asset('js/purecookie.js') }}"></script> -->
 </html>

@@ -420,6 +420,10 @@ class Helper
 
         return $obj;
     }
+
+    public static function checkCompanyStatus($date, $token){
+
+    }
 }
 
 

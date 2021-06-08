@@ -46,10 +46,10 @@ class ReportsController extends Controller
     public function offersReport()
     {
         if(Auth::user()->type == 1){
-            $strom    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_date) as date'))->where("service", "Strom")->groupByRaw(DB::raw("DATE(created_date)"))->get();
-            $tv    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_date) as date'))->where("service", "TV")->groupByRaw(DB::raw("DATE(created_date)"))->get();
-            $flyttevask    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_date) as date'))->where("service", "Flyttevask")->groupByRaw(DB::raw("DATE(created_date)"))->get();
-            $boligalarm    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_date) as date'))->where("service", "Boligalarm")->groupByRaw(DB::raw("DATE(created_date)"))->get();
+            $strom    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_at) as date'))->where("service", "Strom")->groupByRaw(DB::raw("DATE(created_at)"))->get();
+            $tv    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_at) as date'))->where("service", "TV")->groupByRaw(DB::raw("DATE(created_at)"))->get();
+            $flyttevask    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_at) as date'))->where("service", "Flyttevask")->groupByRaw(DB::raw("DATE(created_at)"))->get();
+            $boligalarm    = DB::table('offers')->select(DB::raw('count(*) as total'), DB::raw('DATE(created_at) as date'))->where("service", "Boligalarm")->groupByRaw(DB::raw("DATE(created_at)"))->get();
 
             return view('offers-report', ['stromObj' => $strom, 'tvObj' => $tv, 'flyttevaskObj' => $flyttevask, 'boligalarmObj' => $boligalarm]);
         }else{

@@ -97,5 +97,5 @@ Route::post('/storageStatus', 'APIController@storageStatus');
 Route::post('/getOtpStatus', 'APIController@getOtpStatus');
 Route::post('/loginAuth', 'ProfileController@loginAuth');
 Route::post('/submitVipps', 'VippsController@processPayment');
-Route::post('/initTokens', 'ApiController@initTokens');
-Route::post('/addOffer', 'ApiController@addOffer');
+Route::post('/initTokens', 'APIController@initTokens');
+Route::post('/addOffer', 'APIController@addOffer');

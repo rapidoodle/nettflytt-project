@@ -11,8 +11,6 @@ $datediff   = $now - $your_date;
 $days       = round($datediff / (60 * 60 * 24));
 $hours      = $days * 24;
 
-$replied    = false;
-
 if($hours < 1){
     $status = "status_orange.json"; 
     $title  = "Behandles hes leverander";
@@ -27,10 +25,7 @@ if($hours < 1){
     $title  = "Bekreftet";
 }
 
-if($replied == true && $hours < 20){
-    $status = "status_green.json"; 
-    $title  = "Bekreftet";
-}
+
 
 ?>
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
@@ -45,7 +40,22 @@ if($replied == true && $hours < 20){
         <div class="col-12">
             @if(count(session('customer')['services']) > 0)
             @foreach(session('customer')['services'] as $service)
-            <?php $people = explode(",", $service[2]); ?>
+            <?php
+
+            $people  = explode(",", $service[2]);
+            $replied =  in_array($service[1], $response);
+            
+            // echo $service[1];
+            // echo json_encode($response);
+            // echo $replied;
+            if($replied == 1 && $hours <= 20){
+                $status = "status_yellow.json"; 
+                $title  = "Behandles hos leverandør";
+            }else if($replied == 1 && $hours > 20){
+                $status = "status_green.json"; 
+                $title  = "Bekreftet";
+            }
+            ?>
             <div class="bg-light p-4 p-md-5 mb-4">
                 <h3 class="text-center mb-4">Flyttemelding til {{$service[0]}}</h3>
                 <div class="row">
@@ -121,6 +131,10 @@ if($replied == true && $hours < 20){
                 </div>
             </div>
             @endforeach
+            @else
+           <div class="bg-light p-4 p-md-5 mb-4">
+                <h3 class="text-center">Ingen selskaper lagt til</h3>
+            </div>
             @endif
         </div>
     </div>

@@ -24,17 +24,26 @@ class ProfileController extends Controller
         	}
     	}elseif(session('customer') && session('customer')['isLogged'] == true){    
 
-           $status = Helper::storageStatus(Helper::getToken(), session('customer')['_storageToken'], "service");   
+            $status = Helper::storageStatus(Helper::getToken(), session('customer')['_storageToken'], "service");   
             $status   = json_decode($status);
             $response = array();
             if($status->_status == 0){
                 if($status->_storage_status_list){
                     foreach ($status->_storage_status_list as $key => $value) {
                         if (str_contains($value->detail, 'mailtrackingid')) {
-                            $data  = explode("|", $value->detail);
-                            $comp  = explode(":", $data[0]);
-                            $ref   = explode(":", $data[1]);
-                            $sql = Inbox::where('ref', '=', $ref[1])->first();
+                            $data    = explode("|", $value->detail);
+                            $comp    = explode(":", $data[0]);
+                            $ref     = explode(":", $data[1]);
+                            $mtid    = $ref[1];
+                            $sql     = Inbox::where('ref', $mtid)->first();
+
+                            if(isset($sql->ref)){
+                                Inbox::where('ref', $mtid)->update(['company' => $comp[1]]);
+                                if(!in_array($comp[1], $response)){
+                                    $response[] = $comp[1];
+                                }
+                            }
+
                         }
                     }
                 }

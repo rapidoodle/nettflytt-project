@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Webklex\IMAP\Facades\Client;
 use App\Inbox;
+use App\Offers;
 
 class Crontroller extends Controller
 {
@@ -25,7 +26,7 @@ class Crontroller extends Controller
                     $i = Inbox::where('ref', '=', $ref)->first();
                         if ($i === null) {
                             $inbox          = new Inbox;
-                            $inbox->ref     = str_replace("_", "", $ref);
+                            $inbox->ref     = str_replace("_", "", trim($ref));
                             $inbox->save();
                         }
                 }
@@ -34,8 +35,43 @@ class Crontroller extends Controller
     }
 
     public function getOffers(){
-        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-03 00:00:00", "_created_to" => "2021-06-03 23:59:59" ]);
 
+        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-06 00:00:00", "_created_to" => "2021-06-06 23:59:59" ]);
+
+            if($storages->_status == 0){
+                foreach ($storages->sids as $key => $value) {
+                    $storage = Helper::getStorage(Helper::getToken(), $value);
+                    // echo $storage = Helper::getStorage(Helper::getToken(), "lJ1okHRtLBctJkAWDMIcHcz2nqExd5E3cS0YAaj1QpKckIHBNpA4EU4rMSgbBkNX");
+                    $sObj = json_decode($storage);
+                        if(isset($sObj->switch_service)){
+                            $service  = isset($sObj->switch_service) ? $sObj->switch_service : "";
+                            $token    = isset($sObj->_token) ? $sObj->_token : "";
+                            $phone    = isset($sObj->phone) ? $sObj->phone : "";
+                            $recordid = isset($sObj->_recordid) ? $sObj->_recordid : "";
+                            $created  = isset($sObj->_created) ? $sObj->_created : "";
+                            if($service){
+                            foreach ($service as $key => $value) {
+                                    $service = $key == "isStrom" ? "Strom" : ($key == "isTV" ? "TV" : ($key == "isFlyttevask" ? "Flyttevask" : ($key == "isBoligalarm" ? "Boligalarm" : "NULL")));
+                                // $i = Offers::where('ref', '=', $ref)->first();
+                                // if ($i === null) {
+                                //     $inbox          = new Inbox;
+                                //     $inbox->ref     = str_replace("_", "", $ref);
+                                //     $inbox->save();
+                                // }
+                                $offer                = new Offers;
+                                $offer->service       = $service;
+                                $offer->recordid      = $recordid;
+                                $offer->phone         = $phone;
+                                $offer->storage_token = $token;
+                                $offer->created_at    = $created;
+                                $offer->save();
+                            }
+
+                            }
+
+                    }
+                }
+            }
         echo json_encode($storages);
     }
 }

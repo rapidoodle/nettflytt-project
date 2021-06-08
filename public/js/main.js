@@ -653,7 +653,11 @@ $(document).ready(function() {
                     $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Koden du tastet inn var feil. Vennligst prøv igjen");
                     failedProgress();
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "SubscriberBarred"){
-                    $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Ditt abonnement er dessverre sperret for mobilbetaling. Vennligst velg en annen betalingsmåte.");
+                    $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Ditt abonnement har nådd maks belastningsgrense. Vennligst velg en annen betalingsmåte.");
+                    failedProgress();
+                    window.location.href = "/betaling#"+newPhone;
+                }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "InsufficientFunds"){
+                    $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Insufficient Funds");
                     failedProgress();
                     window.location.href = "/betaling#"+newPhone;
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordExpired"){

@@ -1,8 +1,6 @@
 @extends('layouts.main')
 @section('title', 'Profile')
 @section('content')
-<!-- <?=json_encode(session('customer'));?> -->
-<!-- <?=json_encode(session()->all());?> -->
 <input type="hidden" id="csrf" value="{{ csrf_token() }}">
 <div class="container">
 <div class="row mb-5 mt-5 mt-md-0">

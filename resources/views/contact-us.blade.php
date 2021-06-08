@@ -68,6 +68,7 @@
 
             <div class="card-body p-md-5 m-md-0 text-center d-hiddens" id="contact-5">
                 <h5 class="mb-0">Send oss gjerne en e-post så svarer vi deg fortløpende</h5>
+                <p>Vi svarer vanligvis innen 24 timer</p>
                 <div class="py-4">
                     <div data-reamaze-embed="contact" data-reamaze-embed-disable-subject="true" data-reamaze-embed-form-id="23129"></div>
                 </div>
