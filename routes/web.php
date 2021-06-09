@@ -51,7 +51,7 @@ Route::get('/folkeregisteret', function () {
     return view('index', ['type' => "folkeregisteret"]);
 });
 Route::get('/betaling/#{number}', 'VippsController@index');
-Route::get('/betaling', 'VippsController@check');
+Route::get('/betaling', 'VippsController@checker');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/logginn', 'ProfileController@logginn');
 Route::get('/logout', function () {
