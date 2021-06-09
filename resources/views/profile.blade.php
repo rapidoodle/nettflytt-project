@@ -55,8 +55,8 @@ if($hours < 1){
             <div class="bg-light p-4 p-md-5 mb-5">
                 <h3 class="text-center mb-4">Flyttemelding til {{$service[0]}}</h3>
                 <div class="row">
-                    <div class="col-md-3 col-12">
-                        <div class="card card-profile mb-4">
+                    <div class="col-md-3 col-12 mb-4 mb-md-none">
+                        <div class="card card-profile">
                             <div class="card-body">
                                 <center>
                                     <h5><i class="fa fa-user"></i> Address</h5>
@@ -90,8 +90,8 @@ if($hours < 1){
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3 col-12">
-                        <div class="card card-profile mb-4">
+                    <div class="col-md-3 col-12 mb-4 mb-md-none">
+                        <div class="card card-profile">
                             <div class="card-body text-left">
                                 <center>
                                     <h5><i class="fa fa-user"></i> Personer</h5>
@@ -115,8 +115,8 @@ if($hours < 1){
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-12">
-                        <div class="card card-profile mb-4">
+                    <div class="col-md-6 col-12 mb-4 mb-md-none">
+                        <div class="card card-profile">
                             <div class="card-body p-md-5">
                                 <h4 class="text-center">Status per {{date("d.M Y")}} Klokken {{date("H:i")}}</h4>
                                 <lottie-player style="height:100px" src="{{ asset('lottie/'.$status) }}" background="transparent"  speed="1" autoplay loop></lottie-player>
@@ -135,7 +135,7 @@ if($hours < 1){
         </div>
     </div>
     <center class="mb-4">
-        <a class="btn btn-extra-lg" href="/logout">Avslut</a>
+        <a class="btn btn-extra-lg" href="/logout">Avslutt</a>
     </center>
 </div>
 @endsection
