@@ -396,12 +396,15 @@ $(document).ready(function() {
     })
 
     $(".btn-offer").click(function(){
-        // console.log($(this).attr("data-offer"));
         var fields = {};
-        fields["switch_service."+$(this).attr("data-offer")] = 1;
-        updateCustomerData(fields);
-
         var offer = $(this).attr("data-description");
+        fields["switch_service."+$(this).attr("data-offer")] = 1;
+        if($(this).attr("data-offer") == "isBoligalarm"){
+            updateCustomerData(fields, true, "/postkasse/");
+        }else{
+            updateCustomerData(fields);
+        }
+
         addOffer(offer);
 
     });
@@ -420,12 +423,12 @@ $(document).ready(function() {
         var isPostBox = $("#isPostbox").val();
         var isNorges  = $("#isNorges").val();
 
-        // console.log(names);
         updateCustomerData({"isNorges" :isNorges, 
             "mailbox-sign" :$("#isPostbox").val(), 
             "sign_send_to_address" : $('input[name="radios"]:checked').val(), 
-            "postbox.names" : names});
-        window.location.href = "/oppsummering/";
+            "postbox.names" : names, 
+            "pb-names" : names}, true, "/oppsummering/");
+
     });
 
     $(".btn-legg-till").click(function(){
@@ -453,8 +456,8 @@ $(document).ready(function() {
             $('#addressModal').modal('toggle');
         }else{
             var names     = $(".postbox-summary").html().replace(/\<br>/g, ',');
-            updateCustomerData({"pb-names" : names});
-            window.location.href = "/oppsummering/";
+            updateCustomerData({"pb-names" : names, "postbox" : names}, true, "/oppsummering/");
+
         }
     })
 
@@ -476,6 +479,13 @@ $(document).ready(function() {
     });
 
     //SUMMARY
+
+    //check the mailbox again
+    if($("#otp").length  == 1){
+        checkPb();
+        console.log("checking mailbox");
+    }
+
     $(".otpFooter").hide();
     $('#otpModal').on('hidden.bs.modal', function (e) {
         loadingProgress(0, true);
@@ -728,13 +738,28 @@ $(document).ready(function() {
         });
     }
 
-    function updateCustomerData(data){
+    function checkPb(){
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val()},
+            url: "/checkPb",
+            success: function(response){
+                 // console.log(response);
+                return true;
+            }
+        });
+    }
+
+    function updateCustomerData(data, isRed = false, link = null){
         $.ajax({
             type: "POST",
             data: { _token : csrf.val(), fields : data},
             url: "/updateCustomerData",
             success: function(response){
-                // console.log(response);
+                if(isRed == true){
+                    window.location.href = link;
+                }
+                return true;
             }
         });
     }
@@ -745,7 +770,7 @@ $(document).ready(function() {
             data: { _token : csrf.val(), offer : offer},
             url: "/addOffer",
             success: function(response){
-                console.log(response);
+                // console.log(response);
             }
         });
     }
@@ -936,7 +961,7 @@ $(document).ready(function() {
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>E-post</td>'+
-                                        '<td><input type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="person-input email-input" value="'+email.val()+'" id="email_'+pCtr+'" required="true"></td>'+
+                                        '<td><input type="email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" class="person-input email-input" value="'+email.val()+'" id="email_'+pCtr+'" required="true" oninvalid="alert("Invalid E-post");" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<td>Telefonnummer</td>'+

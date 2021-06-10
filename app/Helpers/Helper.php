@@ -107,7 +107,7 @@ class Helper
 		$u 	  	  = "u46114-".session("_sessionSalt");
 
 	    // Get storage
-	    echo $url = "https://". $u .":". $token ."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$storageToken."/details";
+	    $url = "https://". $u .":". $token ."@api.nettflytt.no/api/nettflytt/2020-10/storage/".$storageToken."/details";
 		    $json = file_get_contents( $url, FALSE);
 		    $res = json_decode( $json, true );
 

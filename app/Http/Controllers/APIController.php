@@ -60,7 +60,7 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "8dMUoxmlt0tBSWyOj7nWbJyIUGaVM8jnB8jJD7ny7sOULbaHdMWzBHjryOidSkfM");
+        echo Helper::getStorage(Helper::getToken(), "0TqcrColNxKkWVIAv0ZJelFT95VGpv78dbQmQygWqPBSiMd94UDosZ29yobySdCK");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
@@ -369,5 +369,30 @@ class APIController extends Controller
     public function addOffer(Request $request){
         $offer = $request->offer;
         Helper::addOffer($offer); 
+    }
+    public function checkPb(Request $request){
+        $names = is_array(session('customer')['pb-names']) ? session('customer')['pb-names'] : explode(",", session('customer')['pb-names']);
+
+        if(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
+            session()->forget('customer.sign_mailbox-b');
+            session()->forget('customer.sign_mailbox-c');
+            session()->put("customer.sign_mailbox-a", $names);
+            echo "sign_mailbox-a";
+        }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
+            session()->forget('customer.sign_mailbox-a');
+            session()->forget('customer.sign_mailbox-b');
+            session()->put("customer.sign_mailbox-c", $names);
+            echo "sign_mailbox-c";
+        }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
+            session()->forget('customer.sign_mailbox-a');
+            session()->forget('customer.sign_mailbox-c');
+            session()->put("customer.sign_mailbox-b", $names);
+            echo "sign_mailbox-b";
+        }else{
+            session()->forget('customer.sign_mailbox-a');
+            session()->forget('customer.sign_mailbox-b');
+            session()->forget('customer.sign_mailbox-c');    
+            echo "nothing";            
+        }
     }
 }

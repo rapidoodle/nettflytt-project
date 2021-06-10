@@ -164,7 +164,7 @@
                                 <a class="btn btn-info btn-block btn-blur py-3 btn-actions" href="/postkasse">Nei takk</a>
                             </div>
                             <div class="col pl-md-4 order-2">
-                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" href="/postkasse" data-offer="isBoligalarm" data-description="Boligalarm">Ja takk!</a>
+                                <a class="btn btn-info btn-block py-3 btn-offer btn-actions" data-offer="isBoligalarm" data-description="Boligalarm">Ja takk!</a>
                             </div>
                         </div>
                         <?php } ?>

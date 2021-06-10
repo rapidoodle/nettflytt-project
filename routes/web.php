@@ -99,3 +99,4 @@ Route::post('/loginAuth', 'ProfileController@loginAuth');
 Route::post('/submitVipps', 'VippsController@processPayment');
 Route::post('/initTokens', 'APIController@initTokens');
 Route::post('/addOffer', 'APIController@addOffer');
+Route::post('/checkPb', 'APIController@checkPb');
