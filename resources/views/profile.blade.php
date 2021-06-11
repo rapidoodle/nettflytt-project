@@ -59,7 +59,7 @@ if($hours < 1){
                         <div class="card card-profile">
                             <div class="card-body">
                                 <center>
-                                    <h5><i class="fa fa-user"></i> Address</h5>
+                                    <h5><i class="fa fa-user"></i> Adresse</h5>
                                 </center>
                                 <p class="text-bold">Flytter fra</p>
                                 <table class="w-100">

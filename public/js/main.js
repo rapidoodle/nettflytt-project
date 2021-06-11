@@ -480,6 +480,13 @@ $(document).ready(function() {
 
     //SUMMARY
 
+    $("#optin-c").click(function(){
+        if($("#optin").is(':checked')){
+            $("#optin").prop("checked", false);
+        }else{
+            $("#optin").prop("checked", true);
+        }
+    });
     //check the mailbox again
     if($("#otp").length  == 1){
         checkPb();

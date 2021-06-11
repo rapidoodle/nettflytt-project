@@ -33,15 +33,30 @@
 </div>  
 <div class="row mt-0 mb-5 my-lg-5  mt-lg-0">
     <div class="col-12">
-        <div class="bg-light p-4 text-center">
-            <h4>Legg inn koden du fikk på SMS for å fullføre</h4>
+        <!-- <div class="bg-light p-4 text-center"> -->
+<!--             <h4>Legg inn koden du fikk på SMS for å fullføre</h4>
             <input type="text" class="my-4 form-control" id="otp" placeholder="4-siffret kode">
             <div class="mb-5">
                 <p class="mb-4 text-left text-md-center">Ved å legge inn koden og aksepterer du <a href="/kjopsvilkaar/" class="text-underline" target="_blank">betingelsene</a> og vi sender flyttemeldingende for deg.</p>
                 <div class="px-md-5  px-md-0 text-center">
                     <button class="btn btn-info btn-lg" id="btn-summary-send">Send flyttemeldingene</button>
                 </div>  
-            </div>
+            </div> -->
+
+
+        <!-- </div> -->
+
+         <div class="bg-light p-4 text-left">
+            <ol>
+                <li class="mb-4">Vennligst se over at all informasjon du har oppgitt er riktig før du godkjenner adresseendringen</li>
+                <li class="mb-4"><input type="checkbox" id="optin" class="mr-1"> <span id="optin-c" class="pointer">Ja, jeg har lest og godtar <a href="/kjopsvilkaar" target="_blank">vilkårene</a> for utsending av flyttemeldinger/ bestillinger og <a href="/personvern" target="_blank">personvernvilkårene</a> for tjenesten <span class="text-red">*</span></span></li>
+                <li>Oppgi koden du fikk på SMS når du startet tjenesten: <span class="text-red">*</span> <br>
+                <input type="text" class="my-2 form-control" id="otp" placeholder="4-siffret kode"> 
+                </li>
+            </ol>
+                <div class="px-md-4 px-md-0 text-left">
+                    <button class="btn btn-info btn-lg" id="btn-summary-send">Godkjenn og send</button>
+                </div> 
         </div>
     </div>
 </div>

@@ -984,3 +984,9 @@ a.page-link.active {
 p.f-12{
     font-size: 12px!important;
 }
+.optin-c{
+    cursor: pointer!important;
+}
+label.font-weight-normal{
+    font-weight: normal !important;
+}
