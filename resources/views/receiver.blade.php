@@ -42,7 +42,7 @@
 
     <div class="ps-cont text-center mt-5 mt-md-0" id="power-supply">
         <h5 class="mini-header">
-        Velg ny strømavtale for <?=session('customer')['new_address']?></h5>
+        Vår anbefalte steømavtale for <?=session('customer')['new_address']?></h5>
 <!--         <div class="row px-4 mb-5">
             <div class="col-12 offset-md-1 col-md-5 text-center p-4">
                 <div class="ps-option p-4 mx-0 mx-lg-5">
