@@ -49,8 +49,8 @@
          <div class="bg-light p-4 text-left">
             <ol>
                 <li class="mb-4">Vennligst se over at all informasjon du har oppgitt er riktig før du godkjenner adresseendringen</li>
-                <li class="mb-4"><input type="checkbox" id="optin" class="mr-1"> <span id="optin-c" class="pointer">Ja, jeg har lest og godtar <a href="/kjopsvilkaar" target="_blank">vilkårene</a> for utsending av flyttemeldinger/ bestillinger og <a href="/personvern" target="_blank">personvernvilkårene</a> for tjenesten <span class="text-red">*</span></span></li>
-                <li>Oppgi koden du fikk på SMS når du startet tjenesten: <span class="text-red">*</span> <br>
+                <li class="mb-4"><input type="checkbox" id="optin" class="mr-1"> <span id="optin-c" class="pointer">Ja, jeg har lest og godtar <a href="/kjopsvilkaar" target="_blank">vilkårene</a> for utsending av flyttemeldinger/ bestillinger og <a href="/personvern" target="_blank">personvernvilkårene</a> for tjenesten</span></li>
+                <li>Oppgi koden du fikk på SMS når du startet tjenesten: <br>
                 <input type="text" class="my-2 form-control" id="otp" placeholder="4-siffret kode"> 
                 </li>
             </ol>
@@ -58,93 +58,6 @@
                     <button class="btn btn-info btn-lg" id="btn-summary-send">Godkjenn og send</button>
                 </div> 
         </div>
-    </div>
-</div>
-<div class="row mb-5">
-    <div class="col-12 col-md-5">
-        <div class="smry-rcrd p-4 h-auto">
-            <?php
-            $pbPrice    = session('customer')['pb-price'] != "" ? session('customer')['pb-price'] : 0;
-            $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
-            $totalPrice = session('customer')['price'] + $pbPrice + $advPrice;
-            session()->put("customer.total_price", $totalPrice);
-            ?>
-            <input type="hidden" id="total-price" value="<?=$totalPrice?>">
-            <input type="hidden" id="pb-price" value="<?=$pbPrice?>">
-            <input type="hidden" id="phone" value="{{session('customer')['phone']}}">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th><b>Produkt</b></th>
-                        <?php if(session('customer')['pb-free'] == 1) { ?>
-                        <!-- <th><b>Pris</b></th> -->
-                        <th></th>
-                        <?php } ?>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Behandling av flyttemeldinger</td>
-
-                        <?php if(session('customer')['pb-free'] == 1) { ?>
-                        <td></td>
-                        <?php } ?>
-                    </tr>
-                    <?php if(session('customer')['mailbox-sign'] == 1) { ?>
-                    <tr class="tr-pb">
-                        <td>Postkasseskilt</td>
-
-                        <?php if(session('customer')['pb-free'] == 1) { ?>
-                        <td>GRATIS</td>
-                        <?php } ?>
-                        <td><i class="fa fa-trash-o pointer remove-pb" data-toggle="modal" data-target="#remove-pbModal" data-toggle="modal"></i></td>
-                    </tr>
-                    <?php } ?>
-                    <?php if(isset(session('customer')['isAdv']) && session('customer')['isAdv'] == 1) { ?>
-                    <tr class="tr-ad">
-                        <td>Uadressert reklame nei takk</td>
-                        <?php if(session('customer')['pb-free'] == 1) { ?>
-                        <td></td>
-                        <?php } ?>
-                        <td><i class="fa fa-trash-o pointer remove-ad" data-toggle="modal" data-target="#remove-adModal" data-toggle="modal"></i></td>
-                    </tr>
-                    <?php } ?>
-
-<!--                     <tr>
-                        <td>Totalt:</td>
-                        <td>kr <span id="total-price-cont"><?=$totalPrice?></span>,-</td>
-                    </tr> -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-5 offset-md-2">
-        <?php
-        $check = '<i class="fa fa-check"></i>';
-        $times = '<i class="fa fa-times"></i>';
-        ?>
-        <div class="smry-rcrd p-4 mt-5 mt-md-0 h-auto">
-            <h5>Gjennomgang av avtaler hos</h5>
-            <table class="table">
-                <tr>
-                    <td width="30px"><?=isset(session('customer')['switch_service']['isStrom']) ? $check : $times; ?></td>
-                    <td>Strøm</td>
-                </tr>
-                <tr>
-                    <td><?=isset(session('customer')['switch_service']['isTV']) ? $check : $times; ?></td>
-                    <td>TV/Internet</td>
-                </tr>
-                <tr>
-                    <td><?=isset(session('customer')['switch_service']['isFlyttevask']) ? $check : $times; ?></td>
-                    <td>Flyttevask</td>
-                </tr>
-                <tr>
-                    <td><?=isset(session('customer')['switch_service']['isBoligalarm']) ? $check : $times; ?></td>
-                    <td>Boligalarm</td>
-                </tr>
-            </table>
-        </div> 
     </div>
 </div>
 <div class="row mb-5">
@@ -167,6 +80,7 @@
             </div>
         </div>
     </div>
+
     <div class="col-12 col-md-5 offset-md-2">
         <div class="smry-rcrd p-4 mt-5 mt-md-0">
             <h3 class="mb-5"><i class="fa fa-envelope"></i> Mottakere</h3>
@@ -205,6 +119,87 @@
             <?php } ?>
             </table>
         </div>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-12 col-md-5">
+        <div class="smry-rcrd p-4 h-auto">
+            <?php
+            $pbPrice    = session('customer')['pb-price'] != "" ? session('customer')['pb-price'] : 0;
+            $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
+            $totalPrice = session('customer')['price'] + $pbPrice + $advPrice;
+            session()->put("customer.total_price", $totalPrice);
+            ?>
+            <input type="hidden" id="total-price" value="<?=$totalPrice?>">
+            <input type="hidden" id="pb-price" value="<?=$pbPrice?>">
+            <input type="hidden" id="phone" value="{{session('customer')['phone']}}">
+            <table class="table">
+                <!-- <thead> -->
+                    <!-- <tr> -->
+                        <!-- <th><b>Produkt</b></th> -->
+                         <?php //if(session('customer')['pb-free'] == 1) { ?>
+                        <!-- <th><b>Pris</b></th> -->
+                        <!-- <th></th> -->
+                        <?php // } ?>
+                    <!-- </tr> -->
+                <!-- </thead> -->
+                    <tr>
+                        <td>Behandling av flyttemeldinger</td>
+                        <td></td>
+                    </tr>
+                    <?php if(session('customer')['mailbox-sign'] == 1) { ?>
+                    <tr class="tr-pb">
+                        <td>Postkasseskilt</td>
+
+                        <?php if(session('customer')['pb-free'] == 1) { ?>
+                        <td>GRATIS</td>
+                        <?php } ?>
+                        <td><i class="fa fa-trash-o pointer remove-pb" data-toggle="modal" data-target="#remove-pbModal" data-toggle="modal"></i></td>
+                    </tr>
+                    <?php } ?>
+                    <?php if(isset(session('customer')['isAdv']) && session('customer')['isAdv'] == 1) { ?>
+                    <tr class="tr-ad">
+                        <td>Uadressert reklame nei takk</td>
+                        <?php if(session('customer')['pb-free'] == 1) { ?>
+                        <td></td>
+                        <?php } ?>
+                        <td><i class="fa fa-trash-o pointer remove-ad" data-toggle="modal" data-target="#remove-adModal" data-toggle="modal"></i></td>
+                    </tr>
+                    <?php } ?>
+
+<!--                     <tr>
+                        <td>Totalt:</td>
+                        <td>kr <span id="total-price-cont"><?=$totalPrice?></span>,-</td>
+                    </tr> -->
+            </table>
+        </div>
+    </div>
+    <div class="col-12 col-md-5 offset-md-2">
+        <?php
+        $check = '<i class="fa fa-check"></i>';
+        $times = '<i class="fa fa-times"></i>';
+        ?>
+        <div class="smry-rcrd p-4 mt-5 mt-md-0 h-auto">
+            <h5>Gjennomgang av avtaler hos</h5>
+            <table class="table">
+                <tr>
+                    <td width="30px"><?=isset(session('customer')['switch_service']['isStrom']) ? $check : $times; ?></td>
+                    <td>Strøm</td>
+                </tr>
+                <tr>
+                    <td><?=isset(session('customer')['switch_service']['isTV']) ? $check : $times; ?></td>
+                    <td>TV/Internet</td>
+                </tr>
+                <tr>
+                    <td><?=isset(session('customer')['switch_service']['isFlyttevask']) ? $check : $times; ?></td>
+                    <td>Flyttevask</td>
+                </tr>
+                <tr>
+                    <td><?=isset(session('customer')['switch_service']['isBoligalarm']) ? $check : $times; ?></td>
+                    <td>Boligalarm</td>
+                </tr>
+            </table>
+        </div> 
     </div>
 </div>
 <div class="row mb-5">

@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta description="Flyttesentralen home page">
+        <meta description="Flytteregisteret home page">
 
-        <title>Flyttesentralen - @yield('title')</title>
+        <title>Flytteregisteret - @yield('title')</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
@@ -40,7 +40,7 @@
         <nav class="navbar navbar-expand-lg px-0">
         <a class="navbar-brand title" href="/">
         <img src="{{ asset('images/nettflytt-logo.png')}}" width="40" height="40" class="d-inline-block align-top" alt="Netflytt logo">
-        Flyttesentralen
+        Flytteregisteret
         </a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">

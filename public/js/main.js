@@ -946,7 +946,7 @@ $(document).ready(function() {
         }else if(validN.substr(0, 1) != "4" && validN.substr(0, 1) != "9"){
             // console.log("error 2: "+validN.substr(0, 1));
             alert("Telefonnumeret i skjemaet er feil, vennligst skriv inn riktig telefonnummer.");
-        }else if($(".person").length == 0 && age <= 18){
+        }else if($(".person").length == 0 && age < 18){
                 alert("Hovedpersonen må være 18 år gammel");
         }else{
          var pCtr   = $(".person").length;

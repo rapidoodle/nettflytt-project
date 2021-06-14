@@ -69,7 +69,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                 age--;
             }    
             // console.log(age);
-            if(age > 18){
+            if(age >= 18){
                 valid = true;
             }else{
                 alert("Hovedpersonen må være 18 år gammel");
@@ -233,7 +233,7 @@ $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbol
                                         <select type="text" required="true" class="main-field form-control req-fld"  id="birth_year" name="birth_year">
                                             <option value="" disabled selected>År</option>
                                         <?php 
-                                        for ($i = 2020; $i >= 1920 ; $i--) {?>
+                                        for ($i = 2003; $i >= 1920 ; $i--) {?>
                                             <option value="<?=$i?>"><?=$i?></option>
                                         <?php } ?>
                                         </select>
