@@ -25,7 +25,7 @@
             <tbody>
                 @foreach ($records as $data)
                 <?php
-                    $type =$data->type == 1 ? "Topp 5 garanti" : ($data->type == 2 ? "Strøm til lavpris" : ($data->type == 3 ? "Strøm til Lavpris (Kampanje)" : ( $data->type == 4 ? "Sesongpris" : "N/A")));
+                    $type =$data->type == 1 ? "Topp 5 garanti" : ($data->type == 2 ? "Strøm til lavpris" : ($data->type == 3 ? "Strøm til Lavpris (Kampanje)" : ( $data->type == 4 ? "Sesongpris" : ($data->type == 5 ? "(Kampanje)" : "N/A"))));
                 ?>
                     <tr>
                         <td>{{$data->name}}</td>

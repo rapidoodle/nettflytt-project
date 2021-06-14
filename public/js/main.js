@@ -282,7 +282,7 @@ $(document).ready(function() {
         $("#isNorges").val("1");
         $("#isPostbox").val("1");
         $(".btn-next-summary").attr("is-postbox", "1");
-        sendSMS(3, false);
+        sendSMS(5, false);
     });
 
     $(".btn-postbox").click(function(){

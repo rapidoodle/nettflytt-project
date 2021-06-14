@@ -147,7 +147,25 @@ if(is_array($pbNames)){
                 <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
                 <h5 class="my-4">KAMPANJE!</h5>
                 <div class="mb-4">Gratis postkasseskilt ved bestilling av strøm</div>
-                <a id="btn-add-postbox" class="btn btn-violet btn-show-lott" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill Strøm til Lavpris</a>
+                <table class="text-left my-4">
+                    <tr>
+                        <td class="pr-2"><i class="fas fa-check"></i></td>
+                        <td>Ingen påslag eller bindingstid</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-2"><i class="fas fa-check"></i></td>
+                        <td>Abonnementspris på 49 kr/md</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-2"><i class="fas fa-check"></i></td>
+                        <td>Spotpris om sommeren og variabelpris om vinteren</td>
+                    </tr>
+                    <tr>
+                        <td class="pr-2"><i class="fas fa-check"></i></td>
+                        <td>Fornøydhetsgaranti</td>
+                    </tr>
+                </table>
+                <a id="btn-add-postbox" class="btn btn-violet btn-show-lott" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true">Bestill Sesongpris strøm</a>
             </div>
         </div>
         <div class="text-left bg-light p-4 collapse multi-collapse">
