@@ -43,7 +43,7 @@
     <div class="ps-cont text-center mt-5 mt-md-0" id="power-supply">
         <h5 class="mini-header">
         Velg ny strømavtale for <?=session('customer')['new_address']?></h5>
-        <div class="row px-4 mb-5">
+<!--         <div class="row px-4 mb-5">
             <div class="col-12 offset-md-1 col-md-5 text-center p-4">
                 <div class="ps-option p-4 mx-0 mx-lg-5">
                     <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
@@ -65,6 +65,40 @@
 
                     <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" data-type="2">Bestill “Topp 5 Garanti</a>
                 </div>
+            </div>
+        </div> -->  
+        <div class="row px-4 mb-5">
+            <div class="col-12 text-center p-4">
+                <center>
+                <div class="w-350 ps-option p-4">
+                    <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
+                    <h5 class="my-4">SESONGPRIS</h5>
+
+                    <b>For deg som ønsker en mer stabil strømpris i vintermånedene.</b>
+                    <table class="text-left my-4">
+                        <tr>
+                            <td class="pr-2"><i class="fas fa-check"></i></td>
+                            <td>Ingen påslag eller bindingstid</td>
+                        </tr>
+                        <tr>
+                            <td class="pr-2"><i class="fas fa-check"></i></td>
+                            <td>Abonnementspris på 49 kr/md</td>
+                        </tr>
+                        <tr>
+                            <td class="pr-2"><i class="fas fa-check"></i></td>
+                            <td>Spotpris om sommeren og variabelpris om vinteren</td>
+                        </tr>
+                        <tr>
+                            <td class="pr-2"><i class="fas fa-check"></i></td>
+                            <td>Fornøydhetsgaranti</td>
+                        </tr>
+                    </table>
+
+                    <a class="btn btn-violet px-4 py-2 btn-go-power" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="true" data-type="4">
+                    Bestill “Sesongpris”
+                    </a>
+                </div>
+                </center>
             </div>
         </div>  
     </div>

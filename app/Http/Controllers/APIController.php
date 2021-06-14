@@ -60,7 +60,7 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "0TqcrColNxKkWVIAv0ZJelFT95VGpv78dbQmQygWqPBSiMd94UDosZ29yobySdCK");
+        echo Helper::getStorage(Helper::getToken(), "tGMbdmDg133jMCvxXiC7v22wXHX75I7X12qwu7eiHLHZeUaqEO7hCBBwJ15d7NmU");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
@@ -214,16 +214,16 @@ class APIController extends Controller
 
         //mailbox sign pricing
         if(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
-            session()->forget('customer.sign_mailbox-a');
-            session()->forget('customer.sign_mailbox-c');
+            session()->put('customer.sign_mailbox-a', 0);
+            session()->put('customer.sign_mailbox-c', 0);
             session()->put("customer.sign_mailbox-b", $names);
         }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
-            session()->forget('customer.sign_mailbox-a');
-            session()->forget('customer.sign_mailbox-b');
+            session()->put('customer.sign_mailbox-a', 0);
+            session()->put('customer.sign_mailbox-b', 0);
             session()->put("customer.sign_mailbox-c", $names);
         }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
-            session()->forget('customer.sign_mailbox-b');
-            session()->forget('customer.sign_mailbox-c');
+            session()->put('customer.sign_mailbox-b', 0);
+            session()->put('customer.sign_mailbox-c', 0);
             session()->put("customer.sign_mailbox-a", $names);
         }else{
             session()->forget('customer.sign_mailbox-a');
@@ -331,16 +331,16 @@ class APIController extends Controller
 
             //mailbox sign pricing
             if(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
-                session()->forget('customer.sign_mailbox-a');
-                session()->forget('customer.sign_mailbox-c');
+                session()->put('customer.sign_mailbox-a', 0);
+                session()->put('customer.sign_mailbox-c', 0);
                 session()->put("customer.sign_mailbox-b", $names);
             }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
-                session()->forget('customer.sign_mailbox-a');
-                session()->forget('customer.sign_mailbox-b');
+                session()->put('customer.sign_mailbox-a', 0);
+                session()->put('customer.sign_mailbox-b', 0);
                 session()->put("customer.sign_mailbox-c", $names);
             }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
-                session()->forget('customer.sign_mailbox-b');
-                session()->forget('customer.sign_mailbox-c');
+                session()->put('customer.sign_mailbox-b', 0);
+                session()->put('customer.sign_mailbox-c', 0);
                 session()->put("customer.sign_mailbox-a", $names);
             }else{
                 session()->forget('customer.sign_mailbox-a');
@@ -374,18 +374,18 @@ class APIController extends Controller
         $names = is_array(session('customer')['pb-names']) ? session('customer')['pb-names'] : explode(",", session('customer')['pb-names']);
 
         if(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
-            session()->forget('customer.sign_mailbox-b');
-            session()->forget('customer.sign_mailbox-c');
+            session()->put('customer.sign_mailbox-b', 0);
+            session()->put('customer.sign_mailbox-c', 0);
             session()->put("customer.sign_mailbox-a", $names);
             echo "sign_mailbox-a";
         }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
-            session()->forget('customer.sign_mailbox-a');
-            session()->forget('customer.sign_mailbox-b');
+            session()->put('customer.sign_mailbox-a', 0);
+            session()->put('customer.sign_mailbox-b', 0);
             session()->put("customer.sign_mailbox-c", $names);
             echo "sign_mailbox-c";
         }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
-            session()->forget('customer.sign_mailbox-a');
-            session()->forget('customer.sign_mailbox-c');
+            session()->put('customer.sign_mailbox-a', 0);
+            session()->put('customer.sign_mailbox-c', 0);
             session()->put("customer.sign_mailbox-b", $names);
             echo "sign_mailbox-b";
         }else{

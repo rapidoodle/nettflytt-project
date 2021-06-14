@@ -51,7 +51,7 @@ Route::get('/folkeregisteret', function () {
     return view('index', ['type' => "folkeregisteret"]);
 });
 Route::get('/betaling/#{number}', 'VippsController@index');
-Route::get('/betaling', 'VippsController@checker');
+Route::get('/betaling', 'VippsController@index');
 Route::get('/profile', 'ProfileController@index');
 Route::get('/logginn', 'ProfileController@logginn');
 Route::get('/logout', function () {
@@ -83,6 +83,7 @@ Route::post('/create-user', 'UserManagementController@create')->name('create');
 //CRONS
 Route::get('/get-inbox', 'Crontroller@getInbox')->name('getInbox');
 Route::get('/get-offers', 'Crontroller@getOffers')->name('getOffers');
+Route::get('/get-vipps', 'Crontroller@getVippsByDate')->name('getVippsByDate');
 
 //API
 Route::post('/saveSale', 'APIController@saveSale');

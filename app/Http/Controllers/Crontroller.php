@@ -36,7 +36,7 @@ class Crontroller extends Controller
 
     public function getOffers(){
 
-        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-06 00:00:00", "_created_to" => "2021-06-06 23:59:59" ]);
+        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-06 00:00:00", "_created_to" => "2021-06-06 12:59:59" ]);
 
             if($storages->_status == 0){
                 foreach ($storages->sids as $key => $value) {
@@ -73,5 +73,36 @@ class Crontroller extends Controller
                 }
             }
         echo json_encode($storages);
+    }
+
+    public function getVippsByDate(){
+
+        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-06 00:00:00", "_created_to" => "2021-06-06 23:59:59" ]);
+        $sids = array();
+
+            if($storages->_status == 0){
+                foreach ($storages->sids as $key => $value) {
+                    $storage = Helper::storageStatus(Helper::getToken(), $value, "payment");
+                    $arr     = json_decode($storage, false);
+                    $sid     = $value;
+                    if(isset($arr->_storage_status_list)){
+                        foreach ($arr->_storage_status_list as $key => $value) {
+                            if(($value->status == "reserved" || $value->status == "captured") && $value->id == "no.vipps"){
+                                if(!in_array($sid, $sids)){
+                                    $sids[] = $sid;              
+                                }
+                            }
+                        }
+                    }
+                }
+                if($sids){
+                    foreach ($sids as $key => $value) {
+                        echo $storage = Helper::getStorage(Helper::getToken(), $value);
+
+                        echo "<br><br>";
+                    }
+                }
+            }
+
     }
 }

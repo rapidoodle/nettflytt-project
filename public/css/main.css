@@ -990,3 +990,6 @@ p.f-12{
 label.font-weight-normal{
     font-weight: normal !important;
 }
+div.w-350{
+    max-width: 350px!important;
+}
