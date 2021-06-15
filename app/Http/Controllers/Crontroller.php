@@ -74,6 +74,17 @@ class Crontroller extends Controller
             }
         echo json_encode($storages);
     }
+    public function getStoragesByDate(){
+        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-11 00:00:00", "_created_to" => "2021-06-11 23:59:59" ]);
+
+        if($storages->_status == 0){
+            foreach ($storages->sids as $key => $value) {
+                $storage = Helper::getStorage(Helper::getToken(), $value);
+                echo $storage;
+                echo "<br><br>";
+            }
+        }
+    }
 
     public function getVippsByDate(){
 

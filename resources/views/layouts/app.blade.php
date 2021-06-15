@@ -102,6 +102,7 @@
                             <div class="card-body">
                                 <ul>
                                     <li><a href="/storage-update">Storage Update</a></li>
+                                    <li><a href="/sms-management">Manage SMS</a></li>
                                     <li><a href="/users-management">Manage Users</a></li>
 
                                 </ul>

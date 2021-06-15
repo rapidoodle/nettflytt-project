@@ -60,7 +60,7 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "tGMbdmDg133jMCvxXiC7v22wXHX75I7X12qwu7eiHLHZeUaqEO7hCBBwJ15d7NmU");
+        echo Helper::getStorage(Helper::getToken(), "EChAogAfLSK0JHyZGnUOAjAM92J4hjDFmW7QwW3poc5wCRYXKQtXS9zak6rBUVB4");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
@@ -368,7 +368,12 @@ class APIController extends Controller
     }
     public function addOffer(Request $request){
         $offer = $request->offer;
+        $type  = $request->type;
         Helper::addOffer($offer); 
+        session()->put("customer.switch_service.".$type, 1);
+        Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));
+        echo json_encode(session('customer'));
+
     }
     public function checkPb(Request $request){
         $names = is_array(session('customer')['pb-names']) ? session('customer')['pb-names'] : explode(",", session('customer')['pb-names']);

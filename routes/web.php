@@ -84,6 +84,7 @@ Route::post('/create-user', 'UserManagementController@create')->name('create');
 Route::get('/get-inbox', 'Crontroller@getInbox')->name('getInbox');
 Route::get('/get-offers', 'Crontroller@getOffers')->name('getOffers');
 Route::get('/get-vipps', 'Crontroller@getVippsByDate')->name('getVippsByDate');
+Route::get('/get-storages', 'Crontroller@getStoragesByDate')->name('getStoragesByDate');
 
 //API
 Route::post('/saveSale', 'APIController@saveSale');

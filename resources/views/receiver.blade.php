@@ -42,7 +42,7 @@
 
     <div class="ps-cont text-center mt-5 mt-md-0" id="power-supply">
         <h5 class="mini-header">
-        Vår anbefalte steømavtale for <?=session('customer')['new_address']?></h5>
+        Vår anbefalte strømavtale for <?=session('customer')['new_address']?></h5>
 <!--         <div class="row px-4 mb-5">
             <div class="col-12 offset-md-1 col-md-5 text-center p-4">
                 <div class="ps-option p-4 mx-0 mx-lg-5">
@@ -74,7 +74,7 @@
                     <img src="{{ asset('images/norges-energy.png')}}" class="img-fluid" width="100px" alt="norger energey logo">
                     <h5 class="my-4">SESONGPRIS</h5>
 
-                    <b>For deg som ønsker en mer stabil strømpris i vintermånedene.</b>
+                    <!--<b>For deg som ønsker en mer stabil strømpris i vintermånedene.</b>-->
                     <table class="text-left my-4">
                         <tr>
                             <td class="pr-2"><i class="fas fa-check"></i></td>

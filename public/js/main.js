@@ -400,12 +400,14 @@ $(document).ready(function() {
         var offer = $(this).attr("data-description");
         fields["switch_service."+$(this).attr("data-offer")] = 1;
         if($(this).attr("data-offer") == "isBoligalarm"){
-            updateCustomerData(fields, true, "/postkasse/");
+            // updateCustomerData(fields, true, "/postkasse/");
+            addOffer(offer, $(this).attr("data-offer"), true, "/postkasse/");
         }else{
-            updateCustomerData(fields);
+            // updateCustomerData(fields);
+            addOffer(offer, $(this).attr("data-offer"));
         }
 
-        addOffer(offer);
+        // addOffer(offer, true, "/postkasse/");
 
     });
 
@@ -771,13 +773,16 @@ $(document).ready(function() {
         });
     }
 
-    function addOffer(offer){
+    function addOffer(offer, type, isRed = false, link = null){
         $.ajax({
             type: "POST",
-            data: { _token : csrf.val(), offer : offer},
+            data: { _token : csrf.val(), offer : offer, type : type},
             url: "/addOffer",
             success: function(response){
-                // console.log(response);
+                if(isRed == true){
+                    window.location.href = link;
+                }
+                return true;
             }
         });
     }
