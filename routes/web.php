@@ -77,6 +77,8 @@ Route::post('/select-update', 'StorageUpdateController@selectUpdate')->name('sel
 Route::post('/update-norges', 'ReportsController@updateNorges')->name('updateNorges');
 //users management
 Route::get('/users-management', 'UserManagementController@index')->name('index');
+Route::get('/sms-management', 'SMSManagementController@index')->name('index');
+Route::post('/save-sms', 'SMSManagementController@saveSMS')->name('saveSMS');
 Route::post('/create-user', 'UserManagementController@create')->name('create');
 
 

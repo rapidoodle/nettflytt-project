@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
-
+use App\SMS;
 class Helper
 {
 
@@ -423,6 +423,13 @@ class Helper
 
     public static function checkCompanyStatus($date, $token){
 
+    }
+
+    public static function getSMS($type){
+    	$obj = SMS::where("type", "=", $type)->first();
+
+    	return $obj->text;
+    	// return $obj[->text];
     }
 }
 

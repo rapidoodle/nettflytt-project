@@ -406,9 +406,6 @@ $(document).ready(function() {
             // updateCustomerData(fields);
             addOffer(offer, $(this).attr("data-offer"));
         }
-
-        // addOffer(offer, true, "/postkasse/");
-
     });
 
 

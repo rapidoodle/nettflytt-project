@@ -98,7 +98,7 @@
                             </div>
                         </div>
                         <div class="card mt-4">
-                            <div class="card-header"><h4>{{ __('Admin Tools') }}</h4></div>
+                            <div class="card-header"><h5>{{ __('Admin Tools') }}</h5></div>
                             <div class="card-body">
                                 <ul>
                                     <li><a href="/storage-update">Storage Update</a></li>
