@@ -8,6 +8,9 @@ $monthsE = ['January', 'February', 'March', 'April', 'Mai', 'Juni', 'Juli', 'Aug
 
 $others  = ['enebolig2' => 'Enebolig m/utleiedel', 'tomannsbolig' => 'Tommansbolig', 'tomannsbolig2' => 'Tommansbolig m/utleiedel', 'rekkehus' => 'Rekkehus', 'hybel' => 'Hybel'];
 // XzDgiIikzQLdksklE0OdQW572ifi8f9d9ztgs6IHVhHSUNfws33U81c7UKeZfUer
+
+//save unique visitor
+Helper::saveVisitor();
 ?>
 <img src="{{ asset('images/couple-desktop.webp')}}" class="img-fluid d-sm-none my-4" alt="smiley couple taking selfie while packing move out">
 <div class="row px-2 px-lg-4 mb-5">

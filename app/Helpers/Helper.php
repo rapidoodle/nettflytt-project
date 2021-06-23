@@ -3,10 +3,16 @@
 namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 use App\SMS;
+use Illuminate\Http\Request;
+use App\Conversion;
 class Helper
 {
 
     public static function saveSale($provider = "strex"){
+
+    	//save conversion;
+    	Conversion::where("ip", "=", Helper::getIp())->update(["sale" => 1]);
+
         return DB::insert('Insert into sales (storage_token, name, phone_number, email, total_price, is_postbox, is_advertise, provider) values (?, ?, ?, ?, ?, ?, ?, ?)', [session('customer._storageToken'), session('customer.full-name'), session('customer.phone'), session('customer.email'), session('customer.total_price'), session('customer.mailbox-sign'), session('customer.isAdv'), $provider]);   
     }
 
@@ -430,6 +436,34 @@ class Helper
 
     	return $obj->text;
     	// return $obj[->text];
+    }
+
+    public static function getIp(){
+	    foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+	        if (array_key_exists($key, $_SERVER) === true){
+	            foreach (explode(',', $_SERVER[$key]) as $ip){
+	                $ip = trim($ip); // just to be safe
+	                if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+	                    return $ip;
+	                }
+	            }
+	        }
+	    }
+	    return request()->ip(); // it will return server ip when no client ip found
+	}
+
+    public static function saveVisitor(){
+    	//check if unique
+    	$ip    = Helper::getIp();
+    	$check = Conversion::where("ip", "=", $ip)->first();
+
+    	if($check == null){
+			$conv 		= new Conversion;
+			$conv->ip 	= $ip;
+			$conv->sale = 0;
+			$conv->save();    		
+    	}
+
     }
 }
 

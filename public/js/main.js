@@ -609,6 +609,23 @@ $(document).ready(function() {
         $("#"+next).fadeIn();
     });
 
+
+    //VIPPS
+    if($("#isVipps").length == 1){
+    console.log($("#isVipps").val());
+        //check if number is in storage
+        $.ajax({
+            type: "POST",
+            data: { _token : csrf.val(), number : number},
+            url: "/vipps-check-mobile",
+            success: function(response){
+                console.log(response.result);
+                if(response.result == false){
+                    
+                }
+            }
+        });
+    }
     //IN FUNCTIONS
 
     function updateCompanyList(){

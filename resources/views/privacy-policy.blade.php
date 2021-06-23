@@ -14,7 +14,7 @@
         <table class="mb-4">
             <tr>
                 <td>Navn på selskapet:</td>
-                <td>Nettflytt AS/td>
+                <td>Nettflytt AS</td>
             </tr>
             <tr>
                 <td>Organisasjonsnummer:</td>
@@ -29,8 +29,8 @@
                 <td><a href="/kontakt-oss">https://www.flytteregisteret.no/kontakt-oss</a></td>
             </tr>
             <tr>
-                <td>Telefonnummer:</td>
-                <td>+47 940 59 094</td>
+                <td>E-post:</td>
+                <td><a href="mailto:kundesenter@flytteregsiteret.no">Kundesenter@flytteregsiteret.no</a></td>
             </tr>
             <tr>
                 <td>Postadresse:</td>

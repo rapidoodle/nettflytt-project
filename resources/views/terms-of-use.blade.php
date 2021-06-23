@@ -35,9 +35,7 @@
 
         <b>Kontaktinformasjon og kundeservice</b><br>
         <b>Mailadresse:</b>
-        <p>kundesenter@flytteregisteret.no - Vi svarer vanligvis  innen 24 timer</p>
-        <b>Telefonnummer:</b>
-        <p>94059094</p>
+        <p><a href="mailto:kundesenter@flytteregisteret.no">kundesenter@flytteregisteret.no</a> - Vi svarer vanligvis  innen 24 timer</p>
 <!--     <center class="my-5">
         <button class="btn btn-extra-lg">Tilbake til forsiden</button>
     </center> -->

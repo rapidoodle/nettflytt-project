@@ -13,7 +13,7 @@ class Crontroller extends Controller
 {
     //
     public function getInbox(){
-    	$oClient  = Client::account('default');    //Connect to the IMAP Server
+        $oClient  = Client::account('default');    //Connect to the IMAP Server
         $oClient->connect();
 
         $aFolder  = $oClient->getFolders();
@@ -75,14 +75,49 @@ class Crontroller extends Controller
         echo json_encode($storages);
     }
     public function getStoragesByDate(){
-        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-11 00:00:00", "_created_to" => "2021-06-11 23:59:59" ]);
+        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-16 00:00:00", "_created_to" => "2021-06-16 23:59:59" ]);
 
         if($storages->_status == 0){
             foreach ($storages->sids as $key => $value) {
                 $storage = Helper::getStorage(Helper::getToken(), $value);
-                echo $storage;
-                echo "<br><br>";
+                $obj = json_decode($storage);
+                if($obj->_state == "payment-captured" || $obj->_state == "payment-reserved"){
+                    $data[] = [$obj->email, $obj->phone, $obj->first_name, $obj->last_name, "no", $obj->old_zipcode];
+                }
+
+
+                // if(($obj->_state == "payment-captured" || $obj->_state == "payment-reserved") && (isset($obj->billing_id_vipps))){
+                //     echo $storage;
+                //     echo "<br><br>";
+                // }
             }
+
+            echo json_encode($data);
+            $headers = ['Email', 'Phone', 'First Name', 'Last Name', 'Country', 'Zip'];
+
+            $file = fopen("../storage/app/public/google_ads.csv", "w");
+            foreach($data as $d){
+                fputcsv($file, $d);
+            }
+            fclose($file);
+        }
+    }
+
+    public function getSalesByCompany(Request $request){
+        // $dateFrom = $request->date_from;
+        // $dateFrom = $request->date_to;
+        // $company  = $request->date_company;
+        // $isPaid   = $request->is_paid;
+        $storages = Helper::seachStorageBy(["_created_from" => "2021-06-01 00:00:00", "_created_to" => "2021-06-30 23:59:59", "_address_change-companynr" => "982584027"]);
+
+        if($storages->_status == 0){
+            $total = 0;
+            foreach ($storages->sids as $key => $value) {
+
+                $total++;
+            }
+
+            echo $total;
         }
     }
 
@@ -100,7 +135,7 @@ class Crontroller extends Controller
                         foreach ($arr->_storage_status_list as $key => $value) {
                             if(($value->status == "reserved" || $value->status == "captured") && $value->id == "no.vipps"){
                                 if(!in_array($sid, $sids)){
-                                    $sids[] = $sid;              
+                                    $sids[] = $storage;              
                                 }
                             }
                         }

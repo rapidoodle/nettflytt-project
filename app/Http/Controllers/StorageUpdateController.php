@@ -23,7 +23,8 @@ class StorageUpdateController extends Controller
     public function search(Request $request){
     	$token 	  = Helper::getToken(); 
 		$u 	  	  = "u46114-".session("_sessionSalt");
-		$data 	  = array("type" => "AND", "search" => json_encode(["phone" => $request['query']])); 
+        $data     = array("type" => "AND", "search" => json_encode(["phone" => $request['query']])); 
+		// $data 	  = array("type" => "AND", "search" => json_encode(["_address_change-companynr" => $request['query']])); 
 		// $data 	  = array("type" => "AND", "search" => json_encode(["_recordid" => 175719])); 
 		$endpoint = "https://".$u.":".$token."@api.nettflytt.no/api/nettflytt/2020-10/storage/search";
 	    $postdata = http_build_query( $data );
