@@ -1060,5 +1060,4 @@ $(document).ready(function() {
         return gclid;
     }
 
-saveSale();
 });
