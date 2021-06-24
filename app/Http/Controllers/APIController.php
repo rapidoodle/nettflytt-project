@@ -60,7 +60,7 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "2xtw1rAapKxDF1kHHndaR8gTEdNovXIqdHWQW9ChreJgu0qSDlQyfMJwCrYNQqpI");
+        echo Helper::getStorage(Helper::getToken(), "ErVSR3P5Z65XoQ6bUWJEIFujqttgFtS5kXuHbONxdnaw3KAZKaoWNL19UpckLTAj");
 
 
         // echo json_encode(Helper::searchLocation("1461"));
@@ -155,33 +155,34 @@ class APIController extends Controller
             $request['pb-price']  = 0;
         }
 
+        $request['ip_address']     = session('customer.ip_address') != "" ? session('customer.ip_address') : Helper::getIp();
         $request['power-type']     = session('customer.power-type') != "" ? session('customer.power-type') : 0;
-        $request['tracking_gclid']           = session('customer.tracking_gclid') != "" ? session('customer.tracking_gclid') : $request['tracking_gclid'];
-        $request['adv-price']     = session('customer.adv-price') != "" ? session('customer.adv-price') : 0;
-        $request['isAdv']         = session('customer.isAdv') != "" ? session('customer.isAdv') : 0;
-        $request['price']         = 149;
-        $request['basis']         = 149;
-        $request['total_price']   = 149 + $request['pb-price'] + $request['adv-price'];
-        $request['pb-free']       = session('customer.pb-free') != "" ? session('customer.pb-free') : 0;
-        $request['mailbox-sign']  = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 0;
-        $request['phone']         = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
-        $request['totalPerson']   = $pctr == 0 ? 1 : $pctr;
-        $request['services']      = session('customer.services') != "" ? session('customer.services') : array();
-        $request['switch_service']        = session('customer.switch_service') != "" ? session('customer.switch_service') : array();
-        $request['postbox']       = session('customer.postbox') != "" ? session('customer.postbox') : array();
-        $request['old_post']      = $request['old_zipcode'].' '.$request['old_place'];
+        $request['tracking_gclid'] = session('customer.tracking_gclid') != "" ? session('customer.tracking_gclid') : $request['tracking_gclid'];
+        $request['adv-price']      = session('customer.adv-price') != "" ? session('customer.adv-price') : 0;
+        $request['isAdv']          = session('customer.isAdv') != "" ? session('customer.isAdv') : 0;
+        $request['price']          = 149;
+        $request['basis']          = 149;
+        $request['total_price']    = 149 + $request['pb-price'] + $request['adv-price'];
+        $request['pb-free']        = session('customer.pb-free') != "" ? session('customer.pb-free') : 0;
+        $request['mailbox-sign']   = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 0;
+        $request['phone']          = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
+        $request['totalPerson']    = $pctr == 0 ? 1 : $pctr;
+        $request['services']       = session('customer.services') != "" ? session('customer.services') : array();
+        $request['switch_service'] = session('customer.switch_service') != "" ? session('customer.switch_service') : array();
+        $request['postbox']        = session('customer.postbox') != "" ? session('customer.postbox') : array();
+        $request['old_post']       = $request['old_zipcode'].' '.$request['old_place'];
+        $request['new_post']       = $request['new_zipcode'].' '.$request['new_place'];
+        $request['tag']            = "malabon01";
+        $request['isNorges']       = session('customer.isNorges') != "" ? session('customer.isNorges') : 0;
+        $request['_status']        = session('customer._status') != "" ? session('customer._status') : "in progress";
+        $request['_storageToken']  = session('customer._storageToken') != "" ? session('customer._storageToken') : "";
+        $request['_keyLogin']      = session('customer._keyLogin') != "" ? session('customer._keyLogin') : substr(time(), -5);
+        $request['pb-names']       = session('customer.pb-names') != "" ? session('customer.pb-names') : $names;
+        $request['is-subscribe']   = session('customer.is-subscribe') != "" ? session('customer.is-subscribe') : false;
+        $request["vipps-result"]   = session('customer.vipps-result') != "" ? session('customer.vipps-result') : [];
+        $request['isLogged']       = session('customer.isLogged') != "" ? session('customer.isLogged') : false;
+        $request['moving_date']    = session('customer.moving_date_year') != "" ? session('customer.moving_date_year') : $request['moving_date_year']."-".$request['moving_date_month']."-".$request['moving_date_day'];
         $request['sign_send_to_address'] = $request['sign_send_to_address'] != "" ? session('sign_send_to_address') : "";
-        $request['new_post']      = $request['new_zipcode'].' '.$request['new_place'];
-        $request['tag']           = "malabon01";
-        $request['isNorges']      = session('customer.isNorges') != "" ? session('customer.isNorges') : 0;
-        $request['_status']       = session('customer._status') != "" ? session('customer._status') : "in progress";
-        $request['_storageToken'] = session('customer._storageToken') != "" ? session('customer._storageToken') : "";
-        $request['_keyLogin']     = session('customer._keyLogin') != "" ? session('customer._keyLogin') : substr(time(), -5);
-        $request['pb-names']      = session('customer.pb-names') != "" ? session('customer.pb-names') : $names;
-        $request['is-subscribe']  = session('customer.is-subscribe') != "" ? session('customer.is-subscribe') : false;
-        $request["vipps-result"]  = session('customer.vipps-result') != "" ? session('customer.vipps-result') : [];
-        $request['isLogged']      = session('customer.isLogged') != "" ? session('customer.isLogged') : false;
-        $request['moving_date']   = session('customer.moving_date_year') != "" ? session('customer.moving_date_year') : $request['moving_date_year']."-".$request['moving_date_month']."-".$request['moving_date_day'];
 
         unset($request['people']);
         unset($request['_token']);
@@ -289,7 +290,7 @@ class APIController extends Controller
     public function confirmOtp(Request $request){
         $otp            = $request->otp;
         $phone          = session('customer')['phone'];
-        $transactionId  = session('customer')['billing_id_strex'];
+        $transactionId  = isset(session('customer')['billing_id_strex']) ? session('customer')['billing_id_strex'] : "";
         
         //check otp
         echo $result = Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp, session('customer')['total_price']);

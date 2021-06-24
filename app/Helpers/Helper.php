@@ -11,7 +11,7 @@ class Helper
     public static function saveSale($provider = "strex"){
 
     	//save conversion;
-    	Conversion::where("ip", "=", Helper::getIp())->update(["sale" => 1]);
+    	Conversion::where("ip", "=", Helper::getIp())->update(["sale" => 1, "token" => session('customer._storageToken')]);
 
         return DB::insert('Insert into sales (storage_token, name, phone_number, email, total_price, is_postbox, is_advertise, provider) values (?, ?, ?, ?, ?, ?, ?, ?)', [session('customer._storageToken'), session('customer.full-name'), session('customer.phone'), session('customer.email'), session('customer.total_price'), session('customer.mailbox-sign'), session('customer.isAdv'), $provider]);   
     }
@@ -78,9 +78,9 @@ class Helper
     }
 
     public static function tokenDetails($token){
-		    $u 	  	  = "u46114-".session("_sessionSalt");
+		    $u 	  	  = "u46114".session("_sessionSalt");
 		    $newToken = Helper::getToken();
-		    $url 	  = "https://".$u.":".$newToken."@api.nettflytt.no/api/nettflytt/2020-10/token/".$token."/details";
+		    echo $url 	  = "https://".$u.":".$newToken."@api.nettflytt.no/api/nettflytt/2020-10/token/".$token."/details";
 		    $json 	  = file_get_contents( $url, FALSE);
 			$res 	  = json_decode( $json, true );
 			
@@ -426,6 +426,7 @@ class Helper
 
         return $obj;
     }
+
 
     public static function checkCompanyStatus($date, $token){
 

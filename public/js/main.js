@@ -621,7 +621,7 @@ $(document).ready(function() {
             success: function(response){
                 console.log(response.result);
                 if(response.result == false){
-                    
+
                 }
             }
         });
@@ -1060,5 +1060,5 @@ $(document).ready(function() {
         return gclid;
     }
 
-
+saveSale();
 });
