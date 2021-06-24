@@ -3,6 +3,7 @@
 namespace App\Helpers;
 use Illuminate\Support\Facades\DB;
 use App\SMS;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 use App\Conversion;
 class Helper
@@ -178,7 +179,8 @@ class Helper
 	    $context  = stream_context_create( $options );
 	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
 		$response = json_decode($json);
-
+		Log::info("billing-otp response: ".$json);
+		
 	    return $response->transactionid;
     }
     public static function login($token, $phone, $password){
