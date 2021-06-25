@@ -180,7 +180,7 @@ class Helper
 	    $json 	  = file_get_contents( $endpoint, FALSE, $context);
 		$response = json_decode($json);
 		Log::info("billing-otp response: ".$json);
-		
+		session()->put("billing_id_strex", $response->transactionid);
 	    return $response->transactionid;
     }
     public static function login($token, $phone, $password){

@@ -690,7 +690,7 @@ $(document).ready(function() {
                     failedProgress();
                     window.location.href = "/betaling#"+newPhone;
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "InsufficientFunds"){
-                    $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Insufficient Funds");
+                    $("#tbl-loading tr:nth-child(4) td:nth-child(2) span").html("Ikke dekning på kontantkort");
                     failedProgress();
                     window.location.href = "/betaling#"+newPhone;
                 }else if(obj.status == 0 && obj.strex_resultcode == "Failed" && obj.strex_detailedstatuscode == "OneTimePasswordExpired"){

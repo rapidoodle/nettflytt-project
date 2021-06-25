@@ -190,7 +190,7 @@ class APIController extends Controller
          // send otp for the first time
         if(!$request->session()->has('billing_id_strex')){
             $tId = Helper::sendOTP(Helper::getToken(), $request['phone'], "Flyttereg");
-            session()->put("billing_id_strex", $tId);
+            // session()->put("billing_id_strex", $tId);
             $request['billing_id_strex'] = $tId;
         }
 
@@ -290,9 +290,10 @@ class APIController extends Controller
     public function confirmOtp(Request $request){
         $otp            = $request->otp;
         $phone          = session('customer')['phone'];
-        $transactionId  = isset(session('customer')['billing_id_strex']) ? session('customer')['billing_id_strex'] : "";
+        $transactionId  = session('billing_id_strex');
         
         //check otp
+        Log::info("Confirm otp request: ".json_encode(array(session('customer')['phone'], $transactionId, $otp, session('customer')['total_price'])));
         echo $result = Helper::confirmOtp(Helper::getToken(), session('customer')['phone'], $transactionId, $otp, session('customer')['total_price']);
         Log::info("Confirm otp result: ".$result);
     }
