@@ -3,13 +3,12 @@
 @section('content')
 <!-- 47101010 -->
 <!-- 29257 -->
-<!-- {{json_encode(session('customer'))}} -->
 <?php
 $now        = time(); // or your date as well
 $your_date  = strtotime(session('customer')['_created']);
-$datediff   = $now - $your_date;
+$datediff   = $your_date - $now;
 $days       = round($datediff / (60 * 60 * 24));
-$hours      = $days * 24;
+$hours      = $days * 24 * 24;
 
 if($hours < 1){
     $status = "status_orange.json"; 
@@ -132,6 +131,8 @@ if($hours < 1){
                 <h3 class="text-center">Ingen selskaper lagt til</h3>
             </div>
             @endif
+
+            @if($days <= 14)
             <div class="row">
                 <div class="col-12 col-md-7">
                     <div class="mb-4">
@@ -148,11 +149,8 @@ if($hours < 1){
                         </p>
                         <div class="bg-light w-100 p-4 search-no-result">
                             <h5>Det er dessverre ingen Norske selskaper som passer med søket ditt</h5>
-        <!--                <p> <b>Fant du ikke det du lette etter?</b></p>
-                            <button class="btn btn-other-search">Søk videre i brønnøysundregstrene</button> -->
                         </div>
                         <table class="table table-striped receiver-search-result">
-
                         </table>
                         <center>
                             <nav aria-label="Page navigation example" class="text-center">
@@ -189,6 +187,7 @@ if($hours < 1){
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
     <center class="mb-4">
