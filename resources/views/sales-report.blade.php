@@ -12,6 +12,9 @@ $dataPoints = array();
         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Sales Report</a>
     </li>
     <li class="nav-item" role="presentation">
+        <a class="nav-link" id="conversion-tab" data-toggle="tab" href="#conversion" role="tab" aria-controls="profile" aria-selected="false">Conversion</a>
+    </li>
+    <li class="nav-item" role="presentation">
         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Chart</a>
     </li>
 </ul>
@@ -45,6 +48,39 @@ $dataPoints = array();
                     <th>Email</th>
                     <th>Total</th>
                     <th>Sales date</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="conversion" role="tabpanel" aria-labelledby="conversion-tab">
+        <table id="conversionTable" class="display table mt-4" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Total Visitor</th>
+                    <th>Sales</th>
+                    <th>Conversion</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($conversion as $data)
+                <?php
+                    $perc = $data->sales * 100 / $data->total;
+                ?>
+                    <tr>
+                        <td>{{$data->total}}</td>
+                        <td>{{$data->sales}}</td>
+                        <td>{{number_format((float)$perc, 2, '.', '')}}% </td>
+                        <td>{{$data->date}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total Visitor</th>
+                    <th>Sales</th>
+                    <th>Conversion</th>
+                    <th>Date</th>
                 </tr>
             </tfoot>
         </table>

@@ -60,9 +60,15 @@ class APIController extends Controller
         // echo "<br>---------------<br>";
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
-        echo Helper::getStorage(Helper::getToken(), "ErVSR3P5Z65XoQ6bUWJEIFujqttgFtS5kXuHbONxdnaw3KAZKaoWNL19UpckLTAj");
+        // echo Helper::getStorage(Helper::getToken(), "ErVSR3P5Z65XoQ6bUWJEIFujqttgFtS5kXuHbONxdnaw3KAZKaoWNL19UpckLTAj");
 
+        $headers = ['First Name', 'Last Name', 'Email', 'Phone'];
 
+        $file = fopen("../storage/app/public/Strom.csv", "a");
+        foreach($data as $d){
+            fputcsv($file, $d);
+        }
+        fclose($file);
         // echo json_encode(Helper::searchLocation("1461"));
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
@@ -192,13 +198,14 @@ class APIController extends Controller
             $tId = Helper::sendOTP(Helper::getToken(), $request['phone'], "Flyttereg");
             // session()->put("billing_id_strex", $tId);
             $request['billing_id_strex'] = $tId;
+            Log::info("Send OTP result: " . session("billing_id_strex"));
+
         }
 
         session(['customer' => $request->all()]);
 
         session(['old_post'          => $request['old_zipcode'].' '.$request['old_place'],
                  'new_post'          => $request['new_zipcode'].' '.$request['new_place'],
-                 'billing_id_strex'  => session("billing_id_strex"),
                  'customer'          => $request->all()]);
 
         if(!isset($request['person0'])){
@@ -276,8 +283,6 @@ class APIController extends Controller
     public function sendSMS(Request $request){
         $message = Helper::getSMS($request->type);
 
-        // $request->type == 1 ? "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Topp 5 garanti. Du får strøm til kun 77,99 øre/kWh! Ingen månedsavgift. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/topp-5-garanti/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Flytteregisteret." : "Hei! Svar Ja på denne sms for å bekrefte strøm fra Norges Energi. Avtalen er Strøm til lavpris. Du får strøm til spotpris! Månedsbeløp 27 kr + 3,49øre/kWh. Ingen bindingstid og du har 14 dagers angrerett. Se vilkår: norgesenergi.no/stromavtaler/strom-til-lavpris/. Vennligst bekreft avtalen med å svare JA på denne meldingen. Mvh Flytteregisteret.";
-        
         echo Helper::sendPowerSMS(Helper::getToken(), session('customer')['phone'], 2099, $message, "power", session('customer._storageToken'));
 
         //set power type to storage
@@ -290,7 +295,7 @@ class APIController extends Controller
     public function confirmOtp(Request $request){
         $otp            = $request->otp;
         $phone          = session('customer')['phone'];
-        $transactionId  = session('billing_id_strex');
+        $transactionId  = str_replace("#", "", session('billing_id_strex'));
         
         //check otp
         Log::info("Confirm otp request: ".json_encode(array(session('customer')['phone'], $transactionId, $otp, session('customer')['total_price'])));

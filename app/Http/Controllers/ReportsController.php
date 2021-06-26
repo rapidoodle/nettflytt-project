@@ -38,7 +38,10 @@ class ReportsController extends Controller
         if(Auth::user()->type == 1){
             $allSales = DB::table('sales')->get();
             $sales    = DB::table('sales')->select(DB::raw('count(*) as total'), DB::raw('DATE(sales_date) as date'))->groupByRaw(DB::raw("DATE(sales_date)"))->get();
-            return view('sales-report', ['records' => $sales, 'allSales' => $allSales]);
+
+            $visitors  = DB::table('conversion')->select(DB::raw('count(*) as total'), DB::raw('SUM(conversion.sale = 1) as sales'), DB::raw('DATE(created_at) as date'))->groupByRaw(DB::raw("DATE(created_at)"))->get();
+
+            return view('sales-report', ['records' => $sales, 'allSales' => $allSales, "conversion" => $visitors]);
         }else{
             return redirect('/storage-update');
         }

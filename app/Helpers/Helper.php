@@ -18,7 +18,15 @@ class Helper
     }
 
     public static function addOffer($offer){
-        return DB::insert('Insert into offers (storage_token, service) values (?, ?)', [session('customer._storageToken'), $offer]);   
+        return DB::insert('Insert into offers (storage_token, service) values (?, ?)', [session('customer._storageToken'), $offer]);  
+
+		$headers = ['First Name', 'Last Name', 'Email', 'Phone'];
+
+		$file = fopen("../storage/app/public/".$offer.".csv", "w");
+		foreach($data as $d){
+			fputcsv($file, $d);
+		}
+		fclose($file);
     }
 
 	public static function firstName(string $string){
