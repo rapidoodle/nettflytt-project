@@ -83,6 +83,7 @@
                 </div>
             @endif -->
             <div class="content">
+                {{json_encode(session('customer'))}}
                 @yield('content')
             </div>
         </div>

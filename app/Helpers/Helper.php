@@ -18,9 +18,10 @@ class Helper
     }
 
     public static function addOffer($offer){
+    	$birthday = session('customer')['birth_year'].'-'.session('customer')['birth_month'].'-'.session('customer')['birth_day'];
 
-		$file = fopen("../storage/app/public/".$offer.".csv", "a");
-		$d = array(session('customer')['full-name'], session('customer')['email'], session('customer')['phone'], session('customer')['_recordid'], session('customer')['new_address'].' '.session('customer')['new_place'].' '.session('customer')['new_post'], session('customer')['new_house_type'], date("Y-m-d H:i:s"));
+		$file = fopen("../public/files/".$offer.".csv", "a");
+		$d = array(session('customer')['_recordid'], session('customer')['full-name'], session('customer')['email'], session('customer')['phone'], session('customer')['new_address'].' '.session('customer')['new_place'].' '.session('customer')['new_post'], session('customer')['new_house_type'], $birthday, session('customer')['moving_date'], session('customer')['_created']);
 		fputcsv($file, $d);
 		fclose($file);
 
@@ -299,8 +300,10 @@ class Helper
 		curl_setopt($ch, CURLOPT_POST, true);
 		$output = curl_exec($ch);
 		curl_close($ch);
+		echo $output;
 		$response = json_decode($output);
-
+		session()->put("customer._created", $response->_created);
+		
 		return $response->_recordid;
     }
 

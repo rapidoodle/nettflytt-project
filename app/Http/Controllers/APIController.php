@@ -61,7 +61,7 @@ class APIController extends Controller
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
         // echo Helper::getStorage(Helper::getToken(), "ErVSR3P5Z65XoQ6bUWJEIFujqttgFtS5kXuHbONxdnaw3KAZKaoWNL19UpckLTAj");
-        echo Helper::getData("mWyG79kTUYOL60u2kJZ5MlxMcore7SzmE3VJJH1bzU2xuxAVbelOCepWQjf06wBe");
+        echo Helper::getRecordId("mWyG79kTUYOL60u2kJZ5MlxMcore7SzmE3VJJH1bzU2xuxAVbelOCepWQjf06wBe");
         // $headers = ['First Name', 'Last Name', 'Email', 'Phone'];
 
         // $file = fopen("../storage/app/public/Strom.csv", "a");
@@ -380,8 +380,8 @@ class APIController extends Controller
         $offer = $request->offer;
         $type  = $request->type;
         Helper::addOffer($offer); 
-        // session()->put("customer.switch_service.".$type, 1);
-        // Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));
+        session()->put("customer.switch_service.".$type, 1);
+        Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));
         echo json_encode(session('customer'));
 
     }
