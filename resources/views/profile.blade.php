@@ -12,7 +12,7 @@ $hours      = $days * 24 * 24;
 
 if($hours < 1){
     $status = "status_orange.json"; 
-    $title  = "Behandles hes leverander";
+    $title  = "Behandles hos leverander";
 }elseif($hours >= 1 && $hours < 20 ){
     $status = "status_blue.json"; 
     $title  = "Sendt";

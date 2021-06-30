@@ -26,6 +26,12 @@ $(document).ready(function() {
         "bDestroy": true 
     });
 
+    $('#offersTable1').DataTable( {
+        columnDefs: [ { type: 'date', 'targets': [2] } ],
+        order: [[ 2, 'desc' ]],
+        "bDestroy": true 
+    });
+
     function getStorage(token, title, modal, type, table){
 		$('#'+modal).modal('toggle');
         $.ajax({

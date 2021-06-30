@@ -18,15 +18,13 @@ class Helper
     }
 
     public static function addOffer($offer){
-        return DB::insert('Insert into offers (storage_token, service) values (?, ?)', [session('customer._storageToken'), $offer]);  
 
-		$headers = ['First Name', 'Last Name', 'Email', 'Phone'];
-
-		$file = fopen("../storage/app/public/".$offer.".csv", "w");
-		foreach($data as $d){
-			fputcsv($file, $d);
-		}
+		$file = fopen("../storage/app/public/".$offer.".csv", "a");
+		$d = array(session('customer')['full-name'], session('customer')['email'], session('customer')['phone'], session('customer')['_recordid'], session('customer')['new_address'].' '.session('customer')['new_place'].' '.session('customer')['new_post'], session('customer')['new_house_type'], date("Y-m-d H:i:s"));
+		fputcsv($file, $d);
 		fclose($file);
+
+        return DB::insert('Insert into offers (storage_token, service) values (?, ?)', [session('customer._storageToken'), $offer]);  
     }
 
 	public static function firstName(string $string){
@@ -292,19 +290,18 @@ class Helper
     }
 
 
-    public static function getData($token){
+    public static function getRecordId($token){
 		$endpoint = "https://api.nettflytt.no/api/nettflytt/2020-04/storage/".$token."/details";
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $endpoint);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
 		$output = curl_exec($ch);
 		curl_close($ch);
 		$response = json_decode($output);
 
-		return $response;
+		return $response->_recordid;
     }
 
     public static function getSearchToken(){

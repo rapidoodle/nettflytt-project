@@ -61,14 +61,14 @@ class APIController extends Controller
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
         // echo Helper::getStorage(Helper::getToken(), "ErVSR3P5Z65XoQ6bUWJEIFujqttgFtS5kXuHbONxdnaw3KAZKaoWNL19UpckLTAj");
+        echo Helper::getData("mWyG79kTUYOL60u2kJZ5MlxMcore7SzmE3VJJH1bzU2xuxAVbelOCepWQjf06wBe");
+        // $headers = ['First Name', 'Last Name', 'Email', 'Phone'];
 
-        $headers = ['First Name', 'Last Name', 'Email', 'Phone'];
-
-        $file = fopen("../storage/app/public/Strom.csv", "a");
-        foreach($data as $d){
-            fputcsv($file, $d);
-        }
-        fclose($file);
+        // $file = fopen("../storage/app/public/Strom.csv", "a");
+        // foreach($data as $d){
+        //     fputcsv($file, $d);
+        // }
+        // fclose($file);
         // echo json_encode(Helper::searchLocation("1461"));
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
@@ -259,6 +259,7 @@ class APIController extends Controller
             if($storageToken){
                 session()->put("_storageToken", $storageToken);
                 session()->put("customer._storageToken", $storageToken);
+                session()->put("customer._recordid", Helper::getRecordId($storageToken));
 
                 //update storage
                 Helper::updateStorage(Helper::getToken(), $storageToken, $storage);
@@ -379,8 +380,8 @@ class APIController extends Controller
         $offer = $request->offer;
         $type  = $request->type;
         Helper::addOffer($offer); 
-        session()->put("customer.switch_service.".$type, 1);
-        Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));
+        // session()->put("customer.switch_service.".$type, 1);
+        // Helper::updateStorage(Helper::getToken(), session('_storageToken'), session('customer'));
         echo json_encode(session('customer'));
 
     }
