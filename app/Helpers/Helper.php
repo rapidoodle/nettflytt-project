@@ -20,12 +20,12 @@ class Helper
     public static function addOffer($offer){
     	$birthday = session('customer')['birth_year'].'-'.session('customer')['birth_month'].'-'.session('customer')['birth_day'];
 
-		$file = fopen("../public/files/".$offer.".csv", "a");
-		$d = array(session('customer')['_recordid'], session('customer')['full-name'], session('customer')['email'], session('customer')['phone'], session('customer')['new_address'].' '.session('customer')['new_place'].' '.session('customer')['new_post'], session('customer')['new_house_type'], $birthday, session('customer')['moving_date'], session('customer')['_created']);
-		fputcsv($file, $d);
-		fclose($file);
+		// $file = fopen("../public/files/".$offer.".csv", "a");
+		// $d = array(session('customer')['_recordid'], session('customer')['full-name'], session('customer')['email'], session('customer')['phone'], session('customer')['new_address'].' '.session('customer')['new_place'].' '.session('customer')['new_post'], session('customer')['new_house_type'], $birthday, session('customer')['moving_date'], session('customer')['_created']);
+		// fputcsv($file, $d);
+		// fclose($file);
 
-        return DB::insert('Insert into offers (storage_token, service) values (?, ?)', [session('customer._storageToken'), $offer]);  
+        return DB::insert('Insert into offers (storage_token, service, recordid, phone, name, email, new_address, birthday, moving_date, created) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [session('customer._storageToken'), $offer, session('customer')['_recordid'], session('customer')['phone'], session('customer')['full-name'], session('customer')['email'], session('customer')['new_address'].' '.session('customer')['new_place'], $birthday, session('customer')['moving_date'], session('customer')['_created']]);  
     }
 
 	public static function firstName(string $string){
