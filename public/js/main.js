@@ -250,6 +250,12 @@ $(document).ready(function() {
     $("#receiver-search-input").on('keypress',function(e) {
         if($(this).val().length > 1){
             if(e.which == 13) {
+                //for profile page
+                // console.log("He", );
+                if($("#search-more-company").length > 0){
+                    $(".result-cont").show();
+                }
+
                 var val = searchComp.val();
                 $(".search-no-result").hide();
                 if(val.length > 1){
@@ -489,7 +495,7 @@ $(document).ready(function() {
     //check the mailbox again
     if($("#otp").length  == 1){
         checkPb();
-        console.log("checking mailbox");
+        // console.log("checking mailbox");
     }
 
     $(".otpFooter").hide();
@@ -612,19 +618,36 @@ $(document).ready(function() {
 
     //VIPPS
     if($("#isVipps").length == 1){
-    console.log($("#isVipps").val());
         //check if number is in storage
         $.ajax({
             type: "POST",
             data: { _token : csrf.val(), number : number},
             url: "/vipps-check-mobile",
             success: function(response){
-                console.log(response.result);
+                // console.log(response.result);
                 if(response.result == false){
 
                 }
             }
         });
+    }
+
+    //PROFILE
+    if($("#search-more-company").length > 0){
+        $(".search-container").hide();
+        $(".result-cont").hide();
+
+        $("#search-more-company").click(function(){
+                $("#search-more-company").fadeOut();
+                $(".search-container").fadeIn();
+        });
+            $("#company-search").click(function(){
+                if($("#receiver-search-input").val().length > 2){
+                    // console.log("this is from profile page");
+                        $(".result-cont").show();
+                }
+
+            });
     }
     //IN FUNCTIONS
 

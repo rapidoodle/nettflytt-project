@@ -69,6 +69,22 @@ button.btn-info-100{
     border-color: #1D576F;
     width: 100%;
 }
+.btn-info-normal{
+    font-size: 14px;
+    border-radius: 4px!important;
+    border: 1px solid #495057;
+    padding:.3rem 1.3rem;
+    font-weight: bold;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #1D576F;
+    border-color: #1D576F;
+}
+.btn-info-normal:hover{
+    color:#fff!important;
+    background-color: #7EA8B4;
+}
+
 button.btn-info-100:hover{
     color:#fff!important;
 }

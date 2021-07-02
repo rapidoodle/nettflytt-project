@@ -136,6 +136,10 @@ if($hours < 1){
             <div class="row">
                 <div class="col-12 col-md-7">
                     <div class="mb-4">
+                        <h4>Ønsker du å legge til flere mottakere i din flyttemelding?</h4>
+                        <button class="btn btn-info-normal" id="search-more-company">Legg til flere selskaper</button>
+                    </div>
+                    <div class="mb-4 search-container">
                         <div class="input-group mb-3 receiver-search-group">
                             <input type="text" class="form-control" placeholder="Søk etter selskap eller organisasjon" aria-label="Søk etter selskap eller organisasjon" aria-describedby="basic-addon2" id="receiver-search-input">
                             <div class="input-group-append">
@@ -160,31 +164,7 @@ if($hours < 1){
                     </div>
                 </div>
                 <div class="col-12 col-md-5">
-                    <div class="bg-info index-summary p-4 mt-4 mt-lg-0">
-                        <p class="sub-heading mt-md-3">Mottakere</p>
-                        <div class="summary-choices px-2 py-3">
-                            <table width="100%" class="selected-list">
-                                <?php 
-                                if(count(session('customer')['services']) == 0){?>
-                                <tr class="default-selected">
-                                    <td align="center">Vennligst velg et selskap</td>
-                                </tr>
-                                <?php } else{
-                                    foreach (session('customer')['services'] as $key => $value) {
-                                    $newId = time(); 
-                                    $isps  = isset($value[3]) ? 'data-isps=true' : "";
-                                    if($value){?>
-                                <tr id="comp_{{$key}}{{$newId}}">
-                                    <td width="10%"><i class="fas fa-check"></i></td>
-                                    <td class="cl">{{$value[0]}}</td>
-                                    <td>
-                                        <i class="fas fa-times pointer company-list" data-parent="comp_{{$key}}{{$newId}}" data-value="{{$value[0]}}" data-company-number="{{$value[1]}}" data-company-people="{{$value[2]}}" data-toggle="modal" data-target="#deleteModal" data-toggle="modal" data-target="#deleteModal" {{$isps}}></i>
-                                    </td>
-                                </tr>
-                                <?php } } }?>
-                            </table>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             @endif
