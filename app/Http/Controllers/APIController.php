@@ -72,7 +72,7 @@ class APIController extends Controller
         // echo json_encode(Helper::searchLocation("1461"));
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-        echo Helper::getStorage(Helper::getToken(), "JGWAn4mCgmyDFWalhakAHRWxrLavgoaeaq3VMY3pqgT1lJ0ZiCMOcsHla5cESkzm");
+        // echo Helper::getStorage(Helper::getToken(), "JGWAn4mCgmyDFWalhakAHRWxrLavgoaeaq3VMY3pqgT1lJ0ZiCMOcsHla5cESkzm");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");
@@ -112,9 +112,13 @@ class APIController extends Controller
     }
 
     public function getToken(Request $request){
-        if($request['full-name'] === null && $request['people'] === null){
+        $isValidEmail = filter_var($email, FILTER_VALIDATE_EMAIL) == $email ? true : false;
+        if(($request['full-name'] === null && $request['people'] === null) || !$isValidEmail){
+
+        Log::error("Invalid Form: ".json_encode($request->all()));
             return redirect('/');
         }
+
         Log::info("Request: ".json_encode($request->all()));
         $people = $request->people;
         $person = explode("---", $people);
