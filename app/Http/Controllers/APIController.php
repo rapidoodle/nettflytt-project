@@ -61,7 +61,7 @@ class APIController extends Controller
         // echo Helper::storageStatus(Helper::getToken(), "GFiKg29uB8Y95peHOqQdKmflQBIVkH06z1cORURLaQCmP9LfZYVti93kcqO3VK8r", "info");
 
         // echo Helper::getStorage(Helper::getToken(), "ErVSR3P5Z65XoQ6bUWJEIFujqttgFtS5kXuHbONxdnaw3KAZKaoWNL19UpckLTAj");
-        echo Helper::getRecordId("mWyG79kTUYOL60u2kJZ5MlxMcore7SzmE3VJJH1bzU2xuxAVbelOCepWQjf06wBe");
+        // echo Helper::getRecordId("mWyG79kTUYOL60u2kJZ5MlxMcore7SzmE3VJJH1bzU2xuxAVbelOCepWQjf06wBe");
         // $headers = ['First Name', 'Last Name', 'Email', 'Phone'];
 
         // $file = fopen("../storage/app/public/Strom.csv", "a");
@@ -72,7 +72,7 @@ class APIController extends Controller
         // echo json_encode(Helper::searchLocation("1461"));
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-        // echo Helper::getStorage(Helper::getToken(), "sdzsDDe1LuyX2k5WAxurnHgptDRdmxEOg0WtlvKh2UydMPHRCA4eXRXCZv7AeH7f");
+        echo Helper::getStorage(Helper::getToken(), "JGWAn4mCgmyDFWalhakAHRWxrLavgoaeaq3VMY3pqgT1lJ0ZiCMOcsHla5cESkzm");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");
@@ -112,6 +112,9 @@ class APIController extends Controller
     }
 
     public function getToken(Request $request){
+        if($request['full-name'] === null && $request['people'] === null){
+            return redirect('/');
+        }
         Log::info("Request: ".json_encode($request->all()));
         $people = $request->people;
         $person = explode("---", $people);
