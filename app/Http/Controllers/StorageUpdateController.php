@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Offers;
 use Helper;
+use Illuminate\Support\Facades\Storage;
 
 class StorageUpdateController extends Controller
 {
@@ -50,6 +52,22 @@ class StorageUpdateController extends Controller
 	    session(['new_storage' => $response['storage']]);
 
         return view('storage-update', ['response' => $response]);
+    }
+
+    public function downloadOffers(Request $request){
+        $from = $request->from;
+        $to   = $request->to;
+        $service = $request->service;
+        $filename = $service.time().'.csv';
+        $offers = Offers::where("service", $service)->where("created_at", ">=", $from)->where("created_at", "<=", $to)->get();
+        $f = fopen("../storage/app/public/".$filename, "a");
+        fputcsv($f, array("Record ID", "Name", "Email", "New address", "Birthday", "Moving date", "Created"));
+        foreach ($offers as $key => $value) {
+            fputcsv($f, array($value->recordid, $value->name, $value->email, $value->new_address, $value->birthday, $value->moving_date, $value->created_at)); 
+        }
+
+
+        return Storage::download("public/".$filename);
     }
 
     public function saveStorage(Request $request){

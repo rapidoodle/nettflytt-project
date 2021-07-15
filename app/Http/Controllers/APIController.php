@@ -72,7 +72,7 @@ class APIController extends Controller
         // echo json_encode(Helper::searchLocation("1461"));
         // Log::info("TEST API");
         // return redirect()->route('/betaling/92445024', ['error' => "Din betaling var avvist eller avbrutt. Venligst prøv igjen."]);
-        // echo Helper::getStorage(Helper::getToken(), "JGWAn4mCgmyDFWalhakAHRWxrLavgoaeaq3VMY3pqgT1lJ0ZiCMOcsHla5cESkzm");
+        echo Helper::getStorage(Helper::getToken(), "oUoxglsCpT7moiMc0lHflEg1au8ULkgPcEVneT2esVlcTlNSuEBdzKCDur5MTrAd");
         // $token = Helper::getToken();
         // echo session("_tokenTimeout");
         // echo Helper::searchCompanies("norges", "orgnr");
@@ -112,172 +112,175 @@ class APIController extends Controller
     }
 
     public function getToken(Request $request){
-        $isValidEmail = filter_var($email, FILTER_VALIDATE_EMAIL) == $email ? true : false;
+        $isValidEmail = filter_var($request['email'], FILTER_VALIDATE_EMAIL) == $request['email'] ? true : false;
         if(($request['full-name'] === null && $request['people'] === null) || !$isValidEmail){
 
-        Log::error("Invalid Form: ".json_encode($request->all()));
+            Log::error("Invalid Form: ".json_encode($request->all()));
+            session()->put("form-error", true);
+
             return redirect('/');
-        }
+        }else{
 
-        Log::info("Request: ".json_encode($request->all()));
-        $people = $request->people;
-        $person = explode("---", $people);
-        $pctr   = 0;
-        $request['first_name'] = Helper::firstName($request['full-name']);
-        $request['last_name']  = Helper::lastName($request['full-name']);
-        $names = array();
+            session()->put("form-error", false);
+            Log::info("Request: ".json_encode($request->all()));
+            $people = $request->people;
+            $person = explode("---", $people);
+            $pctr   = 0;
+            $request['first_name'] = Helper::firstName($request['full-name']);
+            $request['last_name']  = Helper::lastName($request['full-name']);
+            $names = array();
 
-        foreach ($person as $key => $value) {
-            if($value){
-                $pos       = $key;
-                $record    = explode("|", $value);
-                $firstName = Helper::firstName($record['0']);
-                $lastName  = Helper::lastName($record['0']);
-                if($firstName != "" && $lastName != "" && $record[1] != "" && $record[2] != ""){
-                    $request['person'.$pos] = array("name" => $record[0], "bday" => $record[3], "last_name" => $lastName, "first_name" => $firstName, "phone" => $record[1], "email" => $record[2]);
-                    $pctr++;
+            foreach ($person as $key => $value) {
+                if($value){
+                    $pos       = $key;
+                    $record    = explode("|", $value);
+                    $firstName = Helper::firstName($record['0']);
+                    $lastName  = Helper::lastName($record['0']);
+                    if($firstName != "" && $lastName != "" && $record[1] != "" && $record[2] != ""){
+                        $request['person'.$pos] = array("name" => $record[0], "bday" => $record[3], "last_name" => $lastName, "first_name" => $firstName, "phone" => $record[1], "email" => $record[2]);
+                        $pctr++;
+                    }
+
+                    $names[] = $record[0];
                 }
-
-                $names[] = $record[0];
             }
-        }
 
 
 
-        if(isset($request['person0'])){
-            $bdayArr = explode("-", $request['person0']['bday']);
-            $request['full-name']   = $request['person0']['name'];
-            $request['first_name']  = $request['person0']['first_name'];
-            $request['last_name']   = $request['person0']['last_name'];
-            $request['email']       = $request['person0']['email'];
-            $request['phone']       = $request['person0']['phone'];
-            $request['birth_day']   = $bdayArr[2];
-            $request['birth_month'] = $bdayArr[1];
-            $request['birth_year']  = $bdayArr[0];
-        }
+            if(isset($request['person0'])){
+                $bdayArr = explode("-", $request['person0']['bday']);
+                $request['full-name']   = $request['person0']['name'];
+                $request['first_name']  = $request['person0']['first_name'];
+                $request['last_name']   = $request['person0']['last_name'];
+                $request['email']       = $request['person0']['email'];
+                $request['phone']       = $request['person0']['phone'];
+                $request['birth_day']   = $bdayArr[2];
+                $request['birth_month'] = $bdayArr[1];
+                $request['birth_year']  = $bdayArr[0];
+            }
 
-        if(isset($request['mailbox-sign']) && $request['mailbox-sign'] == 1){
-            if(session('customer.pb-free') != "" && session('customer.pb-price') == 149){
-                $request['pb-price'] = 149;
-            }elseif(session('customer.pb-free') != "" && session('customer.pb-free') == 1){
-                $request['pb-price'] = 0;
+            if(isset($request['mailbox-sign']) && $request['mailbox-sign'] == 1){
+                if(session('customer.pb-free') != "" && session('customer.pb-price') == 149){
+                    $request['pb-price'] = 149;
+                }elseif(session('customer.pb-free') != "" && session('customer.pb-free') == 1){
+                    $request['pb-price'] = 0;
+                }else{
+                    $request['pb-price'] = 169;
+                }
             }else{
-                $request['pb-price'] = 169;
+                $request['pb-price']  = 0;
             }
-        }else{
-            $request['pb-price']  = 0;
-        }
 
-        $request['ip_address']     = session('customer.ip_address') != "" ? session('customer.ip_address') : Helper::getIp();
-        $request['power-type']     = session('customer.power-type') != "" ? session('customer.power-type') : 0;
-        $request['tracking_gclid'] = session('customer.tracking_gclid') != "" ? session('customer.tracking_gclid') : $request['tracking_gclid'];
-        $request['adv-price']      = session('customer.adv-price') != "" ? session('customer.adv-price') : 0;
-        $request['isAdv']          = session('customer.isAdv') != "" ? session('customer.isAdv') : 0;
-        $request['price']          = 149;
-        $request['basis']          = 149;
-        $request['total_price']    = 149 + $request['pb-price'] + $request['adv-price'];
-        $request['pb-free']        = session('customer.pb-free') != "" ? session('customer.pb-free') : 0;
-        $request['mailbox-sign']   = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 0;
-        $request['phone']          = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
-        $request['totalPerson']    = $pctr == 0 ? 1 : $pctr;
-        $request['services']       = session('customer.services') != "" ? session('customer.services') : array();
-        $request['switch_service'] = session('customer.switch_service') != "" ? session('customer.switch_service') : array();
-        $request['postbox']        = session('customer.postbox') != "" ? session('customer.postbox') : array();
-        $request['old_post']       = $request['old_zipcode'].' '.$request['old_place'];
-        $request['new_post']       = $request['new_zipcode'].' '.$request['new_place'];
-        $request['tag']            = "malabon01";
-        $request['isNorges']       = session('customer.isNorges') != "" ? session('customer.isNorges') : 0;
-        $request['_status']        = session('customer._status') != "" ? session('customer._status') : "in progress";
-        $request['_storageToken']  = session('customer._storageToken') != "" ? session('customer._storageToken') : "";
-        $request['_keyLogin']      = session('customer._keyLogin') != "" ? session('customer._keyLogin') : substr(time(), -5);
-        $request['pb-names']       = session('customer.pb-names') != "" ? session('customer.pb-names') : $names;
-        $request['is-subscribe']   = session('customer.is-subscribe') != "" ? session('customer.is-subscribe') : false;
-        $request["vipps-result"]   = session('customer.vipps-result') != "" ? session('customer.vipps-result') : [];
-        $request['isLogged']       = session('customer.isLogged') != "" ? session('customer.isLogged') : false;
-        $request['moving_date']    = session('customer.moving_date_year') != "" ? session('customer.moving_date_year') : $request['moving_date_year']."-".$request['moving_date_month']."-".$request['moving_date_day'];
-        $request['sign_send_to_address'] = $request['sign_send_to_address'] != "" ? session('sign_send_to_address') : "";
+            $request['ip_address']     = session('customer.ip_address') != "" ? session('customer.ip_address') : Helper::getIp();
+            $request['power-type']     = session('customer.power-type') != "" ? session('customer.power-type') : 0;
+            $request['tracking_gclid'] = session('customer.tracking_gclid') != "" ? session('customer.tracking_gclid') : $request['tracking_gclid'];
+            $request['adv-price']      = session('customer.adv-price') != "" ? session('customer.adv-price') : 0;
+            $request['isAdv']          = session('customer.isAdv') != "" ? session('customer.isAdv') : 0;
+            $request['price']          = 149;
+            $request['basis']          = 149;
+            $request['total_price']    = 149 + $request['pb-price'] + $request['adv-price'];
+            $request['pb-free']        = session('customer.pb-free') != "" ? session('customer.pb-free') : 0;
+            $request['mailbox-sign']   = isset($request['mailbox-sign']) ? $request['mailbox-sign'] : 0;
+            $request['phone']          = isset($request['phone']) ? substr($request['phone'], -8) : $request['person0']['phone'];
+            $request['totalPerson']    = $pctr == 0 ? 1 : $pctr;
+            $request['services']       = session('customer.services') != "" ? session('customer.services') : array();
+            $request['switch_service'] = session('customer.switch_service') != "" ? session('customer.switch_service') : array();
+            $request['postbox']        = session('customer.postbox') != "" ? session('customer.postbox') : array();
+            $request['old_post']       = $request['old_zipcode'].' '.$request['old_place'];
+            $request['new_post']       = $request['new_zipcode'].' '.$request['new_place'];
+            $request['tag']            = "malabon01";
+            $request['isNorges']       = session('customer.isNorges') != "" ? session('customer.isNorges') : 0;
+            $request['_status']        = session('customer._status') != "" ? session('customer._status') : "in progress";
+            $request['_storageToken']  = session('customer._storageToken') != "" ? session('customer._storageToken') : "";
+            $request['_keyLogin']      = session('customer._keyLogin') != "" ? session('customer._keyLogin') : substr(time(), -5);
+            $request['pb-names']       = session('customer.pb-names') != "" ? session('customer.pb-names') : $names;
+            $request['is-subscribe']   = session('customer.is-subscribe') != "" ? session('customer.is-subscribe') : false;
+            $request["vipps-result"]   = session('customer.vipps-result') != "" ? session('customer.vipps-result') : [];
+            $request['isLogged']       = session('customer.isLogged') != "" ? session('customer.isLogged') : false;
+            $request['moving_date']    = session('customer.moving_date') != "" ? session('customer.moving_date') : $request['moving_date_year']."-".$request['moving_date_month']."-".$request['moving_date_day'];
+            $request['sign_send_to_address'] = $request['sign_send_to_address'] != "" ? session('sign_send_to_address') : "";
 
-        unset($request['people']);
-        unset($request['_token']);
-        unset($request['_initToken']);
-         // send otp for the first time
-        if(!$request->session()->has('billing_id_strex')){
-            $tId = Helper::sendOTP(Helper::getToken(), $request['phone'], "Flyttereg");
-            // session()->put("billing_id_strex", $tId);
-            $request['billing_id_strex'] = $tId;
-            Log::info("Send OTP result: " . session("billing_id_strex"));
+            unset($request['people']);
+            unset($request['_token']);
+            unset($request['_initToken']);
+             // send otp for the first time
+            if(!$request->session()->has('billing_id_strex')){
+                $tId = Helper::sendOTP(Helper::getToken(), $request['phone'], "Flyttereg");
+                // session()->put("billing_id_strex", $tId);
+                $request['billing_id_strex'] = $tId;
+                Log::info("Send OTP result: " . session("billing_id_strex"));
 
-        }
+            }
 
-        session(['customer' => $request->all()]);
+            session(['customer' => $request->all()]);
 
-        session(['old_post'          => $request['old_zipcode'].' '.$request['old_place'],
-                 'new_post'          => $request['new_zipcode'].' '.$request['new_place'],
-                 'customer'          => $request->all()]);
+            session(['old_post'          => $request['old_zipcode'].' '.$request['old_place'],
+                     'new_post'          => $request['new_zipcode'].' '.$request['new_place'],
+                     'customer'          => $request->all()]);
 
-        if(!isset($request['person0'])){
-            session()->put("customer.person0.name", $request['full-name']);
-            session()->put("customer.person0.bday", $request['birth_year'].'-'.$request['birth_month'].'-'.$request['birth_day']);
+            if(!isset($request['person0'])){
+                session()->put("customer.person0.name", $request['full-name']);
+                session()->put("customer.person0.bday", $request['birth_year'].'-'.$request['birth_month'].'-'.$request['birth_day']);
 
-            session()->put("customer.person0.last_name", $request['last_name']);
-            session()->put("customer.person0.first_name", $request['first_name']);
-            session()->put("customer.person0.phone", $request['phone']);
-            session()->put("customer.person0.email", $request['email']);
+                session()->put("customer.person0.last_name", $request['last_name']);
+                session()->put("customer.person0.first_name", $request['first_name']);
+                session()->put("customer.person0.phone", $request['phone']);
+                session()->put("customer.person0.email", $request['email']);
 
-            session()->put("customer.pb-names", array($request['full-name']));
-        }
+                session()->put("customer.pb-names", array($request['full-name']));
+            }
 
-        //mailbox sign pricing
-        if(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
-            session()->put('customer.sign_mailbox-a', 0);
-            session()->put('customer.sign_mailbox-c', 0);
-            session()->put("customer.sign_mailbox-b", $names);
-        }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
-            session()->put('customer.sign_mailbox-a', 0);
-            session()->put('customer.sign_mailbox-b', 0);
-            session()->put("customer.sign_mailbox-c", $names);
-        }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
-            session()->put('customer.sign_mailbox-b', 0);
-            session()->put('customer.sign_mailbox-c', 0);
-            session()->put("customer.sign_mailbox-a", $names);
-        }else{
-            session()->forget('customer.sign_mailbox-a');
-            session()->forget('customer.sign_mailbox-b');
-            session()->forget('customer.sign_mailbox-c');                
-        }
+            //mailbox sign pricing
+            if(session('customer.pb-price') != "" && session('customer.pb-price') == 169){
+                session()->put('customer.sign_mailbox-a', 0);
+                session()->put('customer.sign_mailbox-c', 0);
+                session()->put("customer.sign_mailbox-b", $names);
+            }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 149){
+                session()->put('customer.sign_mailbox-a', 0);
+                session()->put('customer.sign_mailbox-b', 0);
+                session()->put("customer.sign_mailbox-c", $names);
+            }elseif(session('customer.pb-price') != "" && session('customer.pb-price') == 0){
+                session()->put('customer.sign_mailbox-b', 0);
+                session()->put('customer.sign_mailbox-c', 0);
+                session()->put("customer.sign_mailbox-a", $names);
+            }else{
+                session()->forget('customer.sign_mailbox-a');
+                session()->forget('customer.sign_mailbox-b');
+                session()->forget('customer.sign_mailbox-c');                
+            }
 
 
-        if(!$request->session()->has('customer.mailbox-sign')){
-            session()->forget('customer.sign_mailbox-a');
-            session()->forget('customer.sign_mailbox-b');
-            session()->forget('customer.sign_mailbox-c');
+            if(!$request->session()->has('customer.mailbox-sign')){
+                session()->forget('customer.sign_mailbox-a');
+                session()->forget('customer.sign_mailbox-b');
+                session()->forget('customer.sign_mailbox-c');
 
-        }
-        //save to storage
-        $storage = session('customer');
+            }
+            //save to storage
+            $storage = session('customer');
 
-        if($request->session()->has('_storageToken')){
-            //update storage
-            Helper::updateStorage(Helper::getToken(), session('_storageToken'), $storage);
-        }else{
-            //new storage 
-            $storageToken  = Helper::initStorage(Helper::getToken());
-
-            if($storageToken){
-                session()->put("_storageToken", $storageToken);
-                session()->put("customer._storageToken", $storageToken);
-                session()->put("customer._recordid", Helper::getRecordId($storageToken));
-
+            if($request->session()->has('_storageToken')){
                 //update storage
-                Helper::updateStorage(Helper::getToken(), $storageToken, $storage);
+                Helper::updateStorage(Helper::getToken(), session('_storageToken'), $storage);
+            }else{
+                //new storage 
+                $storageToken  = Helper::initStorage(Helper::getToken());
+
+                if($storageToken){
+                    session()->put("_storageToken", $storageToken);
+                    session()->put("customer._storageToken", $storageToken);
+                    session()->put("customer._recordid", Helper::getRecordId($storageToken));
+
+                    //update storage
+                    Helper::updateStorage(Helper::getToken(), $storageToken, $storage);
+                }
             }
+
+
+            # echo session('customer')['_storageToken'];
+            // Log::info("Saving storage update: ".json_encode(session('customer')));
+            return redirect('/mottakere/');
         }
-
-
-        # echo session('customer')['_storageToken'];
-        // Log::info("Saving storage update: ".json_encode(session('customer')));
-        return redirect('/mottakere/');
-
     }
 
     public function initTokens(){

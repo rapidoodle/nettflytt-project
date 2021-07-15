@@ -143,7 +143,7 @@ Helper::saveVisitor();
                                         </tr>
                                         <tr>
                                             <td>E-post</td>
-                                            <td><input type="email" class="person-input" value="{{session('customer')['person'.$i]['email']}}" id="email_{{$i}}" required="true" oninvalid="alert('Invalid E-post');" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"></td>
+                                            <td><input type="email" class="person-input" value="{{session('customer')['person'.$i]['email']}}" id="email_{{$i}}" required="true" oninvalid="alert('Invalid E-post');" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" minlength="7"></td>
                                         </tr>
                                         <tr>
                                             <td>Telefonnummer</td>
@@ -174,7 +174,7 @@ Helper::saveVisitor();
                                         </tr>
                                         <tr>
                                             <td>E-post</td>
-                                            <td><input type="email" class="person-input" value="{{isset(session('customer')['email']) ?? session('customer')['email']}}" id="email_0" required="true" oninvalid="alert('Invalid E-post');" pattern="[^@\s]+@[^@\s]+\.[^@\s]+"></td>
+                                            <td><input type="email" class="person-input" value="{{isset(session('customer')['email']) ?? session('customer')['email']}}" id="email_0" required="true" oninvalid="alert('Invalid E-post');" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" minlength="7"></td>
                                         </tr>
                                         <tr>
                                             <td>Telefonnummer</td>
@@ -197,7 +197,7 @@ Helper::saveVisitor();
                                 </div>
                                 <div class="form-group">
                                     <label for="email">E-post</label>
-                                    <input type="email" name="email" class="main-field form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+">
+                                    <input type="email" name="email" class="main-field form-control smy-fld req-fld" id="email" placeholder="eksempel@nettflytt.no" required="true" data-conn="hk-email" pattern="[^@\s]+@[^@\s]+\.[^@\s]+" minlength="7">
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Telefonnummer</label>

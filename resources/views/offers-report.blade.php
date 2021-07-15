@@ -69,23 +69,32 @@ $allOffers  = array();
         </table>
     </div>
     <div class="tab-pane fade show" id="files" role="tabpanel" aria-labelledby="files-tab">
-        <table>
-            <tr>
-                <th>Files</th>
+        <form method="post" action="/download-offers">
+            @csrf
+            <table>
+                <tr>
+                    <td>From:</td>
+               <td> <input type="date" name="from" class="form-control" required="true"></td>
+           </tr>
+           <tr>
+                <td>To:</td>
+                <td><input type="date" name="to" class="form-control" required="true"></td>
             </tr>
             <tr>
-                <td><a href="{{ asset('files/Strom.csv')}}" target="_blank">Strom</a></td>
-            </tr>
-            <tr>
-                <td><a href="{{ asset('files/TV.csv')}}" target="_blank">TV</a></td>
-            </tr>
-            <tr>
-                <td><a href="{{ asset('files/Flyttevask.csv')}}" target="_blank">Flyttevask</a></td>
-            </tr>
-            <tr>
-                <td><a href="{{ asset('files/Boligalarm.csv')}}" target="_blank">Boligalarm</a></td>
-            </tr>
-        </table>
+                <td>Type:</td>
+                <td>  <select class="form-control" required="true" name="service">
+                        <option value="Strom">Strom</option>
+                        <option value="TV">TV</option>
+                        <option value="Flyttevask">Flyttevask</option>
+                        <option value="Boligalarm">Boligalarm</option>
+                    </select></td>
+                </tr>
+                    <tr>
+                        <td></td>
+                    <td><input type="submit" name="download" value="Download" class="btn btn-info"></td>
+                </tr>
+            </table>
+        </form>
     </div>
     <div class="tab-pane fade show" id="chart" role="tabpanel" aria-labelledby="chart-tab">
         <div id="chartContainer" class="w-100 mt-4" style="width: 100%!important;"></div>

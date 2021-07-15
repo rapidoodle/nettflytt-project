@@ -65,7 +65,7 @@
                 ?>
                 <tr>
                     <td width="10%">{{$key}}</td>
-                    <td><input type="text" name="{{$key}}" value="{{$value}}" class="form-control"></td>
+                    <td><input type="text" name="{{strtolower($key)}}" value="{{$value}}" class="form-control"></td>
                 </tr>
                 @endif
             @endforeach

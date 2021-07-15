@@ -34,6 +34,47 @@ class Crontroller extends Controller
          // }
     }
 
+    public function getExtraDets(){
+        $offers = Offers::where('phone', null)->distinct()->get();
+        $tokens = array();
+        foreach ($offers as $key => $value) {
+            if(!in_array($value->storage_token, $tokens)){
+                $tokens[] = $value->storage_token;
+            }
+        }
+        if(count($tokens) > 0){
+            foreach ($tokens as $key => $value) {
+                $storage        = Helper::getStorage(Helper::getToken(), $value);
+                $obj            = json_decode($storage);
+                echo $recordid  = property_exists($obj, '_recordid') ? $obj->_recordid : "";
+                $phone          = property_exists($obj, 'phone') ? $obj->phone : "";
+                Offers::where('storage_token', $value)->update(["recordid" => $recordid, "phone" => $phone]);
+
+                echo "<br>";
+            }
+
+
+            // foreach ($tokens as $key => $value) {
+            //     $storage = Helper::getStorage(Helper::getToken(), $value);
+            //     $obj   = json_decode($storage);
+            //     $first_name  = property_exists($obj, 'first_name') ? $obj->first_name : "";
+            //     $last_name  = property_exists($obj, 'first_name') ? $obj->last_name : "";
+            //     $email  = property_exists($obj, 'email') ? $obj->email : "";
+            //     $myear  = property_exists($obj, 'moving_date_year') ? $obj->moving_date_year : "";
+            //     $mmonth = property_exists($obj, 'moving_date_month') ? $obj->moving_date_month : "";
+            //     $mday   = property_exists($obj, 'moving_date_day') ? $obj->moving_date_day : "";
+            //     $mdate  = $mday != "" ? date("Y-m-d", strtotime($myear.'-'.$mmonth.'-'.$mday)) : null;
+
+
+            //     $year  = property_exists($obj, 'birth_year') ? $obj->birth_year : "";
+            //     $month = property_exists($obj, 'birth_month') ? $obj->birth_month : "";
+            //     $day   = property_exists($obj, 'birth_day') ? $obj->birth_day : "";
+            //     $bday  = $day != "" ? $year.'-'.$month.'-'.$day : null;
+            //     Offers::where('storage_token', $value)->update(["email" => $email, "name" => $first_name.' '.$last_name, "new_address" => $obj->new_address.' '.$obj->new_place, "moving_date" => $mdate,  "birthday" => $bday]);
+            // }
+        }
+    }
+
     public function getOffers(){
 
         $storages = Helper::seachStorageBy(["_created_from" => "2021-06-06 00:00:00", "_created_to" => "2021-06-06 12:59:59" ]);

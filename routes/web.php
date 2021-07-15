@@ -80,6 +80,7 @@ Route::post('/save-storage', 'StorageUpdateController@saveStorage')->name('saveS
 Route::post('/recover-storage', 'StorageUpdateController@recoverStorage')->name('recoverStorage');
 Route::post('/search-storage', 'StorageUpdateController@search')->name('search');
 Route::post('/select-update', 'StorageUpdateController@selectUpdate')->name('selectUpdate');
+Route::post('/download-offers', 'StorageUpdateController@downloadOffers')->name('downloadOffers ');
 //admin page form
 Route::post('/update-norges', 'ReportsController@updateNorges')->name('updateNorges');
 //users management
@@ -96,6 +97,7 @@ Route::get('/get-vipps', 'Crontroller@getVippsByDate')->name('getVippsByDate');
 Route::get('/get-storages', 'Crontroller@getStoragesByDate')->name('getStoragesByDate');
 Route::get('/get-sales', 'Crontroller@getSalesByDate')->name('getSalesByDate');
 Route::get('/get-sales-by-company', 'Crontroller@getSalesByCompany')->name('getSalesByCompany');
+Route::get('/get-offers-details', 'Crontroller@getExtraDets')->name('getExtraDets');
 
 //API
 Route::post('/saveSale', 'APIController@saveSale');
