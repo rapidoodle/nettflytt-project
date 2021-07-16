@@ -52,7 +52,7 @@
                 <li class="mb-4"><input type="checkbox" id="optin" class="mr-1"> <span id="optin-c" class="pointer">Ja, jeg har lest og godtar <a href="/kjopsvilkaar" target="_blank">vilkårene</a> for utsending av flyttemeldinger/ bestillinger og <a href="/personvern" target="_blank">personvernvilkårene</a> for tjenesten</span></li>
                 <li>
                     
-        <div class="card w-350 mb-4">
+        <div class="card w-350 mb-4 shadow p-2">
             <?php
             $pbPrice    = session('customer')['pb-price'] != "" ? session('customer')['pb-price'] : 0;
             $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
@@ -62,7 +62,7 @@
             <input type="hidden" id="total-price" value="<?=$totalPrice?>">
             <input type="hidden" id="pb-price" value="<?=$pbPrice?>">
             <input type="hidden" id="phone" value="{{session('customer')['phone']}}">
-            <table class="table mb-0">
+            <table class="mb-0">
                 <!-- <thead> -->
                     <!-- <tr> -->
                         <!-- <th><b>Produkt</b></th> -->
