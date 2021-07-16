@@ -50,12 +50,68 @@
             <ol>
                 <li class="mb-4">Vennligst se over at all informasjon du har oppgitt er riktig før du godkjenner adresseendringen</li>
                 <li class="mb-4"><input type="checkbox" id="optin" class="mr-1"> <span id="optin-c" class="pointer">Ja, jeg har lest og godtar <a href="/kjopsvilkaar" target="_blank">vilkårene</a> for utsending av flyttemeldinger/ bestillinger og <a href="/personvern" target="_blank">personvernvilkårene</a> for tjenesten</span></li>
+                <li>
+                    
+        <div class="card w-350 mb-4">
+            <?php
+            $pbPrice    = session('customer')['pb-price'] != "" ? session('customer')['pb-price'] : 0;
+            $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
+            $totalPrice = session('customer')['price'] + $pbPrice + $advPrice;
+            session()->put("customer.total_price", $totalPrice);
+            ?>
+            <input type="hidden" id="total-price" value="<?=$totalPrice?>">
+            <input type="hidden" id="pb-price" value="<?=$pbPrice?>">
+            <input type="hidden" id="phone" value="{{session('customer')['phone']}}">
+            <table class="table mb-0">
+                <!-- <thead> -->
+                    <!-- <tr> -->
+                        <!-- <th><b>Produkt</b></th> -->
+                         <?php //if(session('customer')['pb-free'] == 1) { ?>
+                        <!-- <th><b>Pris</b></th> -->
+                        <!-- <th></th> -->
+                        <?php // } ?>
+                    <!-- </tr> -->
+                <!-- </thead> -->
+                    <tr>
+                        <td>Behandling av flyttemeldinger</td>
+                        <td>kr 149,-</td>
+                    </tr>
+                    <?php if(session('customer')['mailbox-sign'] == 1) { ?>
+                    <tr class="tr-pb">
+                        <td>Postkasseskilt</td>
+
+                        <?php if(session('customer')['pb-free'] == 1) { ?>
+                        <td>GRATIS</td>
+                        <?php } ?>
+                        <td>kr {{$pbPrice}},-</td>
+                    </tr>
+                    <?php } ?>
+                    <?php if(isset(session('customer')['isAdv']) && session('customer')['isAdv'] == 1) { ?>
+                    <tr class="tr-ad">
+                        <td>Uadressert reklame nei takk</td>
+                        <?php if(session('customer')['pb-free'] == 1) { ?>
+                        <td></td>
+                        <?php } ?>
+                        <td>kr {{$advPrice}},-</td>
+                    </tr>
+                    <?php } ?>
+
+                    <tr>
+                        <td>Totalt:</td>
+                        <td>kr <span id="total-price-cont"><?=$totalPrice?></span>,-</td>
+                    </tr>
+            </table>
+        </div>
+
+
+                </li>
                 <li>Oppgi koden du fikk på SMS når du startet tjenesten: <br>
                 <input type="text" class="my-2 form-control" id="otp" placeholder="4-siffret kode"> 
                 </li>
             </ol>
                 <div class="px-md-4 px-md-0 text-left">
-                    <button class="btn btn-info btn-lg" id="btn-summary-send">Godkjenn og send</button>
+                    <button class="btn btn-info-normal btn-lg mb-4" id="btn-summary-send">Send flyttemeldingene og bekreft kjøp</button>
+                    <!-- <p>Ved å legge inn koden sender vi alle flyttemeldinger for deg. Du vil få tilsendt en bekreftelse med logg inn til min side på e-post. Tjenesten koster 149,- kroner  og kommer på telefonregningen din.</p> -->
                 </div> 
         </div>
     </div>
