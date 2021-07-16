@@ -50,9 +50,8 @@
             <ol>
                 <li class="mb-4">Vennligst se over at all informasjon du har oppgitt er riktig før du godkjenner adresseendringen</li>
                 <li class="mb-4"><input type="checkbox" id="optin" class="mr-1"> <span id="optin-c" class="pointer">Ja, jeg har lest og godtar <a href="/kjopsvilkaar" target="_blank">vilkårene</a> for utsending av flyttemeldinger/ bestillinger og <a href="/personvern" target="_blank">personvernvilkårene</a> for tjenesten</span></li>
-                <li>
+                <li class="mb-4">
                     
-        <div class="card w-350 mb-4 shadow p-2">
             <?php
             $pbPrice    = session('customer')['pb-price'] != "" ? session('customer')['pb-price'] : 0;
             $advPrice   = isset(session('customer')['isAdv']) && isset(session('customer')['adv-price']) ? session('customer')['adv-price'] : 0;
@@ -62,47 +61,27 @@
             <input type="hidden" id="total-price" value="<?=$totalPrice?>">
             <input type="hidden" id="pb-price" value="<?=$pbPrice?>">
             <input type="hidden" id="phone" value="{{session('customer')['phone']}}">
-            <table class="mb-0">
-                <!-- <thead> -->
-                    <!-- <tr> -->
-                        <!-- <th><b>Produkt</b></th> -->
-                         <?php //if(session('customer')['pb-free'] == 1) { ?>
-                        <!-- <th><b>Pris</b></th> -->
-                        <!-- <th></th> -->
-                        <?php // } ?>
-                    <!-- </tr> -->
-                <!-- </thead> -->
-                    <tr>
-                        <td>Behandling av flyttemeldinger</td>
-                        <td>kr 149,-</td>
-                    </tr>
-                    <?php if(session('customer')['mailbox-sign'] == 1) { ?>
-                    <tr class="tr-pb">
-                        <td>Postkasseskilt</td>
+            <div class="f-14 w-270">
 
-                        <?php if(session('customer')['pb-free'] == 1) { ?>
-                        <td>GRATIS</td>
-                        <?php } ?>
-                        <td>kr {{$pbPrice}},-</td>
-                    </tr>
-                    <?php } ?>
+                Behandling av flyttemeldinger: <span class="float-right">149,-</span> <br>
+
+            <?php if(session('customer')['mailbox-sign'] == 1) { ?>
+                <?php if(session('customer')['pb-free'] == 1) { ?>
+                Postkasseskilt: <span class="float-right">GRATIS,-</span> <br>
+                <?php }else{ ?>
+                Postkasseskilt: <span class="float-right">{{$pbPrice}},-</span> <br>
+                <?php } 
+                 } ?>
+
+
                     <?php if(isset(session('customer')['isAdv']) && session('customer')['isAdv'] == 1) { ?>
-                    <tr class="tr-ad">
-                        <td>Uadressert reklame nei takk</td>
-                        <?php if(session('customer')['pb-free'] == 1) { ?>
-                        <td></td>
-                        <?php } ?>
-                        <td>kr {{$advPrice}},-</td>
+                        Uadressert reklame nei takk:
+                        <span class="float-right">{{$advPrice}},-</span> <br>
                     </tr>
                     <?php } ?>
 
-                    <tr>
-                        <td>Totalt:</td>
-                        <td>kr <span id="total-price-cont"><?=$totalPrice?></span>,-</td>
-                    </tr>
-            </table>
-        </div>
-
+                Totalt: <span class="float-right">{{$totalPrice}},-</span> <br>
+            </div>
 
                 </li>
                 <li>Oppgi koden du fikk på SMS når du startet tjenesten: <br>

@@ -1009,3 +1009,15 @@ label.font-weight-normal{
 div.w-350{
     max-width: 350px!important;
 }
+div.w-300{
+    max-width: 300px!important;
+}
+div.w-280{
+    max-width: 280px!important;
+}
+.f-14{
+    font-size: 15px;
+}
+div.smy-div > div{
+    width:250px!important;
+}
